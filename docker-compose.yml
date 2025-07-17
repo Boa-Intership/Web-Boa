@@ -1,0 +1,32 @@
+
+services:
+  dev:
+    build: .
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev -- --host
+    # Opcional: para mantener el contenedor corriendo con hot reload
+    environment:
+      - NODE_ENV=development
+
+  # prod:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   command: npm run build && npx serve -s dist
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - NODE_ENV=production
+  
+  
+  
+  #   # O puedes usar nginx para servir la build
+  #   # image: nginx:alpine
+  #   # volumes:
+  #   #   - ./dist:/usr/share/nginx/html:ro
+  #   # ports:
+  #   #   - "80:80"   

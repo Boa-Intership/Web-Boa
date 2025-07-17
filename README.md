@@ -1,12 +1,51 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es un frontend basado en React y Vite.
 
-Currently, two official plugins are available:
+## Ejecución del proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Opción 1: Usando Docker (recomendado)
 
-## Expanding the ESLint configuration
+1. **Construir y levantar el entorno de desarrollo:**
+   ```bash
+   docker-compose up --build
+   ```
+   Esto instalará las dependencias y levantará el servidor de desarrollo en [http://localhost:5173](http://localhost:5173).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. **Detener el entorno:**
+   Presiona `Ctrl+C` en la terminal o ejecuta:
+   ```bash
+   docker-compose down
+   ```
+
+### Opción 2: Sin Docker (Node.js y npm)
+
+1. **Instala Node.js y npm** (si no los tienes ya instalados).
+
+2. **Instala las dependencias:**
+   ```bash
+   npm install
+   ```
+
+3. **Levanta el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
+   El frontend estará disponible en [http://localhost:5173](http://localhost:5173).
+
+---
+
+## Otros comandos útiles
+
+- **Build de producción:**
+  ```bash
+  npm run build
+  ```
+- **Preview de la build:**
+  ```bash
+  npm run preview
+  ```
+- **Linting:**
+  ```bash
+  npm run lint
+  ```

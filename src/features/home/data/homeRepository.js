@@ -1,0 +1,1 @@
+// Aquí iría la lógica de adaptación de datos para Home 
