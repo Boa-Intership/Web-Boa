@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar dependencias
-RUN npm install
+RUN npm install --save-dev typescript @types/react @types/react-dom @types/node
 
 # Copiar el resto del código
 COPY . .

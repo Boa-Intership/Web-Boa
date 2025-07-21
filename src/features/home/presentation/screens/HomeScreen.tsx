@@ -4,7 +4,7 @@ import HomeActionButton from '../components/HomeActionButton';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../router/routes';
 
-export default function HomeScreen() {
+const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
 
   return (
@@ -32,4 +32,6 @@ export default function HomeScreen() {
       </Stack>
     </Box>
   );
-} 
+};
+
+export default HomeScreen; 

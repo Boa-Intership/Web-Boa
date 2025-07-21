@@ -1,7 +1,13 @@
 import React from 'react';
 import { Button } from '@mui/material';
 
-export default function HomeActionButton({ label, onClick, icon }) {
+interface HomeActionButtonProps {
+  label: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  icon?: React.ReactNode;
+}
+
+const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, icon }) => {
   return (
     <Button
       variant="contained"
@@ -24,4 +30,6 @@ export default function HomeActionButton({ label, onClick, icon }) {
       {label}
     </Button>
   );
-} 
+};
+
+export default HomeActionButton; 
