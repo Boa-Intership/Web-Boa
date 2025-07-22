@@ -13,7 +13,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { Navigate, useNavigate } from 'react-router-dom';
 //import ColorModeIconDropdown from '../../theme/ColorModeIconDropdown';
+
+
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -32,6 +35,8 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 const AppAppBar: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <AppBar
       position="fixed"
@@ -46,7 +51,12 @@ const AppAppBar: React.FC = () => {
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-            <Button variant="text" color="primary" size="small">
+            <Button 
+              variant="text" 
+              color="primary" 
+              size="small"
+              onClick={() => navigate('/home')}
+            >
               Inicio 
             </Button>
           </Box>
