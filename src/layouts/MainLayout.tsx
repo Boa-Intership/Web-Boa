@@ -10,7 +10,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
   <>
     <AppAppBar />
     <main style={{ 
-        marginTop: 200, 
+        marginTop: 80, 
         minHeight: '70vh', 
         width: '100%', 
         display: 'flex',
