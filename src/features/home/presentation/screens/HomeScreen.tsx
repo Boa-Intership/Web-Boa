@@ -11,24 +11,21 @@ const HomeScreen: React.FC = () => {
     <Box
       sx={{
         minHeight: '80vh',
+        width: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        px: 2,
       }}
     >
-      <Stack direction="row" spacing={4}>
-        <HomeActionButton 
-          label="Información"
-          onClick={() => navigate(ROUTES.INFORMACION)}
-        />
-        <HomeActionButton 
-          label="Cotizar"
-          onClick={() => navigate(ROUTES.COTIZAR)} 
-        />
-        <HomeActionButton 
-        label="Pre-registro"
-        onClick={() => navigate(ROUTES.PREREGISTRO)}
-        />
+      <Stack 
+        direction={{ xs: 'column', sm: 'row'}} 
+        spacing={4} 
+        alignItems="center"
+      >
+        <HomeActionButton label="Información" onClick={() => navigate(ROUTES.INFORMACION)}/>
+        <HomeActionButton label="Cotizar" onClick={() => navigate(ROUTES.COTIZAR)}/>
+        <HomeActionButton label="Pre-registro" onClick={() => navigate(ROUTES.PREREGISTRO)}/>
       </Stack>
     </Box>
   );
