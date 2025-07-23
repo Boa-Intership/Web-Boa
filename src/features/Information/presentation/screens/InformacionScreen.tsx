@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Stack } from '@mui/material';
+import CardInfoSection from '../components/CardInfoSection';
 
-export default function InformacionScreen() {       
+
+export default function InformacionScreen() { 
+return (
+    <div>
+        <CardInfoSection/>
+    </div>
+)
+  
 }
