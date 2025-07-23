@@ -6,17 +6,26 @@ const Footer: React.FC = () => (
     component="footer"
     sx={{
       width: '100%',
-      py: 2,
+      py: 3,
       px: 2,
       mt: 'auto',
-      backgroundColor: (theme) => theme.palette.background.paper,
+      backgroundColor: (theme) => theme.palette.primary.main,
+      color: (theme) => theme.palette.secondary.contrastText,
       textAlign: 'center',
-      borderTop: '1px solid',
+      borderTop: '2px solid',
       borderColor: (theme) => theme.palette.divider,
+      boxShadow: 3,
+      fontSize: 16,
+      letterSpacing: 1,
+      position: 'relative',
+      zIndex: 10,
     }}
   >
-    <Typography variant="body2" color="text.secondary">
+    <Typography variant="body1" sx={{ fontWeight: 500 }}>
       © {new Date().getFullYear()} BOA. Todos los derechos reservados.
+    </Typography>
+    <Typography variant="caption" sx={{ opacity: 0.8 }}>
+      Desarrollado para el área de carga de BOA
     </Typography>
   </Box>
 );
