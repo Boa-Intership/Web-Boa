@@ -1,11 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { useMemo, useState } from 'react';
 import getDesignTokens from './theme';
 import { createTheme } from '@mui/material/styles';
+import App from './App';
 
 const Main: React.FC = () => {
   const [mode, setMode] = useState<'light' | 'dark'>('light');
