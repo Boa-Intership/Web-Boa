@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Container, Step, StepLabel, Stepper } from '@mui/material';
+import { Container, Box, Step, StepLabel, Stepper } from '@mui/material';
 import StepHeader from '../components/StepHeader';
 import StepDatosPersonales from '../components/StepDatosPersonales';
 import StepRuta from '../components/StepRuta';
@@ -7,7 +7,8 @@ import StepRuta from '../components/StepRuta';
 export default function PreRegistroScreen() {
     const [step, setStep] = useState(0);
     const [formData, setFormData] = useState({
-        datosPersonales: {},
+        remitente: {},
+        destinatario: {},
         ruta: {},
         carga: {},
         factura: {},
@@ -19,9 +20,9 @@ export default function PreRegistroScreen() {
 
     const steps = [
         <StepDatosPersonales 
-            data={formData.datosPersonales} 
-            setData={(d) => setFormData({...formData, datosPersonales: d})} 
-            onNext={handleNext} 
+            data={{ remitente: formData.remitente, destinatario: formData.destinatario }}
+            setData={(d) => setFormData({ ...formData, remitente: d.remitente, destinatario: d.destinatario })}
+            onNext={handleNext}
         />,
         <StepRuta 
             data={formData.ruta} 
@@ -34,6 +35,7 @@ export default function PreRegistroScreen() {
     return (
         <Container>
             <StepHeader currentStep={step} />
+            <Box m={4} />
             {steps[step]}
         </Container>
     );

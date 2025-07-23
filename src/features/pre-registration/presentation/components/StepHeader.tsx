@@ -6,7 +6,7 @@ const steps = [
 
 const StepHeader = ({ currentStep }: { currentStep: number }) => {
   return (
-    <Stepper alternativeLabel activeStep={1} >
+    <Stepper alternativeLabel activeStep={currentStep} >
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel >{label}</StepLabel>
