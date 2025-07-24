@@ -156,7 +156,7 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
 
         {/* Botón siguiente */}
         <Grid item xs={12} display="flex" justifyContent="flex-end">
-          <Button variant="contained" onClick={handleNextClick}>Siguiente</Button>
+          <Button variant="contained" color="secondary" onClick={handleNextClick}>Siguiente</Button>
         </Grid>
       </Grid>
     </Box>

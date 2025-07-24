@@ -1,103 +1,69 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-import { StepIconProps } from '@mui/material/StepIcon';
-
-const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
-  [`&.${stepConnectorClasses.alternativeLabel}`]: {
-    top: 22,
-  },
-  [`&.${stepConnectorClasses.active}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        'linear-gradient( 136deg, rgb(15,82,152) 0%, rgb(0,45,87) 50%, rgb(54,104,173) 100%)',//
-    },
-  },
-  [`&.${stepConnectorClasses.completed}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        'linear-gradient( 136deg, rgb(15,82,152) 0%, rgb(0,45,87) 50%, rgb(54,104,173) 100%)',
-    },
-  },
-  [`& .${stepConnectorClasses.line}`]: {
-    height: 3,
-    border: 0,
-    backgroundColor: '#eaeaf0',
-    borderRadius: 1,
-    ...theme.applyStyles('dark', {
-      backgroundColor: theme.palette.grey[800],
-    }),
-  },
-}));
-
-const ColorlibStepIconRoot = styled('div')<{
-  ownerState: { completed?: boolean; active?: boolean };
-}>(({ theme }) => ({
-  backgroundColor: '#ccc',
-  zIndex: 1,
-  color: '#fff',
-  width: 50,
-  height: 50,
-  display: 'flex',
-  borderRadius: '50%',
-  justifyContent: 'center',
-  alignItems: 'center',
-  ...theme.applyStyles('dark', {
-    backgroundColor: theme.palette.grey[700],
-  }),
-  variants: [
-    {
-      props: ({ ownerState }) => ownerState.active,
-      style: {
-        backgroundImage:
-          'linear-gradient( 136deg, rgb(0,45,87) 0%, rgb(15,82,152) 50%, rgb(54,104,173) 100%)',
-        boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
-      },
-    },
-    {
-      props: ({ ownerState }) => ownerState.completed,
-      style: {
-        backgroundImage:
-          'linear-gradient( 136deg, rgb(0,45,87) 0%, rgb(15,82,152) 50%, rgb(54,104,173) 100%)',
-      },
-    },
-  ],
-}));
-
-function ColorlibStepIcon(props: StepIconProps) {
-  const { active, completed, className } = props;
-
-  const icons: { [index: string]: React.ReactElement<unknown> } = {
-    1: <span>&#9733;</span>, // cambiar para otros iconos
-    2: <span>&#9632;</span>,
-    3: <span>&#9733;</span>,
-    4: <span>&#9733;</span>,
-    5: <span>&#9733;</span>,
-  };
-
-  return (
-    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
-      {icons[String(props.icon)]}
-    </ColorlibStepIconRoot>
-  );
-}
+import { Box, Typography } from '@mui/material';
+import { CheckCircle, Person, LocationOn, Inventory2, ReceiptLong, TaskAlt } from '@mui/icons-material';
 
 const steps = [
-  'Datos personales', 'Ruta', 'Carga', 'Factura', 'Resumen'
+  { label: 'Datos personales', icon: <Person /> },
+  { label: 'Ruta', icon: <LocationOn /> },
+  { label: 'Paquete', icon: <Inventory2 /> },
+  { label: 'Factura', icon: <ReceiptLong /> },
+  { label: 'Resumen', icon: <TaskAlt /> },
 ];
 
-export default function CustomizedSteppers() {
+interface Props {
+  activeStep: number;
+}
+
+export default function CustomStepper({ activeStep }: Props) {
   return (
-    <Stepper alternativeLabel activeStep={1} connector={<ColorlibConnector />}>
-      {steps.map((label) => (
-        <Step key={label}>
-          <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-        </Step>
-      ))}
-    </Stepper>
+    <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ width: '100%', my: 4 }}>
+      {steps.map((step, index) => {
+        const isActive = index === activeStep;
+        const isCompleted = index < activeStep;
+
+        return (
+          <Box key={step.label} display="flex" alignItems="center" width="100%">
+            {/* Icon with circle */}
+            <Box
+              sx={{
+                backgroundColor: isActive || isCompleted ? '#3668AD' : 'transparent',
+                border: `2px solid ${isActive || isCompleted ? '#3668AD' : '#cfd8dc'}`,
+                borderRadius: '50%',
+                width: 40,
+                height: 40,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: isActive || isCompleted ? '#fff' : '#cfd8dc',
+              }}
+            >
+              {step.icon}
+            </Box>
+
+            {/* Label */}
+            <Box ml={1} display="flex" flexDirection="column" alignItems="center">
+              <Typography
+                variant="caption"
+                color={isActive ? 'primary' : 'textSecondary'}
+                sx={{ mt: 1 }}
+              >
+                {step.label}
+              </Typography>
+            </Box>
+
+            {/* Line between steps */}
+            {index < steps.length - 1 && (
+              <Box
+                sx={{
+                  flex: 1,
+                  height: 2,
+                  backgroundColor: index < activeStep ? '#1976d2' : '#cfd8dc',
+                  mx: 1,
+                }}
+              />
+            )}
+          </Box>
+        );
+      })}
+    </Box>
   );
 }

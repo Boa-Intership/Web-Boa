@@ -3,6 +3,7 @@ import { Container, Box, Step, StepLabel, Stepper } from '@mui/material';
 import StepHeader from '../components/StepHeader';
 import StepDatosPersonales from '../components/StepDatosPersonales';
 import StepRuta from '../components/StepRuta';
+import CustomizedSteppers from '../components/CustomizedSteppers';
 
 export default function PreRegistroScreen() {
     const [step, setStep] = useState(0);
@@ -35,6 +36,7 @@ export default function PreRegistroScreen() {
     return (
         <Container>
             <StepHeader currentStep={step} />
+            <CustomizedSteppers activeStep={1} />
             <Box m={4} />
             {steps[step]}
         </Container>
