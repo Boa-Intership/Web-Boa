@@ -60,8 +60,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
             {icon}
             <Typography fontSize={16} variant="subtitle1" fontWeight="bold">
                 {title}
-            </Typography>
-            
+            </Typography>   
         </Box>
         <Box display="flex" justifyContent="space-between" alignItems="center" gap={1} width="100%">
             <Typography fontSize={14} variant="subtitle1">

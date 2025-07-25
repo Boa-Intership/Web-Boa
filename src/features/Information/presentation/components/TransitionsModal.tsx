@@ -1,7 +1,9 @@
 // components/TransitionsModal.tsx
 import React from "react";
-import { Modal, Fade, Backdrop, Box, Typography } from "@mui/material";
+import { Modal, Fade, Backdrop, Box, Typography, Grid } from "@mui/material";
 import ModalDetailItem from "./ModalDetailItem";
+import CardSimple from "./CardSimple";
+import ExampleType from "./ExampleType";
 
 const style = {
   position: "absolute",
@@ -21,23 +23,41 @@ const style = {
 interface Detail {
   title: string;
   description: string[];
+  imageUrl?: string[];
+}
+
+type Card = {
+  title?: string;
+  description: string;
   imageUrl?: string;
+  background?: string;
+
+}
+
+type Example = {
+  title: string;
+  description: string;
+  image: string;
 }
 
 interface TransitionsModalProps {
   open: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;
+  concept: Card[];
   subtitle: string;
   details: Detail[];
+  example?: Example[];
 }
 
 const TransitionsModal: React.FC<TransitionsModalProps> = ({
   open,
   onClose,
   title,
+  concept,
   subtitle,
   details,
+  example,
 }) => {
   return (
     <Modal
@@ -51,10 +71,21 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
     >
       <Fade in={open}>
         <Box sx={style}>
-          <Typography id="modal-title" variant="h5" fontWeight="bold" mb={1}>
+          <Typography id="modal-title" variant="h5" fontWeight="bold">
             {title}
           </Typography>
-          <Typography variant="h6" fontWeight="bold" mb={3}>
+
+          {concept.map((item, index) => (
+            <CardSimple
+              key={index}
+              title={item.title}
+              description={item.description}
+              imageUrl={item.imageUrl}
+              background={item.background}
+            />
+          ))}
+
+          <Typography variant="h6" fontWeight="bold">
             {subtitle}
           </Typography>
 
@@ -66,6 +97,27 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
               imageUrl={item.imageUrl}
             />
           ))}
+          {example && example.length > 0 && (
+            <Box>
+              <Typography variant="subtitle1" fontWeight={"bold"} mt={2}>
+                ¿Que cargas pueden entrar a esta categoria?
+              </Typography>
+              <Typography variant="body2">
+                Ejemplos comunes de carga general en BoA Cargo:
+              </Typography>
+              <Grid container spacing={2} >
+                {example.map((item, index) => (
+                  <Grid item key={index} xs={12} sm={6} md={3} mt={3}>
+                    <ExampleType
+                      title={item.title}
+                      description={item.description}
+                      image={item.image}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          )}
         </Box>
       </Fade>
     </Modal>

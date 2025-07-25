@@ -5,6 +5,7 @@ import PetsOutlinedIcon from "@mui/icons-material/PetsOutlined";
 import SetMealOutlinedIcon from "@mui/icons-material/SetMealOutlined";
 import ButtonCardInfo from "./ButtonCardInfo";
 import TransitionsModal from "./TransitionsModal";
+import { title } from "process";
 
 export default function CardInfoSection() {
   const [openModal, setOpenModal] = useState<null | "cargaGeneral" | "animalesVivos" | "perecederos">(null);
@@ -17,12 +18,17 @@ export default function CardInfoSection() {
     setOpenModal(null);
   };
 
-  // Puedes definir la data específica para cada modal
+  // Informacion especifica de cada tipo de carga
   const getModalProps = () => {
     switch (openModal) {
       case "cargaGeneral":
         return {
           title: "Carga General",
+          concept:[{
+            description: "Una 'Carga general' se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con cargas peligrosas o perecederas.",
+            imageUrl: "../src/assets/cargaGeneral.jpg",
+            background: "#a5c2027a",
+          }],
           subtitle: "Requisitos",
           details: [
             {
@@ -35,7 +41,7 @@ export default function CardInfoSection() {
                 "La carga será aceptada hasta dos horas antes de la salida del vuelo y entregada una hora después de la llegada del vuelo.",
                 "Todo envío y recepción de cargas se debe realizar únicamente en oficinas de BoA Cargo.",
               ],
-              imageUrl: "../src/assets/cargaGeneral.jpg",
+              imageUrl: ["../src/assets/cargaGeneral.jpg","../src/assets/cargaGeneral.jpg"],
             },
             {
               title: "Internacional",
@@ -45,11 +51,54 @@ export default function CardInfoSection() {
               
             },
           ],
+          example:[
+            {
+              title: "Bienes manufacturados",
+              description: "Ropa, calzado, juguetes, herramientas",
+              image:"../src/assets/cargaGeneral.jpg",
+            },
+            {
+              title: "Maquinaria y repuestos",
+              description: "Motores, partes de vehículos, maquinaria liviana",
+              image:"../src/assets/cargaGeneral.jpg",
+            },
+            {
+              title: "Material impreso y papelería",
+              description: "Libros, revistas, catálogos, documentos",
+              image:"../src/assets/cargaGeneral.jpg",
+            },
+            {
+              title: "Electrodomésticos y electrónicos",
+              description: "Celulares, computadoras, impresoras",
+              image:"../src/assets/cargaGeneral.jpg",
+            },
+            {
+              title: "Productos de higiene o limpieza",
+              description: "Detergentes, jabones, desinfectantes (no peligrosos)",
+              image:"../src/assets/cargaGeneral.jpg",
+            },
+            {
+              title: "Efectos personales",
+              description: "Maletas, cajas con pertenencias de viaje",
+              image:"../src/assets/cargaGeneral.jpg",
+            },
+            {
+              title: "Muebles pequeños desmontables",
+              description: "Sillas, mesas plegables, estanterías livianas",
+              image:"../src/assets/cargaGeneral.jpg",
+            }
+          ],
         };
 
       case "animalesVivos":
         return {
           title: "Animales Vivos",
+          concept:[{
+            title: "Carga General",
+            description:"Una 'Carga general' se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con cargas peligrosas o perecederas.",
+            imageUrl: "../src/assets/cargaGeneral.jpg",
+            background: "#22408160",
+          }],
           subtitle: "Requisitos",
           details: [
             {
@@ -67,14 +116,21 @@ export default function CardInfoSection() {
                 "Por seguridad sugerimos no sedar animales domésticos en tramos nacionales e internacionales.",
                 "Para el transporte de animales vivos de fauna silvestre en peligro de extinción, se debe presentar la Autorización del Ministerio de Medio Ambiente y Agua de Bolivia.",
                             ],
-              imageUrl: "../src/assets/animalesVivos.jpg",
+              imageUrl: ["../src/assets/animalesVivos.jpg"],
             },
           ],
+          example: [],
         };
 
       case "perecederos":
         return {
           title: "Perecederos",
+          concept:[{
+            title: "Carga General",
+            description: "Una 'Carga general' se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con cargas peligrosas o perecederas.",
+            imageUrl: "../src/assets/cargaGeneral.jpg",
+            background: "#a505058a",
+          }],
           subtitle: "Requisitos",
           details: [
             {
@@ -87,9 +143,10 @@ export default function CardInfoSection() {
                 "Si es carga sensible a la temperatura, debe contar con su propio refrigerante.",
                 "El transporte se realizará a temperatura ambiente, por ello el cliente debe tomar las previsiones necesarias para que su carga mantenga la temperatura óptima.",
               ],
-              imageUrl: "../src/assets/perecedero.jpg",
+              imageUrl: ["../src/assets/perecedero.jpg"],
             },
           ],
+          example: [],
         };
 
       default:
@@ -130,8 +187,10 @@ export default function CardInfoSection() {
           open={!!openModal}
           onClose={handleCloseModal}
           title={modalProps.title}
+          concept={modalProps.concept}
           subtitle={modalProps.subtitle}
           details={modalProps.details}
+          example={modalProps.example}
         />
       )}
     </Container>
