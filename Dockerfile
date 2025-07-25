@@ -4,11 +4,11 @@ FROM node:20-alpine
 # Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar package.json y package-lock.json
-COPY package*.json ./
+# Copiar package.json y package-lock.json si existe
+COPY package.json ./
 
-# Instalar dependencias
-RUN npm install --save-dev typescript @types/react @types/react-dom @types/node
+# Instalar todas las dependencias declaradas en package-lock.json
+RUN npm install
 
 # Copiar el resto del código
 COPY . .

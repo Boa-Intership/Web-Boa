@@ -7,20 +7,26 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
-  <>
+  <div style={{
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    background: 'inherit',
+  }}>
     <AppAppBar />
-    <main style={{ 
-        marginTop: 80, 
-        minHeight: '70vh', 
-        width: '100%', 
-        display: 'flex',
-        //backgroundColor: '#1976d2',
-        }}
-      >
+    <main style={{
+      flex: 1,
+      marginTop: 80,
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
       {children}
     </main>
-    <Footer/>
-  </>
+    <Footer />
+  </div>
 );
 
 export default MainLayout;
