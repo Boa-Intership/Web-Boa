@@ -105,9 +105,9 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
               <Typography variant="body2">
                 Ejemplos comunes de carga general en BoA Cargo:
               </Typography>
-              <Grid container spacing={2} >
+              <Grid container spacing={2} mt={2}>
                 {example.map((item, index) => (
-                  <Grid item key={index} xs={12} sm={6} md={3} mt={3}>
+                  <Grid item key={index} xs={12} sm={6} md={3} >
                     <ExampleType
                       title={item.title}
                       description={item.description}

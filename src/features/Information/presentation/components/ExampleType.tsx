@@ -15,7 +15,7 @@ function ExampleType ({title,description,image}:ExampleTypeProps){
                 <img src={image} alt={title} style={{ width: 100, borderRadius: 100}} />
                 )}
             </Box>
-             <Box >
+             <Box sx={{display:"flex", alignItems:"center", flexDirection: "column", width: "100%"}}>
                 <Typography variant="subtitle1" fontWeight="bold">{title}</Typography>
                 <Typography variant="body2">{description}</Typography>
             </Box>
