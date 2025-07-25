@@ -57,7 +57,7 @@ const AppAppBar: React.FC = () => {
               size="small"
               onClick={() => navigate('/home')}
             >
-              Inicio 
+              Inicio deploy 
             </Button>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
