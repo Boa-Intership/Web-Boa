@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Grid, TextField, Typography, Paper } from '@mui/material';
+import { Person } from '@mui/icons-material';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const [localData, setLocalData] = useState(data || {
@@ -23,9 +24,10 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
 
   const handleNextClick = () => {
     // Validación mínima
-    const requiredFields = ['ci', 'nombre', 'celular'];
-    const remitenteOk = requiredFields.every(f => localData.remitente?.[f]);
-    const destinatarioOk = requiredFields.every(f => localData.destinatario?.[f]);
+    const requiredFieldsRem = ['ci', 'nombre', 'celular', 'correo'];
+    const requiredFieldsDes = ['nombre', 'celular'];
+    const remitenteOk = requiredFieldsRem.every(f => localData.remitente?.[f]);
+    const destinatarioOk = requiredFieldsDes.every(f => localData.destinatario?.[f]);
 
     if (!remitenteOk || !destinatarioOk) {
       alert('Por favor llena los campos obligatorios (*) de remitente y destinatario.');
@@ -42,7 +44,10 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
         {/* Panel Remitente */}
         <Grid item xs={12} md={6}>
           <Paper elevation={2} sx={{ padding: 2 }}>
-            <Typography variant="subtitle1" gutterBottom>Información del Remitente</Typography>
+            <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
+              <Person color='primary' />
+              <Typography variant="h5" color='primary'>Información del Remitente</Typography>
+            </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -100,14 +105,16 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
         {/* Panel Destinatario */}
         <Grid item xs={12} md={6}>
           <Paper elevation={2} sx={{ padding: 2 }}>
-            <Typography variant="subtitle1" gutterBottom>Información del Destinatario</Typography>
+            <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
+              <Person color='primary' />
+              <Typography variant="h5" color='primary'>Información del Destinatario</Typography>
+            </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="CI"
                   name="ci"
                   fullWidth
-                  required
                   value={localData.destinatario?.ci || ''}
                   onChange={(e) => handleChange(e, 'destinatario')}
                 />
@@ -156,7 +163,7 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
 
         {/* Botón siguiente */}
         <Grid item xs={12} display="flex" justifyContent="flex-end">
-          <Button variant="contained" color="secondary" onClick={handleNextClick}>Siguiente</Button>
+          <Button variant="contained" color="primary" onClick={handleNextClick}>Siguiente</Button>
         </Grid>
       </Grid>
     </Box>

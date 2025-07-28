@@ -3,7 +3,7 @@ import { Container, Box, Step, StepLabel, Stepper } from '@mui/material';
 import StepHeader from '../components/StepHeader';
 import StepDatosPersonales from '../components/StepDatosPersonales';
 import StepRuta from '../components/StepRuta';
-import CustomizedSteppers from '../components/CustomizedSteppers';
+import StepCarga from '../components/StepCarga';
 
 export default function PreRegistroScreen() {
     const [step, setStep] = useState(0);
@@ -20,14 +20,19 @@ export default function PreRegistroScreen() {
     const handleBack = () => setStep((prev) => prev - 1);
 
     const steps = [
-        <StepDatosPersonales 
+        <StepDatosPersonales
             data={{ remitente: formData.remitente, destinatario: formData.destinatario }}
             setData={(d) => setFormData({ ...formData, remitente: d.remitente, destinatario: d.destinatario })}
             onNext={handleNext}
         />,
-        <StepRuta 
+        <StepRuta
             data={formData.ruta} 
             setData={(d) => setFormData({...formData, ruta: d})} 
+            onNext={handleNext} onBack={handleBack} 
+        />,
+        <StepCarga
+            data={formData.carga} 
+            setData={(d) => setFormData({...formData, carga: d})} 
             onNext={handleNext} onBack={handleBack} 
         />,
         // ... los otros steps
@@ -35,8 +40,7 @@ export default function PreRegistroScreen() {
 
     return (
         <Container>
-            <StepHeader currentStep={step} />
-            <CustomizedSteppers activeStep={1} />
+            <StepHeader activeStep={step} />
             <Box m={4} />
             {steps[step]}
         </Container>
