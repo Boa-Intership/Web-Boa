@@ -20,13 +20,18 @@ jobs:
           git config --global user.name "GitHub Actions"
           git pull origin ${{ github.ref_name }}
 
+      - name: Limpiar node_modules y package-lock.json
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Instalar dependencias
-        run: npm ci
+        run: npm install
 
       - name: Lint
         run: npm run lint
