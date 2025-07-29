@@ -5,6 +5,7 @@ import StepDatosPersonales from '../components/StepDatosPersonales';
 import StepRuta from '../components/StepRuta';
 import StepCarga from '../components/StepCarga';
 import StepFactura from '../components/StepFactura';
+import StepResumen from '../components/StepResumen';
 
 export default function PreRegistroScreen() {
     const [step, setStep] = useState(0);
@@ -43,7 +44,10 @@ export default function PreRegistroScreen() {
             carga={formData.carga}
             ruta={formData.ruta}
         />,
-        // ... los otros steps
+        <StepResumen
+            formData={formData}
+            onBack={handleBack}
+        />,
     ];
 
     return (
