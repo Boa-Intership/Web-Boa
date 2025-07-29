@@ -15,6 +15,7 @@ import {
   Paper
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { Inventory2 } from '@mui/icons-material';
 
 const tiposCarga = ['Carga general', 'Animales vivos', 'Perecedero'];
 
@@ -66,7 +67,10 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>Información de la Carga</Typography>
+      <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
+        <Inventory2 color='primary' />
+        <Typography variant="h5" color='primary'>Información de la Carga</Typography>
+      </Box>
 
       {/* Tipo de carga */}
       <Grid container spacing={2}>
