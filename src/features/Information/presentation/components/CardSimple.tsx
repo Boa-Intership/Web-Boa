@@ -17,7 +17,7 @@ type CardSimpleProps = {
               gap={2}
               p={1}
               alignItems="center"
-              borderRadius={4}
+              borderRadius={2}
               >
             
               <Box flexShrink={0} >

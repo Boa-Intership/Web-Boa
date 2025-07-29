@@ -14,9 +14,9 @@ const style = {
   maxWidth: 900,
   maxHeight: "90vh",
   overflowY: "auto",
-  bgcolor: "background.paper",
+  bgcolor: "#ffffff",
   boxShadow: 24,
-  p: 4,
+  p: 6,
   borderRadius: 4,
 };
 
@@ -71,7 +71,7 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
     >
       <Fade in={open}>
         <Box sx={style}>
-          <Typography id="modal-title" variant="h5" fontWeight="bold">
+          <Typography id="modal-title" variant="h4" fontWeight="bold" color={(theme) => theme.palette.blue_dark.main} mb={2}>
             {title}
           </Typography>
 
@@ -85,7 +85,7 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
             />
           ))}
 
-          <Typography variant="h6" fontWeight="bold">
+          <Typography variant="h6" fontWeight="bold" color={(theme) => theme.palette.blue_dark.main} mt={2}>
             {subtitle}
           </Typography>
 
@@ -99,11 +99,11 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
           ))}
           {example && example.length > 0 && (
             <Box>
-              <Typography variant="subtitle1" fontWeight={"bold"} mt={2}>
+              <Typography variant="subtitle1" fontWeight={"bold"} mt={2} color={(theme) => theme.palette.blue_dark.main}>
                 ¿Que cargas pueden entrar a esta categoria?
               </Typography>
               <Typography variant="body2">
-                Ejemplos comunes de carga general en BoA Cargo:
+                Ejemplos comunes de {title} en BoA Cargo:
               </Typography>
               <Grid container spacing={2} mt={2}>
                 {example.map((item, index) => (
