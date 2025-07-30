@@ -7,7 +7,7 @@ import ButtonCardInfo from "./ButtonCardInfo";
 import TransitionsModal from "./TransitionsModal";
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
-import { title } from "process";
+
 
 export default function CardInfoSection() {
   const [openModal, setOpenModal] = useState<null | "cargaGeneral" | "animalesVivos" | "perecederos" | "restosHumanos" | "prohibidos">(null);
@@ -222,8 +222,7 @@ export default function CardInfoSection() {
                 "El embalaje deberá ser adecuado para el transporte.",
                 "NOTA: Se deben presentar los documentos originales más tres copias de cada uno.",
 
-              ],
-              imageUrl: ["../src/assets/cargaGeneral.jpg", "../src/assets/cargaGeneral.jpg"],
+              ]
             },
             {
               title: "Internacional",
@@ -236,9 +235,8 @@ export default function CardInfoSection() {
                 "Autorización para traslado del cadáver, emitido por una Oficina Gubernamental(policial o alcaldía) del país local donde se origina el embarque.",
                 "Cualquier otro certificado que pudiera ser exigido por los países de tránsito o destino del féretro.",
                 "El embalaje deberá ser adecuado para el transporte.",
-              ],
-
-            },
+              ]
+            }
           ],
           example: [
             {
@@ -256,39 +254,54 @@ export default function CardInfoSection() {
 
       case "prohibidos":
         return {
-          title: "Prohibidos",
+          title: "Peligrosos",
           concept: [{
-            description: "Una 'Carga general' se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.",
-            imageUrl: "/informacioPage/prohibido/prohibido.jpg",
+            description: "En BoA Cargo, las cargas peligrosas son todos aquellos materiales o sustancias que, por sus características químicas o físicas, pueden representar un riesgo para la salud, la seguridad, la propiedad o el medio ambiente durante su transporte aéreo. Estas cargas están reguladas internacionalmente por la IATA (Asociación Internacional de Transporte Aéreo) bajo la Regulación de Mercancías Peligrosas (DGR) y, en Bolivia, por normativas de la DGAC y autoridades competentes.",
+            imageUrl: "/informacioPage/peligroso/prohibido.jpg",
             background: "#22408160",
           }],
-          subtitle: "Requisitos",
-          details: [
-            {
-              title: "Nacional",
-              description: [
-                "Toda carga debe ser presentada abierta para su correspondiente revisión al 100%.",
-                "El cliente debe tener material para terminar de embalar luego de la revisión de su carga.",
-                "La carga debe contar con embalaje adecuado de acuerdo al tipo de carga que desea enviar.",
-                "Toda encomienda o carga será aceptada para envío con el respectivo documento de identidad vigente.",
-                "La carga será aceptada hasta dos horas antes de la salida del vuelo y entregada una hora después de la llegada del vuelo.",
-                "Todo envío y recepción de cargas se debe realizar únicamente en oficinas de BoA Cargo.",
-              ],
-              // imageUrl: [],
-            },
-            {
-              title: "Internacional",
-              description: [
-                "Para el transporte de carga internacional, los clientes deben contactarse con un Agente de carga de su confianza, que lo asesorará con todos los documentos y procedimientos de exportación según normativa aduanera vigente, embalaje de acuerdo a tipo de carga y procedimiento de controles de autoridades gubernamentales en origen y destino.",
-              ],
-
-            },
-          ],
+          subtitle: "",
+          details: [],
           example: [
             {
-              title: "Bienes manufacturados",
-              description: "Ropa, calzado, juguetes, herramientas",
-              image: "../src/assets/cargaGeneral.jpg",
+              title: "Explosivos",
+              description: "municiones, material para expediciones,bengalas,fuegos artificiales, articulos pirotécnicos",
+              image: "/informacioPage/peligroso/explosive-symbol.jpg",
+            },
+            {
+              title: "Solidos inflamables",
+              description: "fosforo, articulos de facil ignicion,combustion expontanea o que al tacto con el agua emitan gases inflamables",
+              image: "/informacioPage/peligroso/Flammables.gif",
+            },
+            {
+              title: "Venenos y sustancias infecciosas",
+              description: "muestras para diagnosticos, sustancias toxicas o infecciosas y herbicidas",
+              image: "/informacioPage/peligroso/sustanciasInfecciosas.jpg",
+            },
+            {
+              title: "Gases comprimidos inflamables, no inflamables y venenosos",
+              description: "extintores, botellas de oxigeno para bucear, licuados refrigerrados o disueltos",
+              image: "/informacioPage/peligroso/gasComprimido.gif",
+            },
+            {
+              title: "Liquidos inflamables",
+              description: "Bombonas de gas para recargar encendedores, pinturas, disolventes,combustibles liquidos o solidos,cerillas ",
+              image: "/informacioPage/peligroso/Flammables.gif",
+            },
+            {
+              title: "Material radioactivo",
+              description: "Material con isotopos radiactivos",
+              image: "/informacioPage/peligroso/nuclear.png",
+            },
+            {
+              title: "Materiales corrosivos y Oxidantes",
+              description: "acidos alcalinos, mercurio, pilas humedas, peroxidos,acumuladores electricos",
+              image: "/informacioPage/peligroso/corrosivoOxidante.jpg",
+            },
+            {
+              title: "Pilas y baterias",
+              description: "Ademas de otros articulos considerados peligrosos como material ferro-magnetico, hielo seco y baterias de coche",
+              image: "/informacioPage/peligroso/bateriasLitio.webp",
             }
           ],
         };
@@ -332,11 +345,11 @@ export default function CardInfoSection() {
           imageUrl="/informacioPage/restosHumanos/ataud.webp"
         />
         <ButtonCardInfo
-          title="Prohibidos"
+          title="Peligrosas"
           description="Unos cuantos ejemplos, restricciones"
           onClick={() => handleOpenModal("prohibidos")}
           icon={<DoNotDisturbAltIcon />}
-          imageUrl="/informacioPage/prohibido/prohibido.jpg"
+          imageUrl="/informacioPage/peligroso/prohibido.jpg"
         />
 
       </Box>

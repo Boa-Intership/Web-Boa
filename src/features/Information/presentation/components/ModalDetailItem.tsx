@@ -40,28 +40,5 @@ function ModalDetailItem({ title, description, imageUrl }: ModalDetailItemProps)
     </Grid>
   );
 }
-// const ModalDetailItem: React.FC<ModalDetailItemProps> = ({ title, description, imageUrl }) => {
-//   return (
-//     <Box 
-//       display="flex"
-//       flexDirection={{ xs: 'column', sm: 'row' }} // columna en móviles, fila en pantallas medianas o mayores
-//       gap={1}
-//       alignItems="center">
-//       <Box flex={imageUrl ? 1 : "100%"}>
-//         <Typography variant="subtitle1" fontWeight="bold">{title}</Typography>
-//         <ul>
-//           {description.map((text, index) => (
-//             <li key={index}>
-//               <Typography variant="body2">{text}</Typography>
-//             </li>
-//           ))}
-//         </ul>
-//       </Box>
-//       <Box flexShrink={0}>
-//         <img src={imageUrl} style={{ width: 250, borderRadius: 4 }} />
-//       </Box>
-//     </Box>
-//   );
-// };
 
 export default ModalDetailItem;

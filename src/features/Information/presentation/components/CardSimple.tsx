@@ -33,42 +33,5 @@ type CardSimpleProps = {
 
       );
   }
-//  function CardSimple({ title, description, imageUrl, background }: CardSimpleProps) {
-//    return (
-//      <Box bgcolor={background} p={2}>
-//        <Grid
-//          container
-//          spacing={2}
-        
-//          width={700}
-//          direction={{ xs: 'column', sm: 'row' }}
-//        >
-//          {imageUrl && (
-//            <Grid item xs={12} sm={4}>
-//              <Box sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
-//                <img
-//                  src={imageUrl}
-//                  alt={title}
-//                  style={{
-//                    width: 190,
-//                    borderRadius: 4,
-                  
-//                  }}
-//                />
-//              </Box>
-//            </Grid>
-//          )}
 
-//          <Grid item xs={12} >
-//            <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-//              {title}
-//            </Typography>
-//            <Typography variant="body2">
-//              {description}
-//            </Typography>
-//          </Grid>
-//        </Grid>
-//      </Box>
-//    );
-//  }
 export default CardSimple

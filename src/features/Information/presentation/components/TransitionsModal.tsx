@@ -71,7 +71,7 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
     >
       <Fade in={open}>
         <Box sx={style}>
-          <Typography id="modal-title" variant="h4" fontWeight="bold" color={(theme) => theme.palette.blue_dark.main} mb={2}>
+          <Typography id="modal-title" variant="h4" fontWeight="bold" color={'#002f5bff'} mb={2}>
             {title}
           </Typography>
 
@@ -85,7 +85,7 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
             />
           ))}
 
-          <Typography variant="h6" fontWeight="bold" color={(theme) => theme.palette.blue_dark.main} mt={2}>
+          <Typography variant="h6" fontWeight="bold" color={'#002f5bff'} mt={2}>
             {subtitle}
           </Typography>
 
@@ -99,7 +99,7 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
           ))}
           {example && example.length > 0 && (
             <Box>
-              <Typography variant="subtitle1" fontWeight={"bold"} mt={2} color={(theme) => theme.palette.blue_dark.main}>
+              <Typography variant="subtitle1" fontWeight={"bold"} mt={2} color={'#002f5bff'}>
                 ¿Que cargas pueden entrar a esta categoria?
               </Typography>
               <Typography variant="body2">
