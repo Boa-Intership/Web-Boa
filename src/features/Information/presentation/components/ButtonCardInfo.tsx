@@ -73,10 +73,11 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
                 size='small'
                 sx={{
                 textTransform: 'none',
-                backgroundColor:(theme) => theme.palette.blue_dark.main,
+                // backgroundColor:(theme) => theme.palette.blue_dark.main,
+                backgroundColor: '#002f5bff',
                 color:'#ffffff',
                 '&:hover': {
-                    backgroundColor: "palette.blue_light.main",
+                    backgroundColor: "#3668AD",
                 },
                 }}
             >

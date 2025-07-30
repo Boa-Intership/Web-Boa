@@ -12,7 +12,7 @@ function ExampleType ({title,description,image}:ExampleTypeProps){
         <Box sx={{display:"flex", alignItems:"center", flexDirection: "column", width: "100%"}}>
             <Box>
                 {image && (
-                <img src={image} alt={title} style={{ width: 100, borderRadius: 100}} />
+                <img src={image} alt={title} style={{ width: 150, borderRadius: 4}} />
                 )}
             </Box>
              <Box sx={{display:"flex", alignItems:"center", flexDirection: "column", width: "100%"}}>

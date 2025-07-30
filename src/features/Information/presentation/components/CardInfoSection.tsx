@@ -28,7 +28,7 @@ export default function CardInfoSection() {
           title: "Carga General",
           concept: [{
             description: "Una 'Carga general' se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.",
-            imageUrl: "../src/assets/cargaGeneral.jpg",
+            imageUrl: "/informacioPage/cargaGeneral/paquete.jpg",
             background: "#22408160",
           }],
           subtitle: "Requisitos",
@@ -43,7 +43,7 @@ export default function CardInfoSection() {
                 "La carga será aceptada hasta dos horas antes de la salida del vuelo y entregada una hora después de la llegada del vuelo.",
                 "Todo envío y recepción de cargas se debe realizar únicamente en oficinas de BoA Cargo.",
               ],
-              imageUrl: ["../src/assets/Gemini_Generated_Image_paquete.png"],
+              imageUrl: ["/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png"]
             },
             {
               title: "Internacional",
@@ -57,37 +57,37 @@ export default function CardInfoSection() {
             {
               title: "Bienes manufacturados",
               description: "Ropa, calzado, juguetes, herramientas",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/cargaGeneral/GGI_manu.png",
             },
             {
               title: "Maquinaria y repuestos",
               description: "Motores, partes de vehículos, maquinaria liviana",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/cargaGeneral/GGI_herramientas.png",
             },
             {
               title: "Material impreso y papelería",
               description: "Libros, revistas, catálogos, documentos",
-              image: "../src/assets/cargaGeneral.jpg",
+              image:"/informacioPage/cargaGeneral/GGI_papeleria.png",
             },
             {
               title: "Electrodomésticos y electrónicos",
               description: "Celulares, computadoras, impresoras",
-              image: "../src/assets/cargaGeneral.jpg",
+              image:"/informacioPage/cargaGeneral/GGI_electronicos.png",
             },
             {
               title: "Productos de higiene o limpieza",
               description: "Detergentes, jabones, desinfectantes (no peligrosos)",
-              image: "../src/assets/cargaGeneral.jpg",
+              image:"/informacioPage/cargaGeneral/GGI_limpieza.png",
             },
             {
               title: "Efectos personales",
               description: "Maletas, cajas con pertenencias de viaje",
-              image: "../src/assets/cargaGeneral.jpg",
+              image:"/informacioPage/cargaGeneral/GGI_personal.png",
             },
             {
               title: "Muebles pequeños desmontables",
               description: "Sillas, mesas plegables, estanterías livianas",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/cargaGeneral/GGI_muebles.png",
             }
           ],
         };
@@ -97,7 +97,7 @@ export default function CardInfoSection() {
           title: "Animales Vivos",
           concept: [{
             description: "la categoría de 'Animales Vivos' hace referencia al servicio especializado para el transporte aéreo de animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje.",
-            imageUrl: "../src/assets/mascotas2.jpg",
+            imageUrl: "/informacioPage/animalesVivos/mascotas2.jpg",
             background: "#22408160",
           }],
           subtitle: "Requisitos",
@@ -117,34 +117,34 @@ export default function CardInfoSection() {
                 "Por seguridad sugerimos no sedar animales domésticos en tramos nacionales e internacionales.",
                 "Para el transporte de animales vivos de fauna silvestre en peligro de extinción, se debe presentar la Autorización del Ministerio de Medio Ambiente y Agua de Bolivia.",
               ],
-              imageUrl: ["../src/assets/mascotas1.webp", "../src/assets/vacunas.webp"],
+              imageUrl: ["/informacioPage/animalesVivos/mascotas1.webp", "/informacioPage/animalesVivos/vacunas.webp"],
             },
           ],
           example: [
             {
               title: "Mascotas domésticas",
               description: "Perros, gatos",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/animalesVivos/GGI_mascotas.png",
             },
             {
               title: "Aves",
               description: "Canarios, loros, aves ornamentales",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/animalesVivos/GGI_aves.png",
             },
             {
               title: " Animales pequeños",
               description: "Conejos, hámsters, cobayos",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/animalesVivos/GGI_aniPeque.png",
             },
             {
               title: "Animales de granja (ocasional)",
               description: "Pollitos, cabritos, corderos",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/animalesVivos/GGI_granja.png",
             },
             {
               title: "Animales exóticos (autorizados)",
               description: "Tortugas, iguanas. Importante:BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES)",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/animalesVivos/GGI_exotico.png",
             }
 
           ],
@@ -155,7 +155,7 @@ export default function CardInfoSection() {
           title: "Perecederos",
           concept: [{
             description: "las 'Cargas Perecederas' son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.",
-            imageUrl: "../src/assets/alimentos.jpg",
+            imageUrl: "/informacioPage/perecederos/alimentos.jpg",
             background: "#22408160",
           }],
           subtitle: "Requisitos",
@@ -176,27 +176,27 @@ export default function CardInfoSection() {
             {
               title: "Alimentos frescos",
               description: "	Frutas, verduras, hortalizas, hierbas frescas",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/perecederos/GGI_frescos.png",
             },
             {
               title: "Productos cárnicos y derivados",
               description: "Carne fresca o congelada, embutidos, charcutería",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/perecederos/GGI_embutidos.png",
             },
             {
               title: "Pescados y mariscos",
               description: "Filetes, camarones, productos congelados",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/perecederos/GGI_pescados.png",
             },
             {
               title: "Productos lácteos y panadería",
               description: "Yogur, quesos, postres, pasteles",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/perecederos/GGI_panaderia.png",
             },
             {
               title: "Flores y plantas vivas",
               description: "Rosas, claveles, orquídeas, plantas ornamentales",
-              image: "../src/assets/cargaGeneral.jpg",
+              image: "/informacioPage/perecederos/GGI_flores.png",
             }
           ],
         };
@@ -206,7 +206,7 @@ export default function CardInfoSection() {
           title: "Restos humanos",
           concept: [{
             description: " la categoría de 'Restos humanos' se refiere al transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo (féretro) o de cenizas (urnas funerarias), cumpliendo con normas legales, sanitarias y logísticas estrictas.",
-            imageUrl: "../src/assets/ataud.webp",
+            imageUrl: "/informacioPage/restosHumanos/ataud.webp",
             background: "#22408160",
           }],
           subtitle: "Requisitos",
@@ -242,39 +242,14 @@ export default function CardInfoSection() {
           ],
           example: [
             {
-              title: "Bienes manufacturados",
-              description: "Ropa, calzado, juguetes, herramientas",
-              image: "../src/assets/cargaGeneral.jpg",
+              title: "Restos humanos en féretro",
+              description: "El cuerpo del fallecido, preparado, embalsamado y colocado en un ataúd especial para vuelos.",
+              image: "/informacioPage/restosHumanos/GGI_ataud.png",
             },
             {
-              title: "Maquinaria y repuestos",
-              description: "Motores, partes de vehículos, maquinaria liviana",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Material impreso y papelería",
-              description: "Libros, revistas, catálogos, documentos",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Electrodomésticos y electrónicos",
-              description: "Celulares, computadoras, impresoras",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Productos de higiene o limpieza",
-              description: "Detergentes, jabones, desinfectantes (no peligrosos)",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Efectos personales",
-              description: "Maletas, cajas con pertenencias de viaje",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Muebles pequeños desmontables",
-              description: "Sillas, mesas plegables, estanterías livianas",
-              image: "../src/assets/cargaGeneral.jpg",
+              title: "Cenizas humanas (urnas)",
+              description: "Restos cremados transportados en urnas funerarias adecuadas.",
+              image: "/informacioPage/restosHumanos/GGI_cenizas.png",
             }
           ],
         };
@@ -284,7 +259,7 @@ export default function CardInfoSection() {
           title: "Prohibidos",
           concept: [{
             description: "Una 'Carga general' se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.",
-            imageUrl: "../src/assets/cargaGeneral.jpg",
+            imageUrl: "/informacioPage/prohibido/prohibido.jpg",
             background: "#22408160",
           }],
           subtitle: "Requisitos",
@@ -299,7 +274,7 @@ export default function CardInfoSection() {
                 "La carga será aceptada hasta dos horas antes de la salida del vuelo y entregada una hora después de la llegada del vuelo.",
                 "Todo envío y recepción de cargas se debe realizar únicamente en oficinas de BoA Cargo.",
               ],
-              imageUrl: ["../src/assets/cargaGeneral.jpg", "../src/assets/cargaGeneral.jpg"],
+              // imageUrl: [],
             },
             {
               title: "Internacional",
@@ -314,36 +289,6 @@ export default function CardInfoSection() {
               title: "Bienes manufacturados",
               description: "Ropa, calzado, juguetes, herramientas",
               image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Maquinaria y repuestos",
-              description: "Motores, partes de vehículos, maquinaria liviana",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Material impreso y papelería",
-              description: "Libros, revistas, catálogos, documentos",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Electrodomésticos y electrónicos",
-              description: "Celulares, computadoras, impresoras",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Productos de higiene o limpieza",
-              description: "Detergentes, jabones, desinfectantes (no peligrosos)",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Efectos personales",
-              description: "Maletas, cajas con pertenencias de viaje",
-              image: "../src/assets/cargaGeneral.jpg",
-            },
-            {
-              title: "Muebles pequeños desmontables",
-              description: "Sillas, mesas plegables, estanterías livianas",
-              image: "../src/assets/cargaGeneral.jpg",
             }
           ],
         };
@@ -356,41 +301,42 @@ export default function CardInfoSection() {
 
   return (
     <Container>
-      <Box display="flex" justifyContent="center" flexWrap="wrap" gap={2}>
+      <Box display="flex" justifyContent="center" flexWrap="wrap" gap={4}>
         <ButtonCardInfo
           title="Carga General"
           description="Unos cuantos ejemplos, restricciones"
           onClick={() => handleOpenModal("cargaGeneral")}
           icon={<Inventory2OutlinedIcon />}
-          imageUrl="../src/assets/cargaGeneral.jpg"
+          imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
         />
         <ButtonCardInfo
           title="Animales vivos"
           description="Unos cuantos ejemplos, restricciones"
           onClick={() => handleOpenModal("animalesVivos")}
           icon={<PetsOutlinedIcon />}
-          imageUrl="../src/assets/mascotas2.jpg"
+          imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
         />
         <ButtonCardInfo
           title="Perecederos"
           description="Unos cuantos ejemplos, restricciones"
           onClick={() => handleOpenModal("perecederos")}
           icon={<SetMealOutlinedIcon />}
-          imageUrl="../src/assets/alimentos.jpg"
+          imageUrl="/informacioPage/perecederos/alimentos.jpg"
+          
         />
         <ButtonCardInfo
           title="Restos Humanos"
           description="Unos cuantos ejemplos, restricciones"
           onClick={() => handleOpenModal("restosHumanos")}
           icon={<LocalHospitalOutlinedIcon />}
-          imageUrl="../src/assets/ataud.webp"
+          imageUrl="/informacioPage/restosHumanos/ataud.webp"
         />
         <ButtonCardInfo
           title="Prohibidos"
           description="Unos cuantos ejemplos, restricciones"
           onClick={() => handleOpenModal("prohibidos")}
           icon={<DoNotDisturbAltIcon />}
-          imageUrl="../src/assets/prohibido.jpg"
+          imageUrl="/informacioPage/prohibido/prohibido.jpg"
         />
 
       </Box>
