@@ -29,7 +29,7 @@ export default function CardInfoSection() {
           concept: [{
             description: "Una 'Carga general' se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.",
             imageUrl: "/informacioPage/cargaGeneral/paquete.jpg",
-            background: "#22408160",
+            background: "#0852f160",
           }],
           subtitle: "Requisitos",
           details: [
@@ -98,7 +98,7 @@ export default function CardInfoSection() {
           concept: [{
             description: "la categoría de 'Animales Vivos' hace referencia al servicio especializado para el transporte aéreo de animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje.",
             imageUrl: "/informacioPage/animalesVivos/mascotas2.jpg",
-            background: "#22408160",
+            background:  "#0852f160",
           }],
           subtitle: "Requisitos",
           details: [
@@ -156,7 +156,7 @@ export default function CardInfoSection() {
           concept: [{
             description: "las 'Cargas Perecederas' son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.",
             imageUrl: "/informacioPage/perecederos/alimentos.jpg",
-            background: "#22408160",
+            background:  "#0852f160",
           }],
           subtitle: "Requisitos",
           details: [
@@ -207,7 +207,7 @@ export default function CardInfoSection() {
           concept: [{
             description: " la categoría de 'Restos humanos' se refiere al transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo (féretro) o de cenizas (urnas funerarias), cumpliendo con normas legales, sanitarias y logísticas estrictas.",
             imageUrl: "/informacioPage/restosHumanos/ataud.webp",
-            background: "#22408160",
+            background:  "#0852f160",
           }],
           subtitle: "Requisitos",
           details: [
@@ -258,7 +258,7 @@ export default function CardInfoSection() {
           concept: [{
             description: "En BoA Cargo, las cargas peligrosas son todos aquellos materiales o sustancias que, por sus características químicas o físicas, pueden representar un riesgo para la salud, la seguridad, la propiedad o el medio ambiente durante su transporte aéreo. Estas cargas están reguladas internacionalmente por la IATA (Asociación Internacional de Transporte Aéreo) bajo la Regulación de Mercancías Peligrosas (DGR) y, en Bolivia, por normativas de la DGAC y autoridades competentes.",
             imageUrl: "/informacioPage/peligroso/prohibido.jpg",
-            background: "#22408160",
+            background:  "#0852f160",
           }],
           subtitle: "",
           details: [],
@@ -314,7 +314,7 @@ export default function CardInfoSection() {
 
   return (
     <Container>
-      <Box display="flex" justifyContent="center" flexWrap="wrap" gap={4}>
+      <Box display="flex" justifyContent="center" flexWrap="wrap" gap={4} mb={4} mt={4}>
         <ButtonCardInfo
           title="Carga General"
           description="Unos cuantos ejemplos, restricciones"
@@ -345,7 +345,7 @@ export default function CardInfoSection() {
           imageUrl="/informacioPage/restosHumanos/ataud.webp"
         />
         <ButtonCardInfo
-          title="Peligrosas"
+          title="Peligrosos"
           description="Unos cuantos ejemplos, restricciones"
           onClick={() => handleOpenModal("prohibidos")}
           icon={<DoNotDisturbAltIcon />}

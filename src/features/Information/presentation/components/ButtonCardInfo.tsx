@@ -32,6 +32,13 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
         display: 'flex',
         alignItems: 'flex-end',
         boxShadow: 2,
+        transition: 'transform 0.5s ease, box-shadow 0.3s ease',
+        // cursor: 'pointer',
+        '&:hover': {
+          transform: 'scale(1.07)',
+          boxShadow: 8,
+        },
+        
       }}
     >
         {/* Overlay oscuro para mejorar contraste */}
@@ -41,7 +48,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
             bottom: 0,
             width: '100%',
             height: '40%',
-            backgroundColor: 'rgba(0, 0, 0, 0.4)', // opacidad para oscurecer fondo
+            backgroundColor: 'rgba(0, 0, 0, 0.52)', // opacidad para oscurecer fondo
         }}
         />
 
