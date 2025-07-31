@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Grid, TextField, Typography, Paper } from '@mui/material';
 import { Person } from '@mui/icons-material';
+import { validateField } from '../../domain/validators/validateDatosPersonales';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const [localData, setLocalData] = useState(data || {
@@ -8,11 +9,21 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     destinatario: {}
   });
 
+  const [errors, setErrors] = useState<any>({});
+  /*
+  const [errors, setErrors] = useState({
+    remitente: {},
+    destinatario: {}
+  });
+  */
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     tipo: 'remitente' | 'destinatario'
-    ) => {
+  ) => {
     const { name, value } = e.target;
+    // Validar el campo individualmente
+    const error = validateField(name, value);
     setLocalData((prev: any) => ({
         ...prev,
         [tipo]: {
@@ -20,23 +31,66 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
         [name]: value
         }
     }));
-    };
+
+    setErrors((prev: any) => ({
+      ...prev,
+      [tipo]: {
+        ...prev[tipo],
+        [name]: error
+      }
+    }));
+  };
 
   const handleNextClick = () => {
-    // Validación mínima
-    const requiredFieldsRem = ['ci', 'nombre', 'celular', 'correo'];
-    const requiredFieldsDes = ['nombre', 'celular'];
-    const remitenteOk = requiredFieldsRem.every(f => localData.remitente?.[f]);
-    const destinatarioOk = requiredFieldsDes.every(f => localData.destinatario?.[f]);
+    const newErrors: any = { remitente: {}, destinatario: {} };
+    let isValid = true;
 
-    if (!remitenteOk || !destinatarioOk) {
-      alert('Por favor llena los campos obligatorios (*) de remitente y destinatario.');
-      return;
+    const requiredFieldsRemitente = ['ci', 'celular', 'nombre', 'correo'];
+    const requiredFieldsDestinatario = ['celular', 'nombre'];
+
+    requiredFieldsRemitente.forEach(field => {
+      const value = localData.remitente?.[field] || '';
+      const error = validateField(field, value);
+      if (error) {
+        newErrors.remitente[field] = error;
+        isValid = false;
+      }
+    });
+
+    requiredFieldsDestinatario.forEach(field => {
+      const value = localData.destinatario?.[field] || '';
+      const error = validateField(field, value);
+      if (error) {
+        newErrors.destinatario[field] = error;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (isValid) {
+      setData(localData);
+      onNext();
     }
-
-    setData(localData);
-    onNext();
   };
+
+  const renderTextField = (
+    tipo: 'remitente' | 'destinatario',
+    name: string,
+    label: string,
+    required = false
+  ) => (
+    <TextField
+      label={label}
+      name={name}
+      fullWidth
+      required={required}
+      value={localData[tipo]?.[name] || ''}
+      onChange={(e) => handleChange(e, tipo)}
+      error={!!errors[tipo]?.[name]}
+      helperText={errors[tipo]?.[name] || ''}
+    />
+  );
 
   return (
     <Box>
@@ -57,7 +111,10 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   required
                   value={localData.remitente?.ci || ''}
                   onChange={(e) => handleChange(e, 'remitente')}
+                  error={!!errors.remitente?.ci}
+                  helperText={errors.remitente?.ci}
                 />
+                {/** {renderTextField('remitente', 'celular', 'Número Celular', true)} */}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -67,6 +124,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   required
                   value={localData.remitente?.celular || ''}
                   onChange={(e) => handleChange(e, 'remitente')}
+                  error={!!errors.remitente?.celular}
+                  helperText={errors.remitente?.celular}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -77,6 +136,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   required
                   value={localData.remitente?.nombre || ''}
                   onChange={(e) => handleChange(e, 'remitente')}
+                  error={!!errors.remitente?.nombre}
+                  helperText={errors.remitente?.nombre}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -87,6 +148,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   required
                   value={localData.remitente?.correo || ''}
                   onChange={(e) => handleChange(e, 'remitente')}
+                  error={!!errors.remitente?.correo}
+                  helperText={errors.remitente?.correo}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -96,6 +159,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   fullWidth
                   value={localData.remitente?.direccion || ''}
                   onChange={(e) => handleChange(e, 'remitente')}
+                  error={!!errors.remitente?.direccion}
+                  helperText={errors.remitente?.direccion}
                 />
               </Grid>
             </Grid>
@@ -117,6 +182,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   fullWidth
                   value={localData.destinatario?.ci || ''}
                   onChange={(e) => handleChange(e, 'destinatario')}
+                  error={!!errors.destinatario?.ci}
+                  helperText={errors.destinatario?.ci}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -127,6 +194,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   required
                   value={localData.destinatario?.celular || ''}
                   onChange={(e) => handleChange(e, 'destinatario')}
+                  error={!!errors.destinatario?.celular}
+                  helperText={errors.destinatario?.celular}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -137,6 +206,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   required
                   value={localData.destinatario?.nombre || ''}
                   onChange={(e) => handleChange(e, 'destinatario')}
+                  error={!!errors.destinatario?.nombre}
+                  helperText={errors.destinatario?.nombre}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -146,6 +217,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   fullWidth
                   value={localData.destinatario?.correo || ''}
                   onChange={(e) => handleChange(e, 'destinatario')}
+                  error={!!errors.destinatario?.correo}
+                  helperText={errors.destinatario?.correo}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -155,6 +228,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
                   fullWidth
                   value={localData.destinatario?.direccion || ''}
                   onChange={(e) => handleChange(e, 'destinatario')}
+                  error={!!errors.destinatario?.direccion}
+                  helperText={errors.destinatario?.direccion}
                 />
               </Grid>
             </Grid>
