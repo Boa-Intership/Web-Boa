@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Stack, TextField, Button as MuiButton, InputAdornment, Typography, Container } from '@mui/material';
+import { Box, Stack, TextField, Button as MuiButton, InputAdornment, Typography, Container, Alert } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -7,14 +7,31 @@ import SearchIcon from '@mui/icons-material/Search';
 import HomeActionButton from '../components/HomeActionButton';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../router/routes';
+import { homeApi } from '../../data/homeApi';
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const [tracking, setTracking] = useState('');
+  const [apiMessage, setApiMessage] = useState<string | null>(null);
 
   const handleTrack = () => {
     // Aquí iría la lógica de rastreo
     alert(`Buscando información para: ${tracking}`);
+  };
+
+  const testApiConnection = async () => {
+    try {
+      const result = await homeApi.testApiConnection();
+      if (result.success) {
+        setApiMessage(' API conectada correctamente');
+        console.log('API Response:', result.data);
+      } else {
+        setApiMessage(' Error al conectar con la API');
+      }
+    } catch (error) {
+      setApiMessage(' Error al conectar con la API');
+      console.error('API Error:', error);
+    }
   };
 
   return (
@@ -50,25 +67,43 @@ const HomeScreen: React.FC = () => {
           </MuiButton>
         </Stack>
       </Stack>
+
+      {/* Botón para probar API */}
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
+        <MuiButton 
+          variant="outlined" 
+          color="secondary" 
+          onClick={testApiConnection}
+          sx={{ mb: 2 }}
+        >
+          Probar Conexión API
+        </MuiButton>
+        {apiMessage && (
+          <Alert severity={apiMessage.includes('conectada') ? 'success' : 'error'} sx={{ mt: 2 }}>
+            {apiMessage}
+          </Alert>
+        )}
+      </Box>
+
       {/* Botones de acción */}
       <Container maxWidth="md" disableGutters>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4} alignItems="center" justifyContent="center">
           <HomeActionButton
-            label="Información "
+            label="Información"
             icon={<InfoIcon fontSize="large" color="primary" />}
-            description="¿Que puedo enviar en Boa cargo"
+            description="Consulta tipos de carga"
             onClick={() => navigate(ROUTES.INFORMACION)}
           />
           <HomeActionButton
             label="Cotizar envío"
             icon={<AttachMoneyIcon fontSize="large" color="primary" />}
-            description="¿Cual es el precio de mi envio?"
+            description="Cotización rápida para tu envío."
             onClick={() => navigate(ROUTES.COTIZAR)}
           />
           <HomeActionButton
-            label="Registro envio"
+            label="Pre-registro"
             icon={<AssignmentIcon fontSize="large" color="primary" />}
-            description="Acelera el proceso de envio."
+            description="Completa el pre-registro."
             onClick={() => navigate(ROUTES.PREREGISTRO)}
           />
         </Stack>
