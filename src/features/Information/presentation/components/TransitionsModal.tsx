@@ -1,4 +1,3 @@
-// components/TransitionsModal.tsx
 import React from "react";
 import { Modal, Fade, Backdrop, Box, Typography, Grid } from "@mui/material";
 import ModalDetailItem from "./ModalDetailItem";
@@ -15,6 +14,7 @@ const style = {
   maxHeight: "90vh",
   overflowY: "auto",
   bgcolor: "#ffffff",
+  transition: "opacity 1s ease-in-out, transform 0.5s ease-in-out",
   boxShadow: 24,
   p: 6,
   borderRadius: 4,
@@ -67,9 +67,9 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
       slots={{ backdrop: Backdrop }}
-      slotProps={{ backdrop: { timeout: 500 } }}
+      slotProps={{ backdrop: { timeout: 800 } }}
     >
-      <Fade in={open}>
+      <Fade in={open} timeout={800}>
         <Box sx={style}>
           <Typography id="modal-title" variant="h4" fontWeight="bold" color={'#002f5bff'} mb={2}>
             {title}
