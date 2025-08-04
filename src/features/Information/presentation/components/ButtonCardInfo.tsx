@@ -47,7 +47,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           bottom: 0,
           width: '100%',
           height: '40%',
-          backgroundColor: 'rgba(0, 0, 0, 0.52)', // opacidad para oscurecer fondo
+          backgroundColor: 'rgba(0, 0, 0, 0.55)', // opacidad para oscurecer fondo
         }}
       />
 
@@ -76,7 +76,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
             <Button
               variant="contained"
               onClick={onClick}
-              size='small'
+              size='medium'
               sx={{
                 textTransform: 'none',
                 // backgroundColor:(theme) => theme.palette.blue_dark.main,

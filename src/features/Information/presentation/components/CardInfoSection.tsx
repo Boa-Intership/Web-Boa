@@ -27,7 +27,7 @@ export default function CardInfoSection() {
         return {
           title: "Carga General",
           concept: [{
-            description: "Una 'Carga general' se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.",
+            description: "La categoría de Carga general se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.",
             imageUrl: "/informacioPage/cargaGeneral/paquete.jpg",
             background: "#0852f160",
           }],
@@ -96,7 +96,7 @@ export default function CardInfoSection() {
         return {
           title: "Animales Vivos",
           concept: [{
-            description: "la categoría de 'Animales Vivos' hace referencia al servicio especializado para el transporte aéreo de animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje.",
+            description: "La categoría de 'Animales Vivos' hace referencia al servicio especializado para el transporte aéreo de animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje.",
             imageUrl: "/informacioPage/animalesVivos/mascotas2.jpg",
             background:  "#0852f160",
           }],
@@ -154,7 +154,7 @@ export default function CardInfoSection() {
         return {
           title: "Perecederos",
           concept: [{
-            description: "las 'Cargas Perecederas' son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.",
+            description: "La categoría de 'Cargas Perecederas' son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.",
             imageUrl: "/informacioPage/perecederos/alimentos.jpg",
             background:  "#0852f160",
           }],
@@ -205,7 +205,7 @@ export default function CardInfoSection() {
         return {
           title: "Restos humanos",
           concept: [{
-            description: " la categoría de 'Restos humanos' se refiere al transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo (féretro) o de cenizas (urnas funerarias), cumpliendo con normas legales, sanitarias y logísticas estrictas.",
+            description: "La categoría de 'Restos humanos' se refiere al transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo (féretro) o de cenizas (urnas funerarias), cumpliendo con normas legales, sanitarias y logísticas estrictas.",
             imageUrl: "/informacioPage/restosHumanos/ataud.webp",
             background:  "#0852f160",
           }],
@@ -256,7 +256,7 @@ export default function CardInfoSection() {
         return {
           title: "Peligrosos",
           concept: [{
-            description: "En BoA Cargo, las cargas peligrosas son todos aquellos materiales o sustancias que, por sus características químicas o físicas, pueden representar un riesgo para la salud, la seguridad, la propiedad o el medio ambiente durante su transporte aéreo. Estas cargas están reguladas internacionalmente por la IATA (Asociación Internacional de Transporte Aéreo) bajo la Regulación de Mercancías Peligrosas (DGR) y, en Bolivia, por normativas de la DGAC y autoridades competentes.",
+            description: "La categoría de Peligrosos son todos aquellos materiales o sustancias que, por sus características químicas o físicas, pueden representar un riesgo para la salud, la seguridad, la propiedad o el medio ambiente durante su transporte aéreo. Estas cargas están reguladas internacionalmente por la IATA (Asociación Internacional de Transporte Aéreo) bajo la Regulación de Mercancías Peligrosas (DGR) y, en Bolivia, por normativas de la DGAC y autoridades competentes.",
             imageUrl: "/informacioPage/peligroso/prohibido.jpg",
             background:  "#0852f160",
           }],
@@ -315,17 +315,17 @@ export default function CardInfoSection() {
   return (
     <Container >
       <Box display="flex" alignContent={"start"} flexWrap="wrap" gap={2} margin={2}>
-        <Typography variant="h4" fontWeight={"bold"} color={"#002f5bff"}>
+        <Typography variant="h5" fontWeight={"bold"} color={"#002f5bff"}>
           Información sobre los tipos de carga en BoA
         </Typography>
         <Typography variant="body1">
-          Conoce los tipos de carga que puedes enviar a través de nuestro servicio de paquetería aérea y las restricciones aplicables.
+           Conoce los tipos de carga <strong>Permitidas</strong> y <strong>No Permitidas</strong> que puedes enviar a través de nuestro servicio de paquetería aérea y las restricciones aplicables.
         </Typography>
         <Grid container spacing={2} sx={{justifyContent: "center",alignItems: "center",}}>
           <Grid item>
             <ButtonCardInfo
               title="Carga General"
-              description="Unos cuantos ejemplos, restricciones"
+              description="PERMITIDO"
               onClick={() => handleOpenModal("cargaGeneral")}
               icon={<Inventory2OutlinedIcon />}
               imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
@@ -334,7 +334,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Animales vivos"
-              description="Unos cuantos ejemplos, restricciones"
+              description="PERMITIDO"
               onClick={() => handleOpenModal("animalesVivos")}
               icon={<PetsOutlinedIcon />}
               imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
@@ -343,7 +343,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Perecederos"
-              description="Unos cuantos ejemplos, restricciones"
+              description="PERMITIDO"
               onClick={() => handleOpenModal("perecederos")}
               icon={<SetMealOutlinedIcon />}
               imageUrl="/informacioPage/perecederos/alimentos.jpg"
@@ -352,7 +352,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Restos Humanos"
-              description="Unos cuantos ejemplos, restricciones"
+              description="PERMITIDO"
               onClick={() => handleOpenModal("restosHumanos")}
               icon={<LocalHospitalOutlinedIcon />}
               imageUrl="/informacioPage/restosHumanos/ataud.webp"
@@ -361,7 +361,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Peligrosos"
-              description="Unos cuantos ejemplos, restricciones"
+              description="NO PERMITIDO"
               onClick={() => handleOpenModal("prohibidos")}
               icon={<DoNotDisturbAltIcon />}
               imageUrl="/informacioPage/peligroso/prohibido.jpg"

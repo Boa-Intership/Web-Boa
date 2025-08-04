@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../router/routes';
 import { homeApi } from '../../data/homeApi';
 import Hero from '../components/Hero';
+import CardInfoSection from '../../../Information/presentation/components/CardInfoSection';
+
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -116,6 +118,7 @@ const HomeScreen: React.FC = () => {
           />
         </Stack>
       </Container>
+      <CardInfoSection />
     </Container>
   </>
   );
