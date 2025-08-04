@@ -1,22 +1,14 @@
-
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import Divider from '@mui/material/Divider';
-import MenuItem from '@mui/material/MenuItem';
-import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import { Navigate, useNavigate } from 'react-router-dom';
-//import ColorModeIconDropdown from '../../theme/ColorModeIconDropdown';
-
-
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../router/routes';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -50,18 +42,34 @@ const AppAppBar: React.FC = () => {
     >
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-            <Button 
-              variant="text" 
-              color="primary" 
-              size="small"
-              onClick={() => navigate('/home')}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="logo"
+              sx={{ p: 0, mr: 2 }}
+              onClick={() => navigate(ROUTES.HOME)}
             >
-              Inicio deploy 
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
+                alt="BOA Logo"
+                style={{ height: 36 }}
+              />
+            </IconButton>
+            <Button
+              variant="text"
+              color="primary"
+              size="small"
+              onClick={() => navigate(ROUTES.HOME)}
+              sx={{ fontWeight: 600, fontSize: 16 }}
+            >
+              Home
             </Button>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {/*<ColorModeIconDropdown />*/}
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton color="primary" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
           </Box>
         </StyledToolbar>
       </Container>

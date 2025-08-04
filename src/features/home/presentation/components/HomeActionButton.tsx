@@ -44,7 +44,7 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, ico
         </Box>
 
         <Typography
-          variant="h7"
+          variant="subtitle1"
           component="div"
           sx={{
             fontSize: '1rem',

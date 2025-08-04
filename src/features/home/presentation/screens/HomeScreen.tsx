@@ -8,6 +8,7 @@ import HomeActionButton from '../components/HomeActionButton';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../router/routes';
 import { homeApi } from '../../data/homeApi';
+import Hero from '../components/Hero';
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -35,9 +36,16 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
+  <>
+    <Hero />
     <Container maxWidth="md" sx={{ mt: 6, mb: 6 }}>
       {/* Título, descripción y buscador */}
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} alignItems={{ xs: 'flex-start', sm: 'center' }} justifyContent="space-between" mb={6}>
+      
+      <Stack 
+        direction={{ xs: 'column', sm: 'row' }} 
+        spacing={3} 
+        alignItems={{ xs: 'flex-start', sm: 'center' }} 
+        justifyContent="space-between" mb={6}>
         <Box>
           <Typography variant="h4" fontWeight={700} gutterBottom>
             Bienvenido a BOA Cargo
@@ -109,6 +117,7 @@ const HomeScreen: React.FC = () => {
         </Stack>
       </Container>
     </Container>
+  </>
   );
 };
 
