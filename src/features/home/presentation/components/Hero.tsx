@@ -1,6 +1,6 @@
 import { Box, Typography, Button, Stack, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import portada from '../../assets/portada.png'; // Ajusta la ruta según tu estructura de carpetas
+import portada from '../../../../assets/portada.png'; // Ajusta la ruta según tu estructura de carpetas
 
 interface HeroProps {
   tracking: string;
