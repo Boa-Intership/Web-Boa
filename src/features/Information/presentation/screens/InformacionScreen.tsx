@@ -4,9 +4,7 @@ import { Paper } from '@mui/material';
 
 export default function InformacionScreen() { 
 return (
-    <Paper sx={{margin: 2}}> 
-         <CardInfoSection/> 
-    </Paper>
+         <CardInfoSection/>  
 )
   
 }

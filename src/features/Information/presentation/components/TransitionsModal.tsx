@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Fade, Backdrop, Box, Typography, Grid } from "@mui/material";
 import ModalDetailItem from "./ModalDetailItem";
 import CardSimple from "./CardSimple";
@@ -15,7 +15,7 @@ const style = {
   overflowY: "auto",
   bgcolor: "#ffffff",
   transition: "opacity 1s ease-in-out, transform 0.5s ease-in-out",
-  boxShadow: 24,
+  boxShadow: 6,
   p: 6,
   borderRadius: 4,
 };
@@ -59,6 +59,19 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
   details,
   example,
 }) => {
+  const [showImages, setShowImages] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      const timer = setTimeout(() => {
+        setShowImages(true);
+      }, 500); // tiempo de espera tras abrir el modal
+      return () => clearTimeout(timer);
+    } else {
+      setShowImages(false);
+    }
+  }, [open]);
+
   return (
     <Modal
       open={open}
@@ -112,6 +125,7 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
                       title={item.title}
                       description={item.description}
                       image={item.image}
+                      showImages={showImages}
                     />
                   </Grid>
                 ))}

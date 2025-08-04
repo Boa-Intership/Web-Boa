@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Box, Alert } from "@mui/material";
+import { Container, Box, Alert, Typography, Grid } from "@mui/material";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import PetsOutlinedIcon from "@mui/icons-material/PetsOutlined";
 import SetMealOutlinedIcon from "@mui/icons-material/SetMealOutlined";
@@ -161,7 +161,7 @@ export default function CardInfoSection() {
           subtitle: "Requisitos",
           details: [
             {
-              title: "Alimentos Refrigerados",
+              title: "",
               description: [
                 "Deberá estar embalada de tal forma que proteja al producto transportado.",
                 "Embalaje adecuado de acuerdo al tipo de producto.",
@@ -313,45 +313,61 @@ export default function CardInfoSection() {
   const modalProps = getModalProps();
 
   return (
-    <Container>
-      <Box display="flex" justifyContent="center" flexWrap="wrap" gap={4} mb={4} mt={4}>
-        <ButtonCardInfo
-          title="Carga General"
-          description="Unos cuantos ejemplos, restricciones"
-          onClick={() => handleOpenModal("cargaGeneral")}
-          icon={<Inventory2OutlinedIcon />}
-          imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
-        />
-        <ButtonCardInfo
-          title="Animales vivos"
-          description="Unos cuantos ejemplos, restricciones"
-          onClick={() => handleOpenModal("animalesVivos")}
-          icon={<PetsOutlinedIcon />}
-          imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
-        />
-        <ButtonCardInfo
-          title="Perecederos"
-          description="Unos cuantos ejemplos, restricciones"
-          onClick={() => handleOpenModal("perecederos")}
-          icon={<SetMealOutlinedIcon />}
-          imageUrl="/informacioPage/perecederos/alimentos.jpg"
-          
-        />
-        <ButtonCardInfo
-          title="Restos Humanos"
-          description="Unos cuantos ejemplos, restricciones"
-          onClick={() => handleOpenModal("restosHumanos")}
-          icon={<LocalHospitalOutlinedIcon />}
-          imageUrl="/informacioPage/restosHumanos/ataud.webp"
-        />
-        <ButtonCardInfo
-          title="Peligrosos"
-          description="Unos cuantos ejemplos, restricciones"
-          onClick={() => handleOpenModal("prohibidos")}
-          icon={<DoNotDisturbAltIcon />}
-          imageUrl="/informacioPage/peligroso/prohibido.jpg"
-        />
-
+    <Container >
+      <Box display="flex" alignContent={"start"} flexWrap="wrap" gap={2} margin={2}>
+        <Typography variant="h4" fontWeight={"bold"} color={"#002f5bff"}>
+          Información sobre los tipos de carga en BoA
+        </Typography>
+        <Typography variant="body1">
+          Conoce los tipos de carga que puedes enviar a través de nuestro servicio de paquetería aérea y las restricciones aplicables.
+        </Typography>
+        <Grid container spacing={2} sx={{justifyContent: "center",alignItems: "center",}}>
+          <Grid item>
+            <ButtonCardInfo
+              title="Carga General"
+              description="Unos cuantos ejemplos, restricciones"
+              onClick={() => handleOpenModal("cargaGeneral")}
+              icon={<Inventory2OutlinedIcon />}
+              imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
+            />
+          </Grid>
+          <Grid item>
+            <ButtonCardInfo
+              title="Animales vivos"
+              description="Unos cuantos ejemplos, restricciones"
+              onClick={() => handleOpenModal("animalesVivos")}
+              icon={<PetsOutlinedIcon />}
+              imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
+            />
+          </Grid>
+          <Grid item>
+            <ButtonCardInfo
+              title="Perecederos"
+              description="Unos cuantos ejemplos, restricciones"
+              onClick={() => handleOpenModal("perecederos")}
+              icon={<SetMealOutlinedIcon />}
+              imageUrl="/informacioPage/perecederos/alimentos.jpg"
+            />
+          </Grid>
+          <Grid item>
+            <ButtonCardInfo
+              title="Restos Humanos"
+              description="Unos cuantos ejemplos, restricciones"
+              onClick={() => handleOpenModal("restosHumanos")}
+              icon={<LocalHospitalOutlinedIcon />}
+              imageUrl="/informacioPage/restosHumanos/ataud.webp"
+            />
+          </Grid>
+          <Grid item>
+            <ButtonCardInfo
+              title="Peligrosos"
+              description="Unos cuantos ejemplos, restricciones"
+              onClick={() => handleOpenModal("prohibidos")}
+              icon={<DoNotDisturbAltIcon />}
+              imageUrl="/informacioPage/peligroso/prohibido.jpg"
+            />
+          </Grid>
+        </Grid>
       </Box>
 
       {modalProps && (
