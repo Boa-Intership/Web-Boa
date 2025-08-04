@@ -1,6 +1,6 @@
 import { Box, Typography, Button, Stack, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import portada from '../../../../assets/portada.png';
+import portada from '../../assets/portada.png'; // Ajusta la ruta según tu estructura de carpetas
 
 interface HeroProps {
   tracking: string;
@@ -21,7 +21,8 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
         justifyContent: 'center',
         textAlign: 'center',
         px: 2,
-        pt: '80px',
+        mt: '-64px', // 👈 importante
+        pt: '64px',
         position: 'relative',
         color: '#fff',
       }}
@@ -48,7 +49,7 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center">
             <TextField
               variant="outlined"
-              placeholder="N° de guía o tracking" // 👈 cambio aquí
+              placeholder="N° de guía o tracking" 
               size="small"
               value={tracking}
               onChange={e => onTrackingChange(e.target.value)}

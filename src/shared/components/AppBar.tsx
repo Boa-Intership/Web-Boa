@@ -7,10 +7,15 @@ import { useLocation } from 'react-router-dom';
 
 const AppAppBar: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const darkBgRoutes = [ROUTES.HOME]; // rutas con fondo oscuro
+  const isDarkBg = darkBgRoutes.includes(location.pathname);
   const trigger = useScrollTrigger({ threshold: 50 });
+  const isHome = location.pathname === ROUTES.HOME;
+  const isTransparent = isHome && !trigger;
 
-  const bgColor = trigger ? '#fff' : 'transparent';
-  const textColor = trigger ? '#000' : '#fff';
+const bgColor = isTransparent ? 'transparent' : '#fff';
+const textColor = isTransparent ? '#fff' : '#000';
 
   return (
     <AppBar
@@ -46,7 +51,7 @@ const AppAppBar: React.FC = () => {
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
                 alt="BOA Logo"
-                style={{ height: 36, filter: trigger ? 'none' : 'brightness(0) invert(1)' }}
+                style={{ height: 36, filter: isTransparent ? 'brightness(0) invert(1)' : 'none' }}
               />
             </IconButton>
             <Button

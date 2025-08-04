@@ -17,6 +17,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
     <main style={{
       flex: 1,
       width: '100%',
+      paddingTop: '64px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'stretch',
