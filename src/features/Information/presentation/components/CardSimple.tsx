@@ -22,7 +22,7 @@ type CardSimpleProps = {
             
               <Box flexShrink={0} >
                   {imageUrl && (
-                  <img src={imageUrl} alt={title} style={{ width: 190, borderRadius: 4, marginTop:5 }} />
+                  <img src={imageUrl} alt={title} style={{ width: 150,height: 100, borderRadius: 4, marginTop:4 }} />
                   )}
               </Box>
               <Box>

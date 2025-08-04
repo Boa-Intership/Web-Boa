@@ -1,14 +1,10 @@
 import React from 'react';
 import CardInfoSection from '../components/CardInfoSection';
-import SectionInfo from '../components/SectionInfo';
-
+import { Paper } from '@mui/material';
 
 export default function InformacionScreen() { 
 return (
-    <div>
-          {/* <SectionInfo/>  */}
-         <CardInfoSection/> 
-    </div>
+         <CardInfoSection/>  
 )
   
 }
