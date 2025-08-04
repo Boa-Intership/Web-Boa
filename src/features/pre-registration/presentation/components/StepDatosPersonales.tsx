@@ -97,71 +97,27 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
       <Grid container spacing={4}>
         {/* Panel Remitente */}
         <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ padding: 2 }}>
+          <Paper elevation={2} sx={{ p: 2, borderRadius: 4 }}>
             <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
               <Person color='primary' />
               <Typography variant="h5" color='primary'>Información del Remitente</Typography>
             </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="CI"
-                  name="ci"
-                  fullWidth
-                  required
-                  value={localData.remitente?.ci || ''}
-                  onChange={(e) => handleChange(e, 'remitente')}
-                  error={!!errors.remitente?.ci}
-                  helperText={errors.remitente?.ci}
-                />
+                {renderTextField('remitente', 'ci', 'CI', true)}
                 {/** {renderTextField('remitente', 'celular', 'Número Celular', true)} */}
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Número Celular"
-                  name="celular"
-                  fullWidth
-                  required
-                  value={localData.remitente?.celular || ''}
-                  onChange={(e) => handleChange(e, 'remitente')}
-                  error={!!errors.remitente?.celular}
-                  helperText={errors.remitente?.celular}
-                />
+                {renderTextField('remitente', 'celular', 'Número Celular', true)}
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Nombre"
-                  name="nombre"
-                  fullWidth
-                  required
-                  value={localData.remitente?.nombre || ''}
-                  onChange={(e) => handleChange(e, 'remitente')}
-                  error={!!errors.remitente?.nombre}
-                  helperText={errors.remitente?.nombre}
-                />
+                {renderTextField('remitente', 'nombre', 'Nombre', true)}
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Correo Electrónico"
-                  name="correo"
-                  fullWidth
-                  required
-                  value={localData.remitente?.correo || ''}
-                  onChange={(e) => handleChange(e, 'remitente')}
-                  error={!!errors.remitente?.correo}
-                  helperText={errors.remitente?.correo}
-                />
+                {renderTextField('remitente', 'correo', 'Correo Electrónico', true)}
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Dirección"
-                  name="direccion"
-                  fullWidth
-                  value={localData.remitente?.direccion || ''}
-                  onChange={(e) => handleChange(e, 'remitente')}
-                  error={!!errors.remitente?.direccion}
-                  helperText={errors.remitente?.direccion}
-                />
+                {renderTextField('remitente', 'direccion', 'Dirección')}
               </Grid>
             </Grid>
           </Paper>
@@ -169,68 +125,26 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
 
         {/* Panel Destinatario */}
         <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ padding: 2 }}>
+          <Paper elevation={2} sx={{ p: 2, borderRadius: 4 }}>
             <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
               <Person color='primary' />
               <Typography variant="h5" color='primary'>Información del Destinatario</Typography>
             </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="CI"
-                  name="ci"
-                  fullWidth
-                  value={localData.destinatario?.ci || ''}
-                  onChange={(e) => handleChange(e, 'destinatario')}
-                  error={!!errors.destinatario?.ci}
-                  helperText={errors.destinatario?.ci}
-                />
+                {renderTextField('destinatario', 'ci', 'CI')}
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Número Celular"
-                  name="celular"
-                  fullWidth
-                  required
-                  value={localData.destinatario?.celular || ''}
-                  onChange={(e) => handleChange(e, 'destinatario')}
-                  error={!!errors.destinatario?.celular}
-                  helperText={errors.destinatario?.celular}
-                />
+                {renderTextField('destinatario', 'celular', 'Número Celular', true)}
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Nombre"
-                  name="nombre"
-                  fullWidth
-                  required
-                  value={localData.destinatario?.nombre || ''}
-                  onChange={(e) => handleChange(e, 'destinatario')}
-                  error={!!errors.destinatario?.nombre}
-                  helperText={errors.destinatario?.nombre}
-                />
+                {renderTextField('destinatario', 'nombre', 'Nombre', true)}
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Correo Electrónico"
-                  name="correo"
-                  fullWidth
-                  value={localData.destinatario?.correo || ''}
-                  onChange={(e) => handleChange(e, 'destinatario')}
-                  error={!!errors.destinatario?.correo}
-                  helperText={errors.destinatario?.correo}
-                />
+                {renderTextField('destinatario', 'correo', 'Correo Electrónico')}
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Dirección"
-                  name="direccion"
-                  fullWidth
-                  value={localData.destinatario?.direccion || ''}
-                  onChange={(e) => handleChange(e, 'destinatario')}
-                  error={!!errors.destinatario?.direccion}
-                  helperText={errors.destinatario?.direccion}
-                />
+                {renderTextField('destinatario', 'direccion', 'Dirección')}
               </Grid>
             </Grid>
           </Paper>

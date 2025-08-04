@@ -28,7 +28,7 @@ const StepResumen = ({ formData, onBack }: any) => {
       <ResumenEnvio formData={formData} />
 
       {/* Confirmación */}
-      <Box display="flex" justifyContent="center">
+      <Box mt={4} display="flex" justifyContent="center">
         <Button variant="contained" size="large" startIcon={<CheckCircle />} onClick={handleConfirm}>
             Confirmar Pre-Registro
         </Button>

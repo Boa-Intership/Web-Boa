@@ -16,12 +16,12 @@ const ResumenEnvio = ({ formData }: { formData: any }) => {
 
   return (
     <Box>
-      <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
-        <TaskAlt color='primary' />
-        <Typography variant="h5" color='primary'>Resumen del Envío</Typography>
-      </Box>
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 4 }}>
+        <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
+          <TaskAlt color='primary' />
+          <Typography variant="h5" color='primary'>Resumen del Envío</Typography>
+        </Box>
 
-      <Paper sx={{ p: 3, mb: 4 }} elevation={3}>
         <Grid container spacing={3}>
           {/* Remitente */}
           <Grid item xs={12} sm={6}>

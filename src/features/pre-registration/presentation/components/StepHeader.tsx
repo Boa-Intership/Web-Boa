@@ -10,7 +10,7 @@ import {
 const steps = [
   { label: 'Datos personales', icon: <Person /> },
   { label: 'Ruta', icon: <LocationOn /> },
-  { label: 'Paquete', icon: <Inventory2 /> },
+  { label: 'Carga', icon: <Inventory2 /> },
   { label: 'Factura', icon: <ReceiptLong /> },
   { label: 'Resúmen', icon: <TaskAlt /> },
 ];
