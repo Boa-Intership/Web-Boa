@@ -1,25 +1,32 @@
-import { Box, Typography, Button } from '@mui/material';
-import portada from '../../../../assets/portada.png'; // usa alias o ruta relativa según tengas
+import { Box, Typography, Button, Stack, TextField, InputAdornment } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import portada from '../../../../assets/portada.png';
 
-const Hero = () => {
+interface HeroProps {
+  tracking: string;
+  onTrackingChange: (value: string) => void;
+  onTrack: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
   return (
     <Box
       sx={{
         backgroundImage: `url(${portada})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        minHeight: { xs: 300, sm: 400, md: 500 },
+        minHeight: 'calc(100vh - 400px)',
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         textAlign: 'center',
         px: 2,
-        py: 6,
-        color: '#fff',
+        pt: '80px',
         position: 'relative',
+        color: '#fff',
       }}
     >
+      {/* Overlay */}
       <Box
         sx={{
           position: 'absolute',
@@ -28,16 +35,45 @@ const Hero = () => {
           zIndex: 1,
         }}
       />
-      <Box sx={{ position: 'relative', zIndex: 2 }}>
-        <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 2 }}>
-          Bienvenido a BOA
-        </Typography>
-        <Typography variant="h6" sx={{ mb: 4 }}>
-          Encuentra y gestiona tu experiencia de vuelo
-        </Typography>
-        <Button variant="contained" color="primary" size="large">
-          Comenzar
-        </Button>
+
+      {/* Content */}
+      <Box sx={{ position: 'relative', zIndex: 2, maxWidth: 800, width: '100%' }}>
+        <Stack spacing={3} alignItems="center">
+          <Typography variant="h3" fontWeight="bold">
+            Bienvenido a BOA Cargo
+          </Typography>
+          <Typography variant="h6" color="inherit">
+            Gestiona tus envíos de carga de forma rápida y sencilla.
+          </Typography>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center">
+            <TextField
+              variant="outlined"
+              placeholder="N° de guía o tracking" // 👈 cambio aquí
+              size="small"
+              value={tracking}
+              onChange={e => onTrackingChange(e.target.value)}
+              sx={{
+                bgcolor: '#fff',
+                borderRadius: 1,
+                width: { xs: '100%', sm: 220 },
+                '& .MuiInputBase-input': { color: '#000' },
+                '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#ccc',
+                },
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Button variant="contained" size="medium" onClick={onTrack}>
+              Rastrear
+            </Button>
+          </Stack>
+        </Stack>
       </Box>
     </Box>
   );
