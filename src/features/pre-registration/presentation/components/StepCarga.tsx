@@ -210,6 +210,15 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                   onChange={handleChangeNuevoItem}
                   fullWidth
                   required
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        {(campo === 'peso' && 'kg') ||
+                        (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
+                        null}
+                      </InputAdornment>
+                    )
+                  }}
                 />
               </Grid>
             ))}
@@ -250,13 +259,22 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
           {paqueteEditado && (
             <Grid container spacing={2}>
               {['descripcion', 'peso', 'piezas', 'alto', 'ancho', 'largo'].map((campo) => (
-                <Grid item xs={campo === 'descripcion' ? 12 : 4} key={campo}>
+                <Grid item xs={campo === 'descripcion' ? 12 : 6} key={campo}>
                   <TextField
                     name={campo}
                     label={campo.charAt(0).toUpperCase() + campo.slice(1)}
                     value={paqueteEditado[campo]}
                     onChange={handleChangeEdicion}
                     fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          {(campo === 'peso' && 'kg') ||
+                          (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
+                          null}
+                        </InputAdornment>
+                      )
+                    }}
                   />
                 </Grid>
               ))}

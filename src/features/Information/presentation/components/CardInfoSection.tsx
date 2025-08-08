@@ -313,15 +313,15 @@ export default function CardInfoSection() {
   const modalProps = getModalProps();
 
   return (
-    <Container >
-      <Box display="flex" alignContent={"start"} flexWrap="wrap" gap={2} margin={2}>
-        <Typography variant="h5" fontWeight={"bold"} color={"#002f5bff"}>
+    <Container maxWidth="xl" >
+      <Box display="flex" alignContent={"start"} flexWrap="wrap" gap={2} mt={8}>
+        <Typography variant="h4" fontWeight={"bold"} color={"#0F5299"}>
           Información sobre los tipos de carga en BoA
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" color={"#2D2D2D"}>
            Conoce los tipos de carga <strong>Permitidas</strong> y <strong>No Permitidas</strong> que puedes enviar a través de nuestro servicio de paquetería aérea y las restricciones aplicables.
         </Typography>
-        <Grid container spacing={2} sx={{justifyContent: "center",alignItems: "center",}}>
+        <Grid container spacing={5} sx={{justifyContent: "center",alignItems: "center",}}>
           <Grid item>
             <ButtonCardInfo
               title="Carga General"

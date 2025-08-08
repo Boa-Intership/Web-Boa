@@ -14,7 +14,7 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, ico
       variant="contained"
       onClick={onClick}
       sx={{
-        width: { xs: '100%', sm: 160, md: 180 },
+        width: { xs: '100%' },
         minHeight: { xs: 140, sm: 170 },
         borderRadius: 3,
         fontWeight: 'bold',
@@ -47,7 +47,7 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, ico
           variant="subtitle1"
           component="div"
           sx={{
-            fontSize: '1rem',
+            fontSize: '1.2rem',
             fontWeight: 'bold',
             textAlign: 'center',
             width: '100%',
@@ -61,7 +61,7 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, ico
         {description && (
           <Typography
             variant="body2"
-            color="text.secondary"
+            //color="text.secondary"
             align="center"
             sx={{
               width: '100%',
