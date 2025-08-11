@@ -16,11 +16,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
     <AppAppBar />
     <main style={{
       flex: 1,
-      marginTop: 80,
       width: '100%',
+      paddingTop: '64px',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'stretch',
       justifyContent: 'center',
     }}>
       {children}

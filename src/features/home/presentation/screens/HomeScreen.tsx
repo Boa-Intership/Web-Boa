@@ -1,79 +1,93 @@
 import React, { useState } from 'react';
-import { Box, Stack, TextField, Button as MuiButton, InputAdornment, Typography, Container } from '@mui/material';
+import { Box, Stack, TextField, Button as MuiButton, InputAdornment, Typography, Container, Alert } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import SearchIcon from '@mui/icons-material/Search';
 import HomeActionButton from '../components/HomeActionButton';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../router/routes';
+import { homeApi } from '../../data/homeApi';
+import Hero from '../components/Hero';
+import CardInfoSection from '../../../Information/presentation/components/CardInfoSection';
+
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const [tracking, setTracking] = useState('');
+  const [apiMessage, setApiMessage] = useState<string | null>(null);
 
   const handleTrack = () => {
     // Aquí iría la lógica de rastreo
     alert(`Buscando información para: ${tracking}`);
   };
 
+  const testApiConnection = async () => {
+    try {
+      const result = await homeApi.testApiConnection();
+      if (result.success) {
+        setApiMessage(' API conectada correctamente');
+        console.log('API Response:', result.data);
+      } else {
+        setApiMessage(' Error al conectar con la API');
+      }
+    } catch (error) {
+      setApiMessage(' Error al conectar con la API');
+      console.error('API Error:', error);
+    }
+  };
+
   return (
+  <>
+    <Hero 
+        tracking={tracking}
+        onTrackingChange={setTracking}
+        onTrack={handleTrack}
+    />
     <Container maxWidth="md" sx={{ mt: 6, mb: 6 }}>
-      {/* Título, descripción y buscador */}
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} alignItems={{ xs: 'flex-start', sm: 'center' }} justifyContent="space-between" mb={6}>
-        <Box>
-          <Typography variant="h4" fontWeight={700} gutterBottom>
-            Bienvenido a BOA Cargo
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            Gestiona tus envíos de carga de forma rápida y sencilla. Consulta información, cotiza y realiza tu pre-registro.
-          </Typography>
-        </Box>
-        <Stack direction="row" spacing={2} alignItems="center" sx={{ mt: { xs: 2, sm: 0 } }}>
-          <TextField
-            label="N° de guía o tracking"
-            variant="outlined"
-            value={tracking}
-            onChange={e => setTracking(e.target.value)}
-            size="small"
-            sx={{ width: { xs: 160, sm: 220 } }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <MuiButton variant="contained" color="primary" onClick={handleTrack} sx={{ height: 40, minWidth: 100 }}>
-            Rastrear
-          </MuiButton>
-        </Stack>
-      </Stack>
+
+      {/* Botón para probar API */}
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
+        <MuiButton 
+          variant="outlined" 
+          color="secondary" 
+          onClick={testApiConnection}
+          sx={{ mb: 2 }}
+        >
+          Probar Conexión API
+        </MuiButton>
+        {apiMessage && (
+          <Alert severity={apiMessage.includes('conectada') ? 'success' : 'error'} sx={{ mt: 2 }}>
+            {apiMessage}
+          </Alert>
+        )}
+      </Box>
+
       {/* Botones de acción */}
       <Container maxWidth="md" disableGutters>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4} alignItems="center" justifyContent="center">
           <HomeActionButton
-            label="Información "
+            label="Información"
             icon={<InfoIcon fontSize="large" color="primary" />}
-            description="¿Que puedo enviar en Boa cargo"
+            description="Consulta tipos de carga"
             onClick={() => navigate(ROUTES.INFORMACION)}
           />
           <HomeActionButton
             label="Cotizar envío"
             icon={<AttachMoneyIcon fontSize="large" color="primary" />}
-            description="¿Cual es el precio de mi envio?"
+            description="Cotización rápida para tu envío."
             onClick={() => navigate(ROUTES.COTIZAR)}
           />
           <HomeActionButton
-            label="Registro envio"
+            label="Pre-registro"
             icon={<AssignmentIcon fontSize="large" color="primary" />}
-            description="Acelera el proceso de envio."
+            description="Completa el pre-registro."
             onClick={() => navigate(ROUTES.PREREGISTRO)}
           />
         </Stack>
       </Container>
+      <CardInfoSection />
     </Container>
+  </>
   );
 };
 
