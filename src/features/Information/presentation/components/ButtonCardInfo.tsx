@@ -20,7 +20,6 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
   return (
     <Box
       sx={{
-        //backgroundImage: `url(${imageUrl})`,
         position: 'relative',
         width: 350,
         height: 250,

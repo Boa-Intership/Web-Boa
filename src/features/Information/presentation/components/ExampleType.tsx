@@ -25,6 +25,7 @@ function ExampleType({ title, description, image, showImages = false }: ExampleT
               src={image}
               alt={title}
               sx={{ width: 150, borderRadius: 4 }}
+              loading="lazy"
             />            
           </Fade>
         )}
