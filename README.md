@@ -75,8 +75,7 @@ src/
         screens/
   router/
     routes.js
-  App.jsx
-  main.jsx
+
 ```
 
 ### ¿Cómo fluye la información?
