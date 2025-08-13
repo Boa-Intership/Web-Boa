@@ -1,78 +1,55 @@
-import { Contrast } from '@mui/icons-material';
+
 import { createTheme } from '@mui/material/styles';
-import test from 'node:test';
-import { text } from 'stream/consumers';
 
-const getDesignTokens = (mode) => ({
+const theme = createTheme({
   palette: {
-    mode,
+    // AZULES
     primary: {
-      main: '#1976d2',
+      main: '#2e5c9a', // azul medio
+      dark: '#1e3a5f', // azul marino oscuro
+      light: '#4a7bc8', // azul claro
+      contrastText: '#ffffff',
     },
+    // ROJOS
     secondary: {
-      main: '#ff9800',
+      main: '#a85555', // rojo medio
+      dark: '#8b4444', // rojo ladrillo oscuro
+      light: '#c66666', // rojo claro
       contrastText: '#ffffff',
     },
-    // blue
-    blue_light: {
-      main: '#3668AD',
-      contrastText: '#ffffff',
+    // AMARILLOS
+    warning: {
+      main: '#daa520', // amarillo dorado
+      dark: '#b8860b', // amarillo dorado oscuro
+      light: '#f4c430', // amarillo claro
+      contrastText: '#2c2c2c',
     },
-    blue_main: {
-      main: '#0F5299',
-      contrastText: '#ffffff',
+    // VERDES
+    success: {
+      main: '#a4b851', // verde oliva medio
+      dark: '#8b9d3a', // verde oliva oscuro
+      light: '#bdd168', // verde oliva claro
+      contrastText: '#2c2c2c',
     },
-    blue_dark: {
-      main: '#002D57',
-      contrastText: '#ffffff',
+    // GRISES Y FONDO
+    background: {
+      default: '#ffffff', // blanco
+      paper: '#e8ebf0', // gris casi blanco
     },
-    // red
-    red_light: {
-      main: '#3668AD',
-      contrastText: '#ffffff',
+    text: {
+      primary: '#2c2c2c', // gris carbón
+      secondary: '#4a4a4a', // gris medio
+      disabled: '#7a7a7a', // gris claro
     },
-    red_main: {
-      main: '#0F5299',
-      contrastText: '#ffffff',
+    grey: {
+      100: '#d8dce6', // gris muy claro
+      200: '#e8ebf0', // gris casi blanco
+      300: '#ffffff', // blanco
+      400: '#7a7a7a', // gris claro
+      600: '#4a4a4a', // gris medio
+      800: '#2c2c2c', // gris carbón
     },
-    red_dark: {
-      main: '#002D57',
-      contrastText: '#ffffff',
-    },
-    // yellow
-    yellow_light: {
-      main: '#3668AD',
-      contrastText: '#ffffff',
-    },
-    yellow_main: {
-      main: '#0F5299',
-      contrastText: '#ffffff',
-    },
-    yellow_dark: {
-      main: '#002D57',
-      contrastText: '#ffffff',
-    },
-    // green
-    green_light: {
-      main: '#3668AD',
-      contrastText: '#ffffff',
-    },
-    green_main: {
-      main: '#0F5299',
-      contrastText: '#ffffff',
-    },
-    green_dark: {
-      main: '#002D57',
-      contrastText: '#ffffff',
-    },
-
-    ...(mode === 'dark' && {
-      background: {
-        default: '#121212',
-        paper: '#1e1e1e',
-      },
-    }),
   },
 });
 
-export default getDesignTokens; 
+export default theme;
