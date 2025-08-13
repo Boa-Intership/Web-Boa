@@ -14,8 +14,8 @@ const AppAppBar: React.FC = () => {
   const isHome = location.pathname === ROUTES.HOME;
   const isTransparent = isHome && !trigger;
 
-const bgColor = isTransparent ? 'transparent' : '#fff';
-const textColor = isTransparent ? '#fff' : '#000';
+const bgColor = isTransparent ? 'transparent' : '#3668AD';
+const textColor = isTransparent ? '#fff' : '#FFFFFF';
 
   return (
     <AppBar
@@ -30,7 +30,7 @@ const textColor = isTransparent ? '#fff' : '#000';
         mt: 0,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Toolbar
           disableGutters
           sx={{
@@ -42,25 +42,24 @@ const textColor = isTransparent ? '#fff' : '#000';
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <IconButton
-              edge="start"
-              sx={{ p: 0, mr: 2, color: textColor }}
+            <Box
+              component="img"
+              src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
+              alt="BOA Logo"
               onClick={() => navigate(ROUTES.HOME)}
-              aria-label="logo"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
-                alt="BOA Logo"
-                style={{ height: 36, filter: isTransparent ? 'brightness(0) invert(1)' : 'none' }}
-              />
-            </IconButton>
+              sx={{
+                height: 48,
+                cursor: 'pointer',
+                filter: isTransparent ? 'brightness(0) invert(1)' : 'none',
+              }}
+            />
             <Button
               variant="text"
               size="small"
               onClick={() => navigate(ROUTES.HOME)}
               sx={{ fontWeight: 600, fontSize: 16, color: textColor }}
             >
-              Home
+              Inicio
             </Button>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, color: textColor }}>

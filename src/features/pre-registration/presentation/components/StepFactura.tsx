@@ -75,7 +75,7 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
 
         {/* Campos según tipo */}
         <Grid container spacing={2} mt={1}>
-          <Grid item xs={12} sm={tipoDocumento === 'CI' ? 4 : 6}>
+          <Grid item xs={7} sm={tipoDocumento === 'CI' ? 4 : 6}>
             <TextField
               label={tipoDocumento}
               value={numeroDocumento}
@@ -86,7 +86,7 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
           </Grid>
 
           {tipoDocumento === 'CI' && (
-            <Grid item xs={12} sm={2}>
+            <Grid item xs={5} sm={2}>
               <TextField
                 label="Complemento"
                 value={complemento}

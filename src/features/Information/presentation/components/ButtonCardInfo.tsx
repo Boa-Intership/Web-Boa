@@ -20,6 +20,8 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
   return (
     <Box
       sx={{
+        //backgroundImage: `url(${imageUrl})`,
+        borderRadius: 5,
         position: 'relative',
         width: 350,
         height: 250,
@@ -79,7 +81,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
               sx={{
                 textTransform: 'none',
                 // backgroundColor:(theme) => theme.palette.blue_dark.main,
-                backgroundColor: '#002f5bff',
+                backgroundColor: '#0F5299',
                 color: '#ffffff',
                 '&:hover': {
                   backgroundColor: "#3668AD",

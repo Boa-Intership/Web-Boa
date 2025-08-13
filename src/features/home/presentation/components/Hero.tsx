@@ -41,7 +41,7 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
       <Box sx={{ position: 'relative', zIndex: 2, maxWidth: 800, width: '100%' }}>
         <Stack spacing={3} alignItems="center">
           <Typography variant="h3" fontWeight="bold">
-            Bienvenido a BOA Cargo
+            Bienvenido a BoA Cargo
           </Typography>
           <Typography variant="h6" color="inherit">
             Gestiona tus envíos de carga de forma rápida y sencilla.
@@ -50,7 +50,7 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
             <TextField
               variant="outlined"
               placeholder="N° de guía o tracking" 
-              size="small"
+              size="medium"
               value={tracking}
               onChange={e => onTrackingChange(e.target.value)}
               sx={{
@@ -70,7 +70,7 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
                 ),
               }}
             />
-            <Button variant="contained" size="medium" onClick={onTrack}>
+            <Button variant="contained" size="large" onClick={onTrack}>
               Rastrear
             </Button>
           </Stack>
