@@ -325,7 +325,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Carga General"
-              description="PERMITIDO"
+              description="Se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. "
               onClick={() => handleOpenModal("cargaGeneral")}
               icon={<Inventory2OutlinedIcon />}
               imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
@@ -334,7 +334,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Animales vivos"
-              description="PERMITIDO"
+              description="Es el servicio especializado para animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje."
               onClick={() => handleOpenModal("animalesVivos")}
               icon={<PetsOutlinedIcon />}
               imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
