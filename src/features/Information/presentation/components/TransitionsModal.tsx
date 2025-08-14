@@ -26,14 +26,6 @@ interface Detail {
   imageUrl?: string[];
 }
 
-type Card = {
-  title?: string;
-  description: string;
-  imageUrl?: string;
-  background?: string;
-
-}
-
 type Example = {
   title: string;
   description: string;
@@ -44,7 +36,7 @@ interface TransitionsModalProps {
   open: boolean;
   onClose: () => void;
   title?: string;
-  concept: Card[];
+  description: string;
   subtitle: string;
   details: Detail[];
   example?: Example[];
@@ -54,7 +46,7 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
   open,
   onClose,
   title,
-  concept,
+  description,
   subtitle,
   details,
   example,
@@ -88,15 +80,9 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
             {title}
           </Typography>
 
-          {concept.map((item, index) => (
-            <CardSimple
-              key={index}
-              title={item.title}
-              description={item.description}
-              imageUrl={item.imageUrl}
-              background={item.background}
-            />
-          ))}
+          <Typography variant="body2" color={'#3e4449ff'} mb={2} textAlign={"justify"}>
+            {description}
+          </Typography>
 
           <Typography variant="h6" fontWeight="bold" color={'#002f5bff'} mt={2}>
             {subtitle}
