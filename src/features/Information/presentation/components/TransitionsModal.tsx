@@ -112,7 +112,7 @@ const TransitionsModal: React.FC<TransitionsModalProps> = ({
           ))}
           {example && example.length > 0 && (
             <Box>
-              <Typography variant="subtitle1" fontWeight={"bold"} mt={2} color={'#002f5bff'}>
+              <Typography variant="subtitle1" fontWeight={"bold"} mt={2} color={'theme.palette.warning.main'}>
                 ¿Que cargas pueden entrar a esta categoria?
               </Typography>
               <Typography variant="body2">

@@ -325,10 +325,11 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Carga General"
-              description="Se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. "
+              description="Se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento."
               onClick={() => handleOpenModal("cargaGeneral")}
               icon={<Inventory2OutlinedIcon />}
               imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
+              tag= "Permitido"
             />
           </Grid>
           <Grid item>
@@ -338,6 +339,7 @@ export default function CardInfoSection() {
               onClick={() => handleOpenModal("animalesVivos")}
               icon={<PetsOutlinedIcon />}
               imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
+              tag= "Permitido"
             />
           </Grid>
           <Grid item>
@@ -347,6 +349,7 @@ export default function CardInfoSection() {
               onClick={() => handleOpenModal("perecederos")}
               icon={<SetMealOutlinedIcon />}
               imageUrl="/informacioPage/perecederos/alimentos.jpg"
+              tag= "Permitido"
             />
           </Grid>
           <Grid item>
@@ -356,15 +359,17 @@ export default function CardInfoSection() {
               onClick={() => handleOpenModal("restosHumanos")}
               icon={<LocalHospitalOutlinedIcon />}
               imageUrl="/informacioPage/restosHumanos/ataud.webp"
+              tag= "Permitido"
             />
           </Grid>
           <Grid item>
             <ButtonCardInfo
               title="Peligrosos"
-              description="NO PERMITIDO"
+              description="NO PERMITIDO "
               onClick={() => handleOpenModal("prohibidos")}
               icon={<DoNotDisturbAltIcon />}
               imageUrl="/informacioPage/peligroso/prohibido.jpg"
+              tag= "No Permitido"
             />
           </Grid>
         </Grid>

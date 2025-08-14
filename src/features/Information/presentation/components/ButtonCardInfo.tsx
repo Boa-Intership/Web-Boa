@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Box, Button, Typography, Card, CardMedia, CardContent } from '@mui/material';
 
 interface ButtonCardInfoProps {
@@ -7,6 +7,7 @@ interface ButtonCardInfoProps {
   icon?: React.ReactNode;
   onClick?: () => void;
   imageUrl?: string;
+  tag: string;
 }
 
 const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
@@ -15,33 +16,66 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
   icon,
   onClick,
   imageUrl,
+  tag,
 }) => {
+   const [hover, setHover] = useState(false);
   return (
     <Card
       sx={{
         width: 300,
-        height: 400,
+        height: 390,
         borderRadius: 3,
         boxShadow: 2,
         textAlign: 'center',
-        overflow: 'hidden',
         // transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         '&:hover': {
           // transform: 'scale(1.03)',
           boxShadow: 6,
         },
       }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
-      {/* Imagen */}
-      <CardMedia
-        component="img"
-        height="180"
-        image={imageUrl}
-        alt={title}
-        sx={{
-          objectFit: 'cover',
-        }}
-      />
+      {/* Contenedor de imagen con overlay */}
+      <Box sx={{ position: 'relative', height: 180 }}>
+        <CardMedia
+          component="img"
+          height="180"
+          image={imageUrl}
+          alt={title}
+          sx={{
+            objectFit: 'cover',
+            borderTopLeftRadius: 12,
+            borderTopRightRadius: 12,
+          }}
+        />
+
+        {/* Overlay */}
+        {hover && (
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'rgba(45, 50, 54, 0.6)', // fondo semitransparente azul oscuro
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              fontWeight: 'bold',
+              fontSize: 20,
+              letterSpacing: 1,
+              transition: 'opacity 0.3s ease',
+              borderTopLeftRadius: 12,
+              borderTopRightRadius: 12,
+            }}
+          >
+            {tag}
+          </Box>
+        )}
+      </Box>
 
       {/* Contenido */}
       <CardContent sx={{ p: 2}}>
@@ -52,14 +86,17 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           </Typography>
         </Box>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          textAlign={'left'}
-          sx={{ mt: 2, mb:2 }}
+        <Box
+          sx={{
+            overflowY: 'hidden', //si quieres scroll solo cambia por 'auto'
+            height: 100, // define el espacio de scroll
+            mb: 1,
+          }}
         >
-          {description}
-        </Typography>
+          <Typography variant="body2" color="text.secondary" textAlign={"left"}>
+            {description}
+          </Typography>
+        </Box>
 
         {onClick && (
           <Button
