@@ -1,5 +1,6 @@
-import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import React, {useState} from 'react';
+import { Box, Button, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import RoundButton from '../../../../shared/components/RoundButton';
 
 
 interface ButtonCardInfoProps {
@@ -7,7 +8,8 @@ interface ButtonCardInfoProps {
   description: string;
   icon?: React.ReactNode;
   onClick?: () => void;
-  imageUrl?: string;
+  imageUrl: string;
+  tag: string;
 }
 
 const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
@@ -16,93 +18,94 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
   icon,
   onClick,
   imageUrl,
+  tag,
 }) => {
+   const [hover, setHover] = useState(false);
   return (
-    <Box
+    <Card
       sx={{
-        //backgroundImage: `url(${imageUrl})`,
-        borderRadius: 5,
-        position: 'relative',
-        width: 350,
-        height: 250,
-        overflow: 'hidden',
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        display: 'flex',
-        alignItems: 'flex-end',
+        width: 350,  // Evita que sea demasiado pequeña
+        height: 390,
+        borderRadius: 3,
         boxShadow: 2,
-        transition: 'transform 0.5s ease, box-shadow 0.3s ease',
-        // cursor: 'pointer',
+        textAlign: 'center',
+        // transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         '&:hover': {
-          transform: 'scale(1.07)',
-          boxShadow: 8,
+          // transform: 'scale(1.03)',
+          boxShadow: 4,
         },
-
       }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
-      {/* Overlay oscuro para mejorar contraste */}
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: 0,
-          width: '100%',
-          height: '40%',
-          backgroundColor: 'rgba(0, 0, 0, 0.55)', // opacidad para oscurecer fondo
-        }}
-      />
+      {/* Contenedor de imagen con overlay */}
+      <Box sx={{ position: 'relative', height: 180 }}>
+        <CardMedia
+          component="img"
+          height="180"
+          image={imageUrl}
+          alt={title}
+          sx={{
+            objectFit: 'cover',
+            borderTopLeftRadius: 12,
+            borderTopRightRadius: 12,
+          }}
+        />
 
-      {/* Contenido sobre la imagen */}
-      <Box
-        sx={{
-          position: 'relative',
-          color: 'white',
-          padding: 1,
-          width: '100%',
-          height: '40%',
-          zIndex: 1,
-        }}
-      >
-        <Box display="flex" alignItems="center" gap={1}>
+        {/* Overlay */}
+        {hover && (
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'rgba(45, 50, 54, 0.6)', // fondo semitransparente azul oscuro
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              fontWeight: 'bold',
+              fontSize: 20,
+              letterSpacing: 1,
+              transition: 'opacity 0.3s ease',
+              borderTopLeftRadius: 12,
+              borderTopRightRadius: 12,
+            }}
+          >
+            {tag}
+          </Box>
+        )}
+      </Box>
+
+      {/* Contenido */}
+      <CardContent sx={{ p: 2}}>
+        <Box display="flex" alignItems="center" gap={1} justifyContent="flex-start">
           {icon}
-          <Typography fontSize={20} variant="subtitle1" fontWeight="bold">
+          <Typography variant="h6" fontWeight="bold" color="#002F5B">
             {title}
           </Typography>
         </Box>
-        <Box display="flex" justifyContent="space-between" alignItems="center" gap={1} width="100%">
-          <Typography fontSize={14} variant="subtitle1">
+
+        <Box
+          sx={{
+            overflowY: 'hidden', //si quieres scroll solo cambia por 'auto'
+            height: 100, // define el espacio de scroll
+            mb: 1,
+          }}
+        >
+          <Typography variant="body2" color="text.secondary" textAlign={"left"}>
             {description}
           </Typography>
-          {onClick && (
-            <Button
-              variant="contained"
-              onClick={onClick}
-              size='medium'
-              sx={{
-                textTransform: 'none',
-                // backgroundColor:(theme) => theme.palette.blue_dark.main,
-                backgroundColor: '#0F5299',
-                color: '#ffffff',
-                '&:hover': {
-                  backgroundColor: "#3668AD",
-                },
-                '&:focus': {
-                  outline: 'none',
-                  boxShadow: 'none',
-                },
-                '&.Mui-focusVisible': {
-                  outline: 'none',
-                  boxShadow: 'none',
-                },
-              }}
-            >
-              Ver más
-            </Button>)}
         </Box>
-      </Box>
-    </Box>
+
+        {onClick && (
+          <RoundButton onClick={onClick} >Ver más</RoundButton>
+        )}
+      </CardContent>
+    </Card>
   );
 };
-
 
 export default ButtonCardInfo;
