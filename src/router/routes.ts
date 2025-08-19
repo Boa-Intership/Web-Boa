@@ -4,4 +4,5 @@ export const ROUTES = {
   COTIZAR: '/cotizar',
   PREREGISTRO: '/preregistro',
   COMPROBANTE: '/comprobante',
+  CONTACTO: '/contacto',
 }; 
