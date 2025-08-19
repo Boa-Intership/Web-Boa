@@ -6,34 +6,15 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeActionButton from '../components/HomeActionButton';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../router/routes';
-import { homeApi } from '../../data/homeApi';
 import Hero from '../components/Hero';
 import CardInfoSection from '../../../Information/presentation/components/CardInfoSection';
-
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const [tracking, setTracking] = useState('');
-  const [apiMessage, setApiMessage] = useState<string | null>(null);
 
   const handleTrack = () => {
-    // Aquí iría la lógica de rastreo
     alert(`Buscando información para: ${tracking}`);
-  };
-
-  const testApiConnection = async () => {
-    try {
-      const result = await homeApi.testApiConnection();
-      if (result.success) {
-        setApiMessage(' API conectada correctamente');
-        console.log('API Response:', result.data);
-      } else {
-        setApiMessage(' Error al conectar con la API');
-      }
-    } catch (error) {
-      setApiMessage(' Error al conectar con la API');
-      console.error('API Error:', error);
-    }
   };
 
   return (
@@ -44,25 +25,6 @@ const HomeScreen: React.FC = () => {
         onTrack={handleTrack}
     />
     <Container maxWidth="xl" sx={{ mt: 6, mb: 6 }}>
-
-      {/* Botón para probar API */}
-      <Box sx={{ textAlign: 'center', mb: 3 }}>
-        <MuiButton 
-          variant="outlined" 
-          color="secondary" 
-          onClick={testApiConnection}
-          sx={{ mb: 2 }}
-        >
-          Probar Conexión API
-        </MuiButton>
-        {apiMessage && (
-          <Alert severity={apiMessage.includes('conectada') ? 'success' : 'error'} sx={{ mt: 2 }}>
-            {apiMessage}
-          </Alert>
-        )}
-      </Box>
-
-      {/* Botones de acción */}
       <Container maxWidth="xl" disableGutters>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4} alignItems="center" justifyContent="center">
           <HomeActionButton
