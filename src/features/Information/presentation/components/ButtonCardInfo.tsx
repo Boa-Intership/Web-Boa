@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import { Box, Button, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import RoundButton from '../../../../shared/components/RoundButton';
+
 
 interface ButtonCardInfoProps {
   title: string;
   description: string;
   icon?: React.ReactNode;
   onClick?: () => void;
-  imageUrl?: string;
+  imageUrl: string;
   tag: string;
 }
 
@@ -22,7 +24,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
   return (
     <Card
       sx={{
-        width: 300,
+        width: 350,  // Evita que sea demasiado pequeña
         height: 390,
         borderRadius: 3,
         boxShadow: 2,
@@ -30,7 +32,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
         // transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         '&:hover': {
           // transform: 'scale(1.03)',
-          boxShadow: 6,
+          boxShadow: 4,
         },
       }}
       onMouseEnter={() => setHover(true)}
@@ -99,35 +101,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
         </Box>
 
         {onClick && (
-          <Button
-            variant="outlined"
-            onClick={onClick}
-            sx={{
-              textTransform: 'none',
-              borderRadius: 20,
-              borderWidth: 2,
-              borderColor: '#f6a40e',
-              color: '#f6a40e',
-              fontWeight: 'bold',
-              
-              px: 3,
-              '&:hover': {
-                backgroundColor: '#f6a40e',
-                color: '#fff',
-                borderColor: '#f6a40e',
-              },
-               '&:focus': {
-                  outline: 'none',
-                  boxShadow: 'none',
-                },
-                '&.Mui-focusVisible': {
-                  outline: 'none',
-                  boxShadow: 'none',
-                },
-            }}
-          >
-            Ver más
-          </Button>
+          <RoundButton onClick={onClick} >Ver más</RoundButton>
         )}
       </CardContent>
     </Card>

@@ -325,7 +325,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Perecederos"
-              description="PERMITIDO"
+              description="Son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo."
               onClick={() => handleOpenModal("perecederos")}
               icon={<SetMealOutlinedIcon />}
               imageUrl="/informacioPage/perecederos/alimentos.jpg"
@@ -335,7 +335,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Restos Humanos"
-              description="PERMITIDO"
+              description="Es el transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo o de cenizas. "
               onClick={() => handleOpenModal("restosHumanos")}
               icon={<LocalHospitalOutlinedIcon />}
               imageUrl="/informacioPage/restosHumanos/ataud.webp"
@@ -345,7 +345,7 @@ export default function CardInfoSection() {
           <Grid item>
             <ButtonCardInfo
               title="Peligrosos"
-              description="NO PERMITIDO "
+              description="Hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea."
               onClick={() => handleOpenModal("prohibidos")}
               icon={<DoNotDisturbAltIcon />}
               imageUrl="/informacioPage/peligroso/prohibido.jpg"
