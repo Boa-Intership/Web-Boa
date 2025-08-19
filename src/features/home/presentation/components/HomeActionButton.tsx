@@ -11,21 +11,34 @@ interface HomeActionButtonProps {
 const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, icon, description }) => {
   return (
     <Button
-      variant="contained"
       onClick={onClick}
       sx={{
-        width: { xs: '100%', sm: 160, md: 180 },
+        width: { xs: '100%', md: '20%' },
+        
         minHeight: { xs: 140, sm: 170 },
         borderRadius: 3,
         fontWeight: 'bold',
         textTransform: 'none',
         p: 2,
-        boxShadow: 2,
+        boxShadow:4,
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        '&:hover': {
+                background: "#E6B445",
+                //background: "linear-gradient(to bottom, #093e70ff, #3668AD)",
+                color: '#fff',
+              },
+               '&:focus': {
+                  outline: 'none',
+                  boxShadow: 'none',
+                },
+                '&.Mui-focusVisible': {
+                  outline: 'none',
+                  boxShadow: 'none',
+                },
       }}
     >
       <Box
@@ -47,7 +60,7 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, ico
           variant="subtitle1"
           component="div"
           sx={{
-            fontSize: '1rem',
+            fontSize: '1.2rem',
             fontWeight: 'bold',
             textAlign: 'center',
             width: '100%',
@@ -61,7 +74,7 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, ico
         {description && (
           <Typography
             variant="body2"
-            color="text.secondary"
+            //color="text.secondary"
             align="center"
             sx={{
               width: '100%',

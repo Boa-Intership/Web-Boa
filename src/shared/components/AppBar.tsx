@@ -8,14 +8,33 @@ import { useLocation } from 'react-router-dom';
 const AppAppBar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const darkBgRoutes = [ROUTES.HOME]; // rutas con fondo oscuro
-  const isDarkBg = darkBgRoutes.includes(location.pathname);
-  const trigger = useScrollTrigger({ threshold: 50 });
   const isHome = location.pathname === ROUTES.HOME;
-  const isTransparent = isHome && !trigger;
+  const [heroHeight, setHeroHeight] = React.useState(0);
+  const [isTransparent, setIsTransparent] = React.useState(true);
 
-const bgColor = isTransparent ? 'transparent' : '#fff';
-const textColor = isTransparent ? '#fff' : '#000';
+  React.useEffect(() => {
+    if (isHome) {
+      const heroElement = document.getElementById('hero-section');
+      if (heroElement) {
+        setHeroHeight(heroElement.offsetHeight);
+      }
+    }
+  }, [isHome]);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (isHome && heroHeight > 0) {
+        setIsTransparent(window.scrollY < heroHeight);
+      } else {
+        setIsTransparent(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHome, heroHeight]);
+
+  const bgColor = isHome && isTransparent ? 'transparent' : (theme) => theme.palette.background.default;
+  const textColor = isHome && isTransparent ? (theme) => theme.palette.primary.contrastText : (theme) => theme.palette.text.primary;
 
   return (
     <AppBar
@@ -24,13 +43,13 @@ const textColor = isTransparent ? '#fff' : '#000';
       sx={{
         bgcolor: bgColor,
         color: textColor,
-        borderBottom: trigger ? '1px solid #ddd' : 'none',
+        borderBottom: isHome && isTransparent ? 'none' : '1px solid #ddd',
         boxShadow: 'none',
         transition: 'all 0.3s ease',
         mt: 0,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Toolbar
           disableGutters
           sx={{
@@ -42,25 +61,24 @@ const textColor = isTransparent ? '#fff' : '#000';
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <IconButton
-              edge="start"
-              sx={{ p: 0, mr: 2, color: textColor }}
+            <Box
+              component="img"
+              src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
+              alt="BOA Logo"
               onClick={() => navigate(ROUTES.HOME)}
-              aria-label="logo"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
-                alt="BOA Logo"
-                style={{ height: 36, filter: isTransparent ? 'brightness(0) invert(1)' : 'none' }}
-              />
-            </IconButton>
+              sx={{
+                height: 48,
+                cursor: 'pointer',
+                filter: isHome && isTransparent ? 'brightness(0) invert(1)' : 'none',
+              }}
+            />
             <Button
               variant="text"
               size="small"
               onClick={() => navigate(ROUTES.HOME)}
               sx={{ fontWeight: 600, fontSize: 16, color: textColor }}
             >
-              Home
+              Inicio
             </Button>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, color: textColor }}>
