@@ -1,10 +1,11 @@
 import { Box, Typography, Divider } from '@mui/material';
-import { LocationOn, AccessTime, Phone } from '@mui/icons-material';
+import { LocationOn, AccessTime, Phone, HorizontalRule } from '@mui/icons-material';
 
 interface Props {
   ciudad: string;
   direccion: string;
   horarios: {
+    dias: string;
     semana: string;
     sabado: string;
     feriados: string;
@@ -32,7 +33,7 @@ export const ContactCardNacional = ({
         <Box display="flex" alignItems="center" mb={1}>
           <AccessTime color="warning" sx={{ mr: 1 }} />
           <Typography>
-            <strong>Lunes a Viernes:</strong> {horarios.semana}
+            <strong>{horarios.dias}:</strong> {horarios.semana}
           </Typography>
         </Box>
 

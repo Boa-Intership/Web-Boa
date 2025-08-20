@@ -19,14 +19,14 @@ export const ContactCardInternacional = ({
     <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} gap={3}>
       <Box flex={1}>
         <Box display="flex" alignItems="center" mb={1}>
-          <LocationOn color="primary" sx={{ mr: 1 }} />
+          <LocationOn color="info" sx={{ mr: 1 }} />
           <Typography>{direccion}</Typography>
         </Box>
 
         <Divider sx={{ my: 1 }} />
 
         <Box display="flex" alignItems="center" mb={1}>
-          <Phone color="secondary" sx={{ mr: 1 }} />
+          <Phone color="info" sx={{ mr: 1 }} />
           <Typography>
             <strong>Contacto:</strong> {contacto.join(' - ')}
           </Typography>
