@@ -26,13 +26,13 @@ function TipoCargaScreen() {
         subtitle={data.subtitle}
         details={data.details}
         example={data.example}
-        onClick={() => setSelected("")} // 👈 para cerrar o resetear
+        onClick={() => setSelected("")} // para cerrar o resetear
       />
     );
   };
 
   return (
-    <Container >
+    <Container maxWidth= 'lg'>
       <Box mb={2} >
       <Typography>
         Inicio Tipos de carga Carga general
@@ -41,11 +41,21 @@ function TipoCargaScreen() {
       <Grid container spacing={4}  >
         <Grid item xs={12} md={3}>
           <Stack spacing={2}>
-            <RoundButton color={theme.palette.primary.main} onClick={() => setSelected("cargaGeneral")}>Carga General</RoundButton>
-            <RoundButton color={theme.palette.primary.main} onClick={() => setSelected("animalesVivos")}>Animales Vivos</RoundButton>
-            <RoundButton color={theme.palette.primary.main} onClick={() => setSelected("perecederos")}>Perecederos</RoundButton>
-            <RoundButton color={theme.palette.primary.main} onClick={() => setSelected("restosHumanos")}>Restos Humanos</RoundButton>
-            <RoundButton color={theme.palette.primary.main} onClick={() => setSelected("prohibidos")}>Prohibidos</RoundButton> 
+            <RoundButton color={theme.palette.primary.main} 
+            onClick={() => setSelected("cargaGeneral")}  selected={selected === "cargaGeneral"}>
+              Carga General</RoundButton>
+            <RoundButton color={theme.palette.primary.main} 
+            onClick={() => setSelected("animalesVivos")} selected={selected === "animalesVivos"}>
+              Animales Vivos</RoundButton>
+            <RoundButton color={theme.palette.primary.main} 
+            onClick={() => setSelected("perecederos")} selected={selected === "perecederos"}>
+              Perecederos</RoundButton>
+            <RoundButton color={theme.palette.primary.main} 
+            onClick={() => setSelected("restosHumanos")} selected={selected === "restosHumanos"}>
+              Restos Humanos</RoundButton>
+            <RoundButton color={theme.palette.primary.main} 
+            onClick={() => setSelected("prohibidos")} selected={selected === "prohibidos"}>
+              Prohibidos</RoundButton> 
           </Stack>
         </Grid> 
         <Grid item  xs={12} md={9} >

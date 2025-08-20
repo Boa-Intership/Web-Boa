@@ -5,20 +5,21 @@ interface Props {
  color?: string;
  children: React.ReactNode;
  onClick: () => void;
+ selected?: boolean; 
 }
 
-const RoundButton = ({ color = "#f6a40e", children, onClick }: Props) => {
+const RoundButton = ({ color = "#f6a40e", children, onClick,selected = false }: Props) => {
  return (
     <Button
-      onClick={onClick} // <-- añadimos el onClick aquí
+      onClick={onClick} 
       sx={{
         textTransform: "none",
         borderRadius: "20px",
         borderWidth: 2,
         borderStyle: "solid",
         borderColor: color,
-        background: "none",
-        color: color,
+        background: selected ? color : "none", // <-- si está seleccionado fondo pintado
+        color: selected ? "#fff" : color,      // <-- texto blanco si está seleccionado
         fontWeight: "bold",
         px: 3,
         "&:hover": {
