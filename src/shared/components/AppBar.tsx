@@ -13,7 +13,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ROUTES } from "../../router/routes";
 import { NavItem } from "./appbar/types";
-import { NavButton, MegaMenu, MobileDrawer } from "./appbar";
+import NavButton from "./appbar/NavButton";
+import MegaMenu from "./appbar/MegaMenu";
+import MobileDrawer from "./appbar/MobileDrawer";
 
 const navItems: NavItem[] = [
   { key: "home", label: "Inicio", route: ROUTES.HOME },
@@ -44,6 +46,7 @@ const navItems: NavItem[] = [
       },
     ],
   },
+  { key: "contact", label: "Contacto", route: ROUTES.CONTACTO },
 ];
 
 const HoverDelay = 150;

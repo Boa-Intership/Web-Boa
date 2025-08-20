@@ -106,16 +106,21 @@ const oficinasInternacionales = [
 ];
 
 export default function ContactScreen() {
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(0); // 0 = nacional, 1 = internacional
+  const [expanded, setExpanded] = useState<number | false>(0); // para una expansión a la vezzz
   const oficinas = tabIndex === 0 ? oficinasNacionales : oficinasInternacionales;
 
+  const handleChange =
+    (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
+
   return (
-    <Container maxWidth="xl">
-    <Box py={3}>
+    <Container maxWidth="lg">
       <Typography variant="h4" fontWeight="bold" color="primary">
         Nuestras Oficinas
       </Typography>
-      <Typography variant="body2" color="textSecondary" mt={1}>
+      <Typography variant="body1" color="textSecondary" mt={1}>
         Información detallada de horarios de atención y contacto
       </Typography>
       
@@ -146,9 +151,14 @@ export default function ContactScreen() {
       </Box>
 
       {oficinas.map((oficina, index) => (
-        <Accordion key={index} defaultExpanded={index === 0} sx={{my:2}}>
+        <Accordion 
+          key={index} 
+          expanded={expanded === index}
+          onChange={handleChange(index)}
+          sx={{my:2}}
+        >
           <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography fontWeight="bold" fontSize="1.1rem" color='primary'>
+            <Typography fontWeight="bold" fontSize="1.1rem" color='primary' my={1}>
               {oficina.ciudad}
             </Typography>
           </AccordionSummary>
@@ -161,7 +171,6 @@ export default function ContactScreen() {
           </AccordionDetails>
         </Accordion>
       ))}
-    </Box>
     </Container>
   );
 }

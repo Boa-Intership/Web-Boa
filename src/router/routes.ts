@@ -25,9 +25,5 @@ export const ROUTES = {
   COTIZAR: '/cotizar',
   PREREGISTRO: '/preregistro',
   COMPROBANTE: '/comprobante',
-<<<<<<< HEAD
   CONTACTO: '/contacto',
 }; 
-=======
-};
->>>>>>> 0710ec9e75ed163e0504385df61b9e4590f24ae1
