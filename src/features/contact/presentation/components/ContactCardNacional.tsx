@@ -24,28 +24,28 @@ export const ContactCardNacional = ({
     <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} gap={3}>
       <Box flex={1}>
         <Box display="flex" alignItems="center" mb={1}>
-          <LocationOn color="warning" sx={{ mr: 1 }} />
+          <LocationOn color="info" sx={{ mr: 1 }} />
           <Typography>{direccion}</Typography>
         </Box>
 
         <Divider sx={{ my: 1 }} />
 
         <Box display="flex" alignItems="center" mb={1}>
-          <AccessTime color="warning" sx={{ mr: 1 }} />
+          <AccessTime color="info" sx={{ mr: 1 }} />
           <Typography>
             <strong>{horarios.dias}:</strong> {horarios.semana}
           </Typography>
         </Box>
 
         <Box display="flex" alignItems="center" mb={1}>
-          <AccessTime color="warning" sx={{ mr: 1 }} />
+          <AccessTime color="info" sx={{ mr: 1 }} />
           <Typography>
             <strong>Sábados:</strong> {horarios.sabado}
           </Typography>
         </Box>
 
         <Box display="flex" alignItems="center" mb={1}>
-          <AccessTime color="warning" sx={{ mr: 1 }} />
+          <AccessTime color="info" sx={{ mr: 1 }} />
           <Typography>
             <strong>Domingos y Feriados:</strong> {horarios.feriados}
           </Typography>
@@ -54,7 +54,7 @@ export const ContactCardNacional = ({
         <Divider sx={{ my: 1 }} />
 
         <Box display="flex" alignItems="center">
-          <Phone color="warning" sx={{ mr: 1 }} />
+          <Phone color="info" sx={{ mr: 1 }} />
           <Typography>
             <strong>Contacto:</strong> {contacto.join(' - ')}
           </Typography>

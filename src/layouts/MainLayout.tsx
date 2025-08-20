@@ -14,7 +14,8 @@ const MainLayout: React.FC = () => (
     <main style={{
       flex: 1,
       width: '100%',
-      paddingTop: '64px',
+      paddingTop: '2rem',
+      paddingBottom: '2rem',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'stretch',
