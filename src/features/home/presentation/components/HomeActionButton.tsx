@@ -11,21 +11,34 @@ interface HomeActionButtonProps {
 const HomeActionButton: React.FC<HomeActionButtonProps> = ({ label, onClick, icon, description }) => {
   return (
     <Button
-      variant="contained"
       onClick={onClick}
       sx={{
-        width: { xs: '100%' },
+        width: { xs: '100%', md: '20%' },
+        
         minHeight: { xs: 140, sm: 170 },
         borderRadius: 3,
         fontWeight: 'bold',
         textTransform: 'none',
         p: 2,
-        boxShadow: 2,
+        boxShadow:4,
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        '&:hover': {
+                background: "#E6B445",
+                //background: "linear-gradient(to bottom, #093e70ff, #3668AD)",
+                color: '#fff',
+              },
+               '&:focus': {
+                  outline: 'none',
+                  boxShadow: 'none',
+                },
+                '&.Mui-focusVisible': {
+                  outline: 'none',
+                  boxShadow: 'none',
+                },
       }}
     >
       <Box

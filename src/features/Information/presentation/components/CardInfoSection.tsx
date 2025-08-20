@@ -26,11 +26,7 @@ export default function CardInfoSection() {
       case "cargaGeneral":
         return {
           title: "Carga General",
-          concept: [{
-            description: "La categoría de Carga general se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.",
-            imageUrl: "/informacioPage/cargaGeneral/paquete.jpg",
-            background: "#0852f160",
-          }],
+          description: "La categoría de Carga general se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.",
           subtitle: "Requisitos",
           details: [
             {
@@ -95,11 +91,7 @@ export default function CardInfoSection() {
       case "animalesVivos":
         return {
           title: "Animales Vivos",
-          concept: [{
-            description: "La categoría de 'Animales Vivos' hace referencia al servicio especializado para el transporte aéreo de animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje.",
-            imageUrl: "/informacioPage/animalesVivos/mascotas2.jpg",
-            background:  "#0852f160",
-          }],
+          description: "La categoría de Animales Vivos hace referencia al servicio especializado para el transporte aéreo de animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje.",
           subtitle: "Requisitos",
           details: [
             {
@@ -153,11 +145,7 @@ export default function CardInfoSection() {
       case "perecederos":
         return {
           title: "Perecederos",
-          concept: [{
-            description: "La categoría de 'Cargas Perecederas' son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.",
-            imageUrl: "/informacioPage/perecederos/alimentos.jpg",
-            background:  "#0852f160",
-          }],
+          description: "La categoría perecederos son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.",
           subtitle: "Requisitos",
           details: [
             {
@@ -204,11 +192,7 @@ export default function CardInfoSection() {
       case "restosHumanos":
         return {
           title: "Restos humanos",
-          concept: [{
-            description: "La categoría de 'Restos humanos' se refiere al transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo (féretro) o de cenizas (urnas funerarias), cumpliendo con normas legales, sanitarias y logísticas estrictas.",
-            imageUrl: "/informacioPage/restosHumanos/ataud.webp",
-            background:  "#0852f160",
-          }],
+          description: "la categoría de Restos Humanos se refiere al transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo (féretro) o de cenizas (urnas funerarias), cumpliendo con normas legales, sanitarias y logísticas estrictas.",
           subtitle: "Requisitos",
           details: [
             {
@@ -255,11 +239,7 @@ export default function CardInfoSection() {
       case "prohibidos":
         return {
           title: "Peligrosos",
-          concept: [{
-            description: "La categoría de Peligrosos son todos aquellos materiales o sustancias que, por sus características químicas o físicas, pueden representar un riesgo para la salud, la seguridad, la propiedad o el medio ambiente durante su transporte aéreo. Estas cargas están reguladas internacionalmente por la IATA (Asociación Internacional de Transporte Aéreo) bajo la Regulación de Mercancías Peligrosas (DGR) y, en Bolivia, por normativas de la DGAC y autoridades competentes.",
-            imageUrl: "/informacioPage/peligroso/prohibido.jpg",
-            background:  "#0852f160",
-          }],
+          description: "La categoría de “carga prohibida” hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea, ya sea por riesgo a la seguridad, la salud pública, normas nacionales o internacionales, o por limitaciones técnicas de la aeronave.",
           subtitle: "",
           details: [],
           example: [
@@ -313,58 +293,63 @@ export default function CardInfoSection() {
   const modalProps = getModalProps();
 
   return (
-    <Container maxWidth="xl" >
+    <Container >
       <Box display="flex" alignContent={"start"} flexWrap="wrap" gap={2} mt={8}>
         <Typography variant="h4" fontWeight={"bold"} color={"#0F5299"}>
-          Información sobre los tipos de carga en BoA
+          Tipos de carga en BoA Cargo
         </Typography>
         <Typography variant="body1" color={"#2D2D2D"}>
            Conoce los tipos de carga <strong>Permitidas</strong> y <strong>No Permitidas</strong> que puedes enviar a través de nuestro servicio de paquetería aérea y las restricciones aplicables.
         </Typography>
-        <Grid container spacing={5} sx={{justifyContent: "center",alignItems: "center",}}>
+        <Grid container spacing={5} sx={{justifyContent: "center",alignItems: "center"}}>
           <Grid item>
             <ButtonCardInfo
               title="Carga General"
-              description="PERMITIDO"
+              description="Se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento."
               onClick={() => handleOpenModal("cargaGeneral")}
               icon={<Inventory2OutlinedIcon />}
               imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
+              tag= "Permitido"
             />
           </Grid>
           <Grid item>
             <ButtonCardInfo
               title="Animales vivos"
-              description="PERMITIDO"
+              description="Es el servicio especializado para animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje."
               onClick={() => handleOpenModal("animalesVivos")}
               icon={<PetsOutlinedIcon />}
               imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
+              tag= "Permitido"
             />
           </Grid>
           <Grid item>
             <ButtonCardInfo
               title="Perecederos"
-              description="PERMITIDO"
+              description="Son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo."
               onClick={() => handleOpenModal("perecederos")}
               icon={<SetMealOutlinedIcon />}
               imageUrl="/informacioPage/perecederos/alimentos.jpg"
+              tag= "Permitido"
             />
           </Grid>
           <Grid item>
             <ButtonCardInfo
               title="Restos Humanos"
-              description="PERMITIDO"
+              description="Es el transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo o de cenizas. "
               onClick={() => handleOpenModal("restosHumanos")}
               icon={<LocalHospitalOutlinedIcon />}
               imageUrl="/informacioPage/restosHumanos/ataud.webp"
+              tag= "Permitido"
             />
           </Grid>
           <Grid item>
             <ButtonCardInfo
               title="Peligrosos"
-              description="NO PERMITIDO"
+              description="Hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea."
               onClick={() => handleOpenModal("prohibidos")}
               icon={<DoNotDisturbAltIcon />}
               imageUrl="/informacioPage/peligroso/prohibido.jpg"
+              tag= "No Permitido"
             />
           </Grid>
         </Grid>
@@ -375,7 +360,7 @@ export default function CardInfoSection() {
           open={!!openModal}
           onClose={handleCloseModal}
           title={modalProps.title}
-          concept={modalProps.concept}
+          description={modalProps.description}
           subtitle={modalProps.subtitle}
           details={modalProps.details}
           example={modalProps.example}

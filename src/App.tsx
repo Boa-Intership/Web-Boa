@@ -7,20 +7,22 @@ import InformacionScreen from './features/Information/presentation/screens/Infor
 import PreRegistroScreen from './features/pre-registration/presentation/screens/PreRegistroScreen';
 import ComprobanteScreen from './features/pre-registration/presentation/screens/ComprobanteScreen';
 import MainLayout from './layouts/MainLayout';
+import LandingScreen from './features/landing/presentation/screens/LandingScreen';
 
 
 const App: React.FC = () => (
     <BrowserRouter>
-      <MainLayout>
-        <Routes>
-          <Route path={ROUTES.HOME} element={<HomeScreen />} />
-          <Route path={ROUTES.CONTACTO} element={<ContactScreen />} />
-          <Route path={ROUTES.PREREGISTRO} element={<PreRegistroScreen />} />
-          <Route path={ROUTES.COMPROBANTE} element={<ComprobanteScreen />} />
-          <Route path={ROUTES.INFORMACION} element={<InformacionScreen />} />
-          <Route path="/" element={<Navigate to={ROUTES.HOME} />} />
-        </Routes>
-      </MainLayout>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<LandingScreen />} />
+          <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
+          <Route path={ROUTES.CONTACTO.replace('/', '')} element={<ContactScreen />} />
+          <Route path={ROUTES.PREREGISTRO.replace('/', '')} element={<PreRegistroScreen />} />
+          <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
+          <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </BrowserRouter>
 )
 

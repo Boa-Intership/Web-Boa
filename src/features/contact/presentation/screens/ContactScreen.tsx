@@ -6,6 +6,7 @@ import {
   Typography,
   Box,
   Chip,
+  Container,
 } from '@mui/material';
 
 import { ContactCardNacional } from '../components/ContactCardNacional';
@@ -109,7 +110,8 @@ export default function ContactScreen() {
   const oficinas = tabIndex === 0 ? oficinasNacionales : oficinasInternacionales;
 
   return (
-    <Box p={3}>
+    <Container maxWidth="xl">
+    <Box py={3}>
       <Typography variant="h4" fontWeight="bold" color="primary">
         Nuestras Oficinas
       </Typography>
@@ -160,5 +162,6 @@ export default function ContactScreen() {
         </Accordion>
       ))}
     </Box>
+    </Container>
   );
 }
