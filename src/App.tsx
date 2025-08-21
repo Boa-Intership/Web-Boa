@@ -16,7 +16,7 @@ const App: React.FC = () => (
         <Route index element={<LandingScreen />} />
         <Route path={ROUTES.HOME.replace("/", "")} element={<HomeScreen />} />
         <Route
-          path={ROUTES.CONTACT.replace("/", "")}
+          path={ROUTES.CONTACTO.replace("/", "")}
           element={<ContactScreen />}
         />
         <Route

@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Box, Stack, TextField, Button as MuiButton, InputAdornment, Typography, Container, Alert } from '@mui/material';
+import {
+  Box,
+  Stack,
+  TextField,
+  Button as MuiButton,
+  InputAdornment,
+  Typography,
+  Alert,
+} from '@mui/material';
+import AppContainer from '../../../../shared/components/AppContainer';
 import InfoIcon from '@mui/icons-material/Info';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -18,39 +27,46 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
-  <>
-    <Hero 
+    <>
+      <Hero
         tracking={tracking}
         onTrackingChange={setTracking}
         onTrack={handleTrack}
-    />
-    <Container maxWidth="xl" sx={{ mt: 6, mb: 6 }}>
-      <Container maxWidth="xl" disableGutters>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4} alignItems="center" justifyContent="center">
-          <HomeActionButton
-            label="Información"
-            icon={<InfoIcon fontSize="large" />}
-            description="Consulta tipos de carga"
-            onClick={() => navigate(ROUTES.INFORMACION)}
-          />
-          <HomeActionButton
-            label="Cotizar envío"
-            icon={<AttachMoneyIcon fontSize="large" />}
-            description="Cotización rápida para tu envío."
-            onClick={() => navigate(ROUTES.COTIZAR)}
-          />
-          <HomeActionButton
-            label="Pre-registro"
-            icon={<AssignmentIcon fontSize="large" />}
-            description="Completa el pre-registro."
-            onClick={() => navigate(ROUTES.PREREGISTRO)}
-          />
-        </Stack>
-      </Container>
-      <CardInfoSection />
-    </Container>
-  </>
+      />
+      <AppContainer>
+        <AppContainer maxWidth="xl" disableGutters>
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={4}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <HomeActionButton
+              label="Información"
+              icon={<InfoIcon fontSize="large" />}
+              description="Consulta tipos de carga"
+              onClick={() => navigate(ROUTES.INFORMACION)}
+            />
+            <HomeActionButton
+              label="Cotizar envío"
+              icon={<AttachMoneyIcon fontSize="large" />}
+              description="Cotización rápida para tu envío."
+              onClick={() => navigate(ROUTES.COTIZAR)}
+            />
+            <HomeActionButton
+              label="Pre-registro"
+              icon={<AssignmentIcon fontSize="large" />}
+              description="Completa el pre-registro."
+              onClick={() => navigate(ROUTES.PREREGISTRO)}
+            />
+          </Stack>
+        </AppContainer>
+      </AppContainer>
+      <AppContainer>
+        <CardInfoSection />
+      </AppContainer>
+    </>
   );
 };
 
-export default HomeScreen; 
+export default HomeScreen;

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   AppBar,
   Toolbar,
@@ -8,45 +8,46 @@ import {
   Button,
   useTheme,
   useMediaQuery,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate, useLocation } from "react-router-dom";
-import { ROUTES } from "../../router/routes";
-import { NavItem } from "./appbar/types";
-import NavButton from "./appbar/NavButton";
-import MegaMenu from "./appbar/MegaMenu";
-import MobileDrawer from "./appbar/MobileDrawer";
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ROUTES } from '../../router/routes';
+import { NavItem } from './appbar/types';
+import NavButton from './appbar/NavButton';
+import MegaMenu from './appbar/MegaMenu';
+import MobileDrawer from './appbar/MobileDrawer';
+import AppContainer from './AppContainer';
 
 const navItems: NavItem[] = [
-  { key: "home", label: "Inicio", route: ROUTES.HOME },
+  { key: 'home', label: 'Inicio', route: ROUTES.HOME },
   {
-    key: "itinerarios",
-    label: "Itinerarios",
+    key: 'itinerarios',
+    label: 'Itinerarios',
     columns: [
       {
-        title: "Itinerarios",
-        links: [{ label: "Ver itinerarios", to: ROUTES.ITINERARIOS }],
+        title: 'Itinerarios',
+        links: [{ label: 'Ver itinerarios', to: ROUTES.ITINERARIOS }],
       },
       {
-        title: "Operaciones",
-        links: [{ label: "Pre-registro", to: ROUTES.PREREGISTRO }],
+        title: 'Operaciones',
+        links: [{ label: 'Pre-registro', to: ROUTES.PREREGISTRO }],
       },
     ],
   },
   {
-    key: "informacion",
-    label: "Información",
+    key: 'informacion',
+    label: 'Información',
     columns: [
       {
-        title: "General",
+        title: 'General',
         links: [
-          { label: "Información", to: ROUTES.INFORMACION },
-          { label: "Términos", to: ROUTES.TERMINOS },
+          { label: 'Información', to: ROUTES.INFORMACION },
+          { label: 'Términos', to: ROUTES.TERMINOS },
         ],
       },
     ],
   },
-  { key: "contact", label: "Contacto", route: ROUTES.CONTACTO },
+  { key: 'contact', label: 'Contacto', route: ROUTES.CONTACTO },
 ];
 
 const HoverDelay = 150;
@@ -55,7 +56,7 @@ const AppAppBar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   const textColor = (theme) => theme.palette.text.primary;
   const bgColor = (theme) => theme.palette.background.paper;
@@ -86,48 +87,48 @@ const AppAppBar: React.FC = () => {
         sx={{
           bgcolor: bgColor,
           color: textColor,
-          borderBottom: "1px solid rgba(0,0,0,0.06)",
-          boxShadow: "none",
-          transition: "all 0.18s ease",
+          borderBottom: '1px solid rgba(0,0,0,0.06)',
+          boxShadow: 'none',
+          transition: 'all 0.18s ease',
         }}
       >
-        <Container maxWidth="xl">
+        <AppContainer maxWidth="xl">
           <Toolbar
             disableGutters
-            sx={{ display: "flex", alignItems: "center" }}
+            sx={{ display: 'flex', alignItems: 'center' }}
           >
             <Box
               component="img"
               src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
               alt="BOA Logo"
               onClick={() => navigate(ROUTES.LANDING)}
-              sx={{ height: { xs: 36, md: 48 }, cursor: "pointer" }}
+              sx={{ height: { xs: 36, md: 48 }, cursor: 'pointer' }}
             />
             <Box sx={{ flexGrow: 1 }} />
 
             <Box
               component="nav"
               id="main-menu"
-              sx={{ display: { xs: "none", md: "block" } }}
+              sx={{ display: { xs: 'none', md: 'block' } }}
             >
               <Box
                 component="ul"
                 sx={{
-                  display: "flex",
+                  display: 'flex',
                   gap: 1,
-                  alignItems: "center",
-                  listStyle: "none",
+                  alignItems: 'center',
+                  listStyle: 'none',
                   p: 0,
                   m: 0,
                 }}
               >
                 <Box component="li">
-                  <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                     {navItems.map((item) => {
                       const isOpen = openKey === item.key;
                       const canHover = isMdUp;
                       return (
-                        <Box key={item.key} sx={{ position: "relative" }}>
+                        <Box key={item.key} sx={{ position: 'relative' }}>
                           {item.columns ? (
                             <>
                               <NavButton
@@ -137,7 +138,7 @@ const AppAppBar: React.FC = () => {
                                 label={item.label}
                                 onClick={() =>
                                   setOpenKey((k) =>
-                                    k === item.key ? null : item.key
+                                    k === item.key ? null : item.key,
                                   )
                                 }
                                 onMouseEnter={() =>
@@ -181,15 +182,15 @@ const AppAppBar: React.FC = () => {
             <Box
               id="_header-buttons"
               data-testid="header-buttons"
-              sx={{ display: "flex", gap: 1, alignItems: "center" }}
+              sx={{ display: 'flex', gap: 1, alignItems: 'center' }}
             >
               <Button
                 variant="text"
                 size="small"
                 onClick={() => navigate(ROUTES.LOGIN)}
                 sx={{
-                  textTransform: "none",
-                  fontSize: { xs: "0.75rem", md: "1rem" },
+                  textTransform: 'none',
+                  fontSize: { xs: '0.75rem', md: '1rem' },
                 }}
               >
                 Iniciar sesión
@@ -199,15 +200,15 @@ const AppAppBar: React.FC = () => {
                 size="small"
                 onClick={() => navigate(ROUTES.REGISTRO)}
                 sx={{
-                  textTransform: "none",
-                  fontSize: { xs: "0.75rem", md: "1rem" },
+                  textTransform: 'none',
+                  fontSize: { xs: '0.75rem', md: '1rem' },
                 }}
               >
                 Abrir cuenta
               </Button>
             </Box>
 
-            <Box sx={{ display: { xs: "flex", md: "none" }, ml: 1 }}>
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>
               <IconButton
                 color="inherit"
                 aria-label="Menu"
@@ -217,7 +218,7 @@ const AppAppBar: React.FC = () => {
               </IconButton>
             </Box>
           </Toolbar>
-        </Container>
+        </AppContainer>
       </AppBar>
 
       <Box sx={{ height: { xs: 56, md: 68 } }} />

@@ -10,7 +10,7 @@ import {
 
 import { ContactCardNacional } from '../components/ContactCardNacional';
 import { ContactCardInternacional } from '../components/ContactCardInternacional';
-import { Home, Public, ExpandMore } from "@mui/icons-material";
+import { Home, Public, ExpandMore } from '@mui/icons-material';
 
 const oficinasNacionales = [
   {
@@ -41,7 +41,8 @@ const oficinasNacionales = [
   },
   {
     ciudad: 'Tarija Ciudad',
-    direccion: 'Calle General Trigo entre Alejandro del Carpio, y Virginio Lema',
+    direccion:
+      'Calle General Trigo entre Alejandro del Carpio, y Virginio Lema',
     horarios: {
       dias: 'Lunes a Viernes',
       semana: '8:30 - 16:00',
@@ -96,7 +97,8 @@ const oficinasNacionales = [
 const oficinasInternacionales = [
   {
     ciudad: 'Buenos Aires',
-    direccion: 'Autopista Ricchieri S/N, EP 1802 a 35 Km del centro Terminal "A"',
+    direccion:
+      'Autopista Ricchieri S/N, EP 1802 a 35 Km del centro Terminal "A"',
     contacto: ['+54 11 4322 4222', '+54 911 6052 1267'],
     email: 'sergio.dufo@crossracer.aero',
     mapEmbed:
@@ -107,7 +109,8 @@ const oficinasInternacionales = [
 export default function ContactScreen() {
   const [tabIndex, setTabIndex] = useState(0); // 0 = nacional, 1 = internacional
   const [expanded, setExpanded] = useState<number | false>(0); // para una expansión a la vezzz
-  const oficinas = tabIndex === 0 ? oficinasNacionales : oficinasInternacionales;
+  const oficinas =
+    tabIndex === 0 ? oficinasNacionales : oficinasInternacionales;
 
   const handleChange =
     (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -115,28 +118,24 @@ export default function ContactScreen() {
     };
 
   return (
-<<<<<<< HEAD
     <Box p={3}>
-=======
-    <Container maxWidth="lg">
->>>>>>> 8069b60 ([CHANGE] Accordion style)
       <Typography variant="h4" fontWeight="bold" color="primary">
         Nuestras Oficinas
       </Typography>
       <Typography variant="body1" color="textSecondary" mt={1}>
         Información detallada de horarios de atención y contacto
       </Typography>
-      
-      <Box sx={{ display: "flex", gap: 2, my: 2 }}>
+
+      <Box sx={{ display: 'flex', gap: 2, my: 2 }}>
         <Chip
           icon={<Home fontSize="small" />}
           label={`Nacional (${oficinasNacionales.length})`}
           color="primary"
-          variant={tabIndex === 0 ? "filled" : "outlined"}
+          variant={tabIndex === 0 ? 'filled' : 'outlined'}
           onClick={() => setTabIndex(0)}
           sx={{
             p: 1.5,
-            borderRadius: "999px",
+            borderRadius: '999px',
           }}
         />
         {/*** '&:focus': { outline: 'none' }, */}
@@ -144,24 +143,29 @@ export default function ContactScreen() {
           icon={<Public fontSize="small" />}
           label={`Internacional (${oficinasInternacionales.length})`}
           color="primary"
-          variant={tabIndex === 1 ? "filled" : "outlined"}
+          variant={tabIndex === 1 ? 'filled' : 'outlined'}
           onClick={() => setTabIndex(1)}
           sx={{
             p: 1.5,
-            borderRadius: "999px",
+            borderRadius: '999px',
           }}
         />
       </Box>
 
       {oficinas.map((oficina, index) => (
-        <Accordion 
-          key={index} 
+        <Accordion
+          key={index}
           expanded={expanded === index}
           onChange={handleChange(index)}
-          sx={{my:2}}
+          sx={{ my: 2 }}
         >
           <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography fontWeight="bold" fontSize="1.1rem" color='primary' my={1}>
+            <Typography
+              fontWeight="bold"
+              fontSize="1.1rem"
+              color="primary"
+              my={1}
+            >
               {oficina.ciudad}
             </Typography>
           </AccordionSummary>
@@ -174,10 +178,6 @@ export default function ContactScreen() {
           </AccordionDetails>
         </Accordion>
       ))}
-<<<<<<< HEAD
     </Box>
-=======
-    </Container>
->>>>>>> 8069b60 ([CHANGE] Accordion style)
   );
 }
