@@ -33,14 +33,15 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "La carga debe presentarse abierta para revisión total.",
                     "El cliente debe contar con material para reembalar después de la revisión.",
                     "Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).",
-                    "Se requiere documento de identidad vigente para aceptar el envío.",
+                    "Se requiere documento de identidad vigente (carnet de identidad, licencia de conducir o pasaporte) y sello de la empresa si va a nombre de una empresa para aceptar el envío.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "La carga se recibe hasta 2 horas antes del vuelo y se entrega 1 hora después de su llegada.",
                     "El envío y la recepción solo se realizan en oficinas de BoA Cargo.",
                 ],
 
                 imageUrl: [
                     "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
-                ],
+                ]
             },
             {
                 title: "Internacional",
@@ -49,7 +50,8 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "El cliente debe contar con material para reembalar después de la revisión.",
                     "Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).",
                     "La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.",
-                    "Se requiere documento de identidad vigente para aceptar el envío.",
+                    "Se requiere documento de identidad vigente (carnet de identidad, licencia de conducir o pasaporte) y sello de la empresa si va a nombre de una empresa para aceptar el envío.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "La carga de exportación internacional se recibe y almacena hasta 24 horas antes de la salida del vuelo.",
                     "El envío y la recepción se realizan únicamente en oficinas de BoA Cargo.",
                     "Factura comercial de exportación.",
@@ -59,8 +61,8 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "Declaración General de Seguridad de Carga emitida por el agente de carga.",
                     "Documentos validados por la Aduana Nacional de Bolivia.",
                     "El cliente debe coordinar con un agente de carga de su confianza, quien lo asistirá con trámites aduaneros, embalaje, y controles en origen y destino.",
-                ],
-            },
+                ]
+            }
         ],
         example: [
             {
@@ -98,7 +100,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 description: "Sillas, mesas plegables, estanterías livianas",
                 image: "/informacioPage/cargaGeneral/GGI_muebles.png",
             },
-        ],
+        ]
     },
     animalesVivos: {
         title: "Animales Vivos",
@@ -116,6 +118,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "Presentar cartilla de vacunas (original + 2 copias). Deben haber pasado 30 días desde la vacuna antirrábica.",
                     "Certificado veterinario que acredite buen estado de salud. Para especies distintas a perros y gatos, se requiere autorización del SENASAG.",
                     "Los perros de musculatura fuerte y aspecto robusto deben llevar bozal.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "No se transportan perros ni gatos braquicéfalos (nariz achatada).",
                     "El consignatario debe recoger al animal a la llegada del vuelo.",
                     "Se recomienda no sedar animales domésticos en vuelos nacionales e internacionales.",
@@ -134,6 +137,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "La edad mínima del animal es de 3 meses (excepto pollitos bebés).",
                     "Presentar cartilla de vacunas (original + 2 copias). Deben haber pasado 30 días desde la vacuna antirrábica.",
                     "Certificado veterinario que acredite buen estado de salud. Para especies distintas a perros y gatos, se requiere autorización del SENASAG.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "Los perros de musculatura fuerte y aspecto robusto deben llevar bozal.",
                     "No se transportan perros ni gatos braquicéfalos (nariz achatada).",
                     "El consignatario debe recoger al animal a la llegada del vuelo.",
@@ -149,7 +153,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 ],
 
                 imageUrl: ["/informacioPage/animalesVivos/mascotas1.webp", "/informacioPage/animalesVivos/vacunas.webp"],
-            },
+            }
         ],
         example: [
             {
@@ -178,7 +182,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 image: "/informacioPage/animalesVivos/GGI_exotico.png",
             }
 
-        ],
+        ]
     },
     perecederos: {
         title: "Perecederos",
@@ -202,7 +206,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
 
                 imageUrl: [
                     "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
-                ],
+                ]
             },
             {
                 title: "Internacional",
@@ -214,6 +218,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "La carga debe embalarse de manera que proteja el producto transportado.",
                     "Usar embalaje adecuado según el tipo de producto.",
                     "El paquete debe estar marcado y rotulado con: nombre completo del consignatario, teléfono y ciudad.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "En destinos donde no se hable español, la documentación, etiquetas y rótulos deben estar en inglés.",
                     "La carga se recibe hasta 2 horas antes del vuelo y se entrega 1 hora después de la llegada.",
                     "Si la carga es sensible a la temperatura, debe incluir su propio refrigerante.",
@@ -228,8 +233,8 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 ],
                 imageUrl: [
                     "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
-                ],
-            },
+                ]
+            }
         ],
         example: [
             {
@@ -257,7 +262,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 description: "Rosas, claveles, orquídeas, plantas ornamentales",
                 image: "/informacioPage/perecederos/GGI_flores.png",
             }
-        ],
+        ]
     },
     restosHumanos: {
         title: "Restos humanos",
@@ -269,6 +274,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 description: [
                     "Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.",
                     "Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.",
                     "Certificado forense sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ",
                     "Certificado de formolización, (embalsamamiento), cremación según sea aplicable.",
@@ -278,7 +284,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 ],
                 imageUrl: [
                     "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
-                ],
+                ]
             },
             {
                 title: "Internacional",
@@ -286,6 +292,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.",
                     "Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).",
                     "La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.",
                     "Certificado forense sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ",
                     "Certificado de formolización, (embalsamamiento), cremación según sea aplicable.",
@@ -296,7 +303,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "Se recibe el transporte de restos humanos Internacional mediante Agentes de Carga.",
                     "Declaración General de seguridad de Carga, emitido por el agente de carga.",
                 ]
-            },
+            }
         ],
         example: [
             {
@@ -311,55 +318,177 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             }
         ],
     },
+    cargaValiosa: {
+        title: "Carga Valiosa",
+        description:
+            "La categoría de Cargas Valiosas se refiere a mercancías que tienen un alto valor económico, cultural o sensible, y que requieren medidas especiales de seguridad y custodia durante su transporte aéreo.",
+        subtitle: "Requisitos",
+        details: [
+            {
+                title: "Nacional",
+                description: [
+                    "Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.",
+                    "El transporte debe gestionarse a través de un agente de carga especializado en equipos porta valor certificado.",
+                    "El embalaje debe ser adecuado al peso y contenido, evitando manipulación indebida o extracción de componentes.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
+                    "Presentar fotocopia del Formulario M-02 de compra y venta de minerales y metales, emitido y autorizado por SENARECOM.",
+                ],
 
+                imageUrl: [
+                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
+                ]
+            },
+            {
+                title: "Internacional",
+                description: [
+                    "Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.",
+                    "El transporte debe gestionarse a través de un agente de carga especializado en equipos porta valor certificado.",
+                    "El embalaje debe ser adecuado al peso y contenido, evitando manipulación indebida o extracción de componentes.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
+                    "Requisitos de Exportación: Formulario M-03 (exportación de minerales y metales) y Formulario JDLP-001 (acta de inspección), ambos emitidos por SENARECOM.",
+                    "Declaración de Exportación (DEX) emitida por la Aduana Nacional mediante el sistema SUMA.",
+                    "Factura comercial y lista de empaque.",
+                    "Declaración General de Seguridad de Carga emitida por el agente de carga.",
+                    "En destinos donde no se hable español, la documentación, etiquetas y rótulos deben presentarse en inglés.",
+                ]
+
+            }
+        ],
+        example: [
+            {
+                title: "Dinero en efectivo",
+                description: "Billetes, monedas",
+                image: "/informacioPage/cargaGeneral/GGI_manu.png",
+            },
+            {
+                title: "Joyas y metales preciosos",
+                description: "Oro, plata, diamantes, piedras preciosas.",
+                image: "/informacioPage/cargaGeneral/GGI_herramientas.png",
+            },
+            {
+                title: "Obras de arte",
+                description: "Pinturas, esculturas, piezas de colección.",
+                image: "/informacioPage/cargaGeneral/GGI_papeleria.png",
+            },
+            {
+                title: "Electrónica de alto valor",
+                description: "Computadoras de última generación, equipos médicos portátiles.",
+                image: "/informacioPage/cargaGeneral/GGI_electronicos.png",
+            },
+            {
+                title: "Documentos valiosos",
+                description: "Títulos de propiedad, bonos, valores bursátiles, contratos originales.",
+                image: "/informacioPage/cargaGeneral/GGI_limpieza.png",
+            }
+        ]
+    },
+    muestrasBiologicas: {
+        title: "Muestras Biológicas",
+        description:
+            "La categoría de Muestras Biológicas son un tipo de carga especial que corresponde a materiales de origen humano o animal que se transportan con fines médicos, diagnósticos, de investigación o control sanitario.",
+        subtitle: "Requisitos",
+        details: [
+            {
+                title: "Nacional",
+                description: [
+                    "Reservar con al menos 24 horas para nacionales, en oficinas de BoA Cargo.",
+                    "Embalaje combinado: externo, primario, secundario, absorbente y refrigerante (si aplica).",
+                    "La aceptación se realiza según el formulario IATA Lista de Comprobación para Embarques UN 3373.",
+                    "Las muestras biológicas que cumplen requisitos están exentas de inspección manual y Rayos X.",
+                    "Certificado médico que indique que la muestra no es infecto-contagiosa, en hoja membretada, firmado y sellado por la institución que la emite.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo."
+                ],
+
+
+                imageUrl: [
+                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
+                ]
+            },
+            {
+                title: "Internacional",
+                description: [
+                    "Reservar con al menos 48 horas de anticipación para envíos internacionales, en oficinas de BoA Cargo.",
+                    "Embalaje combinado: externo, primario, secundario, absorbente y refrigerante (si aplica).",
+                    "La aceptación se realiza según el formulario IATA Lista de Comprobación para Embarques UN 3373.",
+                    "Las muestras biológicas que cumplen requisitos están exentas de inspección manual y Rayos X.",
+                    "Certificado médico que indique que la muestra no es infecto-contagiosa, en hoja membretada, firmado y sellado por la institución que la emite.",
+                    "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
+                    "Certificado de traslado de muestra emitido por SEDES.",
+                    "Declaración de Exportación (DEX) emitida por la Aduana mediante el sistema SUMA.",
+                    "Factura comercial y lista de empaque.",
+                    "Ficha técnica de descripción de la muestra.",
+                    "Declaración General de Seguridad de Carga emitida por el agente de carga.",
+                    "En envíos internacionales, el exportador debe gestionar el transporte mediante un agente de carga especializado.",
+                    "En destinos donde no se hable español, la documentación, etiquetas y rótulos deben presentarse en inglés.",
+                ]
+            }
+        ],
+        example: [
+            {
+                title: "Categoría A: Sustancias infecciosas",
+                description: "Muestras de virus peligrosos.",
+                image: "/informacioPage/cargaGeneral/GGI_manu.png",
+            },
+            {
+                title: "Categoría B: Sustancias biológicas,no tan peligrosas",
+                description: "Sangre, tejidos, fluidos para análisis comunes.",
+                image: "/informacioPage/cargaGeneral/GGI_herramientas.png",
+            },
+            {
+                title: "Exentas: Muestras que no representan riesgo de infección",
+                description: "Muestras de ADN, cabello, saliva no contaminada.",
+                image: "/informacioPage/cargaGeneral/GGI_papeleria.png",
+            }
+        ]
+    },
     prohibidos: {
         title: "Peligrosos",
-          description: "La categoría de “carga prohibida” hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea, ya sea por riesgo a la seguridad, la salud pública, normas nacionales o internacionales, o por limitaciones técnicas de la aeronave.",
-          subtitle: "",
-          details: [],
-          example: [
+        description: "La categoría de “carga prohibida” hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea, ya sea por riesgo a la seguridad, la salud pública, normas nacionales o internacionales, o por limitaciones técnicas de la aeronave.",
+        subtitle: "",
+        details: [],
+        example: [
             {
-              title: "Explosivos",
-              description: "municiones, material para expediciones,bengalas,fuegos artificiales, articulos pirotécnicos",
-              image: "/informacioPage/peligroso/explosive-symbol.jpg",
+                title: "Explosivos",
+                description: "municiones, material para expediciones,bengalas,fuegos artificiales, articulos pirotécnicos",
+                image: "/informacioPage/peligroso/explosive-symbol.jpg",
             },
             {
-              title: "Solidos inflamables",
-              description: "fosforo, articulos de facil ignicion,combustion expontanea o que al tacto con el agua emitan gases inflamables",
-              image: "/informacioPage/peligroso/Flammables.gif",
+                title: "Solidos inflamables",
+                description: "fosforo, articulos de facil ignicion,combustion expontanea o que al tacto con el agua emitan gases inflamables",
+                image: "/informacioPage/peligroso/Flammables.gif",
             },
             {
-              title: "Venenos y sustancias infecciosas",
-              description: "muestras para diagnosticos, sustancias toxicas o infecciosas y herbicidas",
-              image: "/informacioPage/peligroso/sustanciasInfecciosas.jpg",
+                title: "Venenos y sustancias infecciosas",
+                description: "muestras para diagnosticos, sustancias toxicas o infecciosas y herbicidas",
+                image: "/informacioPage/peligroso/sustanciasInfecciosas.jpg",
             },
             {
-              title: "Gases comprimidos inflamables, no inflamables y venenosos",
-              description: "extintores, botellas de oxigeno para bucear, licuados refrigerrados o disueltos",
-              image: "/informacioPage/peligroso/gasComprimido.gif",
+                title: "Gases comprimidos inflamables, no inflamables y venenosos",
+                description: "extintores, botellas de oxigeno para bucear, licuados refrigerrados o disueltos",
+                image: "/informacioPage/peligroso/gasComprimido.gif",
             },
             {
-              title: "Liquidos inflamables",
-              description: "Bombonas de gas para recargar encendedores, pinturas, disolventes,combustibles liquidos o solidos,cerillas ",
-              image: "/informacioPage/peligroso/Flammables.gif",
+                title: "Liquidos inflamables",
+                description: "Bombonas de gas para recargar encendedores, pinturas, disolventes,combustibles liquidos o solidos,cerillas ",
+                image: "/informacioPage/peligroso/Flammables.gif",
             },
             {
-              title: "Material radioactivo",
-              description: "Material con isotopos radiactivos",
-              image: "/informacioPage/peligroso/nuclear.png",
+                title: "Material radioactivo",
+                description: "Material con isotopos radiactivos",
+                image: "/informacioPage/peligroso/nuclear.png",
             },
             {
-              title: "Materiales corrosivos y Oxidantes",
-              description: "acidos alcalinos, mercurio, pilas humedas, peroxidos,acumuladores electricos",
-              image: "/informacioPage/peligroso/corrosivoOxidante.jpg",
+                title: "Materiales corrosivos y Oxidantes",
+                description: "acidos alcalinos, mercurio, pilas humedas, peroxidos,acumuladores electricos",
+                image: "/informacioPage/peligroso/corrosivoOxidante.jpg",
             },
             {
-              title: "Pilas y baterias",
-              description: "Ademas de otros articulos considerados peligrosos como material ferro-magnetico, hielo seco y baterias de coche",
-              image: "/informacioPage/peligroso/bateriasLitio.webp",
+                title: "Pilas y baterias",
+                description: "Ademas de otros articulos considerados peligrosos como material ferro-magnetico, hielo seco y baterias de coche",
+                image: "/informacioPage/peligroso/bateriasLitio.webp",
             }
-          ],
+        ],
     },
-    
-    // Aquí podrías ir agregando otras categorías como "cargaPeligrosa", "perecederos", etc.
+
+
 };

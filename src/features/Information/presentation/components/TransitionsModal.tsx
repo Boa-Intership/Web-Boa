@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Fade, Backdrop, Box, Typography, Grid } from "@mui/material";
 import ModalDetailItem from "./ModalDetailItem";
-import CardSimple from "./CardSimple";
 import ExampleType from "./ExampleType";
 
 const style = {

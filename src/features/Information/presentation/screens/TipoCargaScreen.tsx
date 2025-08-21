@@ -39,7 +39,7 @@ function TipoCargaScreen() {
       </Typography>
       </Box>
       <Grid container spacing={4}  >
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={3} lg={3}>
           <Stack spacing={2}>
             <RoundButton color={theme.palette.primary.main} 
             onClick={() => setSelected("cargaGeneral")}  selected={selected === "cargaGeneral"}>
@@ -53,12 +53,18 @@ function TipoCargaScreen() {
             <RoundButton color={theme.palette.primary.main} 
             onClick={() => setSelected("restosHumanos")} selected={selected === "restosHumanos"}>
               Restos Humanos</RoundButton>
+              <RoundButton color={theme.palette.primary.main} 
+            onClick={() => setSelected("cargaValiosa")} selected={selected === "cargaValiosa"}>
+              Carga Valiosa</RoundButton>
+              <RoundButton color={theme.palette.primary.main} 
+            onClick={() => setSelected("muestrasBiologicas")} selected={selected === "muestrasBiologicas"}>
+              Muestras Biológicas</RoundButton>
             <RoundButton color={theme.palette.primary.main} 
             onClick={() => setSelected("prohibidos")} selected={selected === "prohibidos"}>
               Prohibidos</RoundButton> 
           </Stack>
         </Grid> 
-        <Grid item  xs={12} md={9} >
+        <Grid item  xs={12} md={9} lg={9} >
           <Box >
              {renderContent()} 
            
