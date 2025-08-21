@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Grid,
-  Typography,
-  Alert,
-} from '@mui/material';
+import { Box, Button, Grid, Typography, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle } from '@mui/icons-material';
 import { ROUTES } from '../../../../router/routes';
@@ -29,8 +23,13 @@ const StepResumen = ({ formData, onBack }: any) => {
 
       {/* Confirmación */}
       <Box mt={4} display="flex" justifyContent="center">
-        <Button variant="contained" size="large" startIcon={<CheckCircle />} onClick={handleConfirm}>
-            Confirmar Pre-Registro
+        <Button
+          variant="contained"
+          size="large"
+          startIcon={<CheckCircle />}
+          onClick={handleConfirm}
+        >
+          Confirmar Pre-Registro
         </Button>
       </Box>
 
@@ -58,7 +57,9 @@ const StepResumen = ({ formData, onBack }: any) => {
 
       {/* Botón Atrás */}
       <Box mt={4} mb={4} display="flex" justifyContent="flex-start">
-        <Button variant="outlined" onClick={onBack}>Anterior</Button>
+        <Button variant="outlined" onClick={onBack}>
+          Anterior
+        </Button>
       </Box>
     </Box>
   );

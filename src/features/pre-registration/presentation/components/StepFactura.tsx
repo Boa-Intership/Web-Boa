@@ -54,7 +54,7 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
 
   return (
     <Box>
-      <Paper elevation={2} sx={{ p: 3, borderRadius: 4 }}>
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor:'#FAFAFA' }}>
         <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
           <ReceiptLong color='primary' />
           <Typography variant="h5" color='primary'>Datos para la Factura</Typography>

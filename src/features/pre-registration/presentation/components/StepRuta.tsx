@@ -35,7 +35,7 @@ const StepRuta = ({ data, setData, onNext, onBack }: any) => {
 
   return (
     <Box>
-      <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: 'rgba(245, 245, 245, 0.9)' }}>
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
         <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
           <LocationOn color='primary' />
           <Typography variant="h5" color='primary'>Información de la Ruta</Typography>
