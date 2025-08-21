@@ -1,12 +1,9 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import AppAppBar from '../shared/components/AppBar';
 import Footer from '../shared/components/Footer';
 
-interface MainLayoutProps {
-  children: React.ReactNode;
-}
-
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
+const MainLayout: React.FC = () => (
   <div style={{
     minHeight: '100vh',
     display: 'flex',
@@ -17,13 +14,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
     <main style={{
       flex: 1,
       width: '100%',
-      paddingTop: '64px',
+      paddingTop: '2rem',
+      paddingBottom: '2rem',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'stretch',
       justifyContent: 'center',
     }}>
-      {children}
+      <Outlet />
     </main>
     <Footer />
   </div>
