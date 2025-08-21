@@ -84,6 +84,7 @@ const AppAppBar: React.FC = () => {
       <AppBar
         position="fixed"
         elevation={0}
+        paddingTop={20}
         sx={{
           bgcolor: bgColor,
           color: textColor,

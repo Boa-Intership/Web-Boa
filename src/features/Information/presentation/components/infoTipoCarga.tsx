@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from 'react';
 import ExampleType from './ExampleType';
-import { Box, Typography, Grid, Stack, Button } from '@mui/material';
+import { Box, Typography, Grid, Stack } from '@mui/material';
 import RoundButton from '../../../../shared/components/RoundButton';
-import { useTheme } from "@mui/material/styles";
+import { useTheme } from '@mui/material/styles';
 
 interface Detail {
   title: string;
@@ -14,7 +14,7 @@ type Example = {
   title: string;
   description: string;
   image: string;
-}
+};
 
 interface infoTipoCargaProps {
   open: boolean;
@@ -26,35 +26,39 @@ interface infoTipoCargaProps {
   onClick: () => void;
 }
 
-
-function infoTipoCarga({ open, title, description, details, subtitle, example }: infoTipoCargaProps) {
-  const [showImages, setShowImages] = useState(false);
+function infoTipoCarga({
+  open,
+  title,
+  description,
+  details,
+  subtitle,
+  example,
+}: infoTipoCargaProps) {
   const [selectedDetail, setSelectedDetail] = useState<number | null>(0); // selecciona el primero por defecto
-  useEffect(() => {
-    if (open) {
-      const timer = setTimeout(() => {
-        setShowImages(true);
-      }, 500); // tiempo de espera tras abrir el modal
-      return () => clearTimeout(timer);
-    } else {
-      setShowImages(false);
-    }
-  }, [open]);
-
   const theme = useTheme();
-
 
   return (
     <Box>
-      <Typography id="modal-title" variant="h4" fontWeight="bold" color={'#002f5bff'} mb={2}>
+      <Typography
+        id="modal-title"
+        variant="h4"
+        fontWeight="bold"
+        color={theme.palette.primary.main}
+        mb={2}
+      >
         {title}
       </Typography>
 
-      <Typography variant="body2" color={'#3e4449ff'} textAlign={"justify"} mb={2}>
+      <Typography variant="body2" textAlign={'justify'} mb={2}>
         {description}
       </Typography>
 
-      <Typography variant="h6" fontWeight="bold" color={'#002f5bff'} mb={2} >
+      <Typography
+        variant="h6"
+        fontWeight="bold"
+        color={theme.palette.primary.main}
+        mb={2}
+      >
         {subtitle}
       </Typography>
 
@@ -76,12 +80,16 @@ function infoTipoCarga({ open, title, description, details, subtitle, example }:
       {/* Mostrar contenido del detalle seleccionado */}
       {selectedDetail !== null && details[selectedDetail] && (
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={
-            details[selectedDetail].imageUrl &&
+          <Grid
+            item
+            xs={12}
+            sm={
+              details[selectedDetail].imageUrl &&
               details[selectedDetail].imageUrl.length > 0
-              ? 9
-              : 12
-          }>
+                ? 9
+                : 12
+            }
+          >
             {details[selectedDetail].description.map((desc, i) => (
               <Typography key={i} variant="body2" gutterBottom>
                 • {desc}
@@ -92,7 +100,7 @@ function infoTipoCarga({ open, title, description, details, subtitle, example }:
           {details[selectedDetail].imageUrl &&
             details[selectedDetail].imageUrl.length > 0 && (
               <Grid item xs={12} sm={3}>
-                <Box sx={{ textAlign: { xs: "center", sm: "right" } }}>
+                <Box sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
                   {details[selectedDetail].imageUrl.map((url, index) => (
                     <img
                       key={index}
@@ -109,7 +117,12 @@ function infoTipoCarga({ open, title, description, details, subtitle, example }:
 
       {example && example.length > 0 && (
         <Box>
-          <Typography variant="subtitle1" fontWeight={"bold"} mt={2} color={'theme.palette.warning.main'}>
+          <Typography
+            variant="subtitle1"
+            fontWeight={'bold'}
+            mt={2}
+            color={theme.palette.primary.main}
+          >
             ¿Que cargas pueden entrar a esta categoria?
           </Typography>
           <Typography variant="body2">
@@ -117,12 +130,11 @@ function infoTipoCarga({ open, title, description, details, subtitle, example }:
           </Typography>
           <Grid container spacing={2} mt={2}>
             {example.map((item, index) => (
-              <Grid item key={index} xs={12} sm={6} md={3} >
+              <Grid item key={index} xs={12} sm={6} md={3}>
                 <ExampleType
                   title={item.title}
                   description={item.description}
                   image={item.image}
-                  showImages={showImages}
                 />
               </Grid>
             ))}
@@ -130,7 +142,7 @@ function infoTipoCarga({ open, title, description, details, subtitle, example }:
         </Box>
       )}
     </Box>
-  )
+  );
 }
 
-export default infoTipoCarga
+export default infoTipoCarga;

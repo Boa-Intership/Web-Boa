@@ -1,80 +1,101 @@
-import React from 'react'
-import { Typography,Container,Box,Grid,Stack, Button } from '@mui/material'
+import React from 'react';
+import { Typography, Box, Grid, Stack } from '@mui/material';
 import InfoTipoCarga from '../components/infoTipoCarga';
 import RoundButton from '../../../../shared/components/RoundButton';
-import { useTheme } from "@mui/material/styles";
+import { useTheme } from '@mui/material/styles';
 import { cargaData } from '../components/cargaData';
-
+import AppContainer from '../../../../shared/components/AppContainer';
 
 function TipoCargaScreen() {
   const theme = useTheme();
-  const [selected, setSelected] = React.useState<string>(""); 
+  const [selected, setSelected] = React.useState<string>('');
 
   const renderContent = () => {
-  if (!selected) {
-    return <p>Selecciona un tipo de carga para ver la información</p>;
-  }
+    if (!selected) {
+      return <p>Selecciona un tipo de carga para ver la información</p>;
+    }
 
-  const data = cargaData[selected]; // obtiene el objeto según la selección
+    const data = cargaData[selected]; // obtiene el objeto según la selección
     if (!data) return <p>No hay información para esta categoría</p>;
 
     return (
       <InfoTipoCarga
-        open={!!selected}                  
+        open={!!selected}
         title={data.title}
         description={data.description}
         subtitle={data.subtitle}
         details={data.details}
         example={data.example}
-        onClick={() => setSelected("")} // para cerrar o resetear
+        onClick={() => setSelected('')} // para cerrar o resetear
       />
     );
   };
 
   return (
-    <Container maxWidth= 'lg'>
-      <Box mb={2} >
-      <Typography>
-        Inicio Tipos de carga Carga general
-      </Typography>
+    <AppContainer>
+      <Box mb={2}>
+        <Typography>Inicio Tipos de carga Carga general</Typography>
       </Box>
-      <Grid container spacing={4}  >
+      <Grid container spacing={4}>
         <Grid item xs={12} md={3} lg={3}>
           <Stack spacing={2}>
-            <RoundButton color={theme.palette.primary.main} 
-            onClick={() => setSelected("cargaGeneral")}  selected={selected === "cargaGeneral"}>
-              Carga General</RoundButton>
-            <RoundButton color={theme.palette.primary.main} 
-            onClick={() => setSelected("animalesVivos")} selected={selected === "animalesVivos"}>
-              Animales Vivos</RoundButton>
-            <RoundButton color={theme.palette.primary.main} 
-            onClick={() => setSelected("perecederos")} selected={selected === "perecederos"}>
-              Perecederos</RoundButton>
-            <RoundButton color={theme.palette.primary.main} 
-            onClick={() => setSelected("restosHumanos")} selected={selected === "restosHumanos"}>
-              Restos Humanos</RoundButton>
-              <RoundButton color={theme.palette.primary.main} 
-            onClick={() => setSelected("cargaValiosa")} selected={selected === "cargaValiosa"}>
-              Carga Valiosa</RoundButton>
-              <RoundButton color={theme.palette.primary.main} 
-            onClick={() => setSelected("muestrasBiologicas")} selected={selected === "muestrasBiologicas"}>
-              Muestras Biológicas</RoundButton>
-            <RoundButton color={theme.palette.primary.main} 
-            onClick={() => setSelected("prohibidos")} selected={selected === "prohibidos"}>
-              Prohibidos</RoundButton> 
+            <RoundButton
+              color={theme.palette.primary.main}
+              onClick={() => setSelected('cargaGeneral')}
+              selected={selected === 'cargaGeneral'}
+            >
+              Carga General
+            </RoundButton>
+            <RoundButton
+              color={theme.palette.primary.main}
+              onClick={() => setSelected('animalesVivos')}
+              selected={selected === 'animalesVivos'}
+            >
+              Animales Vivos
+            </RoundButton>
+            <RoundButton
+              color={theme.palette.primary.main}
+              onClick={() => setSelected('perecederos')}
+              selected={selected === 'perecederos'}
+            >
+              Perecederos
+            </RoundButton>
+            <RoundButton
+              color={theme.palette.primary.main}
+              onClick={() => setSelected('restosHumanos')}
+              selected={selected === 'restosHumanos'}
+            >
+              Restos Humanos
+            </RoundButton>
+            <RoundButton
+              color={theme.palette.primary.main}
+              onClick={() => setSelected('cargaValiosa')}
+              selected={selected === 'cargaValiosa'}
+            >
+              Carga Valiosa
+            </RoundButton>
+            <RoundButton
+              color={theme.palette.primary.main}
+              onClick={() => setSelected('muestrasBiologicas')}
+              selected={selected === 'muestrasBiologicas'}
+            >
+              Muestras Biológicas
+            </RoundButton>
+            <RoundButton
+              color={theme.palette.primary.main}
+              onClick={() => setSelected('prohibidos')}
+              selected={selected === 'prohibidos'}
+            >
+              Prohibidos
+            </RoundButton>
           </Stack>
-        </Grid> 
-        <Grid item  xs={12} md={9} lg={9} >
-          <Box >
-             {renderContent()} 
-           
-          </Box>
-        </Grid> 
+        </Grid>
+        <Grid item xs={12} md={9} lg={9}>
+          <Box>{renderContent()}</Box>
+        </Grid>
       </Grid>
-
-      
-    </Container>
-  )
+    </AppContainer>
+  );
 }
 
-export default TipoCargaScreen
+export default TipoCargaScreen;
