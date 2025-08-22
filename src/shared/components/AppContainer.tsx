@@ -11,9 +11,9 @@ const AppContainer: React.FC<ContainerProps> = ({
     <Container
       maxWidth="xl"
       sx={{
-        px: { xs: 2, sm: 4 }, // padding horizontal
-        py: { xs: 2, sm: 4 }, // padding vertical
-        mx: 'auto', // centrar
+        px: { xs: 2, sm: 4 },
+        py: { xs: 2, sm: 4 },
+        mx: 'auto',
 
         ...sx,
       }}

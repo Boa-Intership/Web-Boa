@@ -13,6 +13,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "baseUrl": ".",
+    "paths": {
+      "src/*": ["./src/*"],
+      "components/*": ["./src/shared/components/*"],
+      "features/*": ["./src/features/*"],
+      "homeComponents": ["./src/features/home/presentation/components/index.ts"],
+      "assets": ["./src/assets/*"],
+      "routes/*": ["./src/features/home/presentation/screens/index.ts"],
+      "pages/*": ["./src/pages/*"],
+      "information": ["./src/features/Information/presentation/components/index.ts"],
+      "information/*": ["./src/features/Information/presentation/components/*"]
+    },
     "types": ["node", "react", "react-dom"]
   },
   "include": ["src"]

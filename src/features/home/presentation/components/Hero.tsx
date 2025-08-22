@@ -1,6 +1,13 @@
-import { Box, Typography, Button, Stack, TextField, InputAdornment } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Stack,
+  TextField,
+  InputAdornment,
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import portada from '../../../../assets/portada.png';
+import portada from 'assets/portada.png';
 
 interface HeroProps {
   tracking: string;
@@ -35,7 +42,12 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
             Gestiona tus envíos de carga de forma rápida y sencilla.
           </Typography>
 
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center" justifyContent="center">
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={2}
+            alignItems="center"
+            justifyContent="center"
+          >
             <TextField
               variant="outlined"
               placeholder="N° de guía o tracking"
