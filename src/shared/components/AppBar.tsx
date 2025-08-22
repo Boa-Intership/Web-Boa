@@ -2,7 +2,6 @@ import React from 'react';
 import {
   AppBar,
   Toolbar,
-  Container,
   Box,
   IconButton,
   Button,
@@ -41,7 +40,11 @@ const navItems: NavItem[] = [
       {
         title: 'General',
         links: [
-          { label: 'Información', to: ROUTES.INFORMACION },
+          {
+            label: 'Tipos de carga',
+            to: ROUTES.TIPOS_CARGAS.replace(':tipo?', 'cargaGeneral'),
+          },
+
           { label: 'Términos', to: ROUTES.TERMINOS },
         ],
       },
@@ -83,7 +86,6 @@ const AppAppBar: React.FC = () => {
     <>
       <AppBar
         position="fixed"
-        elevation={0}
         sx={{
           bgcolor: bgColor,
           color: textColor,

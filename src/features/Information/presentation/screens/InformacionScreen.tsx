@@ -1,8 +1,3 @@
-import TipoCargaScreen from './TipoCargaScreen';
-
 export default function InformacionScreen() {
-  return (
-    // <CardInfoSection/>
-    <TipoCargaScreen />
-  );
+  return <h1>Hola jejeje </h1>;
 }

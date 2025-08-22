@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
-import { Box, Button, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import RoundButton from '../../../../shared/components/RoundButton';
-
 
 interface ButtonCardInfoProps {
   title: string;
@@ -20,18 +19,16 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
   imageUrl,
   tag,
 }) => {
-   const [hover, setHover] = useState(false);
+  const [hover, setHover] = useState(false);
   return (
     <Card
       sx={{
-        width: 350,  // Evita que sea demasiado pequeña
+        width: 350,
         height: 390,
         borderRadius: 3,
         boxShadow: 2,
         textAlign: 'center',
-        // transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         '&:hover': {
-          // transform: 'scale(1.03)',
           boxShadow: 4,
         },
       }}
@@ -44,6 +41,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           component="img"
           height="180"
           image={imageUrl}
+          loading="lazy"
           alt={title}
           sx={{
             objectFit: 'cover',
@@ -80,8 +78,13 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
       </Box>
 
       {/* Contenido */}
-      <CardContent sx={{ p: 2}}>
-        <Box display="flex" alignItems="center" gap={1} justifyContent="flex-start">
+      <CardContent sx={{ p: 2 }}>
+        <Box
+          display="flex"
+          alignItems="center"
+          gap={1}
+          justifyContent="flex-start"
+        >
           {icon}
           <Typography variant="h6" fontWeight="bold" color="#002F5B">
             {title}
@@ -95,14 +98,12 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
             mb: 1,
           }}
         >
-          <Typography variant="body2" color="text.secondary" textAlign={"left"}>
+          <Typography variant="body2" color="text.secondary" textAlign={'left'}>
             {description}
           </Typography>
         </Box>
 
-        {onClick && (
-          <RoundButton onClick={onClick} >Ver más</RoundButton>
-        )}
+        {onClick && <RoundButton onClick={onClick}>Ver más</RoundButton>}
       </CardContent>
     </Card>
   );
