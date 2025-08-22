@@ -6,6 +6,7 @@ import StepRuta from '../components/StepRuta';
 import StepCarga from '../components/StepCarga';
 import StepFactura from '../components/StepFactura';
 import StepResumen from '../components/StepResumen';
+import AppContainer from '../../../../shared/components/AppContainer';
 
 export default function PreRegistroScreen() {
   const [step, setStep] = useState(0);
@@ -51,10 +52,10 @@ export default function PreRegistroScreen() {
   ];
 
   return (
-    <Container>
+    <AppContainer>
       <StepHeader activeStep={step} />
       <Box m={4} />
       {steps[step]}
-    </Container>
+    </AppContainer>
   );
 } 

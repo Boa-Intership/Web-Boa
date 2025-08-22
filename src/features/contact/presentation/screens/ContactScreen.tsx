@@ -10,7 +10,8 @@ import {
 
 import { ContactCardNacional } from '../components/ContactCardNacional';
 import { ContactCardInternacional } from '../components/ContactCardInternacional';
-import { Home, Public, ExpandMore } from '@mui/icons-material';
+import { ExpandMore, Home, Public } from '@mui/icons-material';
+import AppContainer from '../../../../shared/components/AppContainer';
 
 const oficinasNacionales = [
   {
@@ -118,7 +119,7 @@ export default function ContactScreen() {
     };
 
   return (
-    <Box p={3}>
+    <AppContainer>
       <Typography variant="h4" fontWeight="bold" color="primary">
         Nuestras Oficinas
       </Typography>
@@ -157,7 +158,7 @@ export default function ContactScreen() {
           key={index}
           expanded={expanded === index}
           onChange={handleChange(index)}
-          sx={{ my: 2 }}
+          sx={{ my: 2, backgroundColor:'#FAFAFA' }}
         >
           <AccordionSummary expandIcon={<ExpandMore />}>
             <Typography
@@ -178,6 +179,6 @@ export default function ContactScreen() {
           </AccordionDetails>
         </Accordion>
       ))}
-    </Box>
+    </AppContainer>
   );
 }

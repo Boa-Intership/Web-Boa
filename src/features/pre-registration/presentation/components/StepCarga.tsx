@@ -113,7 +113,7 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
 
   return (
     <Box>
-      <Paper elevation={2} sx={{ p: 3, borderRadius: 4 }}>
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor:'#FAFAFA' }}>
         <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
           <Inventory2 color='primary' />
           <Typography variant="h5" color='primary'>Información de la Carga</Typography>
