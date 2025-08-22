@@ -5,11 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   resolve: {
     alias: {
-      components: '/src/shared/components',
-      features: '/src/features',
-      pages: '/src/pages',
-      information: '/src/features/Information/presentation/components',
-      homeComponents: '/src/features/home/presentation/components',
+      ui: '/src/ui',
       assets: '/src/assets',
       router: '/src/router'
     },

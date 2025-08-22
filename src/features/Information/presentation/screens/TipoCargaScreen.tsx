@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Grid, Stack } from '@mui/material';
-import InfoTipoCarga from '../components/InfoTipoCarga';
-import RoundButton from '../../../../shared/components/RoundButton';
+import { RoundButton } from 'ui';
+import { InfoTipoCarga } from 'ui';
 import { useTheme } from '@mui/material/styles';
 import { cargaData } from '../components/cargaData';
-import AppContainer from '../../../../shared/components/AppContainer';
+import { AppContainer } from 'ui';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL

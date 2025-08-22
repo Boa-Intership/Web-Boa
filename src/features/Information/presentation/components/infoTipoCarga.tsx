@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ExampleType from './ExampleType';
 import { Box, Typography, Grid, Stack } from '@mui/material';
-import RoundButton from '../../../../shared/components/RoundButton';
+import { RoundButton } from 'ui';
 import { useTheme } from '@mui/material/styles';
 
 interface Detail {

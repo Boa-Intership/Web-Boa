@@ -1,0 +1,11 @@
+export { default as AppContainer } from '../shared/components/AppContainer';
+export { default as AppBox } from '../shared/components/AppBox';
+export { default as AppGrid } from '../shared/components/AppGrid';
+export { default as AppStack } from '../shared/components/AppStack';
+export { default as Hero } from '../features/home/presentation/components/Hero';
+export { default as CardInfoSection } from '../features/Information/presentation/components/CardInfoSection';
+export { default as InformacionScreen } from '../features/Information/presentation/screens/InformacionScreen';
+export { default as NavButton } from '../shared/components/appbar/NavButton';
+export { default as MegaMenu } from '../shared/components/appbar/MegaMenu';
+export { default as RoundButton } from '../shared/components/RoundButton';
+export { default as InfoTipoCarga } from '../features/Information/presentation/components/infoTipoCarga';
