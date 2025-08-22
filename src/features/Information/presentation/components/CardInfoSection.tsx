@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Grid } from '@mui/material';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
@@ -10,6 +11,7 @@ import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlin
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 
 export default function CardInfoSection() {
+  const navigate = useNavigate();
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center">
       <Typography
@@ -29,7 +31,7 @@ export default function CardInfoSection() {
           <ButtonCardInfo
             title="Carga General"
             description="Se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento."
-            onClick={() => console.log('hola')}
+            onClick={() => navigate('/tipos-cargas/cargaGeneral')}
             icon={<Inventory2OutlinedIcon />}
             imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
             tag="Permitido"
@@ -39,7 +41,7 @@ export default function CardInfoSection() {
           <ButtonCardInfo
             title="Animales vivos"
             description="Es el servicio especializado para animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje."
-            onClick={() => console.log('hola')}
+            onClick={() => navigate('/tipos-cargas/animalesVivos')}
             icon={<PetsOutlinedIcon />}
             imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
             tag="Permitido"
@@ -49,7 +51,7 @@ export default function CardInfoSection() {
           <ButtonCardInfo
             title="Perecederos"
             description="Son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo."
-            onClick={() => console.log('hola')}
+            onClick={() => navigate('/tipos-cargas/perecederos')}
             icon={<SetMealOutlinedIcon />}
             imageUrl="/informacioPage/perecederos/alimentos.jpg"
             tag="Permitido"
@@ -59,7 +61,7 @@ export default function CardInfoSection() {
           <ButtonCardInfo
             title="Restos Humanos"
             description="Es el transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo o de cenizas. "
-            onClick={() => console.log('hola')}
+            onClick={() => navigate('/tipos-cargas/restosHumanos')}
             icon={<LocalHospitalOutlinedIcon />}
             imageUrl="/informacioPage/restosHumanos/ataud.webp"
             tag="Permitido"
@@ -69,7 +71,7 @@ export default function CardInfoSection() {
           <ButtonCardInfo
             title="Carga Valiosa"
             description="Se refiere a mercancías que tienen un alto valor económico, cultural o sensible, y que requieren medidas especiales de seguridad y custodia durante su transporte aéreo."
-            onClick={() => console.log('hola')}
+            onClick={() => navigate('/tipos-cargas/cargaValiosa')}
             icon={<MonetizationOnOutlinedIcon />}
             imageUrl="/informacioPage/valiosos/GGI_dinero.png"
             tag="Permitido"
@@ -79,7 +81,7 @@ export default function CardInfoSection() {
           <ButtonCardInfo
             title="Muestras biológicas"
             description="Son un tipo de carga especial que corresponde a materiales de origen humano o animal que se transportan con fines médicos, diagnósticos, de investigación o control sanitario."
-            onClick={() => console.log('hola')}
+            onClick={() => navigate('/tipos-cargas/muestrasBiologicas')}
             icon={<VaccinesIcon />}
             imageUrl="/informacioPage/muestrasBiologicas/GGI_muestras.png"
             tag="Permitido"
@@ -89,7 +91,7 @@ export default function CardInfoSection() {
           <ButtonCardInfo
             title="Peligrosos"
             description="Hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea."
-            onClick={() => console.log('hola')}
+            onClick={() => navigate('/tipos-cargas/prohibidos')}
             icon={<DangerousOutlinedIcon />}
             imageUrl="/informacioPage/peligroso/prohibido.jpg"
             tag="No Permitido"

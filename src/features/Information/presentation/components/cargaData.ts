@@ -186,7 +186,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     },
     perecederos: {
         title: "Perecederos",
-        description: "La categoría perecederos son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.",
+        description: "La categoría de Perecederos son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.",
         subtitle: "Requisitos",
         details: [
             {
@@ -443,7 +443,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     },
     prohibidos: {
         title: "Peligrosos",
-        description: "La categoría de “carga prohibida” hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea, ya sea por riesgo a la seguridad, la salud pública, normas nacionales o internacionales, o por limitaciones técnicas de la aeronave.",
+        description: "La categoría de Carga Prohibida hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea, ya sea por riesgo a la seguridad, la salud pública, normas nacionales o internacionales, o por limitaciones técnicas de la aeronave.",
         subtitle: "",
         details: [],
         example: [

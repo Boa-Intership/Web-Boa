@@ -4,15 +4,9 @@ type ExampleTypeProps = {
   title: string;
   description: string;
   image: string;
-  showImages?: boolean; // para controlar la animación
 };
 
-function ExampleType({
-  title,
-  description,
-  image,
-  showImages = true,
-}: ExampleTypeProps) {
+function ExampleType({ title, description, image }: ExampleTypeProps) {
   return (
     <Box
       sx={{
@@ -22,28 +16,21 @@ function ExampleType({
         width: '100%',
       }}
     >
-      <Box>
-        {image && (
-          <Fade in={showImages} timeout={5000}>
-            <Box
-              component="img"
-              src={image}
-              alt={title}
-              sx={{ width: 150, borderRadius: 4 }}
-              loading="lazy"
-            />
-          </Fade>
-        )}
-      </Box>
+      <Box
+        component="img"
+        src={image}
+        alt={title}
+        sx={{ width: 150, borderRadius: 4, mb: 1 }}
+        loading="lazy"
+      />
       <Box
         sx={{
-          display: 'flex',
           textAlign: 'center',
           flexDirection: 'column',
           width: '100%',
         }}
       >
-        <Typography variant="subtitle1" fontWeight="bold">
+        <Typography variant="subtitle2" fontWeight="bold">
           {title}
         </Typography>
         <Typography variant="body2">{description}</Typography>

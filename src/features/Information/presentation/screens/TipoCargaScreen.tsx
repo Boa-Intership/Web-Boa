@@ -1,14 +1,20 @@
 import React from 'react';
-import { Typography, Box, Grid, Stack } from '@mui/material';
-import InfoTipoCarga from '../components/infoTipoCarga';
+import { useParams } from 'react-router-dom';
+import { Box, Grid, Stack } from '@mui/material';
+import InfoTipoCarga from '../components/InfoTipoCarga';
 import RoundButton from '../../../../shared/components/RoundButton';
 import { useTheme } from '@mui/material/styles';
 import { cargaData } from '../components/cargaData';
 import AppContainer from '../../../../shared/components/AppContainer';
 
 function TipoCargaScreen() {
+  const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
+  const [selected, setSelected] = React.useState<string>(
+    tipo || 'cargaGeneral',
+  ); //valor inicial desde la URL
+
   const theme = useTheme();
-  const [selected, setSelected] = React.useState<string>('');
+  const colorBoton = theme.palette.primary.dark;
 
   const renderContent = () => {
     if (!selected) {
@@ -20,7 +26,6 @@ function TipoCargaScreen() {
 
     return (
       <InfoTipoCarga
-        open={!!selected}
         title={data.title}
         description={data.description}
         subtitle={data.subtitle}
@@ -33,56 +38,53 @@ function TipoCargaScreen() {
 
   return (
     <AppContainer>
-      <Box mb={2}>
-        <Typography>Inicio Tipos de carga Carga general</Typography>
-      </Box>
       <Grid container spacing={4}>
         <Grid item xs={12} md={3} lg={3}>
           <Stack spacing={2}>
             <RoundButton
-              color={theme.palette.primary.main}
+              color={colorBoton}
               onClick={() => setSelected('cargaGeneral')}
               selected={selected === 'cargaGeneral'}
             >
               Carga General
             </RoundButton>
             <RoundButton
-              color={theme.palette.primary.main}
+              color={colorBoton}
               onClick={() => setSelected('animalesVivos')}
               selected={selected === 'animalesVivos'}
             >
               Animales Vivos
             </RoundButton>
             <RoundButton
-              color={theme.palette.primary.main}
+              color={colorBoton}
               onClick={() => setSelected('perecederos')}
               selected={selected === 'perecederos'}
             >
               Perecederos
             </RoundButton>
             <RoundButton
-              color={theme.palette.primary.main}
+              color={colorBoton}
               onClick={() => setSelected('restosHumanos')}
               selected={selected === 'restosHumanos'}
             >
               Restos Humanos
             </RoundButton>
             <RoundButton
-              color={theme.palette.primary.main}
+              color={colorBoton}
               onClick={() => setSelected('cargaValiosa')}
               selected={selected === 'cargaValiosa'}
             >
               Carga Valiosa
             </RoundButton>
             <RoundButton
-              color={theme.palette.primary.main}
+              color={colorBoton}
               onClick={() => setSelected('muestrasBiologicas')}
               selected={selected === 'muestrasBiologicas'}
             >
               Muestras Biológicas
             </RoundButton>
             <RoundButton
-              color={theme.palette.primary.main}
+              color={colorBoton}
               onClick={() => setSelected('prohibidos')}
               selected={selected === 'prohibidos'}
             >

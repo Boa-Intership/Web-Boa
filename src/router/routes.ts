@@ -8,6 +8,7 @@ export const ROUTES = {
   ITINERARIOS: '/itinerarios',
   TERMINOS: '/terminos',
   TIPOS_CLIENTES: '/tipos-clientes',
+  TIPOS_CARGAS:'/tipos-cargas/:tipo?',
   
   // Autenticación
   LOGIN: '/login',

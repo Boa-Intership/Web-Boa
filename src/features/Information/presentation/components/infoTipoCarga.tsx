@@ -17,7 +17,6 @@ type Example = {
 };
 
 interface infoTipoCargaProps {
-  open: boolean;
   title: string;
   description: string;
   subtitle: string;
@@ -27,7 +26,6 @@ interface infoTipoCargaProps {
 }
 
 function infoTipoCarga({
-  open,
   title,
   description,
   details,
@@ -53,29 +51,31 @@ function infoTipoCarga({
         {description}
       </Typography>
 
-      <Typography
-        variant="h6"
-        fontWeight="bold"
-        color={theme.palette.primary.main}
-        mb={2}
-      >
-        {subtitle}
-      </Typography>
+      <Box sx={{ display: 'flex', gap: 2 }}>
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          color={theme.palette.primary.main}
+          mb={2}
+        >
+          {subtitle}
+        </Typography>
 
-      {/* Botones dinámicos */}
-      {details && details.length > 0 && (
-        <Stack direction="row" spacing={2} flexWrap="wrap" mb={2}>
-          {details.map((item, index) => (
-            <RoundButton
-              key={index}
-              onClick={() => setSelectedDetail(index)}
-              selected={index === selectedDetail}
-            >
-              {item.title}
-            </RoundButton>
-          ))}
-        </Stack>
-      )}
+        {/* Botones dinámicos */}
+        {details && details.length > 0 && (
+          <Stack direction="row" spacing={2} flexWrap="wrap" mb={2}>
+            {details.map((item, index) => (
+              <RoundButton
+                key={index}
+                onClick={() => setSelectedDetail(index)}
+                selected={index === selectedDetail}
+              >
+                {item.title}
+              </RoundButton>
+            ))}
+          </Stack>
+        )}
+      </Box>
 
       {/* Mostrar contenido del detalle seleccionado */}
       {selectedDetail !== null && details[selectedDetail] && (
@@ -105,6 +105,7 @@ function infoTipoCarga({
                     <img
                       key={index}
                       src={url}
+                      loading="lazy"
                       alt={`${details[selectedDetail].title} ${index + 1}`}
                       style={{ width: 200, borderRadius: 4, marginBottom: 8 }}
                     />

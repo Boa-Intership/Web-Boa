@@ -41,6 +41,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           component="img"
           height="180"
           image={imageUrl}
+          loading="lazy"
           alt={title}
           sx={{
             objectFit: 'cover',
