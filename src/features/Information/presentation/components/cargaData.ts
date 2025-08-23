@@ -205,7 +205,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 ],
 
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
+                    "/informacioPage/perecederos/GGI_regrigerante.webp",
                 ]
             },
             {
@@ -232,7 +232,6 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "Todos los documentos validados por la Aduana Nacional de Bolivia.",
                 ],
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
                 ]
             }
         ],
@@ -283,7 +282,6 @@ export const cargaData: Record<string, InfoTipoCarga> = {
 
                 ],
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
                 ]
             },
             {
@@ -333,10 +331,6 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "Presentar fotocopia del Formulario M-02 de compra y venta de minerales y metales, emitido y autorizado por SENARECOM.",
                 ],
-
-                imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
-                ]
             },
             {
                 title: "Internacional",
@@ -358,27 +352,27 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Dinero en efectivo",
                 description: "Billetes, monedas",
-                image: "/informacioPage/cargaGeneral/GGI_manu.png",
+                image: "/informacioPage/valiosos/GGI_money.webp",
             },
             {
                 title: "Joyas y metales preciosos",
                 description: "Oro, plata, diamantes, piedras preciosas.",
-                image: "/informacioPage/cargaGeneral/GGI_herramientas.png",
+                image: "/informacioPage/valiosos/GGI_joyas.webp",
             },
             {
                 title: "Obras de arte",
                 description: "Pinturas, esculturas, piezas de colección.",
-                image: "/informacioPage/cargaGeneral/GGI_papeleria.png",
+                image: "/informacioPage/valiosos/GGI_obrasarte.webp",
             },
             {
                 title: "Electrónica de alto valor",
                 description: "Computadoras de última generación, equipos médicos portátiles.",
-                image: "/informacioPage/cargaGeneral/GGI_electronicos.png",
+                image: "/informacioPage/valiosos/GGI_electronicosValiosos.webp",
             },
             {
                 title: "Documentos valiosos",
                 description: "Títulos de propiedad, bonos, valores bursátiles, contratos originales.",
-                image: "/informacioPage/cargaGeneral/GGI_limpieza.png",
+                image: "/informacioPage/valiosos/GGI_documentosvaliosos.webp",
             }
         ]
     },
@@ -398,10 +392,8 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "Certificado médico que indique que la muestra no es infecto-contagiosa, en hoja membretada, firmado y sellado por la institución que la emite.",
                     "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo."
                 ],
-
-
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
+                   
                 ]
             },
             {
@@ -427,17 +419,17 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Categoría A: Sustancias infecciosas",
                 description: "Muestras de virus peligrosos.",
-                image: "/informacioPage/cargaGeneral/GGI_manu.png",
+                image: "/informacioPage/muestrasBiologicas/GGI_categoriaA.webp",
             },
             {
                 title: "Categoría B: Sustancias biológicas,no tan peligrosas",
                 description: "Sangre, tejidos, fluidos para análisis comunes.",
-                image: "/informacioPage/cargaGeneral/GGI_herramientas.png",
+                image: "/informacioPage/muestrasBiologicas/GGI_categoriaB.webp",
             },
             {
                 title: "Exentas: Muestras que no representan riesgo de infección",
                 description: "Muestras de ADN, cabello, saliva no contaminada.",
-                image: "/informacioPage/cargaGeneral/GGI_papeleria.png",
+                image: "/informacioPage/muestrasBiologicas/GGI_exentos.webp",
             }
         ]
     },

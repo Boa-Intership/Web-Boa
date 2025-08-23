@@ -93,7 +93,7 @@ export default function CardInfoSection() {
             description="Hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea."
             onClick={() => navigate('/tipos-cargas/prohibidos')}
             icon={<DangerousOutlinedIcon />}
-            imageUrl="/informacioPage/peligroso/prohibido.jpg"
+            imageUrl="/informacioPage/peligroso/prohibido.webp"
             tag="No Permitido"
           />
         </Grid>

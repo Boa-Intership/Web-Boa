@@ -39,7 +39,7 @@ function infoTipoCarga({
     <Box>
       <Typography
         id="modal-title"
-        variant="h4"
+        variant="h5"
         fontWeight="bold"
         color={theme.palette.primary.main}
         mb={2}
