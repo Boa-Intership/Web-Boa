@@ -33,7 +33,7 @@ export default function CardInfoSection() {
             description="Se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento."
             onClick={() => navigate('/tipos-cargas/cargaGeneral')}
             icon={<Inventory2OutlinedIcon />}
-            imageUrl="/informacioPage/cargaGeneral/paquete.jpg"
+            imageUrl="/informacioPage/cargaGeneral/cargaGeneral.webp"
             tag="Permitido"
           />
         </Grid>
@@ -43,7 +43,7 @@ export default function CardInfoSection() {
             description="Es el servicio especializado para animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje."
             onClick={() => navigate('/tipos-cargas/animalesVivos')}
             icon={<PetsOutlinedIcon />}
-            imageUrl="/informacioPage/animalesVivos/mascotas2.jpg"
+            imageUrl="/informacioPage/animalesVivos/mascotas2.webp"
             tag="Permitido"
           />
         </Grid>
@@ -53,7 +53,7 @@ export default function CardInfoSection() {
             description="Son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo."
             onClick={() => navigate('/tipos-cargas/perecederos')}
             icon={<SetMealOutlinedIcon />}
-            imageUrl="/informacioPage/perecederos/alimentos.jpg"
+            imageUrl="/informacioPage/perecederos/alimentos.webp"
             tag="Permitido"
           />
         </Grid>
@@ -73,7 +73,7 @@ export default function CardInfoSection() {
             description="Se refiere a mercancías que tienen un alto valor económico, cultural o sensible, y que requieren medidas especiales de seguridad y custodia durante su transporte aéreo."
             onClick={() => navigate('/tipos-cargas/cargaValiosa')}
             icon={<MonetizationOnOutlinedIcon />}
-            imageUrl="/informacioPage/valiosos/GGI_dinero.png"
+            imageUrl="/informacioPage/valiosos/GGI_dinero.webp"
             tag="Permitido"
           />
         </Grid>
@@ -83,7 +83,7 @@ export default function CardInfoSection() {
             description="Son un tipo de carga especial que corresponde a materiales de origen humano o animal que se transportan con fines médicos, diagnósticos, de investigación o control sanitario."
             onClick={() => navigate('/tipos-cargas/muestrasBiologicas')}
             icon={<VaccinesIcon />}
-            imageUrl="/informacioPage/muestrasBiologicas/GGI_muestras.png"
+            imageUrl="/informacioPage/muestrasBiologicas/GGI_muestras.webp"
             tag="Permitido"
           />
         </Grid>
