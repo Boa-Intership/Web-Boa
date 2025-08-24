@@ -25,7 +25,7 @@ interface infoTipoCargaProps {
   onClick: () => void;
 }
 
-function infoTipoCarga({
+function InfoTipoCarga({
   title,
   description,
   details,
@@ -153,4 +153,4 @@ function infoTipoCarga({
   );
 }
 
-export default infoTipoCarga;
+export default InfoTipoCarga;

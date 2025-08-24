@@ -68,7 +68,8 @@ function TipoCargaScreen() {
           <Stack
             spacing={2}
             sx={{
-              background: theme.palette.grey[200], // ejemplo degradado
+              //background: theme.palette.grey[200],
+              background: '#f1f1f1ff',
               borderRadius: 2,
               p: 1,
             }}
