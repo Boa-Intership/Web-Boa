@@ -40,7 +40,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 ],
 
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
+                    "/informacioPage/cargaGeneral/GGI_nacional.webp",
                 ]
             },
             {
@@ -68,37 +68,37 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Bienes manufacturados",
                 description: "Ropa, calzado, juguetes, herramientas",
-                image: "/informacioPage/cargaGeneral/GGI_manu.png",
+                image: "/informacioPage/cargaGeneral/GGI_manu.webp",
             },
             {
                 title: "Maquinaria y repuestos",
                 description: "Motores, partes de vehículos, maquinaria liviana",
-                image: "/informacioPage/cargaGeneral/GGI_herramientas.png",
+                image: "/informacioPage/cargaGeneral/GGI_herramientas.webp",
             },
             {
                 title: "Material impreso y papelería",
                 description: "Libros, revistas, catálogos, documentos",
-                image: "/informacioPage/cargaGeneral/GGI_papeleria.png",
+                image: "/informacioPage/cargaGeneral/GGI_papeleria.webp",
             },
             {
                 title: "Electrodomésticos y electrónicos",
                 description: "Celulares, computadoras, impresoras",
-                image: "/informacioPage/cargaGeneral/GGI_electronicos.png",
+                image: "/informacioPage/cargaGeneral/GGI_electronicos.webp",
             },
             {
                 title: "Productos de higiene o limpieza",
                 description: "Detergentes, jabones, desinfectantes (no peligrosos)",
-                image: "/informacioPage/cargaGeneral/GGI_limpieza.png",
+                image: "/informacioPage/cargaGeneral/GGI_limpieza.webp",
             },
             {
                 title: "Efectos personales",
                 description: "Maletas, cajas con pertenencias de viaje",
-                image: "/informacioPage/cargaGeneral/GGI_personal.png",
+                image: "/informacioPage/cargaGeneral/GGI_personal.webp",
             },
             {
                 title: "Muebles pequeños desmontables",
                 description: "Sillas, mesas plegables, estanterías livianas",
-                image: "/informacioPage/cargaGeneral/GGI_muebles.png",
+                image: "/informacioPage/cargaGeneral/GGI_muebles.webp",
             },
         ]
     },
@@ -159,27 +159,27 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Mascotas domésticas",
                 description: "Perros, gatos",
-                image: "/informacioPage/animalesVivos/GGI_mascotas.png",
+                image: "/informacioPage/animalesVivos/GGI_mascotas.webp",
             },
             {
                 title: "Aves",
                 description: "Canarios, loros, aves ornamentales",
-                image: "/informacioPage/animalesVivos/GGI_aves.png",
+                image: "/informacioPage/animalesVivos/GGI_aves.webp",
             },
             {
                 title: " Animales pequeños",
                 description: "Conejos, hámsters, cobayos",
-                image: "/informacioPage/animalesVivos/GGI_aniPeque.png",
+                image: "/informacioPage/animalesVivos/GGI_aniPeque.webp",
             },
             {
                 title: "Animales de granja (ocasional)",
                 description: "Pollitos, cabritos, corderos",
-                image: "/informacioPage/animalesVivos/GGI_granja.png",
+                image: "/informacioPage/animalesVivos/GGI_granja.webp",
             },
             {
                 title: "Animales exóticos (autorizados)",
                 description: "Tortugas, iguanas. Importante:BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES)",
-                image: "/informacioPage/animalesVivos/GGI_exotico.png",
+                image: "/informacioPage/animalesVivos/GGI_exotico.webp",
             }
 
         ]
@@ -205,7 +205,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                 ],
 
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
+                    "/informacioPage/perecederos/GGI_regrigerante.webp",
                 ]
             },
             {
@@ -232,7 +232,6 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "Todos los documentos validados por la Aduana Nacional de Bolivia.",
                 ],
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
                 ]
             }
         ],
@@ -240,27 +239,27 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Alimentos frescos",
                 description: "	Frutas, verduras, hortalizas, hierbas frescas",
-                image: "/informacioPage/perecederos/GGI_frescos.png",
+                image: "/informacioPage/perecederos/GGI_frescos.webp",
             },
             {
                 title: "Productos cárnicos y derivados",
                 description: "Carne fresca o congelada, embutidos, charcutería",
-                image: "/informacioPage/perecederos/GGI_embutidos.png",
+                image: "/informacioPage/perecederos/GGI_embutidos.webp",
             },
             {
                 title: "Pescados y mariscos",
                 description: "Filetes, camarones, productos congelados",
-                image: "/informacioPage/perecederos/GGI_pescados.png",
+                image: "/informacioPage/perecederos/GGI_pescados.webp",
             },
             {
                 title: "Productos lácteos y panadería",
                 description: "Yogur, quesos, postres, pasteles",
-                image: "/informacioPage/perecederos/GGI_panaderia.png",
+                image: "/informacioPage/perecederos/GGI_panaderia.webp",
             },
             {
                 title: "Flores y plantas vivas",
                 description: "Rosas, claveles, orquídeas, plantas ornamentales",
-                image: "/informacioPage/perecederos/GGI_flores.png",
+                image: "/informacioPage/perecederos/GGI_flores.webp",
             }
         ]
     },
@@ -283,7 +282,6 @@ export const cargaData: Record<string, InfoTipoCarga> = {
 
                 ],
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
                 ]
             },
             {
@@ -309,12 +307,12 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Restos humanos en féretro",
                 description: "El cuerpo del fallecido, preparado, embalsamado y colocado en un ataúd especial para vuelos.",
-                image: "/informacioPage/restosHumanos/GGI_ataud.png",
+                image: "/informacioPage/restosHumanos/GGI_ataud.webp",
             },
             {
                 title: "Cenizas humanas (urnas)",
                 description: "Restos cremados transportados en urnas funerarias adecuadas.",
-                image: "/informacioPage/restosHumanos/GGI_cenizas.png",
+                image: "/informacioPage/restosHumanos/GGI_cenizas.webp",
             }
         ],
     },
@@ -333,10 +331,6 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.",
                     "Presentar fotocopia del Formulario M-02 de compra y venta de minerales y metales, emitido y autorizado por SENARECOM.",
                 ],
-
-                imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
-                ]
             },
             {
                 title: "Internacional",
@@ -358,27 +352,27 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Dinero en efectivo",
                 description: "Billetes, monedas",
-                image: "/informacioPage/cargaGeneral/GGI_manu.png",
+                image: "/informacioPage/valiosos/GGI_money.webp",
             },
             {
                 title: "Joyas y metales preciosos",
                 description: "Oro, plata, diamantes, piedras preciosas.",
-                image: "/informacioPage/cargaGeneral/GGI_herramientas.png",
+                image: "/informacioPage/valiosos/GGI_joyas.webp",
             },
             {
                 title: "Obras de arte",
                 description: "Pinturas, esculturas, piezas de colección.",
-                image: "/informacioPage/cargaGeneral/GGI_papeleria.png",
+                image: "/informacioPage/valiosos/GGI_obrasarte.webp",
             },
             {
                 title: "Electrónica de alto valor",
                 description: "Computadoras de última generación, equipos médicos portátiles.",
-                image: "/informacioPage/cargaGeneral/GGI_electronicos.png",
+                image: "/informacioPage/valiosos/GGI_electronicosValiosos.webp",
             },
             {
                 title: "Documentos valiosos",
                 description: "Títulos de propiedad, bonos, valores bursátiles, contratos originales.",
-                image: "/informacioPage/cargaGeneral/GGI_limpieza.png",
+                image: "/informacioPage/valiosos/GGI_documentosvaliosos.webp",
             }
         ]
     },
@@ -398,10 +392,8 @@ export const cargaData: Record<string, InfoTipoCarga> = {
                     "Certificado médico que indique que la muestra no es infecto-contagiosa, en hoja membretada, firmado y sellado por la institución que la emite.",
                     "La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo."
                 ],
-
-
                 imageUrl: [
-                    "/informacioPage/cargaGeneral/Gemini_Generated_Image_paquete.png",
+                   
                 ]
             },
             {
@@ -427,17 +419,17 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Categoría A: Sustancias infecciosas",
                 description: "Muestras de virus peligrosos.",
-                image: "/informacioPage/cargaGeneral/GGI_manu.png",
+                image: "/informacioPage/muestrasBiologicas/GGI_categoriaA.webp",
             },
             {
                 title: "Categoría B: Sustancias biológicas,no tan peligrosas",
                 description: "Sangre, tejidos, fluidos para análisis comunes.",
-                image: "/informacioPage/cargaGeneral/GGI_herramientas.png",
+                image: "/informacioPage/muestrasBiologicas/GGI_categoriaB.webp",
             },
             {
                 title: "Exentas: Muestras que no representan riesgo de infección",
                 description: "Muestras de ADN, cabello, saliva no contaminada.",
-                image: "/informacioPage/cargaGeneral/GGI_papeleria.png",
+                image: "/informacioPage/muestrasBiologicas/GGI_exentos.webp",
             }
         ]
     },
@@ -450,37 +442,37 @@ export const cargaData: Record<string, InfoTipoCarga> = {
             {
                 title: "Explosivos",
                 description: "municiones, material para expediciones,bengalas,fuegos artificiales, articulos pirotécnicos",
-                image: "/informacioPage/peligroso/explosive-symbol.jpg",
+                image: "/informacioPage/peligroso/explosive-symbol.webp",
             },
             {
                 title: "Solidos inflamables",
                 description: "fosforo, articulos de facil ignicion,combustion expontanea o que al tacto con el agua emitan gases inflamables",
-                image: "/informacioPage/peligroso/Flammables.gif",
+                image: "/informacioPage/peligroso/Flammables.webp",
             },
             {
                 title: "Venenos y sustancias infecciosas",
                 description: "muestras para diagnosticos, sustancias toxicas o infecciosas y herbicidas",
-                image: "/informacioPage/peligroso/sustanciasInfecciosas.jpg",
+                image: "/informacioPage/peligroso/sustanciasInfecciosas.webp",
             },
             {
                 title: "Gases comprimidos inflamables, no inflamables y venenosos",
                 description: "extintores, botellas de oxigeno para bucear, licuados refrigerrados o disueltos",
-                image: "/informacioPage/peligroso/gasComprimido.gif",
+                image: "/informacioPage/peligroso/gasComprimido.webp",
             },
             {
                 title: "Liquidos inflamables",
                 description: "Bombonas de gas para recargar encendedores, pinturas, disolventes,combustibles liquidos o solidos,cerillas ",
-                image: "/informacioPage/peligroso/Flammables.gif",
+                image: "/informacioPage/peligroso/Flammables.webp",
             },
             {
                 title: "Material radioactivo",
                 description: "Material con isotopos radiactivos",
-                image: "/informacioPage/peligroso/nuclear.png",
+                image: "/informacioPage/peligroso/nuclear.webp",
             },
             {
                 title: "Materiales corrosivos y Oxidantes",
                 description: "acidos alcalinos, mercurio, pilas humedas, peroxidos,acumuladores electricos",
-                image: "/informacioPage/peligroso/corrosivoOxidante.jpg",
+                image: "/informacioPage/peligroso/corrosivoOxidante.webp",
             },
             {
                 title: "Pilas y baterias",

@@ -20,7 +20,13 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
         component="img"
         src={image}
         alt={title}
-        sx={{ width: 150, borderRadius: 4, mb: 1 }}
+        sx={{
+          width: 150,
+          height: 150,
+          objectFit: 'cover', // recorta sin deformar
+          borderRadius: 4,
+          mb: 1,
+        }}
         loading="lazy"
       />
       <Box
