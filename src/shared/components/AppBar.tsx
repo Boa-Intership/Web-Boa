@@ -16,6 +16,7 @@ import NavButton from './appbar/NavButton';
 import MegaMenu from './appbar/MegaMenu';
 import MobileDrawer from './appbar/MobileDrawer';
 import AppContainer from './AppContainer';
+import { Logo } from 'ui';
 
 const navItems: NavItem[] = [
   { key: 'home', label: 'Inicio', route: ROUTES.HOME },
@@ -57,7 +58,6 @@ const HoverDelay = 150;
 
 const AppAppBar: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -101,10 +101,13 @@ const AppAppBar: React.FC = () => {
           >
             <Box
               component="img"
-              src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
+              src={Logo}
               alt="BOA Logo"
               onClick={() => navigate(ROUTES.LANDING)}
-              sx={{ height: { xs: 36, md: 48 }, cursor: 'pointer' }}
+              sx={{
+                height: { xs: 36, md: 48 },
+                cursor: 'pointer',
+              }}
             />
             <Box sx={{ flexGrow: 1 }} />
 

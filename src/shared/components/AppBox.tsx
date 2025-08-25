@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, BoxProps } from '@mui/material';
 
-const AppBox: React.FC<BoxProps> = ({ children, sx, ...rest }) => (
+const AppBox: React.FC<BoxProps> = ({ children, component, sx, ...rest }) => (
   <Box
+    component={component}
     sx={{
       p: 2,
       bgcolor: '#f9f9f9',

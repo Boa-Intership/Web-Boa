@@ -25,33 +25,31 @@ const HomeScreen: React.FC = () => {
         onTrack={handleTrack}
       />
       <AppContainer>
-        <AppContainer maxWidth="xl" disableGutters>
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={4}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <HomeActionButton
-              label="Información"
-              icon={<InfoIcon fontSize="large" />}
-              description="Consulta tipos de carga"
-              onClick={() => navigate(ROUTES.INFORMACION)}
-            />
-            <HomeActionButton
-              label="Cotizar envío"
-              icon={<AttachMoneyIcon fontSize="large" />}
-              description="Cotización rápida para tu envío."
-              onClick={() => navigate(ROUTES.COTIZAR)}
-            />
-            <HomeActionButton
-              label="Pre-registro"
-              icon={<AssignmentIcon fontSize="large" />}
-              description="Completa el pre-registro."
-              onClick={() => navigate(ROUTES.PREREGISTRO)}
-            />
-          </Stack>
-        </AppContainer>
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={4}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <HomeActionButton
+            label="Información"
+            icon={<InfoIcon fontSize="large" />}
+            description="Consulta tipos de carga"
+            onClick={() => navigate(ROUTES.INFORMACION)}
+          />
+          <HomeActionButton
+            label="Cotizar envío"
+            icon={<AttachMoneyIcon fontSize="large" />}
+            description="Cotización rápida para tu envío."
+            onClick={() => navigate(ROUTES.COTIZAR)}
+          />
+          <HomeActionButton
+            label="Pre-registro"
+            icon={<AssignmentIcon fontSize="large" />}
+            description="Completa el pre-registro."
+            onClick={() => navigate(ROUTES.PREREGISTRO)}
+          />
+        </Stack>
       </AppContainer>
       <AppContainer>
         <CardInfoSection />
