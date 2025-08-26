@@ -11,7 +11,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ROUTES } from '../../../router/routes';
-import { NavItem } from '../appbar/types';
+import { NavItem } from './types';
 import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
