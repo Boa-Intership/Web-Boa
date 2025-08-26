@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import welcomeImg from '../../../../assets/welcome.webp';
 import { FC } from 'react';
 import headline from '../../../../assets/headline-curve.svg';
+import { AppButton } from 'ui';
 
 interface Exp {
   label: string;
@@ -162,20 +163,7 @@ const WelcomeSection: FC = () => {
                 TRANSPARENCIA.
               </Typography>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
-              <Button
-                variant="contained"
-                size="large"
-                onClick={() => navigate('/home')}
-                sx={{
-                  mt: 2,
-                  bgcolor: 'primary.main',
-                  '&:hover': {
-                    bgcolor: 'primary.dark',
-                  },
-                }}
-              >
-                Comenzar
-              </Button>
+              <AppButton>Comenzar</AppButton>
             </AppBox>
           </AppGrid>
           {/*imagen*/}
