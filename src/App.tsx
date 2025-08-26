@@ -10,6 +10,7 @@ import MainLayout from './layouts/MainLayout';
 import LandingScreen from './features/landing/presentation/screens/LandingScreen';
 import TipoCargaScreen from './features/Information/presentation/screens/TipoCargaScreen';
 import ScrollToTop from './router/ScrollToTop';
+import TerminosScreen from './features/terms_conditions/presentation/screens/TerminosScreen';
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -35,6 +36,11 @@ const App: React.FC = () => (
           element={<InformacionScreen />}
         />
         <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
+
+        <Route
+          path={ROUTES.TERMINOS.replace('/', '')}
+          element={<TerminosScreen />}
+        />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

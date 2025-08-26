@@ -45,7 +45,7 @@ const navItems: NavItem[] = [
             to: ROUTES.TIPOS_CARGAS.replace(':tipo?', 'cargaGeneral'),
           },
 
-          { label: 'Términos', to: ROUTES.TERMINOS },
+          { label: 'Términos y Condiciones', to: ROUTES.TERMINOS },
         ],
       },
     ],
