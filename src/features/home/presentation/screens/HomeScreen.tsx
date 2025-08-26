@@ -24,7 +24,7 @@ const HomeScreen: React.FC = () => {
         onTrackingChange={setTracking}
         onTrack={handleTrack}
       />
-      <AppContainer>
+      <AppContainer sx={{ mt: 4, mb: 4 }}>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
           spacing={4}
@@ -37,7 +37,7 @@ const HomeScreen: React.FC = () => {
             description="Consulta tipos de carga"
             onClick={() => navigate(ROUTES.INFORMACION)}
           />
-          <HomeActionButton
+          {/* <HomeActionButton
             label="Cotizar envío"
             icon={<AttachMoneyIcon fontSize="large" />}
             description="Cotización rápida para tu envío."
@@ -48,7 +48,7 @@ const HomeScreen: React.FC = () => {
             icon={<AssignmentIcon fontSize="large" />}
             description="Completa el pre-registro."
             onClick={() => navigate(ROUTES.PREREGISTRO)}
-          />
+          /> */}
         </Stack>
       </AppContainer>
       <AppContainer>

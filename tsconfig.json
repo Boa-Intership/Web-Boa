@@ -17,7 +17,6 @@
       "ui": ["src/ui/index.ts"],
       "ui/*": ["./src/ui/*"],
       "pages/*": ["./src/pages/*"],
-      "router/*": ["./src/router/*"]
     },
     "types": ["node", "react", "react-dom"]
   },

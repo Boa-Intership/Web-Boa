@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppAppBar, Footer } from 'ui';
 import { Outlet } from 'react-router-dom';
+import QuickContactButtons from '../shared/components/QuickContactButtons';
 
 const MainLayout: React.FC = () => (
   <>
@@ -19,6 +20,7 @@ const MainLayout: React.FC = () => (
       <Outlet />
     </main>
     <Footer />
+    <QuickContactButtons />
   </>
 );
 

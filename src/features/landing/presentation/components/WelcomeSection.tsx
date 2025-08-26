@@ -1,17 +1,11 @@
 import { AppBox, AppContainer, AppGrid } from 'ui';
-import {
-  Typography,
-  Button,
-  Box,
-  Grid,
-  Container,
-  Divider,
-} from '@mui/material';
+import { Typography, Box, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import welcomeImg from '../../../../assets/welcome.webp';
 import { FC } from 'react';
 import headline from '../../../../assets/headline-curve.svg';
 import { AppButton } from 'ui';
+import { ROUTES } from '../../../../router/routes';
 
 interface Exp {
   label: string;
@@ -159,15 +153,22 @@ const WelcomeSection: FC = () => {
                 }}
               >
                 SERVICIOS DE CARGA AEREA PARA ENVIOS NACIONALES E
-                INTERNACIONALES. GESIONA TUS PAQUETES CON FACILIDAD Y
+                INTERNACIONALES. GESTIONA TUS PAQUETES CON FACILIDAD Y
                 TRANSPARENCIA.
               </Typography>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
-              <AppButton>Comenzar</AppButton>
+              <AppButton
+                size="large"
+                sx={{ fontSize: { xs: '1rem', md: '1.2rem' } }}
+                onClick={() => (window.location.href = ROUTES.HOME)}
+              >
+                Comenzar
+              </AppButton>
             </AppBox>
           </AppGrid>
           {/*imagen*/}
           <AppGrid
+            item
             xs={12}
             md={5}
             sx={{

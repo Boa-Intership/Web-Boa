@@ -119,7 +119,7 @@ export default function ContactScreen() {
     };
 
   return (
-    <AppContainer>
+    <AppContainer sx={{ py: 8, minHeight: '80vh' }}>
       <Typography variant="h4" fontWeight="bold" color="primary">
         Nuestras Oficinas
       </Typography>
@@ -158,7 +158,7 @@ export default function ContactScreen() {
           key={index}
           expanded={expanded === index}
           onChange={handleChange(index)}
-          sx={{ my: 2, backgroundColor:'#FAFAFA' }}
+          sx={{ my: 2, backgroundColor: '#FAFAFA' }}
         >
           <AccordionSummary expandIcon={<ExpandMore />}>
             <Typography

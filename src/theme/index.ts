@@ -1,53 +1,71 @@
-
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
     // AZULES
     primary: {
-      main: '#2e5c9a', // azul medio
-      dark: '#1e3a5f', // azul marino oscuro
-      light: '#4a7bc8', // azul claro
+      main: '#2e5c9a',
+      dark: '#1e3a5f',
+      light: '#4a7bc8',
       contrastText: '#ffffff',
     },
     // ROJOS
     secondary: {
-      main: '#a85555', // rojo medio
-      dark: '#8b4444', // rojo ladrillo oscuro
-      light: '#c66666', // rojo claro
+      main: '#a85555',
+      dark: '#8b4444',
+      light: '#c66666',
       contrastText: '#ffffff',
     },
     // AMARILLOS
     warning: {
-      main: '#daa520', // amarillo dorado
-      dark: '#b8860b', // amarillo dorado oscuro
-      light: '#f4c430', // amarillo claro
+      main: '#daa520',
+      dark: '#b8860b',
+      light: '#f4c430',
       contrastText: '#2c2c2c',
     },
     // VERDES
     success: {
-      main: '#a4b851', // verde oliva medio
-      dark: '#8b9d3a', // verde oliva oscuro
-      light: '#bdd168', // verde oliva claro
+      main: '#a4b851',
+      dark: '#8b9d3a',
+      light: '#bdd168',
       contrastText: '#2c2c2c',
+      whatsapp: '#25D366'
     },
+    // AZULES PERSONALIZADOS
+    blue_light: {
+      main: '#4a7bc8',
+      contrastText: '#fff',
+    },
+    blue_main: {
+      main: '#2e5c9a',
+      contrastText: '#fff',
+    },
+    blue_dark: {
+      main: '#1e3a5f',
+      contrastText: '#fff',
+    },
+    // GRISES PERSONALIZADOS (agregados como claves numéricas en grey)
     // GRISES Y FONDO
     background: {
-      default: '#ffffff', // blanco
-      paper: '#e8ebf0', // gris casi blanco
+      default: '#ffffff',
+      paper: '#e8ebf0',
     },
     text: {
-      primary: '#2c2c2c', // gris carbón
-      secondary: '#4a4a4a', // gris medio
-      disabled: '#7a7a7a', // gris claro
+      primary: '#2c2c2c',
+      secondary: '#4a4a4a',
+      disabled: '#7a7a7a',
     },
     grey: {
-      100: '#d8dce6', // gris muy claro
-      200: '#e8ebf0', // gris casi blanco
-      300: '#ffffff', // blanco
-      400: '#7a7a7a', // gris claro
-      600: '#4a4a4a', // gris medio
-      800: '#2c2c2c', // gris carbón
+      100: '#d8dce6',
+      200: '#e8ebf0', // grey_light main
+      300: '#ffffff',
+      400: '#7a7a7a',
+      600: '#4a4a4a', // grey_main main
+      800: '#2c2c2c', // grey_dark main
+      // Custom contrastText values for reference (not used by MUI directly)
+      // 201: '#2c2c2c', // grey_light contrastText
+      // 601: '#fff',     // grey_main contrastText
+      // 801: '#fff',     // grey_dark contrastText
     },
   },
 });

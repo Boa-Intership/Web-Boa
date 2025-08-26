@@ -4,7 +4,6 @@ import {
   Toolbar,
   Box,
   IconButton,
-  Button,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
@@ -16,7 +15,7 @@ import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
 import AppContainer from '../AppContainer';
-import { Logo } from 'ui';
+import { AppButton, Logo } from 'ui';
 
 const navItems: NavItem[] = [
   { key: 'home', label: 'Inicio', route: ROUTES.HOME },
@@ -94,7 +93,7 @@ const AppAppBar: React.FC = () => {
           transition: 'all 0.18s ease',
         }}
       >
-        <AppContainer maxWidth="xl">
+        <AppContainer sx={{ py: { xs: 1, md: 1 } }}>
           <Toolbar
             disableGutters
             sx={{ display: 'flex', alignItems: 'center' }}
@@ -105,7 +104,7 @@ const AppAppBar: React.FC = () => {
               alt="BOA Logo"
               onClick={() => navigate(ROUTES.LANDING)}
               sx={{
-                height: { xs: 36, md: 48 },
+                height: { xs: 26, md: 50 },
                 cursor: 'pointer',
               }}
             />
@@ -187,30 +186,29 @@ const AppAppBar: React.FC = () => {
             <Box
               id="_header-buttons"
               data-testid="header-buttons"
-              sx={{ display: 'flex', gap: 1, alignItems: 'center' }}
+              sx={{
+                display: 'flex',
+                gap: 2,
+                alignItems: 'center',
+                px: { xs: 0, md: 0 },
+              }} // <--- padding lateral aquí
             >
-              <Button
-                variant="text"
+              <AppButton
                 size="small"
+                color="primary"
+                sx={{ fontSize: { xs: '0.75rem', md: '0.9rem' } }}
                 onClick={() => navigate(ROUTES.LOGIN)}
-                sx={{
-                  textTransform: 'none',
-                  fontSize: { xs: '0.75rem', md: '1rem' },
-                }}
               >
                 Iniciar sesión
-              </Button>
-              <Button
-                variant="outlined"
+              </AppButton>
+              <AppButton
                 size="small"
+                color="secondary"
+                sx={{ fontSize: { xs: '0.75rem', md: '0.9rem' } }}
                 onClick={() => navigate(ROUTES.REGISTRO)}
-                sx={{
-                  textTransform: 'none',
-                  fontSize: { xs: '0.75rem', md: '1rem' },
-                }}
               >
-                Abrir cuenta
-              </Button>
+                Registrarse
+              </AppButton>
             </Box>
 
             <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>
@@ -226,7 +224,7 @@ const AppAppBar: React.FC = () => {
         </AppContainer>
       </AppBar>
 
-      <Box sx={{ height: { xs: 56, md: 68 } }} />
+      <Box sx={{ height: { xs: 48, md: 64 } }} />
 
       <MobileDrawer
         open={drawerOpen}

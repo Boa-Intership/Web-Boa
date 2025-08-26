@@ -1,53 +1,71 @@
-import { AppBox, AppStack } from 'ui';
-import { Typography, Divider, Box } from '@mui/material';
+import AppBox from '../../../../shared/components/AppBox';
+import AppContainer from '../../../../shared/components/AppContainer';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Box,
+} from '@mui/material';
+
+const faqs = [
+  {
+    question: '¿Cuáles son los horarios de atención de BOA Cargo?',
+    answer:
+      'Nuestro horario de atención es de lunes a viernes de 8:00 a 18:00 y sábados de 9:00 a 14:00. Puedes contactarnos por teléfono, correo o chat en vivo durante estos horarios.',
+  },
+  {
+    question: '¿Qué restricciones existen para enviar paquetes?',
+    answer:
+      'No se permite el envío de materiales peligrosos, sustancias prohibidas, dinero en efectivo, armas, ni productos perecederos sin embalaje adecuado. Consulta nuestras políticas para más detalles.',
+  },
+  {
+    question: '¿Qué debo hacer si mi paquete se retrasa o se pierde?',
+    answer:
+      'Si tu paquete se retrasa o no llega, comunícate con nuestro equipo de atención al cliente para iniciar el proceso de rastreo y reclamación. Te ayudaremos a resolver cualquier inconveniente.',
+  },
+  {
+    question: '¿Cómo puedo rastrear mi paquete?',
+    answer:
+      'Puedes rastrear tu paquete ingresando el número de guía en nuestra página web o en la sección de seguimiento. También puedes recibir notificaciones por correo o SMS.',
+  },
+  {
+    question: '¿Cómo funciona el pre-registro de envíos?',
+    answer:
+      'El pre-registro te permite agilizar el proceso de envío. Registra los datos de tu paquete en línea y presenta el código generado en la oficina para completar el envío.',
+  },
+];
 
 const FAQSection = () => (
-  <AppBox sx={{ py: 8 }}>
-    <Typography variant="h3" fontWeight={700} mb={2}>
-      Preguntas Frecuentes
-    </Typography>
-    <Typography variant="h5" color="text.secondary" mb={4}>
-      Respuestas a las dudas más comunes sobre el proceso de envío y
-      preregistro.
-    </Typography>
-    <Divider sx={{ mb: 4 }} />
-    <AppStack spacing={3}>
-      <Box>
-        <Typography variant="subtitle1" fontWeight={600}>
-          ¿Cuánto dura el preregistro?
-        </Typography>
-        <Typography variant="body2">
-          El preregistro tiene una validez de 24 horas desde su generación.
+  <AppBox sx={{ py: { xs: 6, md: 10 }, background: 'background.paper' }}>
+    <AppContainer>
+      <Box sx={{ mb: 6, textAlign: 'center' }}>
+        <Typography variant="h4" fontWeight="bold" mb={2}>
+          Preguntas Frecuentes
         </Typography>
       </Box>
-      <Box>
-        <Typography variant="subtitle1" fontWeight={600}>
-          ¿Qué pasa si no recojo el paquete?
-        </Typography>
-        <Typography variant="body2">
-          El paquete permanecerá en resguardo por 7 días. Pasado ese plazo, se
-          aplicarán cargos de almacenamiento.
-        </Typography>
+      <Box sx={{ maxWidth: 700, mx: 'auto' }}>
+        {faqs.map((faq, idx) => (
+          <Accordion key={idx} sx={{ mb: 2, boxShadow: 1 }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls={`faq-content-${idx}`}
+              id={`faq-header-${idx}`}
+            >
+              <Typography variant="subtitle1" fontWeight={600}>
+                {faq.question}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography variant="body2" color="text.secondary">
+                {faq.answer}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </Box>
-      <Box>
-        <Typography variant="subtitle1" fontWeight={600}>
-          ¿Puedo modificar o eliminar el preregistro?
-        </Typography>
-        <Typography variant="body2">
-          Sí, puedes modificar o eliminar el preregistro antes de entregar el
-          paquete en oficina.
-        </Typography>
-      </Box>
-      <Box>
-        <Typography variant="subtitle1" fontWeight={600}>
-          ¿Qué sucede si se exceden dimensiones o peso?
-        </Typography>
-        <Typography variant="body2">
-          El paquete será rechazado o se aplicarán cargos adicionales según la
-          política vigente.
-        </Typography>
-      </Box>
-    </AppStack>
+    </AppContainer>
   </AppBox>
 );
 
