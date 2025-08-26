@@ -24,7 +24,7 @@ function TerminosScreen() {
       >
         Terminos y condiciones
       </Typography>
-      <Typography mb={2}>
+      <Typography mb={2} textAlign={'justify'}>
         Tener términos y condiciones es fundamental para establecer un marco
         claro de reglas y responsabilidades entre una empresa y sus usuarios o
         clientes. Estos documentos definen los derechos, obligaciones y
@@ -43,7 +43,7 @@ function TerminosScreen() {
           variant="h6"
           fontWeight={'bold'}
           mb={2}
-          color={theme.palette.primary.dark}
+          color={theme.palette.primary.main}
           sx={{ textAlign: 'center' }}
         >
           CONTRATO DE TRANSPORTE AÉREO, TERMINOS Y CONDICIONES
@@ -53,18 +53,15 @@ function TerminosScreen() {
           su cuenta asuma la contratación de un seguro para proteger sus
           intereses contra toda eventualidad
         </Typography>
-        {/* <Regla
-          titulo="AVISO IMPORTANTE"
-          contenido="Se recomienda al remitente que por su cuenta asuma la contratación de un seguro para proteger sus intereses contra toda eventualidad."
-        /> */}
         {reglasContrato.map((regla, index) => (
           <Accordion
             key={index}
             defaultExpanded={index === 0}
             sx={{
-              backgroundColor: '#f5f4f4ff', // color de fondo claro
-              boxShadow: 'none', // sin sombra
-              //border: '1px solid #ddd', // borde sutil
+              backgroundColor: '#fafafa', // color de fondo claro
+              //boxShadow: 'none', // sin sombra
+              my: 2,
+              border: '1px solid #f5f5f5ff', // borde sutil
               '&:before': { display: 'none' }, // quita la línea superior por defecto
             }}
           >
@@ -76,7 +73,7 @@ function TerminosScreen() {
               <Typography
                 component="span"
                 fontWeight="bold"
-                color={theme.palette.primary.dark}
+                color={theme.palette.primary.main}
               >
                 {regla.titulo}
               </Typography>

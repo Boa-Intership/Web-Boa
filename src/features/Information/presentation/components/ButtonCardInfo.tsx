@@ -23,7 +23,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
   return (
     <Card
       sx={{
-        width: 350,
+        width: 320,
         height: 390,
         borderRadius: 3,
         boxShadow: 2,
@@ -78,7 +78,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
       </Box>
 
       {/* Contenido */}
-      <CardContent sx={{ p: 2 }}>
+      <CardContent sx={{ p: 2, backgroundColor: '#fafafa' }}>
         <Box
           display="flex"
           alignItems="center"
