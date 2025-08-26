@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "@mui/material";
+import React from 'react';
+import { Button } from '@mui/material';
 
 type Props = {
   label: string;
@@ -16,11 +16,18 @@ const NavButton = React.forwardRef<HTMLButtonElement, Props>(
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      sx={{ textTransform: "none", fontWeight: active ? 700 : 600 }}
+      sx={{
+        textTransform: 'none',
+        fontWeight: active ? 700 : 600,
+        '&:focus, &.Mui-focusVisible': {
+          outline: 'none',
+          boxShadow: 'none',
+        },
+      }}
     >
       {label}
     </Button>
-  )
+  ),
 );
-NavButton.displayName = "NavButton";
+NavButton.displayName = 'NavButton';
 export default NavButton;

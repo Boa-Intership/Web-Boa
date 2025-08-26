@@ -16,6 +16,7 @@ import NavButton from './appbar/NavButton';
 import MegaMenu from './appbar/MegaMenu';
 import MobileDrawer from './appbar/MobileDrawer';
 import AppContainer from './AppContainer';
+import logoCargo from 'assets/logoCargo.webp';
 
 const navItems: NavItem[] = [
   { key: 'home', label: 'Inicio', route: ROUTES.HOME },
@@ -101,8 +102,8 @@ const AppAppBar: React.FC = () => {
           >
             <Box
               component="img"
-              src="https://upload.wikimedia.org/wikipedia/commons/6/63/Logotipo_de_BoA.svg"
-              alt="BOA Logo"
+              src={logoCargo}
+              alt="Logo BoA Cargo"
               onClick={() => navigate(ROUTES.LANDING)}
               sx={{ height: { xs: 36, md: 48 }, cursor: 'pointer' }}
             />

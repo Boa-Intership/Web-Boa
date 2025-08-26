@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { RoundButton } from 'ui';
 import { InfoTipoCarga } from 'ui';
 import { useTheme } from '@mui/material/styles';
@@ -13,6 +13,7 @@ import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
+import { AppStack } from 'ui';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
@@ -65,8 +66,7 @@ function TipoCargaScreen() {
       </Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={3} lg={3}>
-          <Stack
-            spacing={2}
+          <AppStack
             sx={{
               boxShadow: 1,
               background: '#fafafa',
@@ -134,7 +134,7 @@ function TipoCargaScreen() {
             >
               Prohibidos
             </RoundButton>
-          </Stack>
+          </AppStack>
         </Grid>
         <Grid item xs={12} md={9} lg={9}>
           <Box>{renderContent()}</Box>

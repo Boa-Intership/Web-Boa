@@ -7,7 +7,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import portada from 'assets/portada.png';
+import portada from 'assets/portada.webp';
 
 interface HeroProps {
   tracking: string;
