@@ -10,7 +10,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "Santa Cruz",
     salida: "06:30",
     llegada: "07:45",
-    aeronave: "ATR-72",
     dias: ["Lun","Mié","Vie"],
   },
   {
@@ -22,7 +21,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "La Paz",
     salida: "08:15",
     llegada: "09:30",
-    aeronave: "ATR-72",
     dias: ["Lun","Mié","Vie"],
   },
   {
@@ -34,7 +32,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "Cochabamba",
     salida: "09:00",
     llegada: "09:45",
-    aeronave: "ATR-42",
     dias: ["Lun","Mar","Mié","Jue","Vie"],
   },
   {
@@ -46,7 +43,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "Santa Cruz",
     salida: "10:30",
     llegada: "11:15",
-    aeronave: "ATR-42",
     dias: ["Lun","Mar","Mié","Jue","Vie"],
   },
   {
@@ -58,7 +54,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "Sucre",
     salida: "11:00",
     llegada: "12:00",
-    aeronave: "ATR-42",
     dias: ["Mar","Jue","Sáb"],
   },
   {
@@ -70,7 +65,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "Trinidad",
     salida: "13:30",
     llegada: "14:15",
-    aeronave: "ATR-42",
     dias: ["Lun","Mié","Vie"],
   },
   {
@@ -82,7 +76,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "Santa Cruz",
     salida: "14:45",
     llegada: "15:30",
-    aeronave: "ATR-42",
     dias: ["Lun","Mié","Vie"],
   },
   {
@@ -94,7 +87,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "Santa Cruz",
     salida: "12:30",
     llegada: "14:00",
-    aeronave: "ATR-42",
     dias: ["Mar","Jue"],
   },
   {
@@ -106,7 +98,6 @@ export const ITINERARIOS_MOCK: Itinerario[] = [
     destinoNombre: "Santa Cruz",
     salida: "17:15",
     llegada: "18:00",
-    aeronave: "ATR-42",
     dias: ["Lun","Mié","Vie"],
   },
 ];

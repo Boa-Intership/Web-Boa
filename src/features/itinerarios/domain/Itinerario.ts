@@ -10,7 +10,6 @@ export interface Itinerario {
   destinoNombre: string; // "Santa Cruz"
   salida: string;        // "06:30" (24h)
   llegada: string;       // "07:45"
-  aeronave: string;      // "ATR-72"
   dias: DiaCorto[];      // ["Lun","Mié","Vie"]
 }
 

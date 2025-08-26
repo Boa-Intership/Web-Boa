@@ -4,7 +4,7 @@ import { ITINERARIOS_MOCK } from "../../data/itinerarios.mock";
 import { Ciudad, DiaCorto, Itinerario } from "../../domain/Itinerario";
 import { FRANJA_COLORS } from "../../domain/getFlightStatus";
 import ItinerariosFilters, { FiltersState } from "../components/ItinerariosFilters";
-
+import ItinerariosTable from "../components/ItinerariosTable";
 
 export default function ItinerariosScreen() {
   const [filters, setFilters] = useState<FiltersState>({});
@@ -56,7 +56,11 @@ export default function ItinerariosScreen() {
         filtered={filtered.length}
       />
 
-      
+      <ItinerariosTable
+        items={filtered}
+        showEmptyState={hasActiveFilters && filtered.length === 0}
+        onResetAll={onClear}
+      />
     </Container>
   );
 }
