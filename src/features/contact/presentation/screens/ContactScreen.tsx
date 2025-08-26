@@ -136,7 +136,6 @@ export default function ContactScreen() {
           onClick={() => setTabIndex(0)}
           sx={{
             p: 1.5,
-            borderRadius: '999px',
           }}
         />
         {/*** '&:focus': { outline: 'none' }, */}
@@ -148,7 +147,6 @@ export default function ContactScreen() {
           onClick={() => setTabIndex(1)}
           sx={{
             p: 1.5,
-            borderRadius: '999px',
           }}
         />
       </Box>
