@@ -51,12 +51,17 @@ function InfoTipoCarga({
         {description}
       </Typography>
 
-      <Box sx={{ display: 'flex', gap: 2 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: 2,
+          flexDirection: { xs: 'column', sm: 'row', md: 'row' },
+        }}
+      >
         <Typography
           variant="h6"
           fontWeight="bold"
           color={theme.palette.primary.main}
-          mb={2}
         >
           {subtitle}
         </Typography>

@@ -16,41 +16,50 @@ import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
 import AppContainer from '../AppContainer';
 import { AppButton, Logo } from 'ui';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 
 const navItems: NavItem[] = [
-  { key: 'home', label: 'Inicio', route: ROUTES.HOME },
+  {
+    key: 'home',
+    label: 'Inicio',
+    route: ROUTES.HOME,
+    icon: <HomeOutlinedIcon />,
+  },
   {
     key: 'itinerarios',
-    label: 'Itinerarios',
-    columns: [
-      {
-        title: 'Itinerarios',
-        links: [{ label: 'Ver itinerarios', to: ROUTES.ITINERARIOS }],
-      },
-      {
-        title: 'Operaciones',
-        links: [{ label: 'Pre-registro', to: ROUTES.PREREGISTRO }],
-      },
-    ],
+    label: 'Itinerario',
+    route: ROUTES.ITINERARIOS,
+    icon: <EventNoteIcon />,
+  },
+  {
+    key: 'preRegistro',
+    label: 'Pre-registro',
+    route: ROUTES.PREREGISTRO,
+    icon: <AssignmentOutlinedIcon />,
   },
   {
     key: 'informacion',
     label: 'Información',
     columns: [
       {
-        title: 'General',
         links: [
           {
             label: 'Tipos de carga',
             to: ROUTES.TIPOS_CARGAS.replace(':tipo?', 'cargaGeneral'),
           },
-
-          { label: 'Términos', to: ROUTES.TERMINOS },
+          { label: 'Términos y Condiciones', to: ROUTES.TERMINOS },
+          {
+            label: 'Contacto',
+            to: ROUTES.CONTACTO,
+          },
         ],
       },
     ],
+    icon: <InfoOutlinedIcon />,
   },
-  { key: 'contact', label: 'Contacto', route: ROUTES.CONTACTO },
 ];
 
 const HoverDelay = 150;

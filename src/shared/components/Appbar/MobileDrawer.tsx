@@ -1,13 +1,19 @@
-import React from "react";
+import React from 'react';
 import {
   Drawer,
   Box,
   List,
   ListItemButton,
   ListItemText,
+  ListItemIcon,
   Divider,
-} from "@mui/material";
-import type { NavItem } from "./types";
+  Typography,
+} from '@mui/material';
+import type { NavItem } from './types';
+import LoginIcon from '@mui/icons-material/Login';
+import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
+import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 
 const MobileDrawer: React.FC<{
   open: boolean;
@@ -15,9 +21,38 @@ const MobileDrawer: React.FC<{
   navItems: NavItem[];
   navigate: (to: string) => void;
 }> = ({ open, onClose, navItems, navigate }) => {
+  const buttonStyle = {
+    color: 'grey.600',
+    borderRadius: 2,
+    p: 1,
+    fontSize: '0.86em',
+    '&:hover': {
+      backgroundColor: 'background.default',
+      border: '1px solid #e9e9e9ff',
+    },
+  };
+
+  const iconStyle = {
+    color: 'primary.main',
+    minWidth: 45,
+    justifyContent: 'center',
+  };
+
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
-      <Box sx={{ width: 300 }} role="presentation">
+      <Box
+        sx={{
+          width: 300,
+          backgroundColor: '#fafafa',
+          height: '100%',
+          p: 2,
+        }}
+        role="presentation"
+      >
+        <Typography variant="h6" fontWeight={'bold'} color="primary.main">
+          Menú
+        </Typography>
+
         <List>
           {navItems.map((item) => (
             <React.Fragment key={item.key}>
@@ -26,28 +61,31 @@ const MobileDrawer: React.FC<{
                   onClose();
                   if (item.route) navigate(item.route);
                 }}
+                sx={buttonStyle}
               >
-                <ListItemText primary={item.label} />
+                <ListItemIcon sx={iconStyle}>{item.icon}</ListItemIcon>
+                <ListItemText
+                  primary={item.label}
+                  primaryTypographyProps={{ fontWeight: 'bold' }}
+                />
               </ListItemButton>
-
               {item.columns && (
-                <Box sx={{ pl: 2 }}>
+                <Box sx={{ ml: 5 }}>
                   {item.columns.map((col, i) => (
                     <Box key={i}>
-                      {col.title && (
-                        <Box sx={{ fontWeight: 700, pl: 1, pt: 1 }}>
-                          {col.title}
-                        </Box>
-                      )}
+                      {col.title && <Box>{col.title}</Box>}
                       {col.links.map((l) => (
                         <ListItemButton
                           key={l.to}
-                          sx={{ pl: 4 }}
                           onClick={() => {
                             onClose();
                             navigate(l.to);
                           }}
+                          sx={buttonStyle}
                         >
+                          <ListItemIcon sx={iconStyle}>
+                            <DoneOutlinedIcon />
+                          </ListItemIcon>
                           <ListItemText primary={l.label} />
                         </ListItemButton>
                       ))}
@@ -55,25 +93,38 @@ const MobileDrawer: React.FC<{
                   ))}
                 </Box>
               )}
-              <Divider />
             </React.Fragment>
           ))}
 
           <ListItemButton
             onClick={() => {
               onClose();
-              navigate("/login");
+              navigate('/login');
             }}
+            sx={buttonStyle}
           >
-            <ListItemText primary="Iniciar sesión" />
+            <ListItemIcon sx={iconStyle}>
+              <LoginIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Iniciar sesión"
+              primaryTypographyProps={{ fontWeight: 'bold' }}
+            />
           </ListItemButton>
           <ListItemButton
             onClick={() => {
               onClose();
-              navigate("/registro");
+              navigate('/registro');
             }}
+            sx={buttonStyle}
           >
-            <ListItemText primary="Abrir cuenta" />
+            <ListItemIcon sx={iconStyle}>
+              <HowToRegOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Registrarse"
+              primaryTypographyProps={{ fontWeight: 'bold' }}
+            />
           </ListItemButton>
         </List>
       </Box>

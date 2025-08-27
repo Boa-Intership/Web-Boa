@@ -18,7 +18,8 @@ const NavButton = React.forwardRef<HTMLButtonElement, Props>(
       onMouseLeave={onMouseLeave}
       sx={{
         textTransform: 'none',
-        fontWeight: active ? 700 : 600,
+        fontWeight: 'bold',
+        // fontWeight: active ? 700 : 600,
         '&:focus, &.Mui-focusVisible': {
           outline: 'none',
           boxShadow: 'none',
