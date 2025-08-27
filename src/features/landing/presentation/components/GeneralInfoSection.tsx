@@ -47,7 +47,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <AppBox sx={{ py: { xs: 6, md: 10 }, background: 'background.paper' }}>
+    <AppBox sx={{ py: { xs: 6, md: 8 }, background: 'background.paper' }}>
       <AppContainer>
         <Typography variant="h3" fontWeight={700} mb={2} textAlign="center">
           {title}

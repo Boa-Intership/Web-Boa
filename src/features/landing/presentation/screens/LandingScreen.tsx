@@ -5,6 +5,9 @@ import GeneralInfoSection from '../components/GeneralInfoSection';
 import FAQSection from '../components/FAQSection';
 import CustomerServiceSection from '../components/CustomerServiceSection';
 import OfficePreviewSection from '../components/OfficePreviewSection';
+import AboutUsSection from '../components/AboutUsSection';
+import ServicesSection from '../components/ServicesSection';
+import FinalCTASection from '../components/FinalCTASection';
 
 const LandingScreen: React.FC = () => (
   <>
@@ -12,7 +15,11 @@ const LandingScreen: React.FC = () => (
     <GeneralInfoSection />
     <CustomerServiceSection />
     <OfficePreviewSection />
+    <AboutUsSection />
     <FAQSection />
+    {/*<ServicesSection />*/}
+    {/*<ServicesSection />*/}
+    <FinalCTASection />
   </>
 );
 
