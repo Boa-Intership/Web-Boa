@@ -4,6 +4,7 @@ import {
   IconButton, Chip, Divider, Typography, Tooltip, Button
 } from "@mui/material";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Ciudad, DiaCorto } from "../../domain/Itinerario";
 
 export interface FiltersState {
@@ -42,7 +43,8 @@ export default function ItinerariosFilters({
 
   return (
     <Paper elevation={3} sx={{ p: 3, mb: 3, borderRadius: 4, bgcolor:'#FFFFFF' }}>
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <FilterAltIcon sx={{ color:"#D98C00" }} />
         <Typography variant="h6" sx={{ flexGrow: 1 }}>Filtrar Vuelos</Typography>
         <Tooltip title="Limpiar filtros">
           <span>
@@ -54,7 +56,7 @@ export default function ItinerariosFilters({
       </Stack>
 
       <Stack direction={{ xs: "column", md: "row" }} spacing={2} mt={2}>
-        <FormControl sx={{ minWidth: 220 }}>
+        <FormControl sx={{ minWidth: 250 }}>
           <InputLabel>Origen</InputLabel>
           <Select
             label="Origen"
@@ -70,7 +72,7 @@ export default function ItinerariosFilters({
           </Select>
         </FormControl>
 
-        <FormControl sx={{ minWidth: 260 }}>
+        <FormControl sx={{ minWidth: 250 }}>
           <InputLabel>Destino</InputLabel>
           <Select
             label="Destino"
@@ -86,7 +88,7 @@ export default function ItinerariosFilters({
           </Select>
         </FormControl>
 
-        <FormControl sx={{ minWidth: 200 }}>
+        <FormControl sx={{ minWidth: 250 }}>
           <InputLabel>Día de la semana</InputLabel>
           <Select
             label="Día de la semana"
@@ -120,7 +122,7 @@ export default function ItinerariosFilters({
 
       <Divider sx={{ my: 2 }} />
 
-      <Stack direction={{ xs: "column", md: "row" }} alignItems="center" spacing={2}>
+      <Stack direction={{ xs: "column", md: "row" }} alignItems="center" spacing={1}>
         <Typography variant="subtitle1">
           {activeChips.length
             ? `${filtered} vuelos encontrados con los filtros aplicados`

@@ -42,7 +42,6 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
   }
 
   return (
-    //<Paper sx={{ borderRadius: 4, bgcolor:'#FAFAFA' }}>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 850 }}>
         <TableHead sx={{ bgcolor:"#002D57" }}>
@@ -50,8 +49,8 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
             sx={{
               '& .MuiTableCell-root': {
                 color: '#FFFFFF',
-              },
-            }}
+              },
+            }}
           >
             <TableCell>Vuelo</TableCell>
             <TableCell>Ruta</TableCell>
@@ -60,7 +59,7 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
             <TableCell>Días</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody sx={{ bgcolor:"#FAFAFA" }}>
           {items.map(it => {
             const franja = getFlightStatus(it.salida);
             return (
@@ -105,6 +104,5 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
         </TableBody>
       </Table>
     </TableContainer>
-    //</Paper>
   );
 }
