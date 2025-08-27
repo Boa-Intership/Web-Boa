@@ -25,7 +25,7 @@ interface infoTipoCargaProps {
   onClick: () => void;
 }
 
-function infoTipoCarga({
+function InfoTipoCarga({
   title,
   description,
   details,
@@ -39,7 +39,7 @@ function infoTipoCarga({
     <Box>
       <Typography
         id="modal-title"
-        variant="h4"
+        variant="h5"
         fontWeight="bold"
         color={theme.palette.primary.main}
         mb={2}
@@ -102,12 +102,19 @@ function infoTipoCarga({
               <Grid item xs={12} sm={3}>
                 <Box sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
                   {details[selectedDetail].imageUrl.map((url, index) => (
-                    <img
+                    <Box
+                      component="img"
                       key={index}
                       src={url}
                       loading="lazy"
                       alt={`${details[selectedDetail].title} ${index + 1}`}
-                      style={{ width: 200, borderRadius: 4, marginBottom: 8 }}
+                      sx={{
+                        width: { xs: '50%', sm: 200 },
+                        maxWidth: '100%',
+                        objectFit: 'cover',
+                        borderRadius: 2,
+                        mb: 1,
+                      }}
                     />
                   ))}
                 </Box>
@@ -146,4 +153,4 @@ function infoTipoCarga({
   );
 }
 
-export default infoTipoCarga;
+export default InfoTipoCarga;

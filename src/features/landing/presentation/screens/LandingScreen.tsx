@@ -1,9 +1,19 @@
 import React from 'react';
-import { Box } from '@mui/material';
 
-const LandingScreen: React.FC = () => {
-  // Blank landing page by request. Keep minimal container to preserve route.
-  return <Box sx={{ minHeight: '100vh' }} />;
-};
+import WelcomeSection from '../components/WelcomeSection';
+import GeneralInfoSection from '../components/GeneralInfoSection';
+import FAQSection from '../components/FAQSection';
+import CustomerServiceSection from '../components/CustomerServiceSection';
+import OfficePreviewSection from '../components/OfficePreviewSection';
+
+const LandingScreen: React.FC = () => (
+  <>
+    <WelcomeSection />
+    <GeneralInfoSection />
+    <CustomerServiceSection />
+    <OfficePreviewSection />
+    <FAQSection />
+  </>
+);
 
 export default LandingScreen;

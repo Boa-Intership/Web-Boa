@@ -1,30 +1,27 @@
 import React from 'react';
+import { AppAppBar, Footer } from 'ui';
 import { Outlet } from 'react-router-dom';
-import AppAppBar from '../shared/components/AppBar';
-import Footer from '../shared/components/Footer';
+import QuickContactButtons from '../shared/components/QuickContactButtons';
 
 const MainLayout: React.FC = () => (
-  <div style={{
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    background: 'inherit',
-  }}>
+  <>
     <AppAppBar />
-    <main style={{
-      flex: 1,
-      width: '100%',
-      paddingTop: '2rem',
-      paddingBottom: '2rem',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'stretch',
-      justifyContent: 'center',
-    }}>
+    <main
+      style={{
+        flex: 1,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        background: 'inherit',
+      }}
+    >
       <Outlet />
     </main>
     <Footer />
-  </div>
+    <QuickContactButtons />
+  </>
 );
 
 export default MainLayout;

@@ -6,6 +6,7 @@ interface Props {
   children: React.ReactNode;
   onClick: () => void;
   selected?: boolean;
+  icon?: React.ReactNode;
 }
 
 const RoundButton = ({
@@ -13,10 +14,12 @@ const RoundButton = ({
   children,
   onClick,
   selected = false,
+  icon,
 }: Props) => {
   return (
     <Button
       onClick={onClick}
+      startIcon={icon}
       sx={{
         textTransform: 'none',
         borderRadius: '20px',
