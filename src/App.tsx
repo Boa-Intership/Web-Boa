@@ -10,6 +10,7 @@ import MainLayout from './layouts/MainLayout';
 import LandingScreen from './features/landing/presentation/screens/LandingScreen';
 import TipoCargaScreen from './features/Information/presentation/screens/TipoCargaScreen';
 import ScrollToTop from './router/ScrollToTop';
+import ItinerariosScreen from './features/itinerarios/presentation/screens/ItinerariosScreen';
 import TerminosScreen from './features/terms_conditions/presentation/screens/TerminosScreen';
 
 const App: React.FC = () => (
@@ -19,6 +20,7 @@ const App: React.FC = () => (
       <Route path="/" element={<MainLayout />}>
         <Route index element={<LandingScreen />} />
         <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
+        <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
         <Route
           path={ROUTES.CONTACTO.replace('/', '')}
           element={<ContactScreen />}
