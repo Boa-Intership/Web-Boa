@@ -5,7 +5,6 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from '@mui/material';
-import Regla from '../components/Regla';
 import { reglasContrato } from '../components/reglasData';
 import { AppContainer } from 'ui';
 import { useTheme } from '@mui/material/styles';
@@ -58,11 +57,10 @@ function TerminosScreen() {
             key={index}
             defaultExpanded={index === 0}
             sx={{
-              backgroundColor: '#fafafa', // color de fondo claro
-              //boxShadow: 'none', // sin sombra
+              backgroundColor: '#fafafa',
               my: 2,
-              border: '1px solid #f5f5f5ff', // borde sutil
-              '&:before': { display: 'none' }, // quita la línea superior por defecto
+              border: '1px solid #f5f5f5ff',
+              '&:before': { display: 'none' },
             }}
           >
             <AccordionSummary
@@ -79,7 +77,7 @@ function TerminosScreen() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant="body2" component="div">
+              <Typography variant="body1" component="div" textAlign={'justify'}>
                 <ReactMarkdown>{regla.contenido}</ReactMarkdown>
               </Typography>
             </AccordionDetails>
