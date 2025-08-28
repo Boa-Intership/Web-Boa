@@ -34,7 +34,7 @@ const offices: OfficePreview[] = [
 const OfficePreviewSection: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <AppBox sx={{ py: { xs: 6, md: 10 }, background: 'background.paper' }}>
+    <AppBox sx={{ py: { xs: 7, md: 8 }, background: 'background.paper' }}>
       <AppContainer>
         <Typography
           variant="h4"

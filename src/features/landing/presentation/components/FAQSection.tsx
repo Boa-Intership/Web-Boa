@@ -38,7 +38,7 @@ const faqs = [
 ];
 
 const FAQSection = () => (
-  <AppBox sx={{ py: { xs: 6, md: 10 }, background: 'background.paper' }}>
+  <AppBox sx={{ xs: 5, md: 8, background: 'background.paper' }}>
     <AppContainer>
       <Box sx={{ mb: 6, textAlign: 'center' }}>
         <Typography variant="h4" fontWeight="bold" mb={2}>

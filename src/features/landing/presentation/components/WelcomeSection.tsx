@@ -39,7 +39,7 @@ const ExpItem: FC<{ item: Exp }> = ({ item }) => (
 const WelcomeSection: FC = () => {
   const navigate = useNavigate();
   return (
-    <AppBox sx={{ py: { xs: 4, md: 8 } }}>
+    <AppBox sx={{ py: { xs: 4, md: 7 } }}>
       <AppContainer>
         <AppGrid
           container
@@ -160,7 +160,7 @@ const WelcomeSection: FC = () => {
               <AppButton
                 size="large"
                 sx={{ fontSize: { xs: '1rem', md: '1.2rem' } }}
-                onClick={() => (window.location.href = ROUTES.HOME)}
+                onClick={() => navigate(ROUTES.HOME)}
               >
                 Comenzar
               </AppButton>
