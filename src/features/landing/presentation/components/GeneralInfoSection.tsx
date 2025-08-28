@@ -49,7 +49,13 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
   return (
     <AppBox sx={{ py: { xs: 6, md: 8 }, background: 'background.paper' }}>
       <AppContainer>
-        <Typography variant="h3" fontWeight={700} mb={2} textAlign="center">
+        <Typography
+          variant="h4"
+          fontWeight={700}
+          mb={2}
+          textAlign="center"
+          color="primary"
+        >
           {title}
         </Typography>
         <Typography

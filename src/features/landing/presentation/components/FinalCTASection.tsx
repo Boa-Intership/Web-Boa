@@ -20,7 +20,7 @@ const FinalCTASection: React.FC = () => {
       }}
     >
       <AppContainer>
-        <Typography variant="h4" fontWeight={700} mb={2}>
+        <Typography variant="h4" fontWeight={700} mb={2} color="primary">
           ¿Listo para comenzar con BOA Cargo?
         </Typography>
         <Typography variant="h6" fontWeight={400} mb={5}>

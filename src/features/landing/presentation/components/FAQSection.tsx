@@ -41,7 +41,7 @@ const FAQSection = () => (
   <AppBox sx={{ xs: 5, md: 8, background: 'background.paper' }}>
     <AppContainer>
       <Box sx={{ mb: 6, textAlign: 'center' }}>
-        <Typography variant="h4" fontWeight="bold" mb={2}>
+        <Typography variant="h4" fontWeight="bold" mb={2} color="primary">
           Preguntas Frecuentes
         </Typography>
       </Box>
