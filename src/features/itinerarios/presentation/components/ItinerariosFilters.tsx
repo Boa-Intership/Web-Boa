@@ -3,7 +3,7 @@ import {
   Box, Stack, Paper, FormControl, InputLabel, Select, MenuItem,
   IconButton, Chip, Divider, Typography, Tooltip, Button
 } from "@mui/material";
-import ClearAllIcon from "@mui/icons-material/ClearAll";
+import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Ciudad, DiaCorto } from "../../domain/Itinerario";
 
@@ -49,7 +49,7 @@ export default function ItinerariosFilters({
         <Tooltip title="Limpiar filtros">
           <span>
             <IconButton onClick={onClear} disabled={!activeChips.length} color="primary">
-              <ClearAllIcon />
+              <CleaningServicesIcon />
             </IconButton>
           </span>
         </Tooltip>

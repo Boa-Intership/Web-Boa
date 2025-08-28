@@ -6,6 +6,7 @@ import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Itinerario, DIAS_ORDEN } from "../../domain/Itinerario";
 import { getFlightStatus, FRANJA_COLORS } from "../../domain/getFlightStatus";
+import { alpha } from "@mui/material/styles";
 
 interface Props {
   items: Itinerario[];
@@ -86,14 +87,18 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
                 </TableCell>
                 <TableCell>{it.llegada}</TableCell>
                 <TableCell>
-                  <Stack direction="row" spacing={0.5} flexWrap="wrap">
-                    {it.dias.map(d => (
+                  <Stack direction="row" flexWrap="wrap" gap={0.5}>
+                    {it.dias.map((d) => (
                       <Chip
                         key={d}
                         size="small"
                         label={d}
-                        variant="filled"
-                        color="primary"
+                        sx={(t) => ({
+                          px: 0.5,
+                          fontWeight: 600,
+                          bgcolor: alpha(t.palette.primary.main, 0.08),
+                          color: t.palette.primary.main,
+                        })}
                       />
                     ))}
                   </Stack>
