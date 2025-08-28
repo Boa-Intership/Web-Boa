@@ -35,7 +35,9 @@ const HomeScreen: React.FC = () => {
             label="Información"
             icon={<InfoIcon fontSize="large" />}
             description="Consulta tipos de carga"
-            onClick={() => navigate(ROUTES.INFORMACION)}
+            onClick={() =>
+              navigate(ROUTES.TIPOS_CARGAS.replace(':tipo?', 'cargaGeneral'))
+            }
           />
           {/* <HomeActionButton
             label="Cotizar envío"

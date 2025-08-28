@@ -43,13 +43,18 @@ const MobileDrawer: React.FC<{
       <Box
         sx={{
           width: 300,
-          backgroundColor: '#fafafa',
+          backgroundColor: 'grey.200',
           height: '100%',
           p: 2,
         }}
         role="presentation"
       >
-        <Typography variant="h6" fontWeight={'bold'} color="primary.main">
+        <Typography
+          variant="h6"
+          fontWeight={'bold'}
+          color="primary.main"
+          sx={{ ml: 2 }}
+        >
           Menú
         </Typography>
 
@@ -83,9 +88,9 @@ const MobileDrawer: React.FC<{
                           }}
                           sx={buttonStyle}
                         >
-                          <ListItemIcon sx={iconStyle}>
+                          {/* <ListItemIcon sx={iconStyle}>
                             <DoneOutlinedIcon />
-                          </ListItemIcon>
+                          </ListItemIcon> */}
                           <ListItemText primary={l.label} />
                         </ListItemButton>
                       ))}

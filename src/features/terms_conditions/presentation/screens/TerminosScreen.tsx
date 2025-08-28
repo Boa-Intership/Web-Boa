@@ -14,14 +14,14 @@ import ReactMarkdown from 'react-markdown';
 function TerminosScreen() {
   const theme = useTheme();
   return (
-    <AppContainer>
+    <AppContainer sx={{ py: 4 }}>
       <Typography
         variant="h4"
         fontWeight={'bold'}
         mb={2}
         color={theme.palette.primary.main}
       >
-        Terminos y condiciones
+        Terminos y Condiciones
       </Typography>
       <Typography mb={2} textAlign={'justify'}>
         Tener términos y condiciones es fundamental para establecer un marco
