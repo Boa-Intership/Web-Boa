@@ -27,7 +27,7 @@ const HomeScreen: React.FC = () => {
       <AppContainer sx={{ mt: 4, mb: 4 }}>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
-          spacing={4}
+          spacing={3}
           alignItems="center"
           justifyContent="center"
         >
@@ -39,7 +39,7 @@ const HomeScreen: React.FC = () => {
               navigate(ROUTES.TIPOS_CARGAS.replace(':tipo?', 'cargaGeneral'))
             }
           />
-          {/* <HomeActionButton
+          <HomeActionButton
             label="Cotizar envío"
             icon={<AttachMoneyIcon fontSize="large" />}
             description="Cotización rápida para tu envío."
@@ -50,7 +50,7 @@ const HomeScreen: React.FC = () => {
             icon={<AssignmentIcon fontSize="large" />}
             description="Completa el pre-registro."
             onClick={() => navigate(ROUTES.PREREGISTRO)}
-          /> */}
+          />
         </Stack>
       </AppContainer>
       <AppContainer>

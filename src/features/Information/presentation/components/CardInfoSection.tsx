@@ -17,8 +17,8 @@ export default function CardInfoSection() {
       <Typography
         variant="h4"
         fontWeight={'bold'}
-        color={'#0F5299'}
-        marginBottom={2}
+        color="primary.dark"
+        marginBottom={6}
       >
         Tipos de carga en BoA Cargo
       </Typography>

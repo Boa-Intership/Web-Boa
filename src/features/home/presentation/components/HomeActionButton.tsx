@@ -18,87 +18,50 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({
     <Button
       onClick={onClick}
       sx={{
-        width: { xs: '100%', md: '20%' },
-
-        minHeight: { xs: 140, sm: 170 },
+        width: { xs: '70%', md: '25%' },
+        minHeight: { xs: 140, sm: 200 },
         borderRadius: 3,
         fontWeight: 'bold',
         textTransform: 'none',
         p: 2,
-        boxShadow: 4,
-        overflow: 'hidden',
+        boxShadow: 2,
+        border: '2px solid #eeeeeeff',
         display: 'flex',
         flexDirection: 'column',
+        color: 'primary.dark',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
+        gap: 1,
+        overflow: 'hidden',
         '&:hover': {
           background: '#E6B445',
           color: '#fff',
+          border: '2px solid #E6B445',
         },
-        '&:focus': {
-          outline: 'none',
-          boxShadow: 'none',
-        },
-        '&.Mui-focusVisible': {
+        '&:focus, &.Mui-focusVisible': {
           outline: 'none',
           boxShadow: 'none',
         },
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '100%',
-          width: '100%',
-          flexGrow: 1,
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            mb: 1,
-            mt: 1,
-          }}
-        >
-          {icon}
-        </Box>
+      {icon && <Box sx={{ fontSize: 40 }}>{icon}</Box>}
 
+      <Typography variant="h6" fontWeight="bold" textAlign="center">
+        {label}
+      </Typography>
+
+      {description && (
         <Typography
-          variant="subtitle1"
-          component="div"
+          variant="body2"
+          align="center"
           sx={{
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
             textAlign: 'center',
-            width: '100%',
             wordBreak: 'break-word',
-            mb: 0.5,
           }}
         >
-          {label}
+          {description}
         </Typography>
-
-        {description && (
-          <Typography
-            variant="body2"
-            //color="text.secondary"
-            align="center"
-            sx={{
-              width: '100%',
-              textAlign: 'center',
-              wordBreak: 'break-word',
-              mt: 'auto', // empuja hacia abajo si hay espacio
-            }}
-          >
-            {description}
-          </Typography>
-        )}
-      </Box>
+      )}
     </Button>
   );
 };
