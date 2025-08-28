@@ -26,8 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - run: npm ci
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
