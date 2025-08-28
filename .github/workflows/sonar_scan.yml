@@ -1,40 +1,40 @@
-name: SonarQube Analysis Main
+# name: SonarQube Analysis Main
 
-on:
-  push:
-    branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
 
-jobs:
-  sonarqube:
-    name: SonarQube Scan
-    runs-on: ubuntu-latest
+# jobs:
+#   sonarqube:
+#     name: SonarQube Scan
+#     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20]
+#     strategy:
+#       matrix:
+#         node-version: [20]
 
-    steps:
-    - name: Clone repository
-      uses: actions/checkout@v4
-      with:
-          fetch-depth: 0
+#     steps:
+#     - name: Clone repository
+#       uses: actions/checkout@v4
+#       with:
+#           fetch-depth: 0
       
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: ${{ matrix.node-version }}
+#         cache: 'npm'
         
-    - name: Install dependencies
-      run: npm ci
+#     - name: Install dependencies
+#       run: npm ci
     
-    - name: Build project
-      run: npm run build --if-present
+#     - name: Build project
+#       run: npm run build --if-present
     
-    # - name: Run tests
-    #   run: npm test
+#     # - name: Run tests
+#     #   run: npm test
 
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v5
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#     - name: SonarQube Scan
+#       uses: SonarSource/sonarqube-scan-action@v5
+#       env:
+#         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

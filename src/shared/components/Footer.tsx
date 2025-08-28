@@ -1,42 +1,88 @@
-
 import React from 'react';
-import { Box, Typography, Grid, Link, Button } from '@mui/material';
-import { ROUTES } from '../../router/routes';
+import { Box, Typography, Grid } from '@mui/material';
+import { AppBox, AppContainer } from 'ui';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import XIcon from '@mui/icons-material/X';
 
-// Estilos globales para los links del footer
+const LinkButton = ({ href, children, ...props }) => (
+  <Box
+    component="a"
+    href={href}
+    {...props}
+    sx={{
+      fontSize: 12,
+      fontWeight: 500,
+      color: (theme) => theme.palette.primary.main,
+      textTransform: 'none',
+      letterSpacing: 0.5,
+      transition: 'color 0.2s',
+      '&:hover': {
+        color: (theme) => theme.palette.secondary.main,
+        textDecoration: 'underline',
+      },
+      ...(props.sx || {}),
+    }}
+  >
+    {children}
+  </Box>
+);
+
 const sxLink = {
   fontSize: 12,
   fontWeight: 500,
-  color: (theme) => theme.palette.primary.contrastText,
+  color: (theme) => theme.palette.primary.main,
   textTransform: 'none',
   letterSpacing: 0.5,
   transition: 'color 0.2s',
   '&:hover': {
-    color: (theme) => theme.palette.secondary.light,
+    color: (theme) => theme.palette.secondary.main,
+    textDecoration: 'underline',
   },
 };
 
-// Estilos globales para los títulos de las secciones del footer
 const sxTitle = {
   fontWeight: 700,
-  color: (theme) => theme.palette.primary.contrastText,
+  color: (theme) => theme.palette.text.primary,
   mb: 1,
   fontSize: { xs: 15, md: 19 },
   letterSpacing: 0.5,
 };
 
+interface FooterSectionProps {
+  children: React.ReactNode;
+  align?: 'center' | 'left';
+}
+
+const FooterSection: React.FC<FooterSectionProps> = ({
+  children,
+  align = 'left',
+}) => (
+  <Box
+    display="flex"
+    flexDirection="column"
+    alignItems={{
+      xs: 'center',
+      md: align === 'left' ? 'flex-start' : 'center',
+    }}
+    textAlign={{ xs: 'center', md: align }}
+    gap={1}
+  >
+    {children}
+  </Box>
+);
 
 const Footer: React.FC = () => (
-
-  <Box
+  <AppBox
     component="footer"
     sx={{
       width: '100%',
       mt: 'auto',
-      backgroundColor: (theme) => theme.palette.primary.main,
-      color: (theme) => theme.palette.primary.contrastText,
-      borderTop: '2px solid',
-      borderColor: (theme) => theme.palette.grey[200],
+      backgroundColor: (theme) => theme.palette.background.default,
+      color: (theme) => theme.palette.text.primary,
+      borderTop: '10px solid',
+      borderColor: (theme) => theme.palette.background.paper,
       boxShadow: 3,
       fontSize: 16,
       letterSpacing: 1,
@@ -46,79 +92,79 @@ const Footer: React.FC = () => (
       px: { xs: 2, md: 8 },
     }}
   >
-    <Grid container spacing={4} justifyContent="center" alignItems="stretch">
-      {/* Acerca de BoA */}
-      <Grid item xs={12} sm={6} md={3}>
-        <Box display="flex" flexDirection="column" alignItems={{ xs: 'center', md: 'flex-start' }} textAlign={{ xs: 'center', md: 'left' }} gap={1}>
-          <Typography sx={sxTitle}>Acerca de BoA</Typography>
-          <Link href="#" underline="hover" sx={sxLink}>BoA Institucional</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Perfil Corporativo</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Avisos Importantes</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Somos IOSA</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Convocatorias</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Responsabilidad Social</Link>
-        </Box>
-      </Grid>
-      {/* Información legal */}
-      <Grid item xs={12} sm={6} md={3}>
-        <Box display="flex" flexDirection="column" alignItems={{ xs: 'center', md: 'flex-start' }} textAlign={{ xs: 'center', md: 'left' }} gap={1}>
-          <Typography sx={sxTitle}>Información legal</Typography>
-          <Link href="#" underline="hover" sx={sxLink}>Nuestras Tarifas</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Contrato de Transporte</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Derechos y Responsabilidades</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Términos y Condiciones</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Políticas de Privacidad</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Políticas de Cookies</Link>
-        </Box>
-      </Grid>
-      {/* Contáctanos */}
-      <Grid item xs={12} sm={6} md={3}>
-        <Box display="flex" flexDirection="column" alignItems={{ xs: 'center', md: 'flex-start' }} textAlign={{ xs: 'center', md: 'left' }} gap={1}>
-          <Typography sx={sxTitle}>Contáctanos</Typography>
-          <Link href="#" underline="hover" sx={sxLink}>Contact Center</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Nuestras Oficinas</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Whatsapp</Link>
-          <Box display="flex" gap={1} mt={1}>
-            <img src="/public/vite.svg" alt="iata logo" style={{ height: 24 }} />
-          </Box>
-        </Box>
-      </Grid>
-      {/* Enlaces Rápidos */}
-      <Grid item xs={12} sm={6} md={3}>
-        <Box display="flex" flexDirection="column" alignItems={{ xs: 'center', md: 'flex-start' }} textAlign={{ xs: 'center', md: 'left' }} gap={1}>
-          <Typography sx={sxTitle}>Enlaces Rápidos</Typography>
-          <Link href="#" underline="hover" sx={sxLink}>BoACargo</Link>
-          <Link href="#" underline="hover" sx={sxLink}>Mapa de Sitio</Link>
-          <Box display="flex" gap={1} mt={1}>
-            <img src="/public/vite.svg" alt="facebook" style={{ height: 24 }} />          
-          </Box>
-        </Box>
-      </Grid>
+    <AppContainer>
+      <Grid container spacing={4} justifyContent="center" alignItems="stretch">
+        {/* Acerca de BoA */}
+        <Grid item xs={12} sm={6} md={3}>
+          <FooterSection align="left">
+            <Typography sx={sxTitle}>Acerca de BoA</Typography>
+            <LinkButton href="#">BoA Institucional</LinkButton>
+            <LinkButton href="#">Perfil Corporativo</LinkButton>
+            <LinkButton href="#">Avisos Importantes</LinkButton>
+            <LinkButton href="#">Somos IOSA</LinkButton>
+            <LinkButton href="#">Convocatorias</LinkButton>
+            <LinkButton href="#">Responsabilidad Social</LinkButton>
+          </FooterSection>
+        </Grid>
+        {/* Información legal */}
+
+        <Grid item xs={12} sm={6} md={3}>
+          <FooterSection align="left">
+            <Typography sx={sxTitle}>Información legal</Typography>
+            <LinkButton href="#">Nuestras Tarifas</LinkButton>
+            <LinkButton href="#">Contrato de Transporte</LinkButton>
+            <LinkButton href="#">Derechos y Responsabilidades</LinkButton>
+            <LinkButton href="#">Términos y Condiciones</LinkButton>
+            <LinkButton href="#">Políticas de Privacidad</LinkButton>
+            <LinkButton href="#">Políticas de Cookies</LinkButton>
+          </FooterSection>
+        </Grid>
+        {/* Contáctanos */}
+        <Grid item xs={12} sm={6} md={3}>
+          <FooterSection align="left">
+            <Typography sx={sxTitle}>Contáctanos</Typography>
+            <LinkButton href="#">Contact Center</LinkButton>
+            <LinkButton href="#">Nuestras Oficinas</LinkButton>
+            <LinkButton href="#">Whatsapp</LinkButton>
+          </FooterSection>
+        </Grid>
+        {/* Enlaces Rápidos */}
+        <Grid item xs={12} sm={6} md={3}>
+          <FooterSection align="left">
+            <Typography sx={sxTitle}>Enlaces Rápidos</Typography>
+            <LinkButton href="#">BoACargo</LinkButton>
+            <LinkButton href="#">Mapa de Sitio</LinkButton>
+          </FooterSection>
+        </Grid>
+        {/* Redes Sociales */}
         <Grid item xs={12}>
-          <Box display="flex" justifyContent="left" alignItems="center" gap={2} mt={2}>
-            <Link href="https://facebook.com" target="_blank" rel="noopener" sx={{ display: 'flex', alignItems: 'center' }}>
-              <img src="/public/vite.svg" alt="Facebook" style={{ height: 28 }} />
-            </Link>
-            <Link href="https://instagram.com" target="_blank" rel="noopener" sx={{ display: 'flex', alignItems: 'center' }}>
-              <img src="/public/vite.svg" alt="Instagram" style={{ height: 28 }} />
-            </Link>
-            <Link href="https://youtube.com" target="_blank" rel="noopener" sx={{ display: 'flex', alignItems: 'center' }}>
-              <img src="/public/vite.svg" alt="YouTube" style={{ height: 28 }} />
-            </Link>
-            <Link href="https://twitter.com" target="_blank" rel="noopener" sx={{ display: 'flex', alignItems: 'center' }}>
-              <img src="/public/vite.svg" alt="X" style={{ height: 28 }} />
-            </Link>
+          <Grid container justifyContent="center" sx={{ gap: 4 }}>
+            <FacebookIcon href="https://www.facebook.com/BolivianaDeAviacion" />
+            <InstagramIcon href="https://www.instagram.com/boa_bolivia/" />
+            <YouTubeIcon href="https://www.youtube.com/@BoADigital" />
+            <XIcon href="https://x.com/VueleConBoA" />
+          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Box>
+            <Typography
+              variant="inherit"
+              align="center"
+              sx={{
+                color: (theme) => theme.palette.text.secondary,
+                fontWeight: 500,
+                fontSize: 14,
+              }}
+              gutterBottom
+            >
+              Copyright © 2025 Boliviana de Aviación. Todos los derechos
+              reservados
+            </Typography>
           </Box>
         </Grid>
-      <Grid item xs={12}>
-        <Box mt={3}>
-          <Typography variant='inherit' align="center" sx={{ color: (theme) => theme.palette.primary.contrastText, fontWeight: 500, fontSize: 14 }} gutterBottom>
-            Copyright © 2025 Boliviana de Aviación. Todos los derechos reservados
-          </Typography>
-        </Box>
       </Grid>
-    </Grid>
-  </Box>
+    </AppContainer>
+  </AppBox>
 );
 
 export default Footer;

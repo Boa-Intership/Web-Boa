@@ -15,5 +15,5 @@ const Main: React.FC = () => (
 createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Main />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

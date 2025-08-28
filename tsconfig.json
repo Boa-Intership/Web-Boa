@@ -13,6 +13,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "baseUrl": ".",
+    "paths": {
+      "ui": ["src/ui/index.ts"],
+      "ui/*": ["./src/ui/*"],
+      "pages/*": ["./src/pages/*"],
+    },
     "types": ["node", "react", "react-dom"]
   },
   "include": ["src"]

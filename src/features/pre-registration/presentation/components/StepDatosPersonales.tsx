@@ -97,7 +97,7 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
       <Grid container spacing={4}>
         {/* Panel Remitente */}
         <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 2, borderRadius: 4 }}>
+          <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor:'#FAFAFA' }}>
             <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
               <Person color='primary' />
               <Typography variant="h5" color='primary'>Información del Remitente</Typography>
@@ -125,7 +125,7 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
 
         {/* Panel Destinatario */}
         <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 2, borderRadius: 4 }}>
+          <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor:'#FAFAFA' }}>
             <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
               <Person color='primary' />
               <Typography variant="h5" color='primary'>Información del Destinatario</Typography>

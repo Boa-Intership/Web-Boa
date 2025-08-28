@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, ContainerProps } from '@mui/material';
-
 const AppContainer: React.FC<ContainerProps> = ({
   children,
   maxWidth = 'lg',
@@ -9,10 +8,10 @@ const AppContainer: React.FC<ContainerProps> = ({
 }) => {
   return (
     <Container
-      maxWidth="xl"
+      maxWidth="lg"
       sx={{
-        px: { xs: 2, sm: 4 }, // padding horizontal
-        py: { xs: 2, sm: 4 }, // padding vertical
+        //px: { xs: 2, sm: 4 }, // padding horizontal
+        py: 1, // padding vertical
         mx: 'auto', // centrar
 
         ...sx,
