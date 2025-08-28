@@ -38,8 +38,8 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
           mb={3}
           sx={{
             fontSize: {
-              xs: '1.5rem', // ~ h5 en pantallas pequeñas
-              md: '2.125rem', // ~ h4 en pantallas medianas o grandes
+              xs: '1.5rem',
+              md: '2.125rem',
             },
           }}
         >
