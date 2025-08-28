@@ -6,6 +6,7 @@ import {
   Typography,
   Box,
   Chip,
+  Container,
 } from '@mui/material';
 
 import { ContactCardNacional } from '../components/ContactCardNacional';
@@ -119,7 +120,7 @@ export default function ContactScreen() {
     };
 
   return (
-    <AppContainer sx={{ py: 8, minHeight: '80vh' }}>
+    <Container sx={{ py: 4, minHeight: '80vh' }}>
       <Typography variant="h4" fontWeight="bold" color="primary">
         Nuestras Oficinas
       </Typography>
@@ -177,6 +178,6 @@ export default function ContactScreen() {
           </AccordionDetails>
         </Accordion>
       ))}
-    </AppContainer>
+    </Container>
   );
 }
