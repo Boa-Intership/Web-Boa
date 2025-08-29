@@ -31,14 +31,14 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
         color: 'background.default',
       }}
     >
-      <Box sx={{ width: '100%', maxWidth: 1000, py: { xs: 4, md: 8 }, px: 2 }}>
+      <Box sx={{ width: '100%', py: { xs: 14, md: 14 }, px: 2 }}>
         <Typography
           variant="h4"
           fontWeight="bold"
-          mb={3}
+          mb={2}
           sx={{
             fontSize: {
-              xs: '1.5rem',
+              xs: '1.3rem',
               md: '2.125rem',
             },
           }}
@@ -47,7 +47,7 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
         </Typography>
         <Typography
           variant="body1"
-          sx={{ mb: 3, color: 'grey.200', maxWidth: 600, mx: 'auto' }}
+          sx={{ mb: 3, color: 'grey.200', mx: 'auto' }}
         >
           Realiza el seguimiento de tus envios en tiempo real, con la seguridad
           y confianza de BoA Cargo.

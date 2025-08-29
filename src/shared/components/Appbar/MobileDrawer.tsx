@@ -78,7 +78,11 @@ const MobileDrawer: React.FC<{
                 <Box sx={{ ml: 5 }}>
                   {item.columns.map((col, i) => (
                     <Box key={i}>
-                      {col.title && <Box>{col.title}</Box>}
+                      {/* {col.title && (
+                        <Typography fontWeight={'bold'} ml={2}>
+                          {col.title}
+                        </Typography>
+                      )} */}
                       {col.links.map((l) => (
                         <ListItemButton
                           key={l.to}

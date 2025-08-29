@@ -123,7 +123,7 @@ const AppAppBar: React.FC = () => {
               src={Logo}
               alt="BOA Logo"
               onClick={() => navigate(ROUTES.LANDING)}
-              sx={{ height: { xs: 26, md: 40 }, cursor: 'pointer' }}
+              sx={{ height: { xs: 35, md: 40 }, cursor: 'pointer' }}
             />
 
             <Box sx={{ flexGrow: 1 }} />
@@ -191,7 +191,7 @@ const AppAppBar: React.FC = () => {
             {/* -------- BOTONES LOGIN/REGISTRO -------- */}
             <Box
               sx={{
-                display: 'flex',
+                display: { xs: 'none', md: 'flex' },
                 gap: 2,
                 alignItems: 'center',
               }}
@@ -216,7 +216,22 @@ const AppAppBar: React.FC = () => {
 
             {/* -------- MENU HAMBURGUESA (mobile) -------- */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>
-              <IconButton onClick={() => setDrawerOpen(true)}>
+              <IconButton
+                onClick={() => setDrawerOpen(true)}
+                sx={{
+                  bgcolor: 'grey.100',
+                  color: 'primary.main',
+                  borderRadius: 10,
+                  p: 1.2,
+                  '&:hover': {
+                    bgcolor: 'grey.300',
+                  },
+                  '&:focus, &:focus-visible': {
+                    outline: 'none',
+                    boxShadow: 'none',
+                  },
+                }}
+              >
                 <MenuIcon />
               </IconButton>
             </Box>
