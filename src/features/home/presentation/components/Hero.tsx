@@ -54,7 +54,7 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
         </Typography>
 
         {/* Buscador */}
-        <Stack
+        {/* <Stack
           direction={{ xs: 'column', sm: 'row' }}
           spacing={2}
           alignItems="center"
@@ -90,7 +90,7 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
           >
             Rastrear
           </Button>
-        </Stack>
+        </Stack> */}
       </Box>
     </Box>
   );

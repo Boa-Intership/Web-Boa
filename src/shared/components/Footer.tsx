@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid, Icon, IconButton } from '@mui/material';
 import { AppBox, AppContainer } from 'ui';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -139,10 +139,18 @@ const Footer: React.FC = () => (
         {/* Redes Sociales */}
         <Grid item xs={12}>
           <Grid container justifyContent="center" sx={{ gap: 4 }}>
-            <FacebookIcon href="https://www.facebook.com/BolivianaDeAviacion" />
-            <InstagramIcon href="https://www.instagram.com/boa_bolivia/" />
-            <YouTubeIcon href="https://www.youtube.com/@BoADigital" />
-            <XIcon href="https://x.com/VueleConBoA" />
+            <a href="https://www.facebook.com/BolivianaDeAviacion">
+              <FacebookIcon />
+            </a>
+            <a href="https://www.instagram.com/boa_bolivia/">
+              <InstagramIcon />
+            </a>
+            <a href="https://www.youtube.com/@BoADigital">
+              <YouTubeIcon />
+            </a>
+            <a href="https://x.com/VueleConBoA">
+              <XIcon />
+            </a>
           </Grid>
         </Grid>
         <Grid item xs={12}>

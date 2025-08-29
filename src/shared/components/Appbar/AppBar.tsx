@@ -38,12 +38,12 @@ const navItems = [
     route: ROUTES.ITINERARIOS,
     icon: <EventNoteIcon />,
   },
-  {
-    key: 'preRegistro',
-    label: 'Pre-registro',
-    route: ROUTES.PREREGISTRO,
-    icon: <AssignmentOutlinedIcon />,
-  },
+  // {
+  //   key: 'preRegistro',
+  //   label: 'Pre-registro',
+  //   route: ROUTES.PREREGISTRO,
+  //   icon: <AssignmentOutlinedIcon />,
+  // },
   {
     key: 'informacion',
     label: 'Información',
@@ -191,7 +191,7 @@ const AppAppBar: React.FC = () => {
             <Box sx={{ flexGrow: 1 }} />
 
             {/* -------- BOTONES LOGIN/REGISTRO -------- */}
-            <Box
+            {/* <Box
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 gap: 2,
@@ -214,7 +214,7 @@ const AppAppBar: React.FC = () => {
               >
                 Registrarse
               </AppButton>
-            </Box>
+            </Box> */}
 
             {/* -------- MENU HAMBURGUESA (mobile) -------- */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>

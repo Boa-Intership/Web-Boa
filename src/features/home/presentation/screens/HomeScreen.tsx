@@ -31,7 +31,7 @@ const HomeScreen: React.FC = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <HomeActionButton
+          {/* <HomeActionButton
             label="Información"
             icon={<InfoIcon fontSize="large" />}
             description="Consulta tipos de carga"
@@ -50,7 +50,7 @@ const HomeScreen: React.FC = () => {
             icon={<AssignmentIcon fontSize="large" />}
             description="Completa el pre-registro."
             onClick={() => navigate(ROUTES.PREREGISTRO)}
-          />
+          /> */}
         </Stack>
       </AppContainer>
       <AppContainer>
