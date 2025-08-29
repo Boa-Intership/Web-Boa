@@ -29,7 +29,6 @@ const theme = createTheme({
       dark: '#8b9d3a',
       light: '#bdd168',
       contrastText: '#2c2c2c',
-      whatsapp: '#25D366'
     },
     // AZULES PERSONALIZADOS
     blue_light: {
