@@ -24,5 +24,13 @@ export default defineConfig({
       { find: '@', replacement: path.resolve(__dirname, './src') },
       { find: 'assets', replacement: path.resolve(__dirname, './src/assets') },
     ],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'lcov'],
+      exclude: [
+        'node_modules/',
+        'src/setupTests.ts',
+      ],
+    },
   },
 });
