@@ -22,6 +22,7 @@ import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 
 // ------------------ NAV ITEMS ------------------
 const navItems = [
@@ -160,6 +161,7 @@ const AppAppBar: React.FC = () => {
                             }
                             onMouseEnter={() => isMdUp && openMenu(item.key)}
                             onMouseLeave={() => isMdUp && closeMenuWithDelay()}
+                            icon={<KeyboardArrowDownOutlinedIcon />}
                           />
                           <MegaMenu
                             open={isOpen}

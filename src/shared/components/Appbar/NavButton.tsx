@@ -7,15 +7,17 @@ type Props = {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   active?: boolean;
+  icon?: React.ReactNode;
 };
 
 const NavButton = React.forwardRef<HTMLButtonElement, Props>(
-  ({ label, onClick, onMouseEnter, onMouseLeave, active }, ref) => (
+  ({ label, onClick, onMouseEnter, onMouseLeave, active, icon }, ref) => (
     <Button
       ref={ref}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      endIcon={icon}
       sx={{
         textTransform: 'none',
         fontWeight: 'bold',
