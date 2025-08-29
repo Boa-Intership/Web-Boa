@@ -35,17 +35,10 @@ export default function ItinerariosScreen() {
   const onClear = () => setFilters({});
 
   return (
-    <Container maxWidth="lg" sx={{ py: 3 }}>
+    <Container maxWidth="lg" sx={{ py: 4, minHeight: '80vh' }}>
       <Typography variant="h4" fontWeight="bold" color="primary" gutterBottom>
         Horarios de Vuelos
       </Typography>
-
-      {/* Leyenda de franjas */}
-      <Stack direction="row" spacing={2} mb={1}>
-        <Legend color={FRANJA_COLORS["mañana"]} label="Mañana (06:00–12:00)" />
-        <Legend color={FRANJA_COLORS["tarde"]} label="Tarde (12:00–18:00)" />
-        <Legend color={FRANJA_COLORS["noche"]} label="Noche (18:00–05:59)" />
-      </Stack>
 
       <ItinerariosFilters
         cities={cities}
@@ -55,6 +48,13 @@ export default function ItinerariosScreen() {
         total={ITINERARIOS_MOCK.length}
         filtered={filtered.length}
       />
+
+      {/* Leyenda de franjas */}
+      <Stack direction="row" spacing={2} mb={1}>
+        <Legend color={FRANJA_COLORS["mañana"]} label="Mañana (06:00–12:00)" />
+        <Legend color={FRANJA_COLORS["tarde"]} label="Tarde (12:00–18:00)" />
+        <Legend color={FRANJA_COLORS["noche"]} label="Noche (18:00–05:59)" />
+      </Stack>
 
       <ItinerariosTable
         items={filtered}

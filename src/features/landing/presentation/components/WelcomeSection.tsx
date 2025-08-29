@@ -1,10 +1,12 @@
-import { AppBox, AppContainer, AppGrid } from 'ui';
+import AppBox from '../../../../shared/components/AppBox';
+import AppContainer from '../../../../shared/components/AppContainer';
+import AppGrid from '../../../../shared/components/AppGrid';
 import { Typography, Box, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import welcomeImg from '../../../../assets/welcome.webp';
 import { FC } from 'react';
 import headline from '../../../../assets/headline-curve.svg';
-import { AppButton } from 'ui';
+import AppButton from '../../../../shared/components/AppButton';
 import { ROUTES } from '../../../../router/routes';
 
 interface Exp {

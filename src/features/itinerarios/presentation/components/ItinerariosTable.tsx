@@ -6,6 +6,7 @@ import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Itinerario, DIAS_ORDEN } from "../../domain/Itinerario";
 import { getFlightStatus, FRANJA_COLORS } from "../../domain/getFlightStatus";
+import { alpha } from "@mui/material/styles";
 
 interface Props {
   items: Itinerario[];
@@ -42,7 +43,6 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
   }
 
   return (
-    //<Paper sx={{ borderRadius: 4, bgcolor:'#FAFAFA' }}>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 850 }}>
         <TableHead sx={{ bgcolor:"#002D57" }}>
@@ -50,8 +50,8 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
             sx={{
               '& .MuiTableCell-root': {
                 color: '#FFFFFF',
-              },
-            }}
+              },
+            }}
           >
             <TableCell>Vuelo</TableCell>
             <TableCell>Ruta</TableCell>
@@ -60,7 +60,7 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
             <TableCell>Días</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody sx={{ bgcolor:"#FAFAFA" }}>
           {items.map(it => {
             const franja = getFlightStatus(it.salida);
             return (
@@ -87,14 +87,18 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
                 </TableCell>
                 <TableCell>{it.llegada}</TableCell>
                 <TableCell>
-                  <Stack direction="row" spacing={0.5} flexWrap="wrap">
-                    {it.dias.map(d => (
+                  <Stack direction="row" flexWrap="wrap" gap={0.5}>
+                    {it.dias.map((d) => (
                       <Chip
                         key={d}
                         size="small"
                         label={d}
-                        variant="filled"
-                        color="primary"
+                        sx={(t) => ({
+                          px: 0.5,
+                          fontWeight: 600,
+                          bgcolor: alpha(t.palette.primary.main, 0.08),
+                          color: t.palette.primary.main,
+                        })}
                       />
                     ))}
                   </Stack>
@@ -105,6 +109,5 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
         </TableBody>
       </Table>
     </TableContainer>
-    //</Paper>
   );
 }

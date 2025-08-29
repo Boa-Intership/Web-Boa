@@ -1,5 +1,4 @@
-import AppBox from '../../../../shared/components/AppBox';
-import AppContainer from '../../../../shared/components/AppContainer';
+import { AppBox, AppContainer } from 'ui';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Typography,
@@ -41,7 +40,7 @@ const FAQSection = () => (
   <AppBox sx={{ xs: 5, md: 8, background: 'background.paper' }}>
     <AppContainer>
       <Box sx={{ mb: 6, textAlign: 'center' }}>
-        <Typography variant="h4" fontWeight="bold" mb={2}>
+        <Typography variant="h4" fontWeight="bold" mb={2} color="primary">
           Preguntas Frecuentes
         </Typography>
       </Box>

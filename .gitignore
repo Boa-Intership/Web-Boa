@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+coverage
+sonar-project.properties
 
 # Editor directories and files
 .vscode/*
