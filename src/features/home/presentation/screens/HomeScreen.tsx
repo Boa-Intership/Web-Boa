@@ -6,8 +6,8 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeActionButton from '../components/HomeActionButton';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'router/routes';
 import { Hero, CardInfoSection } from 'ui';
+import { ROUTES } from 'router/routes';
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();

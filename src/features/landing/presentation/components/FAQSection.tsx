@@ -1,5 +1,4 @@
-import AppBox from '../../../../shared/components/AppBox';
-import AppContainer from '../../../../shared/components/AppContainer';
+import { AppBox, AppContainer } from 'ui';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Typography,
