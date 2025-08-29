@@ -19,10 +19,30 @@ const NavButton = React.forwardRef<HTMLButtonElement, Props>(
       sx={{
         textTransform: 'none',
         fontWeight: 'bold',
-        // fontWeight: active ? 700 : 600,
-        '&:focus, &.Mui-focusVisible': {
-          outline: 'none',
-          boxShadow: 'none',
+        position: 'relative',
+
+        color: active ? 'warning.main' : 'primary.main',
+        transition: 'color 0.3s ease',
+
+        '&:hover': {
+          color: 'warning.main',
+          backgroundColor: 'transparent',
+        },
+        '&:focus, &.Mui-focusVisible': { outline: 'none', boxShadow: 'none' },
+
+        // Línea animada abajo del texto
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          width: active ? '100%' : '0%',
+          height: '2px',
+          left: 0,
+          bottom: 0,
+          backgroundColor: 'warning.main',
+          transition: 'width 0.3s ease',
+        },
+        '&:hover::after': {
+          width: '100%',
         },
       }}
     >

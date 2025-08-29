@@ -88,9 +88,7 @@ const MobileDrawer: React.FC<{
                           }}
                           sx={buttonStyle}
                         >
-                          {/* <ListItemIcon sx={iconStyle}>
-                            <DoneOutlinedIcon />
-                          </ListItemIcon> */}
+                          <ListItemIcon sx={iconStyle}>{l.icon}</ListItemIcon>
                           <ListItemText primary={l.label} />
                         </ListItemButton>
                       ))}

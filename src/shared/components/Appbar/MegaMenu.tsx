@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Popper,
   Paper,
@@ -6,9 +6,12 @@ import {
   Box,
   MenuList,
   MenuItem,
-  useTheme,
-} from "@mui/material";
-import type { NavColumn } from "./types";
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import type { NavColumn } from './types';
 
 const MegaMenu: React.FC<{
   open: boolean;
@@ -26,8 +29,8 @@ const MegaMenu: React.FC<{
       style={{ zIndex: 1400 }}
       modifiers={
         [
-          { name: "offset", options: { offset: [0, 8] } },
-          { name: "preventOverflow", options: { boundary: "viewport" } },
+          { name: 'offset', options: { offset: [0, 8] } },
+          { name: 'preventOverflow', options: { boundary: 'viewport' } },
         ] as any
       }
     >
@@ -35,24 +38,50 @@ const MegaMenu: React.FC<{
         <Paper
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-          sx={{ mt: 1, p: 2, minWidth: 320 }}
+          sx={{
+            p: 2,
+            mt: 1.5,
+            boxShadow: 2,
+            backgroundColor: '#fafafa',
+          }}
         >
-          <Box sx={{ display: "flex", gap: 4 }}>
+          <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {columns?.map((col, i) => (
               <Box key={i} sx={{ minWidth: 160 }}>
                 {col.title && (
-                  <Box sx={{ fontWeight: 700, mb: 1 }}>{col.title}</Box>
+                  <Typography
+                    variant="body2"
+                    fontWeight={'bold'}
+                    color="primary.main"
+                  >
+                    {col.title}
+                  </Typography>
                 )}
-                <MenuList dense>
+                <MenuList role="menu" dense>
                   {col.links.map((l) => (
                     <MenuItem
                       key={l.to}
-                      onClick={() => {
-                        onClose();
-                        window.location.pathname = l.to;
+                      component={Link}
+                      to={l.to}
+                      onClick={onClose}
+                      role="menuitem"
+                      sx={{
+                        borderRadius: 1,
+                        transition: 'all 0.2s ease',
+
+                        '&:hover': {
+                          backgroundColor: 'Transparent',
+                          color: 'warning.main',
+                          pl: 2,
+                        },
                       }}
                     >
-                      {l.label}
+                      {l.icon && (
+                        <ListItemIcon sx={{ color: 'inherit', minWidth: 30 }}>
+                          {l.icon}
+                        </ListItemIcon>
+                      )}
+                      <ListItemText primary={l.label} />
                     </MenuItem>
                   ))}
                 </MenuList>
