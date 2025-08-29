@@ -78,7 +78,11 @@ const MobileDrawer: React.FC<{
                 <Box sx={{ ml: 5 }}>
                   {item.columns.map((col, i) => (
                     <Box key={i}>
-                      {col.title && <Box>{col.title}</Box>}
+                      {/* {col.title && (
+                        <Typography fontWeight={'bold'} ml={2}>
+                          {col.title}
+                        </Typography>
+                      )} */}
                       {col.links.map((l) => (
                         <ListItemButton
                           key={l.to}
@@ -88,9 +92,7 @@ const MobileDrawer: React.FC<{
                           }}
                           sx={buttonStyle}
                         >
-                          {/* <ListItemIcon sx={iconStyle}>
-                            <DoneOutlinedIcon />
-                          </ListItemIcon> */}
+                          <ListItemIcon sx={iconStyle}>{l.icon}</ListItemIcon>
                           <ListItemText primary={l.label} />
                         </ListItemButton>
                       ))}
@@ -101,7 +103,7 @@ const MobileDrawer: React.FC<{
             </React.Fragment>
           ))}
 
-          <ListItemButton
+          {/* <ListItemButton
             onClick={() => {
               onClose();
               navigate('/login');
@@ -130,7 +132,7 @@ const MobileDrawer: React.FC<{
               primary="Registrarse"
               primaryTypographyProps={{ fontWeight: 'bold' }}
             />
-          </ListItemButton>
+          </ListItemButton> */}
         </List>
       </Box>
     </Drawer>

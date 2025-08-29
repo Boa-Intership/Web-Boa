@@ -84,9 +84,10 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           alignItems="center"
           gap={1}
           justifyContent="flex-start"
+          color="primary.dark"
         >
           {icon}
-          <Typography variant="h6" fontWeight="bold" color="#002F5B">
+          <Typography variant="h6" fontWeight="bold">
             {title}
           </Typography>
         </Box>

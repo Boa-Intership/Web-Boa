@@ -6,8 +6,8 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeActionButton from '../components/HomeActionButton';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'router/routes';
 import { Hero, CardInfoSection } from 'ui';
+import { ROUTES } from 'router/routes';
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const HomeScreen: React.FC = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <HomeActionButton
+          {/* <HomeActionButton
             label="Información"
             icon={<InfoIcon fontSize="large" />}
             description="Consulta tipos de carga"
@@ -50,7 +50,7 @@ const HomeScreen: React.FC = () => {
             icon={<AssignmentIcon fontSize="large" />}
             description="Completa el pre-registro."
             onClick={() => navigate(ROUTES.PREREGISTRO)}
-          />
+          /> */}
         </Stack>
       </AppContainer>
       <AppContainer>

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid, Icon, IconButton } from '@mui/material';
 import { AppBox, AppContainer } from 'ui';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import XIcon from '@mui/icons-material/X';
+import { grey } from '@mui/material/colors';
 
 const LinkButton = ({ href, children, ...props }) => (
   <Box
@@ -14,12 +15,12 @@ const LinkButton = ({ href, children, ...props }) => (
     sx={{
       fontSize: 12,
       fontWeight: 500,
-      color: (theme) => theme.palette.primary.main,
+      color: grey[300],
       textTransform: 'none',
       letterSpacing: 0.5,
       transition: 'color 0.2s',
       '&:hover': {
-        color: (theme) => theme.palette.secondary.main,
+        color: grey[300],
         textDecoration: 'underline',
       },
       ...(props.sx || {}),
@@ -44,7 +45,7 @@ const sxLink = {
 
 const sxTitle = {
   fontWeight: 700,
-  color: (theme) => theme.palette.text.primary,
+  color: '#FFFFFF',
   mb: 1,
   fontSize: { xs: 15, md: 19 },
   letterSpacing: 0.5,
@@ -79,9 +80,8 @@ const Footer: React.FC = () => (
     sx={{
       width: '100%',
       mt: 'auto',
-      backgroundColor: (theme) => theme.palette.background.default,
-      color: (theme) => theme.palette.text.primary,
-      borderTop: '10px solid',
+      backgroundColor: (theme) => theme.palette.primary.dark,
+      color: grey[300],
       borderColor: (theme) => theme.palette.background.paper,
       boxShadow: 3,
       fontSize: 16,
@@ -139,10 +139,18 @@ const Footer: React.FC = () => (
         {/* Redes Sociales */}
         <Grid item xs={12}>
           <Grid container justifyContent="center" sx={{ gap: 4 }}>
-            <FacebookIcon href="https://www.facebook.com/BolivianaDeAviacion" />
-            <InstagramIcon href="https://www.instagram.com/boa_bolivia/" />
-            <YouTubeIcon href="https://www.youtube.com/@BoADigital" />
-            <XIcon href="https://x.com/VueleConBoA" />
+            <a href="https://www.facebook.com/BolivianaDeAviacion">
+              <FacebookIcon />
+            </a>
+            <a href="https://www.instagram.com/boa_bolivia/">
+              <InstagramIcon />
+            </a>
+            <a href="https://www.youtube.com/@BoADigital">
+              <YouTubeIcon />
+            </a>
+            <a href="https://x.com/VueleConBoA">
+              <XIcon />
+            </a>
           </Grid>
         </Grid>
         <Grid item xs={12}>
@@ -151,7 +159,7 @@ const Footer: React.FC = () => (
               variant="inherit"
               align="center"
               sx={{
-                color: (theme) => theme.palette.text.secondary,
+                color: grey[400],
                 fontWeight: 500,
                 fontSize: 14,
               }}

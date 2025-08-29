@@ -17,8 +17,9 @@
       "ui": ["src/ui/index.ts"],
       "ui/*": ["./src/ui/*"],
       "pages/*": ["./src/pages/*"],
+      "router/*": ["./src/router/*"]
     },
-    "types": ["node", "react", "react-dom"]
+  "types": ["node", "react", "react-dom", "vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src"]
 }
