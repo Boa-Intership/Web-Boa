@@ -16,9 +16,12 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: npm run lint
-      - run: npm run build
-      - run: npm test || echo "No tests"
+      - name: Run linting
+        run: npm run lint
+      - name: Run tests
+        run: npm test -- --run
+      - name: Build application
+        run: npm run build
 
   sonarcloud:
     name: SonarCloud Scan
@@ -28,6 +31,8 @@ jobs:
       - uses: actions/setup-node@v4
 
       - run: npm ci
+      - name: Run tests with coverage
+        run: npm test -- --coverage --run
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
