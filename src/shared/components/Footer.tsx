@@ -45,7 +45,7 @@ const sxLink = {
 
 const sxTitle = {
   fontWeight: 700,
-  color: '#FFFFFF',
+  color: grey[300],
   mb: 1,
   fontSize: { xs: 15, md: 19 },
   letterSpacing: 0.5,

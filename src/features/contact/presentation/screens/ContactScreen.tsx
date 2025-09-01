@@ -26,7 +26,7 @@ const oficinasNacionales = [
     },
     contacto: ['(+591) 72223583', '(+591) (4) 4150000 int: 4243'],
     mapEmbed:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.2427567343798!2d-66.17328705743876!3d-17.410553563730986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37300391f6a6b%3A0x2a75e9628fecdbd8!2sEx%20aeropuerto!5e1!3m2!1ses-419!2sbo!4v1755658705331!5m2!1ses-419!2sbo',
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d466.46097572249175!2d-66.17292040539294!3d-17.41020684101914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37396c09e0d11%3A0x237f368416d20b08!2sBoA%20Cargo!5e1!3m2!1ses-419!2sbo!4v1756733452865!5m2!1ses-419!2sbo',
   },
   {
     ciudad: 'La Paz',
@@ -51,7 +51,7 @@ const oficinasNacionales = [
       feriados: "No hay atención",
     },
     contacto: ["(+591) 72206649", "(+591) (3) 3148300 int: 3051"],
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.2427567343798!2d-66.17328705743876!3d-17.410553563730986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37300391f6a6b%3A0x2a75e9628fecdbd8!2sEx%20aeropuerto!5e1!3m2!1ses-419!2sbo!4v1755658705331!5m2!1ses-419!2sbo",
+    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1106.7446107713931!2d-63.13665556496211!3d-17.653025772924618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93f1e1e9759eefa1%3A0x796984b8f4e93738!2sBoa%20Cargo!5e1!3m2!1ses-419!2sbo!4v1756732579013!5m2!1ses-419!2sbo",
   },
   {
     ciudad: "Sucre",
@@ -63,7 +63,7 @@ const oficinasNacionales = [
       feriados: "No hay atención",
     },
     contacto: ["(+591) 68581964", "(+591) (4) 6912325 int: 4850"],
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.2427567343798!2d-66.17328705743876!3d-17.410553563730986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37300391f6a6b%3A0x2a75e9628fecdbd8!2sEx%20aeropuerto!5e1!3m2!1ses-419!2sbo!4v1755658705331!5m2!1ses-419!2sbo",
+    mapEmbed: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d739.6045702968908!2d-65.26463737211203!3d-19.0401604109328!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93fbc9004e30c38f%3A0xe4ea8e5941daf7d6!2sBoa%20Sucre!5e1!3m2!1ses-419!2sbo!4v1756733808018!5m2!1ses-419!2sbo",
   },
   {
     ciudad: "Tarija Ciudad",
@@ -76,7 +76,7 @@ const oficinasNacionales = [
     },
     contacto: ["(+591) (4) 6114222 int: 4750"],
     mapEmbed:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2405.2232816764404!2d-64.73616889100174!3d-21.535367962012895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x940647e193625af5%3A0xc8390887b357f59d!2sAMASZONAS%20linea%20a%C3%A9rea!5e1!3m2!1ses-419!2sbo!4v1755659109521!5m2!1ses-419!2sbo',
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d445.79061172755195!2d-64.73568347480199!3d-21.535221559844434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x940647e1968755f9%3A0x93de1540736be998!2sBOA%20Agencia%20De%20Pasajes!5e1!3m2!1ses-419!2sbo!4v1756734018551!5m2!1ses-419!2sbo',
   },
   {
     ciudad: "Tarija Ato",
@@ -89,7 +89,7 @@ const oficinasNacionales = [
     },
     contacto: ["(+591) 72242719"],
     mapEmbed:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.474304142891!2d-64.72967912487061!3d-21.52816197636296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9406c703cce7babb%3A0xd54252c236a2b6f5!2sTarija%20Terminal%20de%20Buses!5e0!3m2!1ses-419!2sbo!4v1691872360586!5m2!1ses-419!2sbo',
+      'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d478.262327722714!2d-64.70915345770842!3d-21.547059923421873!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x940639b03e3068cf%3A0x66a2595846fe0c32!2sBoa%20Cargo%20Tarija!5e1!3m2!1ses-419!2sbo!4v1756734118940!5m2!1ses-419!2sbo',
   },
   {
     ciudad: "Trinidad",
@@ -101,7 +101,7 @@ const oficinasNacionales = [
       feriados: "No hay atención",
     },
     contacto: ["(+591) 71494371"],
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.2427567343798!2d-66.17328705743876!3d-17.410553563730986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37300391f6a6b%3A0x2a75e9628fecdbd8!2sEx%20aeropuerto!5e1!3m2!1ses-419!2sbo!4v1755658705331!5m2!1ses-419!2sbo",
+    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d415.68181211157554!2d-64.91946662503668!3d-14.822474272657304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93dd71dad45d6f23%3A0x4622815d91c759e8!2sAeropuerto%20Teniente%20Jorge%20Henrich%20Arauz%20(TTD)!5e1!3m2!1ses-419!2sbo!4v1756734277808!5m2!1ses-419!2sbo",
   },
   {
     ciudad: "Oruro Ciudad",
@@ -114,7 +114,7 @@ const oficinasNacionales = [
     },
     contacto: ["(+591) 72207628", "(+591) (2) 5112473"],
     mapEmbed:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.474304142891!2d-64.72967912487061!3d-21.52816197636296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9406c703cce7babb%3A0xd54252c236a2b6f5!2sTarija%20Terminal%20de%20Buses!5e0!3m2!1ses-419!2sbo!4v1691872360586!5m2!1ses-419!2sbo',
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d425.71701968828353!2d-67.11512810584186!3d-17.971306254463993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e2b10ed57fe6af%3A0x65aa06787544bc4c!2sBOA%20CARGO!5e1!3m2!1ses-419!2sbo!4v1756734589965!5m2!1ses-419!2sbo',
   },
   {
     ciudad: "Oruro Ato",
@@ -126,7 +126,7 @@ const oficinasNacionales = [
       feriados: "No hay atención",
     },
     contacto: ["(+591) 72207628", "(+591) (2) 5213500"],
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.2427567343798!2d-66.17328705743876!3d-17.410553563730986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37300391f6a6b%3A0x2a75e9628fecdbd8!2sEx%20aeropuerto!5e1!3m2!1ses-419!2sbo!4v1755658705331!5m2!1ses-419!2sbo",
+    mapEmbed: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d929.6439442346699!2d-67.07951272249564!3d-17.96170594572893!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e2b743341d029b%3A0x7a086e6df0978676!2sAeropuerto%20Internacional%20Juan%20Mendoza!5e1!3m2!1ses-419!2sbo!4v1756734745122!5m2!1ses-419!2sbo",
   },
   {
     ciudad: "Uyuni",
@@ -138,7 +138,7 @@ const oficinasNacionales = [
       feriados: "No hay atención",
     },
     contacto: ["(+591) 71821262"],
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.2427567343798!2d-66.17328705743876!3d-17.410553563730986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37300391f6a6b%3A0x2a75e9628fecdbd8!2sEx%20aeropuerto!5e1!3m2!1ses-419!2sbo!4v1755658705331!5m2!1ses-419!2sbo",
+    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d652.5396738374519!2d-66.84345955800724!3d-20.445001042187457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93ffbaedbf7d0749%3A0x6e7f4fcef28579ad!2sAeropuerto%20Internacional%20La%20Joya%20Andina!5e1!3m2!1ses-419!2sbo!4v1756734951778!5m2!1ses-419!2sbo",
   },
   {
     ciudad: "Cobija",
@@ -150,7 +150,7 @@ const oficinasNacionales = [
       feriados: "No hay atención",
     },
     contacto: ["(+591) 72223582", "(+591) 71722437"],
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.2427567343798!2d-66.17328705743876!3d-17.410553563730986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37300391f6a6b%3A0x2a75e9628fecdbd8!2sEx%20aeropuerto!5e1!3m2!1ses-419!2sbo!4v1755658705331!5m2!1ses-419!2sbo",
+    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d691.3032448195087!2d-68.75814583027434!3d-11.025681200026138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x917eb0d73675c5c3%3A0x3f495a50a8580456!2sBoA!5e1!3m2!1ses-419!2sbo!4v1756735715057!5m2!1ses-419!2sbo",
   },
   {
     ciudad: 'Yacuiba',
@@ -163,7 +163,7 @@ const oficinasNacionales = [
     },
     contacto: ['(+591) 72988105'],
     mapEmbed:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.474304142891!2d-64.72967912487061!3d-21.52816197636296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9406c703cce7babb%3A0xd54252c236a2b6f5!2sTarija%20Terminal%20de%20Buses!5e0!3m2!1ses-419!2sbo!4v1691872360586!5m2!1ses-419!2sbo',
+      'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d897.0200470947035!2d-63.65698907017053!3d-21.965704548831088!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x940f2be809205bf1%3A0xe12e7040ba1274f3!2sAeropuerto%20de%20Yacuiba%20(BYC)!5e1!3m2!1ses-419!2sbo!4v1756735829535!5m2!1ses-419!2sbo',
   },
 ];
 
@@ -173,7 +173,7 @@ const oficinasInternacionales = [
     direccion: 'Autopista Richieri S/N, CP 1802 a 35 Km del sud oeste de Buenos Aires - Terminal \"A\" frente al mostrador 1',
     contacto: ['+54 11 4322 4222', '+54 911 6052 1267'],
     email: 'sergio.dufo@crossracer.aero',
-    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200668.9404677262!2d-58.47644675!3d-34.68774425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5a7f531c7b5%3A0xfdd992892f9ccadb!2sAeroparque%20Internacional%20Jorge%20Newbery!5e1!3m2!1ses-419!2sbo!4v1755659240317!5m2!1ses-419!2sbo',
+    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.6460028244624!2d-58.541010292982364!3d-34.814490500666714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcd0f4e2dea557%3A0xf19b6f81d441cc3b!2sAeropuerto%20Internacional%20Ezeiza!5e1!3m2!1ses-419!2sbo!4v1756736401748!5m2!1ses-419!2sbo',
   },
   {
     ciudad: "Sao Paulo",
