@@ -24,9 +24,9 @@ function TerminosScreen() {
       >
         Terminos y Condiciones
       </Typography>
-
-      <ReactMarkdown>{terminosData.infoSeguridadCarga}</ReactMarkdown>
-
+      <Typography variant="body1" component="div" textAlign={'justify'}>
+        <ReactMarkdown>{terminosData.infoSeguridadCarga}</ReactMarkdown>
+      </Typography>
       <Typography
         variant="h6"
         fontWeight="bold"
