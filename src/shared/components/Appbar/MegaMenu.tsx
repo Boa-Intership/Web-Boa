@@ -40,7 +40,6 @@ const MegaMenu: React.FC<{
           onMouseLeave={onMouseLeave}
           sx={{
             p: 2,
-            mt: 1.5,
             boxShadow: 2,
             backgroundColor: '#fafafa',
           }}
@@ -71,7 +70,7 @@ const MegaMenu: React.FC<{
 
                         '&:hover': {
                           backgroundColor: 'Transparent',
-                          color: 'warning.main',
+                          color: 'primary.main',
                           pl: 2,
                         },
                       }}

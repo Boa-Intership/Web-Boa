@@ -23,11 +23,10 @@ const NavButton = React.forwardRef<HTMLButtonElement, Props>(
         fontWeight: 'bold',
         position: 'relative',
 
-        color: active ? 'warning.main' : 'primary.main',
+        color: "#fff",
         transition: 'color 0.3s ease',
 
         '&:hover': {
-          color: 'warning.main',
           backgroundColor: 'transparent',
         },
         '&:focus, &.Mui-focusVisible': { outline: 'none', boxShadow: 'none' },

@@ -80,7 +80,8 @@ const Footer: React.FC = () => (
     sx={{
       width: '100%',
       mt: 'auto',
-      backgroundColor: (theme) => theme.palette.primary.dark,
+      //backgroundColor: (theme) => theme.palette.primary.dark,
+      background: "linear-gradient(90deg, #002D57 0%, #0F5299 100%)",
       color: grey[300],
       borderColor: (theme) => theme.palette.background.paper,
       boxShadow: 3,
@@ -140,16 +141,16 @@ const Footer: React.FC = () => (
         <Grid item xs={12}>
           <Grid container justifyContent="center" sx={{ gap: 4 }}>
             <a href="https://www.facebook.com/BolivianaDeAviacion">
-              <FacebookIcon />
+              <FacebookIcon sx={{ color:grey[300] }} />
             </a>
             <a href="https://www.instagram.com/boa_bolivia/">
-              <InstagramIcon />
+              <InstagramIcon sx={{ color:grey[300] }} />
             </a>
             <a href="https://www.youtube.com/@BoADigital">
-              <YouTubeIcon />
+              <YouTubeIcon sx={{ color:grey[300] }} />
             </a>
             <a href="https://x.com/VueleConBoA">
-              <XIcon />
+              <XIcon sx={{ color:grey[300] }} />
             </a>
           </Grid>
         </Grid>

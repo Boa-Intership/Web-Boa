@@ -14,7 +14,7 @@ import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
 import AppContainer from '../AppContainer';
-import { AppButton, Logo } from 'ui';
+import { AppButton, Logo, LogoCargo } from 'ui';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import EventNoteIcon from '@mui/icons-material/EventNote';
@@ -109,7 +109,8 @@ const AppAppBar: React.FC = () => {
       <AppBar
         position="fixed"
         sx={{
-          bgcolor: theme.palette.background.paper,
+          bgcolor: "#1C2E5E",
+          //background: "linear-gradient(90deg, #003366 0%, #0073e6 100%)",
           boxShadow: 'none',
         }}
       >
@@ -121,10 +122,10 @@ const AppAppBar: React.FC = () => {
             {/* -------- LOGO -------- */}
             <Box
               component="img"
-              src={Logo}
+              src={LogoCargo}
               alt="BOA Logo"
               onClick={() => navigate(ROUTES.LANDING)}
-              sx={{ height: { xs: 35, md: 40 }, cursor: 'pointer' }}
+              sx={{ height: { xs: 50, md: 55 }, cursor: 'pointer' }}
             />
 
             <Box sx={{ flexGrow: 1 }} />
