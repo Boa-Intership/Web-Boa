@@ -12,7 +12,18 @@ const faqs = [
   {
     question: '¿Cuáles son los horarios de atención de BOA Cargo?',
     answer:
-      'Nuestro horario de atención es de lunes a viernes de 8:00 a 18:00 y sábados de 9:00 a 14:00. Puedes contactarnos por teléfono, correo o chat en vivo durante estos horarios.',
+      'Nuestro horario de atención es de lunes a viernes de 8:00 a 16:00 y sábados de 9:00 a 14:00. Puedes contactarnos por teléfono, correo o chat en vivo durante estos horarios.',
+  },
+  {
+    question: '¿Por qué la carga debe estar abierta antes de ser aceptada?',
+    answer:
+      'La presentación de la carga en condición abierta constituye un requisito indispensable para llevar a cabo los procesos de verificación e inspección conforme a las normativas internacionales de la OACI y a la regulación nacional de la DGAC Bolivia. Este procedimiento garantiza la detección de artículos prohibidos o no declarados. De esta manera, se preserva la integridad de la operación aérea, los pasajeros, la tripulación y la aeronave.',
+  },
+  {
+    question:
+      '¿Por qué se exige que la carga sea presentada al menos 2 horas antes del vuelo?',
+    answer:
+      'La entrega anticipada de la carga, con un margen mínimo de dos horas previo a la salida del vuelo, responde a la necesidad de realizar los controles de seguridad establecidos por la OACI y la DGAC Bolivia. Dicho intervalo garantiza el tiempo suficiente para ejecutar inspecciones rigurosas, verificar documentación, aplicar medidas de sellado y certificar el cumplimiento de los estándares de seguridad aeronáutica.',
   },
   {
     question: '¿Qué restricciones existen para enviar paquetes?',
