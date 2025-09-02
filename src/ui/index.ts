@@ -14,6 +14,7 @@ export { default as RoundButton } from '../shared/components/RoundButton';
 export { default as InfoTipoCarga } from '../features/Information/presentation/components/infoTipoCarga';
 
 export { default as Logo } from '../assets/Logo.svg';
+export { default as LogoCargo } from '../assets/LogoCargo.svg';
 export { default as AppButton } from '../shared/components/AppButton';
 
 // export { default as ROUTES } from '../router/routes';
