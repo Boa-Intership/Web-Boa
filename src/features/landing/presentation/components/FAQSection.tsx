@@ -48,35 +48,33 @@ const faqs = [
 ];
 
 const FAQSection = () => (
-  <AppBox sx={{ xs: 5, md: 8, background: 'background.paper' }}>
-    <AppContainer>
-      <Box sx={{ mb: 6, textAlign: 'center' }}>
-        <Typography variant="h4" fontWeight="bold" mb={2} color="primary">
-          Preguntas Frecuentes
-        </Typography>
-      </Box>
-      <Box sx={{ maxWidth: 700, mx: 'auto' }}>
-        {faqs.map((faq, idx) => (
-          <Accordion key={idx} sx={{ mb: 2, boxShadow: 1 }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls={`faq-content-${idx}`}
-              id={`faq-header-${idx}`}
-            >
-              <Typography variant="subtitle1" fontWeight={600}>
-                {faq.question}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body2" color="text.secondary">
-                {faq.answer}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-      </Box>
-    </AppContainer>
-  </AppBox>
+  <AppContainer sx={{ xs: 5, md: 8 }}>
+    <Box sx={{ mb: 6, textAlign: 'center' }}>
+      <Typography variant="h4" fontWeight="bold" mb={2} color="primary">
+        Preguntas Frecuentes
+      </Typography>
+    </Box>
+    <Box sx={{ maxWidth: 700, mx: 'auto' }}>
+      {faqs.map((faq, idx) => (
+        <Accordion key={idx} sx={{ mb: 2, boxShadow: 1 }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={`faq-content-${idx}`}
+            id={`faq-header-${idx}`}
+          >
+            <Typography variant="subtitle1" fontWeight={600}>
+              {faq.question}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body2" color="text.secondary">
+              {faq.answer}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      ))}
+    </Box>
+  </AppContainer>
 );
 
 export default FAQSection;

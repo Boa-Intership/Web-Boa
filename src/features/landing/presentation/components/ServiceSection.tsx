@@ -1,6 +1,6 @@
 import { Box, Typography, List, ListItem } from '@mui/material';
 import aboutImg from 'assets/call.webp';
-import { AppContainer, AppGrid, AppButton } from 'ui';
+import { AppBox, AppContainer, AppGrid, AppButton } from 'ui';
 import { ROUTES } from 'router/routes';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,80 +31,82 @@ const ServiceSection: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <AppContainer sx={{ py: { xs: 5, md: 8 }} }>
-      <AppGrid
-        container
-        spacing={4}
-        alignItems="center"
-        justifyContent="center"
-      >
+    <AppBox sx={{ py: { xs: 6, md: 8 } }}>
+      <AppContainer>
         <AppGrid
-          item
-          xs={12}
-          md={6}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+          container
+          spacing={4}
+          alignItems="center"
+          justifyContent="center"
         >
-          <Box
-            component="img"
-            src={aboutImg}
-            alt="Atención al Cliente"
+          <AppGrid
+            item
+            xs={12}
+            md={6}
             sx={{
-              width: { xs: '105%', md: '115%' },
-              borderRadius: 6,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
-          />
-        </AppGrid>
-        <AppGrid
-          item
-          xs={12}
-          md={6}
-          sx={{ display: 'flex', alignItems: 'center' }}
-        >
-          <Box sx={{ px: { xs: 0, md: 4 } }}>
-            <Typography
-              variant="h4"
-              color="primary"
-              fontWeight={700}
-              gutterBottom
-            >
-              Atención al Cliente
-            </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-              {data.paragraph}
-            </Typography>
-            <AppGrid container spacing={2}>
-              <AppGrid item xs={12} sm={6}>
-                <List>
-                  {data.Why.map((d, i) => (
-                    <ListItem key={`why-${i}`}>{d}</ListItem>
-                  ))}
-                </List>
-              </AppGrid>
-              <AppGrid item xs={12} sm={6}>
-                <List>
-                  {data.Why2.map((d, i) => (
-                    <ListItem key={`why2-${i}`}>{d}</ListItem>
-                  ))}
-                </List>
-              </AppGrid>
-            </AppGrid>
-            <Box sx={{ mt: 4, textAlign: { xs: 'center', md: 'left' } }}>
-              <AppButton
-                size="large"
+          >
+            <Box
+              component="img"
+              src={aboutImg}
+              alt="Atención al Cliente"
+              sx={{
+                width: { xs: '105%', md: '115%' },
+                borderRadius: 6,
+              }}
+            />
+          </AppGrid>
+          <AppGrid
+            item
+            xs={12}
+            md={6}
+            sx={{ display: 'flex', alignItems: 'center' }}
+          >
+            <Box sx={{ px: { xs: 0, md: 4 } }}>
+              <Typography
+                variant="h4"
                 color="primary"
-                onClick={() => navigate(ROUTES.CONTACTO)}
+                fontWeight={700}
+                gutterBottom
               >
-                Contáctanos
-              </AppButton>
+                Atención al Cliente
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                {data.paragraph}
+              </Typography>
+              <AppGrid container spacing={2}>
+                <AppGrid item xs={12} sm={6}>
+                  <List>
+                    {data.Why.map((d, i) => (
+                      <ListItem key={`why-${i}`}>{d}</ListItem>
+                    ))}
+                  </List>
+                </AppGrid>
+                <AppGrid item xs={12} sm={6}>
+                  <List>
+                    {data.Why2.map((d, i) => (
+                      <ListItem key={`why2-${i}`}>{d}</ListItem>
+                    ))}
+                  </List>
+                </AppGrid>
+              </AppGrid>
+              <Box sx={{ mt: 4, textAlign: { xs: 'center', md: 'left' } }}>
+                <AppButton
+                  size="large"
+                  color="primary"
+                  onClick={() => navigate(ROUTES.CONTACTO)}
+                >
+                  Contáctanos
+                </AppButton>
+              </Box>
             </Box>
-          </Box>
+          </AppGrid>
         </AppGrid>
-      </AppGrid>
-    </AppContainer>
+      </AppContainer>
+    </AppBox>
   );
 };
 

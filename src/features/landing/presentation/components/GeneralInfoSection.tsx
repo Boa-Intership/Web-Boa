@@ -47,73 +47,71 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <AppBox sx={{ py: { xs: 6, md: 8 }, background: 'background.paper' }}>
-      <AppContainer>
-        <Typography
-          variant="h4"
-          fontWeight={700}
-          mb={2}
-          textAlign="center"
-          color="primary"
-        >
-          {title}
-        </Typography>
-        <Typography
-          variant="h6"
-          color="text.secondary"
-          mb={4}
-          textAlign="center"
-        >
-          {subtitle}
-        </Typography>
-        <Divider sx={{ mb: 4 }} />
-        <AppGrid container spacing={4} justifyContent="center">
-          {sections.map((section) => (
-            <AppGrid item xs={12} sm={6} key={section.title}>
-              <Box
-                sx={{
-                  p: 4,
-                  borderRadius: 4,
-                  boxShadow: 2,
-                  background: 'background.default',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  height: '100%',
-                }}
+    <AppContainer sx={{ py: { xs: 6, md: 8 }}}>
+      <Typography
+        variant="h4"
+        fontWeight={700}
+        mb={2}
+        textAlign="center"
+        color="primary"
+      >
+        {title}
+      </Typography>
+      <Typography
+        variant="h6"
+        color="text.secondary"
+        mb={4}
+        textAlign="center"
+      >
+        {subtitle}
+      </Typography>
+      <Divider sx={{ mb: 4 }} />
+      <AppGrid container spacing={4} justifyContent="center">
+        {sections.map((section) => (
+          <AppGrid item xs={12} sm={6} key={section.title}>
+            <Box
+              sx={{
+                p: 4,
+                borderRadius: 4,
+                boxShadow: 2,
+                background: 'background.default',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                height: '100%',
+              }}
+            >
+              {section.icon}
+              <Typography
+                variant="h6"
+                fontWeight={600}
+                mb={2}
+                textAlign="center"
               >
-                {section.icon}
-                <Typography
-                  variant="h6"
-                  fontWeight={600}
-                  mb={2}
-                  textAlign="center"
-                >
-                  {section.title}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  mb={3}
-                  color="text.secondary"
-                  textAlign="center"
-                >
-                  {section.description}
-                </Typography>
-                <AppButton
-                  variant="contained"
-                  color="primary"
-                  size="medium"
-                  onClick={() => navigate(section.link)}
-                  sx={{ mt: 'auto' }}
-                >
-                  {section.buttonText}
-                </AppButton>
-              </Box>
-            </AppGrid>
-          ))}
-        </AppGrid>
-      </AppContainer>
-    </AppBox>
+                {section.title}
+              </Typography>
+              <Typography
+                variant="body2"
+                mb={3}
+                color="text.secondary"
+                textAlign="center"
+              >
+                {section.description}
+              </Typography>
+              <AppButton
+                variant="contained"
+                color="primary"
+                size="medium"
+                onClick={() => navigate(section.link)}
+                sx={{ mt: 'auto' }}
+              >
+                {section.buttonText}
+              </AppButton>
+            </Box>
+          </AppGrid>
+        ))}
+      </AppGrid>
+    </AppContainer>
   );
 };
 
