@@ -22,12 +22,12 @@ const offices: OfficePreview[] = [
   {
     ciudad: 'La Paz',
     direccion: 'Carga Aeropuerto Internacional El Alto',
-    urlGoogleMaps: 'https://maps.app.goo.gl/eiNkgYLVVrbqGGnC8',
+    urlGoogleMaps: 'https://maps.app.goo.gl/2JNVq6WC8aFRwicL7',
   },
   {
-    ciudad: 'Tarija',
+    ciudad: 'Tarija Ciudad',
     direccion: 'Calle General Trigo, zona centro',
-    urlGoogleMaps: 'https://maps.app.goo.gl/eiNkgYLVVrbqGGnC8',
+    urlGoogleMaps: 'https://maps.app.goo.gl/cSnMAV6Kh6ARomrN9',
   },
 ];
 

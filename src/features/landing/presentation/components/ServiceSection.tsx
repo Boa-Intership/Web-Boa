@@ -31,7 +31,7 @@ const ServiceSection: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <AppContainer>
+    <AppContainer sx={{ py: { xs: 5, md: 8 }} }>
       <AppGrid
         container
         spacing={4}

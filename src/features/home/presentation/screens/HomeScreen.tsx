@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack } from '@mui/material';
+import { Container, Stack } from '@mui/material';
 import { AppContainer } from 'ui';
 import InfoIcon from '@mui/icons-material/Info';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -53,9 +53,9 @@ const HomeScreen: React.FC = () => {
           /> */}
         </Stack>
       </AppContainer>
-      <AppContainer>
+      <Container sx={{ mb:6 }}>
         <CardInfoSection />
-      </AppContainer>
+      </Container>
     </>
   );
 };

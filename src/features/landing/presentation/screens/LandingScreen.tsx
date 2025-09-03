@@ -19,7 +19,7 @@ const LandingScreen: React.FC = () => (
     <FAQSection />
     {/*<ServicesSection />*/}
     {/*<ServicesSection />*/}
-    <FinalCTASection />
+    {/*<FinalCTASection />*/}
   </>
 );
 
