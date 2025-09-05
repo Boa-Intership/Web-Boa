@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Typography, List, ListItem } from '@mui/material';
 import aboutImg from 'assets/call.webp';
 import { AppBox, AppContainer, AppGrid, AppButton } from 'ui';

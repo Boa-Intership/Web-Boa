@@ -11,7 +11,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 export default defineConfig([
   globalIgnores(['dist', 'coverage']),
   {
-    files: ['**/*.{ts,tsx,js,jsx}'],
+    files: ['**/*.{ts,tsx,js,jsx}', 'src/__tests__/**/*.ts', 'src/__tests__/**/*.tsx'],
     ignores: ['node_modules', 'build', 'coverage'],
     languageOptions: {
       parser: tsParser,
@@ -19,7 +19,15 @@ export default defineConfig([
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
       },
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+      },
     },
     plugins: {
       react,

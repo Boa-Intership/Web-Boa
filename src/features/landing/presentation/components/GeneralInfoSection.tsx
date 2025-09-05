@@ -1,4 +1,4 @@
-import AppBox from '../../../../shared/components/AppBox';
+import React from 'react';
 import AppContainer from '../../../../shared/components/AppContainer';
 import AppGrid from '../../../../shared/components/AppGrid';
 import AppButton from '../../../../shared/components/AppButton';

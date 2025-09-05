@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Button, Grid, Typography, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle } from '@mui/icons-material';

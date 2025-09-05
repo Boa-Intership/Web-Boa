@@ -7,11 +7,10 @@ import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
 import AppContainer from '../AppContainer';
-import { AppButton, Logo, LogoCargo } from 'ui';
+import { LogoCargo } from 'ui';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import EventNoteIcon from '@mui/icons-material/EventNote';
-import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
@@ -88,7 +87,7 @@ const AppAppBar: React.FC = () => {
   };
   const closeMenuWithDelay = (delay = HoverDelay) => {
     if (hoverTimeout.current) window.clearTimeout(hoverTimeout.current);
-    // @ts-ignore
+
     hoverTimeout.current = window.setTimeout(() => setOpenKey(null), delay);
   };
   const handleClose = () => setOpenKey(null);

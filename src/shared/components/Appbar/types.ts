@@ -1,3 +1,4 @@
+import React from 'react';
 export type NavColumn = {
   title?: string;
   links: { label: string; to: string; icon?: React.ReactNode }[];

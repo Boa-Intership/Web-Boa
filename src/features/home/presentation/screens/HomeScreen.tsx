@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Stack } from '@mui/material';
 import { AppContainer } from 'ui';
-import InfoIcon from '@mui/icons-material/Info';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import HomeActionButton from '../components/HomeActionButton';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Hero, CardInfoSection } from 'ui';
-import { ROUTES } from 'router/routes';
+// import { ROUTES } from 'router/routes';
 
 const HomeScreen: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [tracking, setTracking] = useState('');
 
   const handleTrack = () => {

@@ -1,5 +1,5 @@
-import { Box, Typography, Button, Stack, TextField, InputAdornment } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import React from 'react';
+import { Box, Typography } from '@mui/material';
 import portada from 'assets/GGI_portada1.webp';
 
 interface HeroProps {

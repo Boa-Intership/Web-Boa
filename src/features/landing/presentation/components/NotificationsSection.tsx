@@ -1,3 +1,4 @@
+import React from 'react';
 import AppBox from '../../../../shared/components/AppBox';
 import AppContainer from '../../../../shared/components/AppContainer';
 import AppGrid from '../../../../shared/components/AppGrid';

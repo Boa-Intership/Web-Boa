@@ -30,19 +30,6 @@ const LinkButton = ({ href, children, ...props }) => (
   </Box>
 );
 
-const sxLink = {
-  fontSize: 12,
-  fontWeight: 500,
-  color: (theme) => theme.palette.primary.main,
-  textTransform: 'none',
-  letterSpacing: 0.5,
-  transition: 'color 0.2s',
-  '&:hover': {
-    color: (theme) => theme.palette.secondary.main,
-    textDecoration: 'underline',
-  },
-};
-
 const sxTitle = {
   fontWeight: 700,
   color: grey[300],

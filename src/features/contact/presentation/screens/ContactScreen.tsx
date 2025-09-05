@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import {
   Accordion,
@@ -12,7 +13,6 @@ import {
 import { ContactCardNacional } from '../components/ContactCardNacional';
 import { ContactCardInternacional } from '../components/ContactCardInternacional';
 import { ExpandMore, Home, Public } from '@mui/icons-material';
-import AppContainer from '../../../../shared/components/AppContainer';
 
 const oficinasNacionales = [
   {
@@ -177,7 +177,7 @@ const oficinasInternacionales = [
   {
     ciudad: 'Buenos Aires',
     direccion:
-      'Autopista Richieri S/N, CP 1802 a 35 Km del sud oeste de Buenos Aires - Terminal \"A\" frente al mostrador 1',
+      'Autopista Richieri S/N, CP 1802 a 35 Km del sud oeste de Buenos Aires - Terminal "A" frente al mostrador 1',
     contacto: ['+54 11 4322 4222', '+54 911 6052 1267'],
     email: 'sergio.dufo@crossracer.aero',
     mapEmbed:
