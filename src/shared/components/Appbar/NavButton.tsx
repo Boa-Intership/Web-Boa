@@ -23,7 +23,7 @@ const NavButton = React.forwardRef<HTMLButtonElement, Props>(
         fontWeight: 'bold',
         position: 'relative',
 
-        color: "#fff",
+        color: '#fff',
         transition: 'color 0.3s ease',
 
         '&:hover': {
@@ -49,7 +49,7 @@ const NavButton = React.forwardRef<HTMLButtonElement, Props>(
     >
       {label}
     </Button>
-  ),
+  )
 );
 NavButton.displayName = 'NavButton';
 export default NavButton;

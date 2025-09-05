@@ -33,12 +33,7 @@ const ServiceSection: React.FC = () => {
   return (
     <AppBox sx={{ py: { xs: 6, md: 8 } }}>
       <AppContainer>
-        <AppGrid
-          container
-          spacing={4}
-          alignItems="center"
-          justifyContent="center"
-        >
+        <AppGrid container spacing={4} alignItems="center" justifyContent="center">
           <AppGrid
             item
             xs={12}
@@ -59,19 +54,9 @@ const ServiceSection: React.FC = () => {
               }}
             />
           </AppGrid>
-          <AppGrid
-            item
-            xs={12}
-            md={6}
-            sx={{ display: 'flex', alignItems: 'center' }}
-          >
+          <AppGrid item xs={12} md={6} sx={{ display: 'flex', alignItems: 'center' }}>
             <Box sx={{ px: { xs: 0, md: 4 } }}>
-              <Typography
-                variant="h4"
-                color="primary"
-                fontWeight={700}
-                gutterBottom
-              >
+              <Typography variant="h4" color="primary" fontWeight={700} gutterBottom>
                 Atención al Cliente
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
@@ -94,11 +79,7 @@ const ServiceSection: React.FC = () => {
                 </AppGrid>
               </AppGrid>
               <Box sx={{ mt: 4, textAlign: { xs: 'center', md: 'left' } }}>
-                <AppButton
-                  size="large"
-                  color="primary"
-                  onClick={() => navigate(ROUTES.CONTACTO)}
-                >
+                <AppButton size="large" color="primary" onClick={() => navigate(ROUTES.CONTACTO)}>
                   Contáctanos
                 </AppButton>
               </Box>

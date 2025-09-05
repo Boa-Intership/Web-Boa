@@ -17,9 +17,7 @@ import { AppStack } from 'ui';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
-  const [selected, setSelected] = React.useState<string>(
-    tipo || 'cargaGeneral',
-  ); //valor inicial desde la URL
+  const [selected, setSelected] = React.useState<string>(tipo || 'cargaGeneral'); //valor inicial desde la URL
 
   const theme = useTheme();
   const colorBoton = theme.palette.primary.dark;
@@ -46,20 +44,10 @@ function TipoCargaScreen() {
 
   return (
     <AppContainer sx={{ py: 4 }}>
-      <Typography
-        variant="h4"
-        fontWeight={'bold'}
-        gutterBottom
-        color={theme.palette.primary.main}
-      >
+      <Typography variant="h4" fontWeight={'bold'} gutterBottom color={theme.palette.primary.main}>
         Tipos de carga
       </Typography>
-      <Typography
-        variant="body2"
-        mb={2}
-        textAlign="justify"
-        sx={{ whiteSpace: 'pre-line' }}
-      >
+      <Typography variant="body2" mb={2} textAlign="justify" sx={{ whiteSpace: 'pre-line' }}>
         {`Al analizar los distintos tipos de carga transportada por vía aérea, se dividen en dos grupos principales: carga general y carga especial.Esta última se divide en subgrupos especializados más pequeños. Analizaremos estos subgrupos con mayor detalle más adelante.
 
         Si tiene preguntas respecto a los requisitos para los envíos aéreos, le invitamos a comunicarse con nuestro Call Center de su ciudad de residencia.`}

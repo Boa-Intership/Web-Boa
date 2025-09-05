@@ -55,7 +55,8 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           sx={{
             position: 'absolute',
             inset: 0, // shorthand: top:0, left:0, right:0, bottom:0
-            background: 'linear-gradient(180deg, rgba(0,51,102,0.55) 0%, rgba(0,115,230,0.35) 100%)',
+            background:
+              'linear-gradient(180deg, rgba(0,51,102,0.55) 0%, rgba(0,115,230,0.35) 100%)',
             borderTopLeftRadius: 12,
             borderTopRightRadius: 12,
             opacity: hover ? 0.7 : 0.5, // más fuerte al hover

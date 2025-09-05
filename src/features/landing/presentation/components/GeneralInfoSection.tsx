@@ -20,9 +20,7 @@ const sections: SectionInfo[] = [
     title: 'Tipos de carga y normativa',
     description:
       'Conoce los diferentes tipos de carga que puedes enviar y la normativa vigente para cada uno.',
-    icon: (
-      <LocalShippingIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
-    ),
+    icon: <LocalShippingIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />,
     link: '/tipos-cargas',
     buttonText: 'Ver más',
   },
@@ -47,22 +45,11 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <AppContainer sx={{ py: { xs: 6, md: 8 }}}>
-      <Typography
-        variant="h4"
-        fontWeight={700}
-        mb={2}
-        textAlign="center"
-        color="primary"
-      >
+    <AppContainer sx={{ py: { xs: 6, md: 8 } }}>
+      <Typography variant="h4" fontWeight={700} mb={2} textAlign="center" color="primary">
         {title}
       </Typography>
-      <Typography
-        variant="h6"
-        color="text.secondary"
-        mb={4}
-        textAlign="center"
-      >
+      <Typography variant="h6" color="text.secondary" mb={4} textAlign="center">
         {subtitle}
       </Typography>
       <Divider sx={{ mb: 4 }} />
@@ -82,20 +69,10 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               }}
             >
               {section.icon}
-              <Typography
-                variant="h6"
-                fontWeight={600}
-                mb={2}
-                textAlign="center"
-              >
+              <Typography variant="h6" fontWeight={600} mb={2} textAlign="center">
                 {section.title}
               </Typography>
-              <Typography
-                variant="body2"
-                mb={3}
-                color="text.secondary"
-                textAlign="center"
-              >
+              <Typography variant="body2" mb={3} color="text.secondary" textAlign="center">
                 {section.description}
               </Typography>
               <AppButton

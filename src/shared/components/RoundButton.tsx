@@ -9,13 +9,7 @@ interface Props {
   icon?: React.ReactNode;
 }
 
-const RoundButton = ({
-  color = '#f6a40e',
-  children,
-  onClick,
-  selected = false,
-  icon,
-}: Props) => {
+const RoundButton = ({ color = '#f6a40e', children, onClick, selected = false, icon }: Props) => {
   return (
     <Button
       onClick={onClick}

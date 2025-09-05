@@ -17,17 +17,17 @@ export const homeApi = {
       return {
         success: true,
         data: response.data,
-        message: 'API conectada correctamente'
+        message: 'API conectada correctamente',
       };
     } catch (error) {
       console.error('Error conectando con la API:', error);
       return {
         success: false,
         data: null,
-        message: 'Error al conectar con la API'
+        message: 'Error al conectar con la API',
       };
     }
   },
 };
 
-export default homeApi; 
+export default homeApi;

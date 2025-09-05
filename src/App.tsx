@@ -21,28 +21,13 @@ const App: React.FC = () => (
         <Route index element={<LandingScreen />} />
         <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
         <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
-        <Route
-          path={ROUTES.CONTACTO.replace('/', '')}
-          element={<ContactScreen />}
-        />
-        <Route
-          path={ROUTES.PREREGISTRO.replace('/', '')}
-          element={<PreRegistroScreen />}
-        />
-        <Route
-          path={ROUTES.COMPROBANTE.replace('/', '')}
-          element={<ComprobanteScreen />}
-        />
-        <Route
-          path={ROUTES.INFORMACION.replace('/', '')}
-          element={<InformacionScreen />}
-        />
+        <Route path={ROUTES.CONTACTO.replace('/', '')} element={<ContactScreen />} />
+        <Route path={ROUTES.PREREGISTRO.replace('/', '')} element={<PreRegistroScreen />} />
+        <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
+        <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
         <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
 
-        <Route
-          path={ROUTES.TERMINOS.replace('/', '')}
-          element={<TerminosScreen />}
-        />
+        <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

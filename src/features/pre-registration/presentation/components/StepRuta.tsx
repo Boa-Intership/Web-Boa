@@ -4,7 +4,16 @@ import { LocationOn } from '@mui/icons-material';
 import { Alert, AlertTitle } from '@mui/material';
 
 const ciudades = [
-  'Cochabamba', 'La Paz', 'Santa Cruz', 'Tarija', 'Oruro', 'Potosí', 'Sucre', 'Trinidad', 'Cobija', 'Buenos Aires'
+  'Cochabamba',
+  'La Paz',
+  'Santa Cruz',
+  'Tarija',
+  'Oruro',
+  'Potosí',
+  'Sucre',
+  'Trinidad',
+  'Cobija',
+  'Buenos Aires',
 ];
 
 const StepRuta = ({ data, setData, onNext, onBack }: any) => {
@@ -15,7 +24,7 @@ const StepRuta = ({ data, setData, onNext, onBack }: any) => {
     const { name, value } = e.target;
     const newData = {
       ...localData,
-      [name]: value
+      [name]: value,
     };
     setLocalData(newData);
     if (newData.origen && newData.destino) {
@@ -36,9 +45,11 @@ const StepRuta = ({ data, setData, onNext, onBack }: any) => {
   return (
     <Box>
       <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
-        <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
-          <LocationOn color='primary' />
-          <Typography variant="h5" color='primary'>Información de la Ruta</Typography>
+        <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
+          <LocationOn color="primary" />
+          <Typography variant="h5" color="primary">
+            Información de la Ruta
+          </Typography>
         </Box>
         {/* Alert */}
         {showError && (
@@ -84,11 +95,15 @@ const StepRuta = ({ data, setData, onNext, onBack }: any) => {
         </Grid>
       </Paper>
       <Grid mt={4} display="flex" justifyContent="space-between">
-        <Button variant="outlined" onClick={onBack}>Anterior</Button>
-        <Button variant="contained" onClick={handleNextClick}>Siguiente</Button>
+        <Button variant="outlined" onClick={onBack}>
+          Anterior
+        </Button>
+        <Button variant="contained" onClick={handleNextClick}>
+          Siguiente
+        </Button>
       </Grid>
     </Box>
   );
-}
+};
 
 export default StepRuta;

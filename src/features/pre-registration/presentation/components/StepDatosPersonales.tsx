@@ -4,10 +4,12 @@ import { Person } from '@mui/icons-material';
 import { validateField } from '../../domain/validators/validateDatosPersonales';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
-  const [localData, setLocalData] = useState(data || {
-    remitente: {},
-    destinatario: {}
-  });
+  const [localData, setLocalData] = useState(
+    data || {
+      remitente: {},
+      destinatario: {},
+    }
+  );
 
   const [errors, setErrors] = useState<any>({});
   /*
@@ -25,19 +27,19 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     // Validar el campo individualmente
     const error = validateField(name, value);
     setLocalData((prev: any) => ({
-        ...prev,
-        [tipo]: {
+      ...prev,
+      [tipo]: {
         ...prev[tipo],
-        [name]: value
-        }
+        [name]: value,
+      },
     }));
 
     setErrors((prev: any) => ({
       ...prev,
       [tipo]: {
         ...prev[tipo],
-        [name]: error
-      }
+        [name]: error,
+      },
     }));
   };
 
@@ -48,7 +50,7 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     const requiredFieldsRemitente = ['ci', 'celular', 'nombre', 'correo'];
     const requiredFieldsDestinatario = ['celular', 'nombre'];
 
-    requiredFieldsRemitente.forEach(field => {
+    requiredFieldsRemitente.forEach((field) => {
       const value = localData.remitente?.[field] || '';
       const error = validateField(field, value);
       if (error) {
@@ -57,7 +59,7 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
       }
     });
 
-    requiredFieldsDestinatario.forEach(field => {
+    requiredFieldsDestinatario.forEach((field) => {
       const value = localData.destinatario?.[field] || '';
       const error = validateField(field, value);
       if (error) {
@@ -97,10 +99,12 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
       <Grid container spacing={4}>
         {/* Panel Remitente */}
         <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor:'#FAFAFA' }}>
-            <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
-              <Person color='primary' />
-              <Typography variant="h5" color='primary'>Información del Remitente</Typography>
+          <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor: '#FAFAFA' }}>
+            <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
+              <Person color="primary" />
+              <Typography variant="h5" color="primary">
+                Información del Remitente
+              </Typography>
             </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -125,10 +129,12 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
 
         {/* Panel Destinatario */}
         <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor:'#FAFAFA' }}>
-            <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
-              <Person color='primary' />
-              <Typography variant="h5" color='primary'>Información del Destinatario</Typography>
+          <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor: '#FAFAFA' }}>
+            <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
+              <Person color="primary" />
+              <Typography variant="h5" color="primary">
+                Información del Destinatario
+              </Typography>
             </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -152,7 +158,9 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
 
         {/* Botón siguiente */}
         <Grid item xs={12} display="flex" justifyContent="flex-end">
-          <Button variant="contained" color="primary" onClick={handleNextClick}>Siguiente</Button>
+          <Button variant="contained" color="primary" onClick={handleNextClick}>
+            Siguiente
+          </Button>
         </Grid>
       </Grid>
     </Box>

@@ -1,16 +1,27 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 import {
-  Box, Stack, Paper, FormControl, InputLabel, Select, MenuItem,
-  IconButton, Chip, Divider, Typography, Tooltip, Button
-} from "@mui/material";
+  Box,
+  Stack,
+  Paper,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  IconButton,
+  Chip,
+  Divider,
+  Typography,
+  Tooltip,
+  Button,
+} from '@mui/material';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { Ciudad, DiaCorto } from "../../domain/Itinerario";
+import { Ciudad, DiaCorto } from '../../domain/Itinerario';
 
 export interface FiltersState {
-  origin?: string;      // código IATA o ""
+  origin?: string; // código IATA o ""
   destination?: string; // código IATA o ""
-  day?: DiaCorto | "";  // "" = todos
+  day?: DiaCorto | ''; // "" = todos
 }
 
 interface Props {
@@ -22,30 +33,37 @@ interface Props {
   filtered: number;
 }
 
-const DIAS: DiaCorto[] = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+const DIAS: DiaCorto[] = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
 export default function ItinerariosFilters({
-  cities, value, onChange, onClear, total, filtered
+  cities,
+  value,
+  onChange,
+  onClear,
+  total,
+  filtered,
 }: Props) {
   const activeChips = useMemo(() => {
-    const chips: {label: string, key: string}[] = [];
+    const chips: { label: string; key: string }[] = [];
     if (value.origin) {
-      const c = cities.find(c => c.codigo === value.origin);
-      chips.push({ label: `Origen: ${c?.nombre} (${c?.codigo})`, key: "origin" });
+      const c = cities.find((c) => c.codigo === value.origin);
+      chips.push({ label: `Origen: ${c?.nombre} (${c?.codigo})`, key: 'origin' });
     }
     if (value.destination) {
-      const c = cities.find(c => c.codigo === value.destination);
-      chips.push({ label: `Destino: ${c?.nombre} (${c?.codigo})`, key: "destination" });
+      const c = cities.find((c) => c.codigo === value.destination);
+      chips.push({ label: `Destino: ${c?.nombre} (${c?.codigo})`, key: 'destination' });
     }
-    if (value.day) chips.push({ label: `Día: ${value.day}`, key: "day" });
+    if (value.day) chips.push({ label: `Día: ${value.day}`, key: 'day' });
     return chips;
   }, [value, cities]);
 
   return (
-    <Paper elevation={3} sx={{ p: 3, mb: 3, borderRadius: 4, bgcolor:'#FFFFFF' }}>
+    <Paper elevation={3} sx={{ p: 3, mb: 3, borderRadius: 4, bgcolor: '#FFFFFF' }}>
       <Stack direction="row" alignItems="center" spacing={1}>
-        <FilterAltIcon sx={{ color:"#D98C00" }} />
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>Filtrar Vuelos</Typography>
+        <FilterAltIcon sx={{ color: '#D98C00' }} />
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          Filtrar Vuelos
+        </Typography>
         <Tooltip title="Limpiar filtros">
           <span>
             <IconButton onClick={onClear} disabled={!activeChips.length} color="primary">
@@ -55,16 +73,16 @@ export default function ItinerariosFilters({
         </Tooltip>
       </Stack>
 
-      <Stack direction={{ xs: "column", md: "row" }} spacing={2} mt={2}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} mt={2}>
         <FormControl sx={{ minWidth: 250 }}>
           <InputLabel>Origen</InputLabel>
           <Select
             label="Origen"
-            value={value.origin ?? ""}
+            value={value.origin ?? ''}
             onChange={(e) => onChange({ ...value, origin: e.target.value || undefined })}
           >
             <MenuItem value="">Todas las ciudades</MenuItem>
-            {cities.map(c => (
+            {cities.map((c) => (
               <MenuItem key={c.codigo} value={c.codigo}>
                 {c.nombre} ({c.codigo})
               </MenuItem>
@@ -76,11 +94,11 @@ export default function ItinerariosFilters({
           <InputLabel>Destino</InputLabel>
           <Select
             label="Destino"
-            value={value.destination ?? ""}
+            value={value.destination ?? ''}
             onChange={(e) => onChange({ ...value, destination: e.target.value || undefined })}
           >
             <MenuItem value="">Todas las ciudades</MenuItem>
-            {cities.map(c => (
+            {cities.map((c) => (
               <MenuItem key={c.codigo} value={c.codigo}>
                 {c.nombre} ({c.codigo})
               </MenuItem>
@@ -92,11 +110,15 @@ export default function ItinerariosFilters({
           <InputLabel>Día de la semana</InputLabel>
           <Select
             label="Día de la semana"
-            value={value.day ?? ""}
-            onChange={(e) => onChange({ ...value, day: (e.target.value as DiaCorto) || "" })}
+            value={value.day ?? ''}
+            onChange={(e) => onChange({ ...value, day: (e.target.value as DiaCorto) || '' })}
           >
             <MenuItem value="">Todos los días</MenuItem>
-            {DIAS.map(d => <MenuItem key={d} value={d}>{d}</MenuItem>)}
+            {DIAS.map((d) => (
+              <MenuItem key={d} value={d}>
+                {d}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Stack>
@@ -105,7 +127,7 @@ export default function ItinerariosFilters({
         {activeChips.length ? (
           <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
             <Typography variant="body2">Filtros activos:</Typography>
-            {activeChips.map(ch => (
+            {activeChips.map((ch) => (
               <Chip
                 key={ch.key}
                 label={ch.label}
@@ -122,7 +144,7 @@ export default function ItinerariosFilters({
 
       <Divider sx={{ my: 2 }} />
 
-      <Stack direction={{ xs: "column", md: "row" }} alignItems="center" spacing={1}>
+      <Stack direction={{ xs: 'column', md: 'row' }} alignItems="center" spacing={1}>
         <Typography variant="subtitle1">
           {activeChips.length
             ? `${filtered} vuelos encontrados con los filtros aplicados`
@@ -130,7 +152,9 @@ export default function ItinerariosFilters({
         </Typography>
         <Box flexGrow={1} />
         {/* Acceso rápido para ver todos si estás en vacío */}
-        <Button size="small" onClick={onClear}>Ver todos los vuelos</Button>
+        <Button size="small" onClick={onClear}>
+          Ver todos los vuelos
+        </Button>
       </Stack>
     </Paper>
   );

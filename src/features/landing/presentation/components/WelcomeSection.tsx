@@ -154,9 +154,8 @@ const WelcomeSection: FC = () => {
                   mb: 2,
                 }}
               >
-                SERVICIOS DE CARGA AEREA PARA ENVIOS NACIONALES E
-                INTERNACIONALES. GESTIONA TUS PAQUETES CON FACILIDAD Y
-                TRANSPARENCIA.
+                SERVICIOS DE CARGA AEREA PARA ENVIOS NACIONALES E INTERNACIONALES. GESTIONA TUS
+                PAQUETES CON FACILIDAD Y TRANSPARENCIA.
               </Typography>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
               <AppButton

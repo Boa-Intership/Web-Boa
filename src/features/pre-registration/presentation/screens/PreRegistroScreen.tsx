@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Container, Box, Step, StepLabel, Stepper } from '@mui/material';
 import StepHeader from '../components/StepHeader';
 import StepDatosPersonales from '../components/StepDatosPersonales';
@@ -25,30 +25,32 @@ export default function PreRegistroScreen() {
   const steps = [
     <StepDatosPersonales
       data={{ remitente: formData.remitente, destinatario: formData.destinatario }}
-      setData={(d) => setFormData({ ...formData, remitente: d.remitente, destinatario: d.destinatario })}
+      setData={(d) =>
+        setFormData({ ...formData, remitente: d.remitente, destinatario: d.destinatario })
+      }
       onNext={handleNext}
     />,
     <StepRuta
-      data={formData.ruta} 
-      setData={(d) => setFormData({...formData, ruta: d})} 
-      onNext={handleNext} onBack={handleBack} 
+      data={formData.ruta}
+      setData={(d) => setFormData({ ...formData, ruta: d })}
+      onNext={handleNext}
+      onBack={handleBack}
     />,
     <StepCarga
-      data={formData.carga} 
-      setData={(d) => setFormData({...formData, carga: d})} 
-      onNext={handleNext} onBack={handleBack} 
+      data={formData.carga}
+      setData={(d) => setFormData({ ...formData, carga: d })}
+      onNext={handleNext}
+      onBack={handleBack}
     />,
     <StepFactura
       data={formData.factura}
       setData={(d) => setFormData({ ...formData, factura: d })}
-      onNext={handleNext} onBack={handleBack}
+      onNext={handleNext}
+      onBack={handleBack}
       carga={formData.carga}
       ruta={formData.ruta}
     />,
-    <StepResumen
-      formData={formData}
-      onBack={handleBack}
-    />,
+    <StepResumen formData={formData} onBack={handleBack} />,
   ];
 
   return (
@@ -58,4 +60,4 @@ export default function PreRegistroScreen() {
       {steps[step]}
     </AppContainer>
   );
-} 
+}

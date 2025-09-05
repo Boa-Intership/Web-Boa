@@ -1,11 +1,4 @@
-import {
-  Box,
-  Typography,
-  Button,
-  Stack,
-  TextField,
-  InputAdornment,
-} from '@mui/material';
+import { Box, Typography, Button, Stack, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import portada from 'assets/GGI_portada1.webp';
 
@@ -45,12 +38,9 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
         >
           Gestiona tus envíos de carga de forma rápida y sencilla.
         </Typography>
-        <Typography
-          variant="body1"
-          sx={{ mb: 3, color: 'grey.200', mx: 'auto' }}
-        >
-          Realiza el seguimiento de tus envios en tiempo real, con la seguridad
-          y confianza de BoA Cargo.
+        <Typography variant="body1" sx={{ mb: 3, color: 'grey.200', mx: 'auto' }}>
+          Realiza el seguimiento de tus envios en tiempo real, con la seguridad y confianza de BoA
+          Cargo.
         </Typography>
 
         {/* Buscador */}

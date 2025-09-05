@@ -56,10 +56,7 @@ interface FooterSectionProps {
   align?: 'center' | 'left';
 }
 
-const FooterSection: React.FC<FooterSectionProps> = ({
-  children,
-  align = 'left',
-}) => (
+const FooterSection: React.FC<FooterSectionProps> = ({ children, align = 'left' }) => (
   <Box
     display="flex"
     flexDirection="column"
@@ -81,7 +78,7 @@ const Footer: React.FC = () => (
       width: '100%',
       mt: 'auto',
       //backgroundColor: (theme) => theme.palette.primary.dark,
-      background: "linear-gradient(90deg, #002D57 0%, #0F5299 100%)",
+      background: 'linear-gradient(90deg, #002D57 0%, #0F5299 100%)',
       color: grey[300],
       borderColor: (theme) => theme.palette.background.paper,
       boxShadow: 3,
@@ -141,16 +138,16 @@ const Footer: React.FC = () => (
         <Grid item xs={12}>
           <Grid container justifyContent="center" sx={{ gap: 4 }}>
             <a href="https://www.facebook.com/BolivianaDeAviacion">
-              <FacebookIcon sx={{ color:grey[300] }} />
+              <FacebookIcon sx={{ color: grey[300] }} />
             </a>
             <a href="https://www.instagram.com/boa_bolivia/">
-              <InstagramIcon sx={{ color:grey[300] }} />
+              <InstagramIcon sx={{ color: grey[300] }} />
             </a>
             <a href="https://www.youtube.com/@BoADigital">
-              <YouTubeIcon sx={{ color:grey[300] }} />
+              <YouTubeIcon sx={{ color: grey[300] }} />
             </a>
             <a href="https://x.com/VueleConBoA">
-              <XIcon sx={{ color:grey[300] }} />
+              <XIcon sx={{ color: grey[300] }} />
             </a>
           </Grid>
         </Grid>
@@ -166,8 +163,7 @@ const Footer: React.FC = () => (
               }}
               gutterBottom
             >
-              Copyright © 2025 Boliviana de Aviación. Todos los derechos
-              reservados
+              Copyright © 2025 Boliviana de Aviación. Todos los derechos reservados
             </Typography>
           </Box>
         </Grid>

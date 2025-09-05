@@ -19,11 +19,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <>
-      <Hero
-        tracking={tracking}
-        onTrackingChange={setTracking}
-        onTrack={handleTrack}
-      />
+      <Hero tracking={tracking} onTrackingChange={setTracking} onTrack={handleTrack} />
       <AppContainer sx={{ mt: 4, mb: 4 }}>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
@@ -53,7 +49,7 @@ const HomeScreen: React.FC = () => {
           /> */}
         </Stack>
       </AppContainer>
-      <Container sx={{ mb:6 }}>
+      <Container sx={{ mb: 6 }}>
         <CardInfoSection />
       </Container>
     </>

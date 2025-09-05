@@ -1,11 +1,6 @@
 import React from 'react';
 import { Container, ContainerProps } from '@mui/material';
-const AppContainer: React.FC<ContainerProps> = ({
-  children,
-  maxWidth = 'lg',
-  sx,
-  ...rest
-}) => {
+const AppContainer: React.FC<ContainerProps> = ({ children, maxWidth = 'lg', sx, ...rest }) => {
   return (
     <Container
       maxWidth="lg"

@@ -19,12 +19,7 @@ const QuickContactButtons: React.FC = () => (
       gap: 2,
     }}
   >
-    <Tooltip
-      title={`Llamada (${SCHEDULE})`}
-      placement="left"
-      arrow
-      TransitionComponent={Zoom}
-    >
+    <Tooltip title={`Llamada (${SCHEDULE})`} placement="left" arrow TransitionComponent={Zoom}>
       <IconButton
         size="large"
         sx={{
@@ -52,12 +47,7 @@ const QuickContactButtons: React.FC = () => (
         <CallIcon fontSize="inherit" />
       </IconButton>
     </Tooltip>
-    <Tooltip
-      title={`WhatsApp (${SCHEDULE})`}
-      placement="left"
-      arrow
-      TransitionComponent={Zoom}
-    >
+    <Tooltip title={`WhatsApp (${SCHEDULE})`} placement="left" arrow TransitionComponent={Zoom}>
       <IconButton
         size="large"
         sx={{

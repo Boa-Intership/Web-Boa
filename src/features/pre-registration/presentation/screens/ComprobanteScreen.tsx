@@ -1,18 +1,12 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Paper,
-  Typography,
-  Divider,
-  Container
-} from '@mui/material';
+import { Box, Button, Grid, Paper, Typography, Divider, Container } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ResumenEnvio from '../components/ResumenEnvio';
 
 const generarCodigo = () => {
   const random = Math.floor(100000 + Math.random() * 900000);
-  return `AE-${random}-${Math.floor(Math.random() * 9999).toString().padStart(4, '0')}`;
+  return `AE-${random}-${Math.floor(Math.random() * 9999)
+    .toString()
+    .padStart(4, '0')}`;
 };
 
 const ComprobanteScreen = () => {
@@ -45,7 +39,9 @@ const ComprobanteScreen = () => {
 
         {/* Botones */}
         <Box display="flex" justifyContent="space-between" mt={4}>
-          <Button variant="contained" color="primary">Descargar Comprobante</Button>
+          <Button variant="contained" color="primary">
+            Descargar Comprobante
+          </Button>
           <Button variant="contained" color="success" onClick={() => navigate('/home')}>
             Nuevo Pre-Registro
           </Button>

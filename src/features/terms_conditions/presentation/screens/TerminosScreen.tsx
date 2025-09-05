@@ -1,10 +1,4 @@
-import {
-  Paper,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from '@mui/material';
+import { Paper, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { reglasContrato } from '../components/reglasData';
 import { AppContainer } from 'ui';
 import { useTheme } from '@mui/material/styles';
@@ -16,12 +10,7 @@ function TerminosScreen() {
   const theme = useTheme();
   return (
     <AppContainer sx={{ py: 4 }}>
-      <Typography
-        variant="h4"
-        fontWeight={'bold'}
-        mb={2}
-        color={theme.palette.primary.main}
-      >
+      <Typography variant="h4" fontWeight={'bold'} mb={2} color={theme.palette.primary.main}>
         Terminos y Condiciones
       </Typography>
       <Typography variant="body1" component="div" textAlign={'justify'}>
@@ -61,11 +50,7 @@ function TerminosScreen() {
             aria-controls={`panel${index}-content`}
             id={`panel${index}-header`}
           >
-            <Typography
-              component="span"
-              fontWeight="bold"
-              color={theme.palette.primary.main}
-            >
+            <Typography component="span" fontWeight="bold" color={theme.palette.primary.main}>
               {regla.titulo}
             </Typography>
           </AccordionSummary>

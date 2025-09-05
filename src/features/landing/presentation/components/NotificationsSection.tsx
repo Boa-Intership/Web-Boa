@@ -67,11 +67,7 @@ const getIcon = (type: NotificationType) => {
     case 'whatsapp':
       return <WhatsAppIcon sx={{ color: 'success.main', fontSize: 32 }} />;
     case 'alert':
-      return (
-        <NotificationsActiveIcon
-          sx={{ color: 'secondary.main', fontSize: 32 }}
-        />
-      );
+      return <NotificationsActiveIcon sx={{ color: 'secondary.main', fontSize: 32 }} />;
     default:
       return null;
   }
@@ -86,9 +82,7 @@ const NotificationsSection: React.FC = () => {
   };
 
   const handleMarkRead = (id: number) => {
-    setNotifs((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-    );
+    setNotifs((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)));
   };
 
   return (
@@ -97,12 +91,7 @@ const NotificationsSection: React.FC = () => {
         <Typography variant="h3" fontWeight={700} mb={2} textAlign="center">
           Notificaciones y Comunicación
         </Typography>
-        <Typography
-          variant="h6"
-          color="text.secondary"
-          mb={4}
-          textAlign="center"
-        >
+        <Typography variant="h6" color="text.secondary" mb={4} textAlign="center">
           Mantente informado sobre el estado de tu paquete en todo momento.
         </Typography>
         <Divider sx={{ mb: 4 }} />
@@ -120,9 +109,7 @@ const NotificationsSection: React.FC = () => {
                     boxShadow: 6,
                     borderColor: 'secondary.main',
                   },
-                  background: notif.read
-                    ? 'background.default'
-                    : 'background.paper',
+                  background: notif.read ? 'background.default' : 'background.paper',
                   cursor: 'pointer',
                 }}
                 elevation={0}
@@ -160,19 +147,14 @@ const NotificationsSection: React.FC = () => {
                     onClick={() => handleExpand(notif.id)}
                     aria-label="expandir"
                     sx={{
-                      transform:
-                        expanded === notif.id ? 'rotate(180deg)' : 'none',
+                      transform: expanded === notif.id ? 'rotate(180deg)' : 'none',
                       transition: 'transform 0.2s',
                     }}
                   >
                     <ExpandMoreIcon />
                   </IconButton>
                 </CardActions>
-                <Collapse
-                  in={expanded === notif.id}
-                  timeout="auto"
-                  unmountOnExit
-                >
+                <Collapse in={expanded === notif.id} timeout="auto" unmountOnExit>
                   <CardContent>
                     <Typography variant="body2" color="text.secondary">
                       {notif.details}

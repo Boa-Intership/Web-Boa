@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  IconButton,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material';
+import { AppBar, Toolbar, Box, IconButton, useTheme, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ROUTES } from '../../../router/routes';
@@ -101,24 +94,20 @@ const AppAppBar: React.FC = () => {
   const handleClose = () => setOpenKey(null);
 
   // -------- Detecta ruta activa --------
-  const isActiveRoute = (route?: string) =>
-    route ? location.pathname.startsWith(route) : false;
+  const isActiveRoute = (route?: string) => (route ? location.pathname.startsWith(route) : false);
 
   return (
     <>
       <AppBar
         position="fixed"
         sx={{
-          bgcolor: "#1C2E5E",
+          bgcolor: '#1C2E5E',
           //background: "linear-gradient(90deg, #003366 0%, #0073e6 100%)",
           boxShadow: 'none',
         }}
       >
         <AppContainer sx={{ py: { xs: 1, md: 1 } }}>
-          <Toolbar
-            disableGutters
-            sx={{ display: 'flex', alignItems: 'center' }}
-          >
+          <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center' }}>
             {/* -------- LOGO -------- */}
             <Box
               component="img"
@@ -155,11 +144,7 @@ const AppAppBar: React.FC = () => {
                             ref={(el: any) => (anchors.current[item.key] = el)}
                             label={item.label}
                             active={isOpen || active}
-                            onClick={() =>
-                              setOpenKey((k) =>
-                                k === item.key ? null : item.key,
-                              )
-                            }
+                            onClick={() => setOpenKey((k) => (k === item.key ? null : item.key))}
                             onMouseEnter={() => isMdUp && openMenu(item.key)}
                             onMouseLeave={() => isMdUp && closeMenuWithDelay()}
                             icon={<KeyboardArrowDownOutlinedIcon />}
@@ -170,8 +155,7 @@ const AppAppBar: React.FC = () => {
                             columns={item.columns}
                             onClose={handleClose}
                             onMouseEnter={() => {
-                              if (hoverTimeout.current)
-                                window.clearTimeout(hoverTimeout.current);
+                              if (hoverTimeout.current) window.clearTimeout(hoverTimeout.current);
                             }}
                             onMouseLeave={() => closeMenuWithDelay()}
                           />

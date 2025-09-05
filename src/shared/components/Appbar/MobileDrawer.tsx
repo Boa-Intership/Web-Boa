@@ -49,12 +49,7 @@ const MobileDrawer: React.FC<{
         }}
         role="presentation"
       >
-        <Typography
-          variant="h6"
-          fontWeight={'bold'}
-          color="primary.main"
-          sx={{ ml: 2 }}
-        >
+        <Typography variant="h6" fontWeight={'bold'} color="primary.main" sx={{ ml: 2 }}>
           Menú
         </Typography>
 

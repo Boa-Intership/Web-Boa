@@ -3,15 +3,21 @@
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// 👇 recreamos __dirname para ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      'ui': path.resolve(__dirname, 'src/ui/index.ts'),
-      'assets': path.resolve(__dirname, 'src/assets'),
-      'router': path.resolve(__dirname, 'src/router'),
+      ui: path.resolve(__dirname, 'src/ui/index.ts'),
+      assets: path.resolve(__dirname, 'src/assets'),
+      router: path.resolve(__dirname, 'src/router'),
+      '@': path.resolve(__dirname, 'src'), // 👈 atajo recomendado
     },
   },
   test: {
@@ -27,10 +33,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov'],
-      exclude: [
-        'node_modules/',
-        'src/setupTests.ts',
-      ],
+      exclude: ['node_modules/', 'src/setupTests.ts'],
     },
   },
 });

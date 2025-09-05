@@ -9,12 +9,7 @@ interface Props {
   mapEmbed: string;
 }
 
-export const ContactCardInternacional = ({
-  direccion,
-  contacto,
-  email,
-  mapEmbed,
-}: Props) => {
+export const ContactCardInternacional = ({ direccion, contacto, email, mapEmbed }: Props) => {
   return (
     <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} gap={3}>
       <Box flex={1}>

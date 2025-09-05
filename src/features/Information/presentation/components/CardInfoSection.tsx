@@ -14,19 +14,10 @@ export default function CardInfoSection() {
   const navigate = useNavigate();
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center">
-      <Typography
-        variant="h4"
-        fontWeight={'bold'}
-        color="primary.main"
-        marginBottom={6}
-      >
+      <Typography variant="h4" fontWeight={'bold'} color="primary.main" marginBottom={6}>
         Tipos de carga en BoA Cargo
       </Typography>
-      <Grid
-        container
-        spacing={4}
-        sx={{ justifyContent: 'center', alignItems: 'center' }}
-      >
+      <Grid container spacing={4} sx={{ justifyContent: 'center', alignItems: 'center' }}>
         <Grid item>
           <ButtonCardInfo
             title="Carga General"

@@ -25,13 +25,7 @@ interface infoTipoCargaProps {
   onClick: () => void;
 }
 
-function InfoTipoCarga({
-  title,
-  description,
-  details,
-  subtitle,
-  example,
-}: infoTipoCargaProps) {
+function InfoTipoCarga({ title, description, details, subtitle, example }: infoTipoCargaProps) {
   const [selectedDetail, setSelectedDetail] = useState<number | null>(0); // selecciona el primero por defecto
   const theme = useTheme();
 
@@ -58,11 +52,7 @@ function InfoTipoCarga({
           flexDirection: { xs: 'column', sm: 'row', md: 'row' },
         }}
       >
-        <Typography
-          variant="h6"
-          fontWeight="bold"
-          color={theme.palette.primary.main}
-        >
+        <Typography variant="h6" fontWeight="bold" color={theme.palette.primary.main}>
           {subtitle}
         </Typography>
 
@@ -89,8 +79,7 @@ function InfoTipoCarga({
             item
             xs={12}
             sm={
-              details[selectedDetail].imageUrl &&
-              details[selectedDetail].imageUrl.length > 0
+              details[selectedDetail].imageUrl && details[selectedDetail].imageUrl.length > 0
                 ? 9
                 : 12
             }
@@ -102,29 +91,28 @@ function InfoTipoCarga({
             ))}
           </Grid>
           {/* Imagen (si existe) */}
-          {details[selectedDetail].imageUrl &&
-            details[selectedDetail].imageUrl.length > 0 && (
-              <Grid item xs={12} sm={3}>
-                <Box sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
-                  {details[selectedDetail].imageUrl.map((url, index) => (
-                    <Box
-                      component="img"
-                      key={index}
-                      src={url}
-                      loading="lazy"
-                      alt={`${details[selectedDetail].title} ${index + 1}`}
-                      sx={{
-                        width: { xs: '50%', sm: 200 },
-                        maxWidth: '100%',
-                        objectFit: 'cover',
-                        borderRadius: 2,
-                        mb: 1,
-                      }}
-                    />
-                  ))}
-                </Box>
-              </Grid>
-            )}
+          {details[selectedDetail].imageUrl && details[selectedDetail].imageUrl.length > 0 && (
+            <Grid item xs={12} sm={3}>
+              <Box sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
+                {details[selectedDetail].imageUrl.map((url, index) => (
+                  <Box
+                    component="img"
+                    key={index}
+                    src={url}
+                    loading="lazy"
+                    alt={`${details[selectedDetail].title} ${index + 1}`}
+                    sx={{
+                      width: { xs: '50%', sm: 200 },
+                      maxWidth: '100%',
+                      objectFit: 'cover',
+                      borderRadius: 2,
+                      mb: 1,
+                    }}
+                  />
+                ))}
+              </Box>
+            </Grid>
+          )}
         </Grid>
       )}
 
@@ -138,17 +126,11 @@ function InfoTipoCarga({
           >
             ¿Que cargas pueden entrar a esta categoria?
           </Typography>
-          <Typography variant="body2">
-            Ejemplos comunes de {title} en BoA Cargo:
-          </Typography>
+          <Typography variant="body2">Ejemplos comunes de {title} en BoA Cargo:</Typography>
           <Grid container spacing={2} mt={2}>
             {example.map((item, index) => (
               <Grid item key={index} xs={12} sm={6} md={3}>
-                <ExampleType
-                  title={item.title}
-                  description={item.description}
-                  image={item.image}
-                />
+                <ExampleType title={item.title} description={item.description} image={item.image} />
               </Grid>
             ))}
           </Grid>

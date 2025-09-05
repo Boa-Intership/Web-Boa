@@ -1,7 +1,4 @@
-export const validateField = (
-  name: string,
-  value: string
-): string | null => {
+export const validateField = (name: string, value: string): string | null => {
   if (!value) return 'Campo obligatorio';
 
   switch (name) {

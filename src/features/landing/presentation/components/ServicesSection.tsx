@@ -18,8 +18,7 @@ const clients = [
   //   },
   {
     title: 'Eventuales',
-    description:
-      'Envíos puntuales con pago al momento de realizar el servicio.',
+    description: 'Envíos puntuales con pago al momento de realizar el servicio.',
     icon: <PersonIcon sx={{ fontSize: 40, color: 'secondary.main', mb: 1 }} />,
   },
   {
@@ -32,13 +31,7 @@ const clients = [
 const ServicesSection: React.FC = () => (
   <AppBox sx={{ py: { xs: 5, md: 8 }, background: 'background.paper' }}>
     <AppContainer>
-      <Typography
-        variant="h4"
-        fontWeight={700}
-        textAlign="center"
-        mb={4}
-        color="primary"
-      >
+      <Typography variant="h4" fontWeight={700} textAlign="center" mb={4} color="primary">
         Clientes
       </Typography>
       <AppGrid
@@ -68,20 +61,10 @@ const ServicesSection: React.FC = () => (
               }}
             >
               {client.icon}
-              <Typography
-                variant="h6"
-                fontWeight={600}
-                textAlign="center"
-                mb={1}
-              >
+              <Typography variant="h6" fontWeight={600} textAlign="center" mb={1}>
                 {client.title}
               </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                textAlign="center"
-                mb={3}
-              >
+              <Typography variant="body2" color="text.secondary" textAlign="center" mb={3}>
                 {client.description}
               </Typography>
               <AppButton variant="contained" size="small">

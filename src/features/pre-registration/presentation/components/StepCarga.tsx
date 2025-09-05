@@ -14,12 +14,21 @@ import {
   Paper,
   InputAdornment,
 } from '@mui/material';
-import { Inventory2, Visibility, Edit, Delete, ViewInAr, LocalShipping, AddCircle, Inventory2Outlined } from '@mui/icons-material';
+import {
+  Inventory2,
+  Visibility,
+  Edit,
+  Delete,
+  ViewInAr,
+  LocalShipping,
+  AddCircle,
+  Inventory2Outlined,
+} from '@mui/icons-material';
 
 const tiposCarga = [
   { label: 'Carga general', codigo: 'CG' },
   { label: 'Animales vivos', codigo: 'AV' },
-  { label: 'Perecedero', codigo: 'PR' }
+  { label: 'Perecedero', codigo: 'PR' },
 ];
 
 const StepCarga = ({ data, setData, onNext, onBack }: any) => {
@@ -35,7 +44,12 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const [indiceAEliminar, setIndiceAEliminar] = useState<number | null>(null); // estado eliminar
 
   const [nuevoItem, setNuevoItem] = useState({
-    descripcion: '', peso: '', alto: '', ancho: '', largo: '', piezas: ''
+    descripcion: '',
+    peso: '',
+    alto: '',
+    ancho: '',
+    largo: '',
+    piezas: '',
   });
 
   const handleChangeNuevoItem = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,10 +127,12 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
 
   return (
     <Box>
-      <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor:'#FAFAFA' }}>
-        <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
-          <Inventory2 color='primary' />
-          <Typography variant="h5" color='primary'>Información de la Carga</Typography>
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
+        <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
+          <Inventory2 color="primary" />
+          <Typography variant="h5" color="primary">
+            Información de la Carga
+          </Typography>
         </Box>
 
         {/* Tipo de carga */}
@@ -130,9 +146,9 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <LocalShipping color='action' />
+                <LocalShipping color="action" />
               </InputAdornment>
-            )
+            ),
           }}
         >
           {tiposCarga.map(({ label, codigo }) => (
@@ -142,9 +158,13 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
 
         {/* Detalle de ítems agregados */}
         <Box mt={3}>
-          <Box display='flex' alignItems='center' justifyContent='space-between'>
-            <Typography variant='h6' color='primary'>Paquetes Agregados</Typography>
-            <IconButton color='primary' onClick={() => setModalOpen(true)}><AddCircle /></IconButton>
+          <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Typography variant="h6" color="primary">
+              Paquetes Agregados
+            </Typography>
+            <IconButton color="primary" onClick={() => setModalOpen(true)}>
+              <AddCircle />
+            </IconButton>
           </Box>
 
           {detalles.length === 0 ? (
@@ -167,17 +187,34 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
               </Typography>
             </Box>
           ) : (
-            <Box mt={2} display='flex' flexDirection='column'>
+            <Box mt={2} display="flex" flexDirection="column">
               {detalles.map((item, index) => (
-                <Paper key={index} sx={{ p: 2, borderRadius: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Paper
+                  key={index}
+                  sx={{
+                    p: 2,
+                    borderRadius: 3,
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
                   <Box>
                     <Typography fontWeight={600}>{item.descripcion}</Typography>
-                    <Typography variant='body2'>{item.peso}kg • {item.alto}×{item.ancho}×{item.largo}cm • {item.piezas} piezas</Typography>
+                    <Typography variant="body2">
+                      {item.peso}kg • {item.alto}×{item.ancho}×{item.largo}cm • {item.piezas} piezas
+                    </Typography>
                   </Box>
                   <Box>
-                    <IconButton onClick={() => handleVisualizarItem(item)}><Visibility /></IconButton>
-                    <IconButton onClick={() => handleEditarItem(item, index)}><Edit /></IconButton>
-                    <IconButton onClick={() => handleEliminarItem(index)} color='error'><Delete /></IconButton>
+                    <IconButton onClick={() => handleVisualizarItem(item)}>
+                      <Visibility />
+                    </IconButton>
+                    <IconButton onClick={() => handleEditarItem(item, index)}>
+                      <Edit />
+                    </IconButton>
+                    <IconButton onClick={() => handleEliminarItem(index)} color="error">
+                      <Delete />
+                    </IconButton>
                   </Box>
                 </Paper>
               ))}
@@ -186,16 +223,24 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
         </Box>
 
         <Box mt={4}>
-          <Typography variant='body2'>Peso Total: <strong>{pesoTotal.toFixed(2)} kg</strong></Typography>
-          <Typography variant='body2'>Costo Estimado: <strong>Bs {costoEstimado.toFixed(2)}</strong></Typography>
+          <Typography variant="body2">
+            Peso Total: <strong>{pesoTotal.toFixed(2)} kg</strong>
+          </Typography>
+          <Typography variant="body2">
+            Costo Estimado: <strong>Bs {costoEstimado.toFixed(2)}</strong>
+          </Typography>
         </Box>
       </Paper>
 
-      <Box mt={4} display='flex' justifyContent='space-between'>
-        <Button variant="outlined" onClick={onBack}>Anterior</Button>
-        <Button variant="contained" onClick={handleNextClick}>Siguiente</Button>
+      <Box mt={4} display="flex" justifyContent="space-between">
+        <Button variant="outlined" onClick={onBack}>
+          Anterior
+        </Button>
+        <Button variant="contained" onClick={handleNextClick}>
+          Siguiente
+        </Button>
       </Box>
-      
+
       {/* Dialog de Agregar items */}
       <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
         <DialogTitle>Agregar Paquete</DialogTitle>
@@ -214,10 +259,10 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                     endAdornment: (
                       <InputAdornment position="end">
                         {(campo === 'peso' && 'kg') ||
-                        (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
-                        null}
+                          (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
+                          null}
                       </InputAdornment>
-                    )
+                    ),
                   }}
                 />
               </Grid>
@@ -226,29 +271,42 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setModalOpen(false)}>Cancelar</Button>
-          <Button onClick={handleAgregarItem} variant='contained'>Agregar</Button>
+          <Button onClick={handleAgregarItem} variant="contained">
+            Agregar
+          </Button>
         </DialogActions>
       </Dialog>
 
       {/* Dialog visualización */}
-      <Dialog 
-        open={openVisualizacion} 
-        onClose={() => setOpenVisualizacion(false)} 
-        PaperProps={{sx: { borderRadius: 3, minWidth: 300 }}}
+      <Dialog
+        open={openVisualizacion}
+        onClose={() => setOpenVisualizacion(false)}
+        PaperProps={{ sx: { borderRadius: 3, minWidth: 300 } }}
       >
         <DialogTitle>Detalles del Paquete</DialogTitle>
         <DialogContent dividers>
           {paqueteSeleccionado && (
             <Box display="flex" flexDirection="column" gap={1}>
-              <Typography><strong>Descripción:</strong> {paqueteSeleccionado.descripcion}</Typography>
-              <Typography><strong>Peso:</strong> {paqueteSeleccionado.peso} kg</Typography>
-              <Typography><strong>Dimensiones:</strong> {paqueteSeleccionado.alto} × {paqueteSeleccionado.ancho} × {paqueteSeleccionado.largo} cm</Typography>
-              <Typography><strong>Piezas:</strong> {paqueteSeleccionado.piezas}</Typography>
+              <Typography>
+                <strong>Descripción:</strong> {paqueteSeleccionado.descripcion}
+              </Typography>
+              <Typography>
+                <strong>Peso:</strong> {paqueteSeleccionado.peso} kg
+              </Typography>
+              <Typography>
+                <strong>Dimensiones:</strong> {paqueteSeleccionado.alto} ×{' '}
+                {paqueteSeleccionado.ancho} × {paqueteSeleccionado.largo} cm
+              </Typography>
+              <Typography>
+                <strong>Piezas:</strong> {paqueteSeleccionado.piezas}
+              </Typography>
             </Box>
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenVisualizacion(false)} autoFocus>Cerrar</Button>
+          <Button onClick={() => setOpenVisualizacion(false)} autoFocus>
+            Cerrar
+          </Button>
         </DialogActions>
       </Dialog>
 
@@ -270,10 +328,10 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                       endAdornment: (
                         <InputAdornment position="end">
                           {(campo === 'peso' && 'kg') ||
-                          (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
-                          null}
+                            (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
+                            null}
                         </InputAdornment>
-                      )
+                      ),
                     }}
                   />
                 </Grid>
@@ -283,7 +341,9 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenEditar(false)}>Cancelar</Button>
-          <Button variant="contained" onClick={handleGuardarEdicion}>Guardar</Button>
+          <Button variant="contained" onClick={handleGuardarEdicion}>
+            Guardar
+          </Button>
         </DialogActions>
       </Dialog>
 

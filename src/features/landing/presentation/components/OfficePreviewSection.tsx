@@ -35,13 +35,7 @@ const OfficePreviewSection: React.FC = () => {
   const navigate = useNavigate();
   return (
     <AppContainer sx={{ py: { xs: 7, md: 8 } }}>
-      <Typography
-        variant="h4"
-        fontWeight={700}
-        mb={4}
-        textAlign="center"
-        color="primary"
-      >
+      <Typography variant="h4" fontWeight={700} mb={4} textAlign="center" color="primary">
         Nuestras oficinas
       </Typography>
       <AppGrid container spacing={4} justifyContent="center">
@@ -69,9 +63,7 @@ const OfficePreviewSection: React.FC = () => {
             >
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <LocationOnIcon
-                    sx={{ color: 'primary.main', fontSize: 28, mr: 1 }}
-                  />
+                  <LocationOnIcon sx={{ color: 'primary.main', fontSize: 28, mr: 1 }} />
                   <Typography variant="subtitle1" fontWeight={600}>
                     {office.ciudad}
                   </Typography>

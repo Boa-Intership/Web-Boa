@@ -1,12 +1,6 @@
 import { AppBox, AppContainer } from 'ui';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Box,
-} from '@mui/material';
+import { Typography, Accordion, AccordionSummary, AccordionDetails, Box } from '@mui/material';
 
 const faqs = [
   {
@@ -20,8 +14,7 @@ const faqs = [
       'La presentación de la carga en condición abierta constituye un requisito indispensable para llevar a cabo los procesos de verificación e inspección conforme a las normativas internacionales de la OACI y a la regulación nacional de la DGAC Bolivia. Este procedimiento garantiza la detección de artículos prohibidos o no declarados. De esta manera, se preserva la integridad de la operación aérea, los pasajeros, la tripulación y la aeronave.',
   },
   {
-    question:
-      '¿Por qué se exige que la carga sea presentada al menos 2 horas antes del vuelo?',
+    question: '¿Por qué se exige que la carga sea presentada al menos 2 horas antes del vuelo?',
     answer:
       'La entrega anticipada de la carga, con un margen mínimo de dos horas previo a la salida del vuelo, responde a la necesidad de realizar los controles de seguridad establecidos por la OACI y la DGAC Bolivia. Dicho intervalo garantiza el tiempo suficiente para ejecutar inspecciones rigurosas, verificar documentación, aplicar medidas de sellado y certificar el cumplimiento de los estándares de seguridad aeronáutica.',
   },

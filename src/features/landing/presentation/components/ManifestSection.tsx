@@ -11,13 +11,11 @@ const ManifestSection = () => (
     </Typography>
     <Divider sx={{ mb: 4 }} />
     <Typography variant="body2" mb={2}>
-      El manifiesto es el documento que agrupa todos los paquetes de un vuelo.
-      Cada paquete y cada vuelo tienen su propio código de barras y etiqueta
-      individual.
+      El manifiesto es el documento que agrupa todos los paquetes de un vuelo. Cada paquete y cada
+      vuelo tienen su propio código de barras y etiqueta individual.
     </Typography>
     <Typography variant="body2">
-      Los códigos se insertan y escanean para registrar el ingreso y salida de
-      cada paquete.
+      Los códigos se insertan y escanean para registrar el ingreso y salida de cada paquete.
     </Typography>
   </AppBox>
 );

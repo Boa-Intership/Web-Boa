@@ -1,6 +1,5 @@
 export const terminosData = {
-  tituloPrincipal: "Términos y Condiciones",
-
+  tituloPrincipal: 'Términos y Condiciones',
 
   infoSeguridadCarga: `
 De acuerdo con las normativas internacionales de la [**OACI**](https://www2023.icao.int/Meetings/atconf6/Documents/WorkingPapers/ATConf6-ip007_es.pdf) 
@@ -18,9 +17,8 @@ Más referencias:
 Conoce los **Terminos y condiciones** que aceptas a la hora de usar nuestros servicios de **BoA Cargo**.
 `,
 
-subtitulo: "CONTRATO DE TRANSPORTE AÉREO, TÉRMINOS Y CONDICIONES",
+  subtitulo: 'CONTRATO DE TRANSPORTE AÉREO, TÉRMINOS Y CONDICIONES',
 
   nota: `**AVISO IMPORTANTE:** Se recomienda al remitente que por su cuenta
   asuma la contratación de un seguro para proteger sus intereses contra toda eventualidad.`,
-
 };

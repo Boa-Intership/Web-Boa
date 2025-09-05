@@ -24,8 +24,7 @@ const FinalCTASection: React.FC = () => {
           ¿Listo para comenzar con BOA Cargo?
         </Typography>
         <Typography variant="h6" fontWeight={400} mb={5}>
-          Registra tu envío o contáctanos ahora y descubre la mejor experiencia
-          en carga aérea.
+          Registra tu envío o contáctanos ahora y descubre la mejor experiencia en carga aérea.
         </Typography>
         <AppStack
           direction={{ xs: 'column', sm: 'row' }}

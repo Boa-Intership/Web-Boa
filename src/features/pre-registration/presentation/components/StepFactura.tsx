@@ -10,7 +10,7 @@ import {
   TextField,
   Typography,
   Paper,
-  Divider
+  Divider,
 } from '@mui/material';
 import { ReceiptLong } from '@mui/icons-material';
 
@@ -26,8 +26,14 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
     if (!carga || !carga.detalles || carga.detalles.length === 0) return;
 
     let base = 50; // precio base
-    let totalPiezas = carga.detalles.reduce((sum: number, item: any) => sum + Number(item.piezas || 0), 0);
-    let pesoTotal = carga.detalles.reduce((sum: number, item: any) => sum + Number(item.peso || 0), 0);
+    let totalPiezas = carga.detalles.reduce(
+      (sum: number, item: any) => sum + Number(item.piezas || 0),
+      0
+    );
+    let pesoTotal = carga.detalles.reduce(
+      (sum: number, item: any) => sum + Number(item.peso || 0),
+      0
+    );
 
     const factorCarga = carga.tipo === 'Carga frágil' ? 1.2 : 1;
     const factorRuta = ruta?.origen !== ruta?.destino ? 1.1 : 1;
@@ -46,7 +52,7 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
       numeroDocumento,
       razonSocial: tipoDocumento === 'NIT' ? razonSocial : '',
       complemento: tipoDocumento === 'CI' ? complemento : '',
-      precioEstimado
+      precioEstimado,
     });
 
     onNext();
@@ -54,20 +60,20 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
 
   return (
     <Box>
-      <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor:'#FAFAFA' }}>
-        <Box display='flex' alignItems='center' gap={1} marginBottom={2}>
-          <ReceiptLong color='primary' />
-          <Typography variant="h5" color='primary'>Datos para la Factura</Typography>
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
+        <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
+          <ReceiptLong color="primary" />
+          <Typography variant="h5" color="primary">
+            Datos para la Factura
+          </Typography>
         </Box>
 
         {/* Selección de tipo de documento */}
         <FormControl component="fieldset" sx={{ mt: 2 }}>
-          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>Tipo de Documento</Typography>
-          <RadioGroup
-            row
-            value={tipoDocumento}
-            onChange={(e) => setTipoDocumento(e.target.value)}
-          >
+          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+            Tipo de Documento
+          </Typography>
+          <RadioGroup row value={tipoDocumento} onChange={(e) => setTipoDocumento(e.target.value)}>
             <FormControlLabel value="NIT" control={<Radio />} label="NIT" />
             <FormControlLabel value="CI" control={<Radio />} label="CI" />
           </RadioGroup>
@@ -108,7 +114,9 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
 
         {/* Estimación del costo */}
         <Box mt={4}>
-          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>Estimación de Precio</Typography>
+          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+            Estimación de Precio
+          </Typography>
           <Typography variant="body1" sx={{ mb: 1, pl: 2 }}>
             <strong>Tipo de Carga:</strong> {carga?.tipo || 'No definido'}
           </Typography>
@@ -116,15 +124,19 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
             <strong>Ruta:</strong> {ruta?.origen} → {ruta?.destino}
           </Typography>
           <Divider sx={{ my: 2 }} />
-          <Typography variant="h6" color='primary'>
+          <Typography variant="h6" color="primary">
             Total Estimado: <strong>{precioEstimado} Bs.</strong>
           </Typography>
         </Box>
       </Paper>
       {/* Navegación */}
       <Box mt={4} display="flex" justifyContent="space-between">
-        <Button variant="outlined" onClick={onBack}>Anterior</Button>
-        <Button variant="contained" onClick={handleNextClick}>Siguiente</Button>
+        <Button variant="outlined" onClick={onBack}>
+          Anterior
+        </Button>
+        <Button variant="contained" onClick={handleNextClick}>
+          Siguiente
+        </Button>
       </Box>
     </Box>
   );

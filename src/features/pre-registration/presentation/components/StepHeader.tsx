@@ -1,11 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import {
-  Person,
-  LocationOn,
-  Inventory2,
-  ReceiptLong,
-  TaskAlt,
-} from '@mui/icons-material';
+import { Person, LocationOn, Inventory2, ReceiptLong, TaskAlt } from '@mui/icons-material';
 
 const steps = [
   { label: 'Datos personales', icon: <Person /> },
@@ -28,19 +22,9 @@ const StepHeader = ({ activeStep }: Props) => {
         const color = isActive || isCompleted ? '#3668AD' : '#cfd8dc';
 
         return (
-          <Box
-            key={step.label}
-            display="flex"
-            alignItems="center"
-            flex={1}
-          >
+          <Box key={step.label} display="flex" alignItems="center" flex={1}>
             {/* Paso */}
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              sx={{ minWidth: 60 }}
-            >
+            <Box display="flex" flexDirection="column" alignItems="center" sx={{ minWidth: 60 }}>
               <Box
                 sx={{
                   border: `2px solid ${color}`,
@@ -86,6 +70,6 @@ const StepHeader = ({ activeStep }: Props) => {
       })}
     </Box>
   );
-}
+};
 
 export default StepHeader;
