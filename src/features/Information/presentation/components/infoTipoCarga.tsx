@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ExampleType from './ExampleType';
 import { Box, Typography, Grid, Stack } from '@mui/material';
-import { RoundButton } from 'ui';
+import { BoAButton } from 'ui';
 import { useTheme } from '@mui/material/styles';
 
 interface Detail {
@@ -60,13 +60,14 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
         {details && details.length > 0 && (
           <Stack direction="row" spacing={2} flexWrap="wrap" mb={2}>
             {details.map((item, index) => (
-              <RoundButton
+              <BoAButton
                 key={index}
+                mainButton={false}
                 onClick={() => setSelectedDetail(index)}
                 selected={index === selectedDetail}
               >
                 {item.title}
-              </RoundButton>
+              </BoAButton>
             ))}
           </Stack>
         )}
@@ -75,15 +76,7 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
       {/* Mostrar contenido del detalle seleccionado */}
       {selectedDetail !== null && details[selectedDetail] && (
         <Grid container spacing={2}>
-          <Grid
-            item
-            xs={12}
-            sm={
-              details[selectedDetail].imageUrl && details[selectedDetail].imageUrl.length > 0
-                ? 9
-                : 12
-            }
-          >
+          <Grid item>
             {details[selectedDetail].description.map((desc, i) => (
               <Typography key={i} variant="body2" gutterBottom>
                 • {desc}
@@ -92,8 +85,8 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
           </Grid>
           {/* Imagen (si existe) */}
           {details[selectedDetail].imageUrl && details[selectedDetail].imageUrl.length > 0 && (
-            <Grid item xs={12} sm={3}>
-              <Box sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
+            <Grid item>
+              <Box sx={{ width: '100%', textAlign: 'flex-start' }}>
                 {details[selectedDetail].imageUrl.map((url, index) => (
                   <Box
                     component="img"
@@ -102,7 +95,7 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
                     loading="lazy"
                     alt={`${details[selectedDetail].title} ${index + 1}`}
                     sx={{
-                      width: { xs: '50%', sm: 200 },
+                      width: { xs: '50%', sm: '30%' },
                       maxWidth: '100%',
                       objectFit: 'cover',
                       borderRadius: 2,

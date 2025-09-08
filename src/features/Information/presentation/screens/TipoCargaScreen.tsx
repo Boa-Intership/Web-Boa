@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
-import { RoundButton } from 'ui';
+import { BoAButton } from 'ui';
 import { InfoTipoCarga } from 'ui';
 import { useTheme } from '@mui/material/styles';
 import { cargaData } from '../components/cargaData';
@@ -21,6 +21,8 @@ function TipoCargaScreen() {
 
   const theme = useTheme();
   const colorBoton = theme.palette.primary.dark;
+  const colorHover = theme.palette.primary.main;
+  const mainButton = false;
 
   const renderContent = () => {
     if (!selected) {
@@ -56,72 +58,85 @@ function TipoCargaScreen() {
         <Grid item xs={12} md={3} lg={3}>
           <AppStack
             sx={{
-              boxShadow: 1,
-              background: '#fafafa',
-              border: '1px solid #e6e5e5ff',
-              borderRadius: 2,
+              background: theme.palette.background.default,
+              // border: '1px solid #e6e5e5ff',
+              //borderRadius: 2,
               p: 1,
             }}
           >
             <Typography variant="h6" fontWeight={'bold'} color={colorBoton}>
               Categorías:
             </Typography>
-            <RoundButton
+            <BoAButton
               color={colorBoton}
+              hover={colorHover}
+              mainButton={mainButton}
               onClick={() => setSelected('cargaGeneral')}
               selected={selected === 'cargaGeneral'}
               icon={<Inventory2OutlinedIcon />}
             >
               Carga General
-            </RoundButton>
-            <RoundButton
+            </BoAButton>
+            <BoAButton
               color={colorBoton}
+              hover={colorHover}
+              mainButton={mainButton}
               onClick={() => setSelected('animalesVivos')}
               selected={selected === 'animalesVivos'}
               icon={<PetsOutlinedIcon />}
             >
               Animales Vivos
-            </RoundButton>
-            <RoundButton
+            </BoAButton>
+            <BoAButton
               color={colorBoton}
+              hover={colorHover}
+              mainButton={mainButton}
               onClick={() => setSelected('perecederos')}
               selected={selected === 'perecederos'}
               icon={<SetMealOutlinedIcon />}
             >
               Perecederos
-            </RoundButton>
-            <RoundButton
+            </BoAButton>
+            <BoAButton
               color={colorBoton}
+              hover={colorHover}
+              mainButton={mainButton}
               onClick={() => setSelected('restosHumanos')}
               selected={selected === 'restosHumanos'}
               icon={<LocalHospitalOutlinedIcon />}
             >
               Restos Humanos
-            </RoundButton>
-            <RoundButton
+            </BoAButton>
+            <BoAButton
               color={colorBoton}
+              hover={colorHover}
+              mainButton={mainButton}
               onClick={() => setSelected('cargaValiosa')}
               selected={selected === 'cargaValiosa'}
               icon={<MonetizationOnOutlinedIcon />}
             >
               Carga Valiosa
-            </RoundButton>
-            <RoundButton
+            </BoAButton>
+            <BoAButton
               color={colorBoton}
+              hover={colorHover}
+              mainButton={mainButton}
               onClick={() => setSelected('muestrasBiologicas')}
               selected={selected === 'muestrasBiologicas'}
               icon={<VaccinesIcon />}
             >
               Muestras Biológicas
-            </RoundButton>
-            <RoundButton
+            </BoAButton>
+            <BoAButton
               color={colorBoton}
+              hover={colorHover}
+              mainButton={mainButton}
               onClick={() => setSelected('prohibidos')}
               selected={selected === 'prohibidos'}
               icon={<DangerousOutlinedIcon />}
             >
               Prohibidos
-            </RoundButton>
+            </BoAButton>
           </AppStack>
         </Grid>
         <Grid item xs={12} md={9} lg={9}>
