@@ -21,10 +21,10 @@ const exps: Array<Exp> = [
 const ExpItem: FC<{ item: Exp }> = ({ item }) => (
   <Box sx={{ textAlign: 'center', margin: 2 }}>
     <Stack direction="column" spacing={0.5} alignItems="center" margin={0}>
-      <AppTypography variant="baseMedium" color="secondary.main">
+      <AppTypography variant="h6Bold" color="secondary.main">
         {item.value}
       </AppTypography>
-      <AppTypography variant="baseMedium">{item.label}</AppTypography>
+      <AppTypography variant="h6Bold">{item.label}</AppTypography>
     </Stack>
   </Box>
 );
@@ -136,7 +136,7 @@ const WelcomeSection: FC = () => {
                 </Typography>
               </Box>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
-              <AppTypography variant="baseMedium" textTransform="uppercase">
+              <AppTypography variant="baseMedium">
                 SERVICIOS DE CARGA AEREA PARA ENVIOS NACIONALES E INTERNACIONALES. GESTIONA TUS
                 PAQUETES CON FACILIDAD Y TRANSPARENCIA.
               </AppTypography>
