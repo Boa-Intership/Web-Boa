@@ -1,8 +1,6 @@
 import React from 'react';
-import AppContainer from '../../../../shared/components/AppContainer';
-import AppGrid from '../../../../shared/components/AppGrid';
-import AppButton from '../../../../shared/components/AppButton';
-import { Typography, Divider, Box } from '@mui/material';
+import { AppContainer, AppButton, AppGrid, AppTypography, AppStack } from 'ui';
+import { Typography, Divider, Box, Stack } from '@mui/material';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import GavelIcon from '@mui/icons-material/Gavel';
 import { useNavigate } from 'react-router-dom';
@@ -46,12 +44,14 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
   const navigate = useNavigate();
   return (
     <AppContainer sx={{ py: { xs: 6, md: 8 } }}>
-      <Typography variant="h4" fontWeight={700} mb={2} textAlign="center" color="primary">
-        {title}
-      </Typography>
-      <Typography variant="h6" color="text.secondary" mb={4} textAlign="center">
-        {subtitle}
-      </Typography>
+      <AppStack alignItems="center" mb={2} textAlign={'center'}>
+        <AppTypography variant="h4Bold" color="primary">
+          {title}
+        </AppTypography>
+        {/* <AppTypography variant="baseMedium" color="text.secondary">
+          {subtitle}
+        </AppTypography> */}
+      </AppStack>
       <Divider sx={{ mb: 4 }} />
       <AppGrid container spacing={4} justifyContent="center">
         {sections.map((section) => (
@@ -69,12 +69,12 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               }}
             >
               {section.icon}
-              <Typography variant="h6" fontWeight={600} mb={2} textAlign="center">
+              <AppTypography variant="h6Bold" mb={2} textAlign="center">
                 {section.title}
-              </Typography>
-              <Typography variant="body2" mb={3} color="text.secondary" textAlign="center">
+              </AppTypography>
+              <AppTypography variant="body2" mb={3} color="text.secondary" textAlign="center">
                 {section.description}
-              </Typography>
+              </AppTypography>
               <AppButton
                 variant="contained"
                 color="primary"

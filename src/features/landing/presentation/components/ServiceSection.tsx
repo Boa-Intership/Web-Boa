@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Typography, List, ListItem } from '@mui/material';
+import { Box, Typography, List, ListItem, Stack } from '@mui/material';
 import aboutImg from 'assets/call.webp';
-import { AppBox, AppContainer, AppGrid, AppButton } from 'ui';
+import { AppBox, AppContainer, AppGrid, AppButton, AppTypography } from 'ui';
 import { ROUTES } from 'router/routes';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ const ServiceSection: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <AppBox sx={{ py: { xs: 6, md: 8 } }}>
+    <AppBox>
       <AppContainer>
         <AppGrid container spacing={4} alignItems="center" justifyContent="center">
           <AppGrid
@@ -55,23 +55,32 @@ const ServiceSection: React.FC = () => {
               }}
             />
           </AppGrid>
-          <AppGrid item xs={12} md={6} sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ px: { xs: 0, md: 4 } }}>
-              <Typography variant="h4" color="primary" fontWeight={700} gutterBottom>
-                Atención al Cliente
-              </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-                {data.paragraph}
-              </Typography>
-              <AppGrid container spacing={2}>
-                <AppGrid item xs={12} sm={6}>
+          <AppGrid item xs={10} md={6} sx={{ display: 'flex', alignItems: 'flex-start' }}>
+            <AppBox
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 1, // espacio entre elementos
+                alignItems: 'flex-start',
+              }}
+            >
+              <Stack sx={{ gap: 2, mb: 2 }}>
+                <AppTypography variant="h4Bold" color="primary">
+                  Atención al Cliente
+                </AppTypography>
+                <AppTypography variant="baseRegular" color="text.secondary">
+                  {data.paragraph}
+                </AppTypography>
+              </Stack>
+              <AppGrid container>
+                <AppGrid>
                   <List>
                     {data.Why.map((d, i) => (
                       <ListItem key={`why-${i}`}>{d}</ListItem>
                     ))}
                   </List>
                 </AppGrid>
-                <AppGrid item xs={12} sm={6}>
+                <AppGrid>
                   <List>
                     {data.Why2.map((d, i) => (
                       <ListItem key={`why2-${i}`}>{d}</ListItem>
@@ -79,12 +88,10 @@ const ServiceSection: React.FC = () => {
                   </List>
                 </AppGrid>
               </AppGrid>
-              <Box sx={{ mt: 4, textAlign: { xs: 'center', md: 'left' } }}>
-                <AppButton size="large" color="primary" onClick={() => navigate(ROUTES.CONTACTO)}>
-                  Contáctanos
-                </AppButton>
-              </Box>
-            </Box>
+              <AppButton size="large" color="primary" onClick={() => navigate(ROUTES.CONTACTO)}>
+                Contáctanos
+              </AppButton>
+            </AppBox>
           </AppGrid>
         </AppGrid>
       </AppContainer>

@@ -1,13 +1,11 @@
-import AppBox from '../../../../shared/components/AppBox';
-import AppContainer from '../../../../shared/components/AppContainer';
-import AppGrid from '../../../../shared/components/AppGrid';
-import { Typography, Box, Divider } from '@mui/material';
+import { AppBox, AppContainer, AppGrid, AppButton } from 'ui';
+import { Typography, Box, Divider, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import welcomeImg from '../../../../assets/welcome.webp';
+import welcomeImg from '@/assets/welcome.webp';
 import { FC } from 'react';
-import headline from '../../../../assets/headline-curve.svg';
-import AppButton from '../../../../shared/components/AppButton';
-import { ROUTES } from '../../../../router/routes';
+import headline from '@/assets/headline-curve.svg';
+import { ROUTES } from 'router/routes';
+import { AppTypography } from 'ui';
 
 interface Exp {
   label: string;
@@ -21,20 +19,13 @@ const exps: Array<Exp> = [
 ];
 
 const ExpItem: FC<{ item: Exp }> = ({ item }) => (
-  <Box sx={{ textAlign: 'center', mb: { xs: 1, md: 0 } }}>
-    <Typography
-      sx={{
-        color: 'secondary.main',
-        mb: { xs: 1, md: 2 },
-        fontSize: { xs: 34, md: 44 },
-        fontWeight: 'bold',
-      }}
-    >
-      {item.value}
-    </Typography>
-    <Typography color="text.secondary" variant="h5">
-      {item.label}
-    </Typography>
+  <Box sx={{ textAlign: 'center', margin: 2 }}>
+    <Stack direction="column" spacing={0.5} alignItems="center" margin={0}>
+      <AppTypography variant="h6Bold" color="secondary.main">
+        {item.value}
+      </AppTypography>
+      <AppTypography variant="h6Bold">{item.label}</AppTypography>
+    </Stack>
   </Box>
 );
 
@@ -145,18 +136,10 @@ const WelcomeSection: FC = () => {
                 </Typography>
               </Box>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
-              <Typography
-                variant="subtitle2"
-                color="text.secondary"
-                fontWeight={400}
-                textTransform="uppercase"
-                sx={{
-                  mb: 2,
-                }}
-              >
+              <AppTypography variant="baseMedium">
                 SERVICIOS DE CARGA AEREA PARA ENVIOS NACIONALES E INTERNACIONALES. GESTIONA TUS
                 PAQUETES CON FACILIDAD Y TRANSPARENCIA.
-              </Typography>
+              </AppTypography>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
               <AppButton
                 size="large"
@@ -195,15 +178,15 @@ const WelcomeSection: FC = () => {
           </AppGrid>
         </AppGrid>
         {/* Estadísticas */}
-        <Box sx={{ boxShadow: 2, py: 4, px: 7, borderRadius: 4, mt: 6 }}>
-          <AppGrid container spacing={2}>
+        <AppBox sx={{ boxShadow: 2, py: 4, px: 4, borderRadius: 4 }}>
+          <AppGrid container>
             {exps.map((item) => (
               <AppGrid key={item.value} item xs={12} md={4}>
                 <ExpItem item={item} />
               </AppGrid>
             ))}
           </AppGrid>
-        </Box>
+        </AppBox>
       </AppContainer>
     </AppBox>
   );
