@@ -39,7 +39,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'El envío y la recepción solo se realizan en oficinas de BoA Cargo.',
         ],
 
-        imageUrl: ['/informacioPage/cargaGeneral/GGI_nacional.webp'],
+        imageUrl: [],
       },
       {
         title: 'Internacional',
@@ -123,10 +123,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Se recomienda no sedar animales domésticos en vuelos nacionales e internacionales.',
         ],
 
-        imageUrl: [
-          '/informacioPage/animalesVivos/mascotas1.webp',
-          '/informacioPage/animalesVivos/vacunas.webp',
-        ],
+        imageUrl: [],
       },
       {
         title: 'Internacional',
@@ -153,10 +150,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Para envíos a EE.UU., toda la documentación debe presentarse también en inglés.',
         ],
 
-        imageUrl: [
-          '/informacioPage/animalesVivos/mascotas1.webp',
-          '/informacioPage/animalesVivos/vacunas.webp',
-        ],
+        imageUrl: [],
       },
     ],
     example: [
@@ -209,7 +203,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'En productos con hielo seco (CO₂ sólido), se debe indicar en la etiqueta la cantidad exacta en kilogramos.',
         ],
 
-        imageUrl: ['/informacioPage/perecederos/GGI_regrigerante.webp'],
+        imageUrl: [],
       },
       {
         title: 'Internacional',
@@ -302,6 +296,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Se recibe el transporte de restos humanos Internacional mediante Agentes de Carga.',
           'Declaración General de seguridad de Carga, emitido por el agente de carga.',
         ],
+        imageUrl: [],
       },
     ],
     example: [
@@ -333,6 +328,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Presentar fotocopia del Formulario M-02 de compra y venta de minerales y metales, emitido y autorizado por SENARECOM.',
         ],
+        imageUrl: [],
       },
       {
         title: 'Internacional',
@@ -347,6 +343,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Declaración General de Seguridad de Carga emitida por el agente de carga.',
           'En destinos donde no se hable español, la documentación, etiquetas y rótulos deben presentarse en inglés.',
         ],
+        imageUrl: [],
       },
     ],
     example: [
@@ -412,6 +409,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'En envíos internacionales, el exportador debe gestionar el transporte mediante un agente de carga especializado.',
           'En destinos donde no se hable español, la documentación, etiquetas y rótulos deben presentarse en inglés.',
         ],
+        imageUrl: [],
       },
     ],
     example: [

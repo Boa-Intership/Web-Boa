@@ -10,7 +10,7 @@ export { default as CardInfoSection } from '../features/Information/presentation
 export { default as InformacionScreen } from '../features/Information/presentation/screens/InformacionScreen';
 export { default as NavButton } from '../shared/components/Appbar/NavButton';
 export { default as MegaMenu } from '../shared/components/Appbar/MegaMenu';
-export { default as RoundButton } from '../shared/components/RoundButton';
+export { default as BoAButton } from '../shared/components/BoAButton';
 export { default as InfoTipoCarga } from '../features/Information/presentation/components/infoTipoCarga';
 
 export { default as Logo } from '../assets/Logo.svg';
