@@ -117,7 +117,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
         </Box>
 
         {onClick && (
-          <BoAButton mainButton={true} onClick={onClick}>
+          <BoAButton mainButton={false} onClick={onClick}>
             Ver más
           </BoAButton>
         )}

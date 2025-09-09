@@ -120,9 +120,9 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
             ¿Que cargas pueden entrar a esta categoria?
           </Typography>
           <Typography variant="body2">Ejemplos comunes de {title} en BoA Cargo:</Typography>
-          <Grid container spacing={2} mt={2}>
+          <Grid container spacing={2} mt={2} sx={{ justifyContent: 'center' }}>
             {example.map((item, index) => (
-              <Grid item key={index} xs={12} sm={6} md={3}>
+              <Grid item key={index} xs={12} sm={6} md={4}>
                 <ExampleType title={item.title} description={item.description} image={item.image} />
               </Grid>
             ))}

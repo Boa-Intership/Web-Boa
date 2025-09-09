@@ -21,8 +21,8 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
         src={image}
         alt={title}
         sx={{
-          width: 150,
-          height: 150,
+          width: '90%',
+          //height: 150,
           objectFit: 'cover', // recorta sin deformar
           borderRadius: 4,
           mb: 1,
@@ -33,10 +33,10 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
         sx={{
           textAlign: 'center',
           flexDirection: 'column',
-          width: '100%',
+          width: '90%',
         }}
       >
-        <Typography variant="subtitle2" fontWeight="bold">
+        <Typography variant="subtitle1" color="primary.dark" fontWeight="bold">
           {title}
         </Typography>
         <Typography variant="body2">{description}</Typography>

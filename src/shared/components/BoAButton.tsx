@@ -6,7 +6,7 @@ interface Props {
   color?: string;
   hover?: string;
   letter?: string;
-  mainButton: boolean;
+  mainButton?: boolean;
   children: React.ReactNode;
   onClick: () => void;
   selected?: boolean;
@@ -24,28 +24,34 @@ const BoAButton = ({
   icon,
 }: Props) => {
   const theme = useTheme();
-  color = color || theme.palette.warning.dark;
-  hover = hover || theme.palette.warning.main;
-  letter = letter || theme.palette.grey[300];
+
+  // Colores por defecto si no los pasan
+  const btnColor = color || theme.palette.warning.dark;
+  const btnHover = hover || theme.palette.warning.main;
+  const btnLetter = letter || theme.palette.grey[300];
+
+  // Si es principal o está seleccionado → contained
+  // Caso contrario → outlined
+  const variant = selected || mainButton ? 'contained' : 'outlined';
 
   return (
     <Button
       onClick={onClick}
       startIcon={icon}
+      variant={variant}
       sx={{
         textTransform: 'none',
         borderRadius: '9px',
-        borderWidth: 1,
-        backgroundColor: selected || mainButton ? color : 'none', // <-- si es mainButton fondo pintado
-        borderStyle: 'solid',
-        borderColor: !mainButton ? color : 'transparent',
-        color: selected || mainButton ? letter : color,
         fontWeight: 'bold',
         px: 2,
+        borderWidth: 1,
+        borderColor: btnColor,
+        backgroundColor: variant === 'contained' ? btnColor : 'transparent',
+        color: variant === 'contained' ? btnLetter : btnColor,
         '&:hover': {
-          backgroundColor: hover,
-          color: letter,
-          borderColor: hover,
+          backgroundColor: btnHover,
+          color: btnLetter,
+          borderColor: btnHover,
         },
         '&:focus, &.Mui-focusVisible': {
           outline: 'none',
