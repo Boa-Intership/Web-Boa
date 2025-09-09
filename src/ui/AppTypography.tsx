@@ -15,6 +15,7 @@ const AppTypography: React.FC<AppTypographyProps> = ({
   variant = 'body1',
   responsive = true,
   sx,
+  textAlign,
   ...rest
 }) => {
   const theme = useTheme();
@@ -37,11 +38,13 @@ const AppTypography: React.FC<AppTypographyProps> = ({
 
   return (
     <Typography
+      textAlign={textAlign}
       variant={variant as any}
       sx={{
         fontFamily: `"Lato", sans-serif`,
         fontWeight,
         lineHeight,
+        textAlign,
         ...responsiveStyles,
         ...sx,
       }}

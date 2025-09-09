@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Typography, Grid, Paper, Container } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import PublicIcon from '@mui/icons-material/Public';
-import { AppBox, AppContainer } from 'ui';
+import { AppBox, AppContainer, AppStack, AppTypography } from 'ui';
 
 const values = [
   {
@@ -26,21 +26,23 @@ const values = [
 ];
 
 const AboutUsSection: React.FC = () => (
-  <AppBox sx={{ py: { xs: 5, md: 8 }, background: 'background.paper' }}>
+  <AppBox sx={{ py: { xs: 5, md: 8 }, background: 'background.paper' }} textAlign={'center'}>
     <AppContainer>
-      <Typography variant="h4" fontWeight={700} textAlign="center" mb={3} color="primary">
-        Sobre nosotros
-      </Typography>
-      <Typography variant="body1" color="text.secondary" textAlign="justify" mb={2}>
-        BOA Cargo es una empresa líder en transporte aéreo de carga, fundada para conectar personas
-        y negocios en todo Bolivia. Nuestra misión es ofrecer servicios confiables, rápidos y
-        seguros, adaptándonos a las necesidades de cada cliente.
-      </Typography>
-      <Typography variant="body1" color="text.secondary" textAlign="justify" mb={4}>
-        Con una visión de crecimiento y excelencia, trabajamos cada día para expandir nuestra
-        cobertura y mejorar la experiencia de envío, garantizando la tranquilidad y satisfacción de
-        quienes confían en nosotros.
-      </Typography>
+      <AppStack spacing={2} mb={4}>
+        <AppTypography variant="h4Bold" mb={3} color="primary">
+          Sobre nosotros
+        </AppTypography>
+        <AppTypography variant="baseRegular" color="text.secondary" textAlign="justify">
+          BOA Cargo es una empresa líder en transporte aéreo de carga, fundada para conectar
+          personas y negocios en todo Bolivia. Nuestra misión es ofrecer servicios confiables,
+          rápidos y seguros, adaptándonos a las necesidades de cada cliente.
+        </AppTypography>
+        <AppTypography variant="baseRegular" color="text.secondary" textAlign="justify">
+          Con una visión de crecimiento y excelencia, trabajamos cada día para expandir nuestra
+          cobertura y mejorar la experiencia de envío, garantizando la tranquilidad y satisfacción
+          de quienes confían en nosotros.
+        </AppTypography>
+      </AppStack>
       <Grid container spacing={4} justifyContent="center">
         {values.map((value) => (
           <Grid item xs={12} sm={4} key={value.title}>
@@ -58,12 +60,12 @@ const AboutUsSection: React.FC = () => (
               }}
             >
               {value.icon}
-              <Typography variant="h6" fontWeight={600} textAlign="center" mb={1}>
+              <AppTypography variant="baseBold" fontWeight={600} textAlign="center" mb={1}>
                 {value.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" textAlign="center">
+              </AppTypography>
+              <AppTypography variant="smallMedium" color="text.secondary" textAlign="center">
                 {value.description}
-              </Typography>
+              </AppTypography>
             </Paper>
           </Grid>
         ))}

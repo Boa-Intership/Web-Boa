@@ -1,8 +1,5 @@
 import React from 'react';
-import AppBox from '../../../../shared/components/AppBox';
-import AppContainer from '../../../../shared/components/AppContainer';
-import AppGrid from '../../../../shared/components/AppGrid';
-import AppButton from '../../../../shared/components/AppButton';
+import { AppContainer, AppGrid, AppStack, AppTypography, AppButton } from 'ui';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate } from 'react-router-dom';
@@ -35,9 +32,11 @@ const OfficePreviewSection: React.FC = () => {
   const navigate = useNavigate();
   return (
     <AppContainer sx={{ py: { xs: 7, md: 8 } }}>
-      <Typography variant="h4" fontWeight={700} mb={4} textAlign="center" color="primary">
-        Nuestras oficinas
-      </Typography>
+      <AppStack textAlign="center" mb={2}>
+        <AppTypography variant="h4Bold" color="primary">
+          Nuestras oficinas
+        </AppTypography>
+      </AppStack>
       <AppGrid container spacing={4} justifyContent="center">
         {offices.map((office, idx) => (
           <AppGrid item xs={12} sm={6} md={4} key={idx}>
