@@ -12,7 +12,7 @@ export const ROUTES = {
 
   // Autenticación
   LOGIN: '/login',
-  REGISTRO: '/registro',
+  REGISTER: '/registro',
 
   // Funcionalidades que requieren autenticación
   TRACKING: '/tracking',

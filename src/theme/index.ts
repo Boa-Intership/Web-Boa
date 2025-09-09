@@ -1,6 +1,18 @@
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          '&:focus': {
+            outline: 'none'
+          }
+        }
+      }
+    }
+  },
+
   palette: {
     // AZULES
     primary: {
