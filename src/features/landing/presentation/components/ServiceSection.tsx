@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, List, ListItem } from '@mui/material';
 import aboutImg from 'assets/call.webp';
-import { AppBox, AppContainer, AppGrid, AppButton } from 'ui';
+import { AppBox, AppContainer, AppGrid, AppButton, AppTypography } from 'ui';
 import { ROUTES } from 'router/routes';
 import { useNavigate } from 'react-router-dom';
 
@@ -57,9 +57,9 @@ const ServiceSection: React.FC = () => {
           </AppGrid>
           <AppGrid item xs={12} md={6} sx={{ display: 'flex', alignItems: 'center' }}>
             <Box sx={{ px: { xs: 0, md: 4 } }}>
-              <Typography variant="h4" color="primary" fontWeight={700} gutterBottom>
+              <AppTypography variant="h4Bold" color="primary">
                 Atención al Cliente
-              </Typography>
+              </AppTypography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
                 {data.paragraph}
               </Typography>
