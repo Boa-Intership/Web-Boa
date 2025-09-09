@@ -17,6 +17,9 @@ import { styled } from '@mui/material/styles';
 // import ColorModeSelect from './theme/ColorModeSelect';
 // import { GoogleIcon, FacebookIcon, SitemarkIcon } from './components/CustomIcons';
 import ForgotPassword from '../components/loginForm/ForgotPassword';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from 'router/routes';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -51,13 +54,6 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
     position: 'absolute',
     zIndex: -1,
     inset: 0,
-    backgroundImage:
-      'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-    backgroundRepeat: 'no-repeat',
-    ...theme.applyStyles('dark', {
-      backgroundImage:
-        'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
-    }),
   },
 }));
 
@@ -117,15 +113,17 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
   return (
     <SignInContainer direction="column" justifyContent="space-between">
-      <CssBaseline enableColorScheme />
-      {/* <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} /> */}
-      <Card variant="outlined">
+      <Card
+        variant="outlined"
+        sx={{
+          backgroundColor: 'background.default',
+          borderRadius: '15px'
+        }}
+      >
 
         <Typography
-          component="h1"
-          variant="h4"
           color={'primary'}
-          sx={{ width: '100%', fontSize: 'clamp(24px, 10vw, 25px)', pb: '8px'}}
+          sx={{ width: '100%', fontSize: 'clamp(24px, 10vw, 25px)', pb: '8px' }}
         >
           Iniciar sesi&oacute;n
         </Typography>
@@ -201,7 +199,6 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             onClick={handleClickOpen}
             variant="body2"
             sx={{ alignSelf: 'center' }}
-            color={'warning.main'}
           >
             ¿Olvidaste tu contraseña?
           </Link>
@@ -215,12 +212,12 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
           >
             Iniciar sesi&oacute;n con google
           </Button>
-          <Typography variant="body2" sx={{ textAlign: 'center' }} color={'primary'}>
+          <Typography variant="body2" sx={{ textAlign: 'center' }}>
             ¿No tienes una cuenta?{' '}
             <Link
-              href="/material-ui/getting-started/templates/sign-in/"
+              component={RouterLink}
+              to={ROUTES.REGISTER}
               sx={{ alignSelf: 'center' }}
-              color={'warning.main'}
             >
               Crear una cuenta
             </Link>
