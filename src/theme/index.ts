@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import { typographyVariants } from './typography';
 
 const theme = createTheme({
   components: {
@@ -73,11 +74,11 @@ const theme = createTheme({
       400: '#7a7a7a',
       600: '#4a4a4a', // grey_main main
       800: '#2c2c2c', // grey_dark main
-      // Custom contrastText values for reference (not used by MUI directly)
-      // 201: '#2c2c2c', // grey_light contrastText
-      // 601: '#fff',     // grey_main contrastText
-      // 801: '#fff',     // grey_dark contrastText
     },
+  },
+  typography: {
+    fontFamily: `"Lato", sans-serif`,
+    ...typographyVariants,
   },
 });
 

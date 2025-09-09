@@ -16,5 +16,6 @@ export { default as InfoTipoCarga } from '../features/Information/presentation/c
 export { default as Logo } from '../assets/Logo.svg';
 export { default as LogoCargo } from '../assets/LogoCargo.svg';
 export { default as AppButton } from '../shared/components/AppButton';
+export { default as AppTypography } from '../ui/AppTypography';
 
 // export { default as ROUTES } from '../router/routes';

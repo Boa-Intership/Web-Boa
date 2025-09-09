@@ -1,7 +1,5 @@
 import React from 'react';
-import AppContainer from '../../../../shared/components/AppContainer';
-import AppGrid from '../../../../shared/components/AppGrid';
-import AppButton from '../../../../shared/components/AppButton';
+import { AppContainer, AppButton, AppGrid } from 'ui';
 import { Typography, Divider, Box } from '@mui/material';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import GavelIcon from '@mui/icons-material/Gavel';
