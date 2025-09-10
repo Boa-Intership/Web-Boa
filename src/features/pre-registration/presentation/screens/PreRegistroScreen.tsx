@@ -13,7 +13,7 @@ export default function PreRegistroScreen() {
   const [formData, setFormData] = useState({
     remitente: {},
     destinatario: {},
-    ruta: {},
+    ruta: { origen: '', destino: '' },
     carga: {},
     factura: {},
     resumen: {},

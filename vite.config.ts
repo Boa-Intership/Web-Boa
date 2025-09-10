@@ -36,4 +36,12 @@ export default defineConfig({
       exclude: ['node_modules/', 'src/setupTests.ts'],
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://192.168.150.220',
+        changeOrigin: true,
+      },
+    },
+  },
 });
