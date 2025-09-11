@@ -7,11 +7,11 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '&:focus': {
-            outline: 'none'
-          }
-        }
-      }
-    }
+            outline: 'none',
+          },
+        },
+      },
+    },
   },
 
   palette: {

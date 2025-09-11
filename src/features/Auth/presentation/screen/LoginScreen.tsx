@@ -10,13 +10,12 @@ import {
   Typography,
   Stack,
   Card as MuiCard,
-  styled
+  styled,
 } from '@mui/material';
 import ForgotPassword from '../components/loginForm/ForgotPassword';
 import { ROUTES } from 'router/routes';
 import { Link as RouterLink } from 'react-router-dom';
 import { AppTypography } from 'ui';
-
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -113,15 +112,10 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
         variant="outlined"
         sx={{
           backgroundColor: 'background.default',
-          borderRadius: '15px'
+          borderRadius: '15px',
         }}
       >
-
-        <AppTypography
-          color={'primary'}
-          variant='h3Regular'
-          sx={{ pb: '8px' }}
-        >
+        <AppTypography color={'primary'} variant="h3Regular" sx={{ pb: '8px' }}>
           Iniciar sesi&oacute;n
         </AppTypography>
         <Box
@@ -136,10 +130,7 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
           }}
         >
           <FormControl>
-            <FormLabel
-              htmlFor="email"
-              sx={{ fontSize: '14px' }}
-            >
+            <FormLabel htmlFor="email" sx={{ fontSize: '14px' }}>
               Correo
             </FormLabel>
             <TextField
@@ -159,10 +150,7 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
             />
           </FormControl>
           <FormControl>
-            <FormLabel
-              htmlFor="password"
-              sx={{ fontSize: '14px' }}
-            >
+            <FormLabel htmlFor="password" sx={{ fontSize: '14px' }}>
               Contraseña
             </FormLabel>
             <TextField
@@ -182,12 +170,7 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
             />
           </FormControl>
           <ForgotPassword open={open} handleClose={handleClose} />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            onClick={validateInputs}
-          >
+          <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
             Iniciar sesi&oacute;n
           </Button>
           <Link
@@ -211,11 +194,7 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
           </Button>
           <Typography variant="body2" sx={{ textAlign: 'center' }}>
             ¿No tienes una cuenta?{' '}
-            <Link
-              component={RouterLink}
-              to={ROUTES.REGISTER}
-              sx={{ alignSelf: 'center' }}
-            >
+            <Link component={RouterLink} to={ROUTES.REGISTER} sx={{ alignSelf: 'center' }}>
               Crear una cuenta
             </Link>
           </Typography>

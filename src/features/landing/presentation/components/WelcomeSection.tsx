@@ -21,10 +21,10 @@ const exps: Array<Exp> = [
 const ExpItem: FC<{ item: Exp }> = ({ item }) => (
   <Box sx={{ textAlign: 'center', margin: 2 }}>
     <Stack direction="column" spacing={0.5} alignItems="center" margin={0}>
-      <AppTypography variant="h3Bold" color="secondary.main">
+      <AppTypography variant="h4Bold" color="secondary.main">
         {item.value}
       </AppTypography>
-      <AppTypography variant="h3Bold">{item.label}</AppTypography>
+      <AppTypography variant="h4Medium">{item.label}</AppTypography>
     </Stack>
   </Box>
 );

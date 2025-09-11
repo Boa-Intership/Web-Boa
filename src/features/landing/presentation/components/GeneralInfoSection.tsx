@@ -45,12 +45,12 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
   return (
     <AppContainer sx={{ py: { xs: 6, md: 8 } }}>
       <AppStack alignItems="center" mb={2} textAlign={'center'}>
-        <AppTypography variant="h4Bold" color="primary">
+        <AppTypography variant="h2Bold" color="primary">
           {title}
         </AppTypography>
-        {/* <AppTypography variant="baseMedium" color="text.secondary">
+        <AppTypography variant="baseRegular" color="text.secondary">
           {subtitle}
-        </AppTypography> */}
+        </AppTypography>
       </AppStack>
       <Divider sx={{ mb: 4 }} />
       <AppGrid container spacing={4} justifyContent="center">
@@ -61,7 +61,6 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
                 p: 4,
                 borderRadius: 4,
                 boxShadow: 2,
-                background: 'background.default',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -69,10 +68,10 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               }}
             >
               {section.icon}
-              <AppTypography variant="h6Bold" mb={2} textAlign="center">
+              <AppTypography variant="h4Bold" mb={2}>
                 {section.title}
               </AppTypography>
-              <AppTypography variant="body2" mb={3} color="text.secondary" textAlign="center">
+              <AppTypography variant="smallMedium" mb={2} color="text.secondary" textAlign="center">
                 {section.description}
               </AppTypography>
               <AppButton

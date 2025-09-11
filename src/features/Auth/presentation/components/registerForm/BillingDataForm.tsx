@@ -9,13 +9,7 @@ const BillingDataForm = () => {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <TextField
-            required
-            id="razonSocial"
-            name="razonSocial"
-            label="Razón Social"
-            fullWidth
-          />
+          <TextField required id="razonSocial" name="razonSocial" label="Razón Social" fullWidth />
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -27,8 +21,8 @@ const BillingDataForm = () => {
             fullWidth
             defaultValue="CI"
           >
-            <MenuItem value='1'>CI</MenuItem>
-            <MenuItem value='5'>NIT</MenuItem>
+            <MenuItem value="1">CI</MenuItem>
+            <MenuItem value="5">NIT</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={8}>
@@ -41,12 +35,7 @@ const BillingDataForm = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            id="complemento"
-            name="complemento"
-            label="Complemento"
-            fullWidth
-          />
+          <TextField id="complemento" name="complemento" label="Complemento" fullWidth />
         </Grid>
       </Grid>
     </>
