@@ -13,7 +13,7 @@ import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
-import { AppStack } from 'ui';
+import { AppStack, AppTypography } from 'ui';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
@@ -46,14 +46,14 @@ function TipoCargaScreen() {
 
   return (
     <AppContainer sx={{ py: 4 }}>
-      <Typography variant="h4" fontWeight={'bold'} gutterBottom color={theme.palette.primary.main}>
+      <AppTypography variant="h2Bold" color="primary" mb={2}>
         Tipos de carga
-      </Typography>
-      <Typography variant="body2" mb={2} textAlign="justify" sx={{ whiteSpace: 'pre-line' }}>
+      </AppTypography>
+      <AppTypography variant="baseRegular" mb={2}>
         {`Al analizar los distintos tipos de carga transportada por vía aérea, se dividen en dos grupos principales: carga general y carga especial.Esta última se divide en subgrupos especializados más pequeños. Analizaremos estos subgrupos con mayor detalle más adelante.
 
         Si tiene preguntas respecto a los requisitos para los envíos aéreos, le invitamos a comunicarse con nuestro Call Center de su ciudad de residencia.`}
-      </Typography>
+      </AppTypography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={3} lg={3}>
           <AppStack
@@ -64,9 +64,9 @@ function TipoCargaScreen() {
               p: 1,
             }}
           >
-            <Typography variant="h6" fontWeight={'bold'} color={colorBoton}>
+            <AppTypography variant="h4Bold" color="primary.dark" mb={2}>
               Categorías:
-            </Typography>
+            </AppTypography>
             <BoAButton
               color={colorBoton}
               hover={colorHover}

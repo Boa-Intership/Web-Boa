@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import ExampleType from './ExampleType';
 import { Box, Typography, Grid, Stack } from '@mui/material';
-import { BoAButton } from 'ui';
-import { useTheme } from '@mui/material/styles';
+import { BoAButton, AppTypography } from 'ui';
 
 interface Detail {
   title: string;
@@ -27,23 +26,16 @@ interface infoTipoCargaProps {
 
 function InfoTipoCarga({ title, description, details, subtitle, example }: infoTipoCargaProps) {
   const [selectedDetail, setSelectedDetail] = useState<number | null>(0); // selecciona el primero por defecto
-  const theme = useTheme();
 
   return (
     <Box>
-      <Typography
-        id="modal-title"
-        variant="h5"
-        fontWeight="bold"
-        color={theme.palette.primary.main}
-        mb={2}
-      >
+      <AppTypography variant="h4Bold" color="primary" mb={2}>
         {title}
-      </Typography>
+      </AppTypography>
 
-      <Typography variant="body2" textAlign={'justify'} mb={2}>
+      <AppTypography variant="baseRegular" mb={3}>
         {description}
-      </Typography>
+      </AppTypography>
 
       <Box
         sx={{
@@ -52,13 +44,13 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
           flexDirection: { xs: 'column', sm: 'row', md: 'row' },
         }}
       >
-        <Typography variant="h6" fontWeight="bold" color={theme.palette.primary.main}>
+        <AppTypography variant="h4Bold" color="primary">
           {subtitle}
-        </Typography>
+        </AppTypography>
 
         {/* Botones dinámicos */}
         {details && details.length > 0 && (
-          <Stack direction="row" spacing={2} flexWrap="wrap" mb={2}>
+          <Stack direction="row" spacing={2} flexWrap="wrap" mb={1}>
             {details.map((item, index) => (
               <BoAButton
                 key={index}
@@ -75,12 +67,12 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
 
       {/* Mostrar contenido del detalle seleccionado */}
       {selectedDetail !== null && details[selectedDetail] && (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} mb={3}>
           <Grid item>
             {details[selectedDetail].description.map((desc, i) => (
-              <Typography key={i} variant="body2" gutterBottom>
+              <AppTypography key={i} variant="baseRegular" mb={1}>
                 • {desc}
-              </Typography>
+              </AppTypography>
             ))}
           </Grid>
           {/* Imagen (si existe) */}
@@ -111,16 +103,13 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
 
       {example && example.length > 0 && (
         <Box>
-          <Typography
-            variant="subtitle1"
-            fontWeight={'bold'}
-            mt={2}
-            color={theme.palette.primary.main}
-          >
+          <AppTypography variant="h4Bold" color="primary" mb={1}>
             ¿Que cargas pueden entrar a esta categoria?
-          </Typography>
-          <Typography variant="body2">Ejemplos comunes de {title} en BoA Cargo:</Typography>
-          <Grid container spacing={1} mt={2} sx={{ justifyContent: 'center' }}>
+          </AppTypography>
+          <AppTypography variant="baseRegular" mb={1}>
+            Ejemplos comunes de {title} en BoA Cargo:
+          </AppTypography>
+          <Grid container spacing={1} sx={{ justifyContent: 'center' }}>
             {example.map((item, index) => (
               <Grid item mb={2} key={index} xs={12} sm={6} md={6}>
                 <ExampleType title={item.title} description={item.description} image={item.image} />
