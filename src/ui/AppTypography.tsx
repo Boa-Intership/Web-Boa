@@ -38,6 +38,7 @@ const AppTypography: React.FC<AppTypographyProps> = ({
   return (
     <Typography
       variant={variant as any}
+      component={rest.component||variant}
       sx={{
         fontFamily: `"Lato", sans-serif`,
         fontWeight,
