@@ -1,4 +1,4 @@
-import { Box, Typography, Fade } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 type ExampleTypeProps = {
   title: string;
@@ -16,27 +16,51 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
         width: '100%',
       }}
     >
+      {/* Imagen con overlay */}
       <Box
-        component="img"
-        src={image}
-        alt={title}
         sx={{
-          width: 150,
-          height: 150,
-          objectFit: 'cover', // recorta sin deformar
-          borderRadius: 4,
+          position: 'relative',
+          width: '90%',
+          borderRadius: 2,
+          overflow: 'hidden',
           mb: 1,
         }}
-        loading="lazy"
-      />
+      >
+        <Box
+          component="img"
+          src={image}
+          alt={title}
+          sx={{
+            width: '100%',
+            height: 'auto',
+            objectFit: 'cover',
+            display: 'block',
+          }}
+          loading="lazy"
+        />
+
+        {/* Capa azulada encima */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            bgcolor: 'rgba(0, 45, 87, 0.2)', // azul semitransparente
+          }}
+        />
+      </Box>
+
+      {/* Texto */}
       <Box
         sx={{
           textAlign: 'center',
           flexDirection: 'column',
-          width: '100%',
+          width: '90%',
         }}
       >
-        <Typography variant="subtitle2" fontWeight="bold">
+        <Typography variant="subtitle1" color="primary.dark" fontWeight="bold">
           {title}
         </Typography>
         <Typography variant="body2">{description}</Typography>

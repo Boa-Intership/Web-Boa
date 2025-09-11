@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import type { NavItem } from './types';
+import { alpha, useTheme } from '@mui/material/styles';
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
@@ -21,30 +22,40 @@ const MobileDrawer: React.FC<{
   navItems: NavItem[];
   navigate: (to: string) => void;
 }> = ({ open, onClose, navItems, navigate }) => {
+  const theme = useTheme();
   const buttonStyle = {
     color: 'grey.600',
     borderRadius: 2,
     p: 1,
     fontSize: '0.86em',
     '&:hover': {
-      backgroundColor: 'background.default',
-      border: '1px solid #e9e9e9ff',
+      backgroundColor: 'background.paper',
+      //border: '1px solid #e9e9e9ff',
     },
   };
 
   const iconStyle = {
-    color: 'primary.main',
+    color: 'primary.light',
     minWidth: 45,
     justifyContent: 'center',
   };
 
   return (
-    <Drawer anchor="right" open={open} onClose={onClose}>
+    <Drawer
+      anchor="right"
+      open={open}
+      onClose={onClose}
+      PaperProps={{
+        sx: {
+          width: 300,
+          backgroundColor: alpha(theme.palette.grey[300], 0.6), // 👈 transparente
+          backdropFilter: 'blur(6px)', // 👈 efecto vidrio
+          boxShadow: 'none',
+        },
+      }}
+    >
       <Box
         sx={{
-          width: 300,
-          backgroundColor: 'grey.200',
-          height: '100%',
           p: 2,
         }}
         role="presentation"

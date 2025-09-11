@@ -40,6 +40,7 @@ const AppTypography: React.FC<AppTypographyProps> = ({
     <Typography
       textAlign={textAlign}
       variant={variant as any}
+      component={rest.component||variant}
       sx={{
         fontFamily: `"Lato", sans-serif`,
         fontWeight,

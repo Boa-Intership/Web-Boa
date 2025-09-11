@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
-import RoundButton from '../../../../shared/components/RoundButton';
+import BoAButton from '../../../../shared/components/BoAButton';
 
 interface ButtonCardInfoProps {
   title: string;
@@ -116,7 +116,11 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           </Typography>
         </Box>
 
-        {onClick && <RoundButton onClick={onClick}>Ver más</RoundButton>}
+        {onClick && (
+          <BoAButton mainButton={false} onClick={onClick}>
+            Ver más
+          </BoAButton>
+        )}
       </CardContent>
     </Card>
   );
