@@ -13,6 +13,7 @@ import ScrollToTop from './router/ScrollToTop';
 import ItinerariosScreen from './features/itinerarios/presentation/screens/ItinerariosScreen';
 import TerminosScreen from './features/terms_conditions/presentation/screens/TerminosScreen';
 import Login from './features/Auth/presentation/screen/LoginScreen';
+import Register from './features/Auth/presentation/screen/RegisterScreen';
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -28,7 +29,7 @@ const App: React.FC = () => (
         <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
         <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
         <Route path={ROUTES.LOGIN.replace('/', '')} element={<Login />} />
-        {/* <Route path={ROUTES.REGISTER.replace('/', '')} element={<Register />} /> */}
+        <Route path={ROUTES.REGISTER.replace('/', '')} element={<Register />} />
 
         <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
       </Route>

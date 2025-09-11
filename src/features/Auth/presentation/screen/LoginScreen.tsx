@@ -1,25 +1,21 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Divider from '@mui/material/Divider';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import MuiCard from '@mui/material/Card';
-import { styled } from '@mui/material/styles';
-// import AppTheme from './theme/AppTheme';
-// import ColorModeSelect from './theme/ColorModeSelect';
-// import { GoogleIcon, FacebookIcon, SitemarkIcon } from './components/CustomIcons';
+import {
+  Box,
+  Button,
+  Divider,
+  FormLabel,
+  FormControl,
+  Link,
+  TextField,
+  Typography,
+  Stack,
+  Card as MuiCard,
+  styled
+} from '@mui/material';
 import ForgotPassword from '../components/loginForm/ForgotPassword';
-import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'router/routes';
 import { Link as RouterLink } from 'react-router-dom';
+import { AppTypography } from 'ui';
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -57,7 +53,7 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function SignIn(props: { disableCustomTheme?: boolean }) {
+export default function Login(props: { disableCustomTheme?: boolean }) {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
@@ -121,12 +117,13 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
         }}
       >
 
-        <Typography
+        <AppTypography
           color={'primary'}
-          sx={{ width: '100%', fontSize: 'clamp(24px, 10vw, 25px)', pb: '8px' }}
+          variant='h3Regular'
+          sx={{ pb: '8px' }}
         >
           Iniciar sesi&oacute;n
-        </Typography>
+        </AppTypography>
         <Box
           component="form"
           onSubmit={handleSubmit}
