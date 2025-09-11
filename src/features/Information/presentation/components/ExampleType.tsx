@@ -20,8 +20,8 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
       <Box
         sx={{
           position: 'relative',
-          width: '90%',
-          borderRadius: 2,
+          width: '100%',
+          borderRadius: 1,
           overflow: 'hidden',
           mb: 1,
         }}
@@ -32,7 +32,7 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
           alt={title}
           sx={{
             width: '100%',
-            height: 'auto',
+            height: '250px',
             objectFit: 'cover',
             display: 'block',
           }}
@@ -55,9 +55,9 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
       {/* Texto */}
       <Box
         sx={{
-          textAlign: 'center',
+          textAlign: 'flex-start',
           flexDirection: 'column',
-          width: '90%',
+          width: '100%',
         }}
       >
         <Typography variant="subtitle1" color="primary.dark" fontWeight="bold">
