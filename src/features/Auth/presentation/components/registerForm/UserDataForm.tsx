@@ -1,11 +1,15 @@
 import React from 'react';
-import { TextField, MenuItem, Grid, Typography } from '@mui/material';
+import { TextField, MenuItem, Grid, Typography, Stack, Box } from '@mui/material';
 import { AppTypography } from 'ui';
 
 const UserDataForm = () => {
   return (
     <>
-      <Typography color={'primary.main'}>Datos de Usuario</Typography>
+      <Box sx={{ mb: '20px' }}>
+        <AppTypography variant="h4Regular" color={'primary.main'}>
+          Datos de Usuario
+        </AppTypography>
+      </Box>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField

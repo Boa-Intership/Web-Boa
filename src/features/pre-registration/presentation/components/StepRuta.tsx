@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, Grid, MenuItem, TextField, Typography, Paper } from '@mui/material';
 import { LocationOn } from '@mui/icons-material';
 import { Alert, AlertTitle } from '@mui/material';
+import { AppTypography } from 'ui';
 
 const ciudades = [
   'Cochabamba',
@@ -47,9 +48,9 @@ const StepRuta = ({ data, setData, onNext, onBack }: any) => {
       <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
         <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
           <LocationOn color="primary" />
-          <Typography variant="h5" color="primary">
+          <AppTypography variant="h4Regular" color="primary">
             Información de la Ruta
-          </Typography>
+          </AppTypography>
         </Box>
         {/* Alert */}
         {showError && (

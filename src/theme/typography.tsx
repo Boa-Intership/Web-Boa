@@ -1,26 +1,26 @@
 // src/theme/typography.ts
 export const typographyVariants = {
-  h1Regular: { fontSize: '42px', fontWeight: 400, lineHeight: '44px' },
-  h1Medium: { fontSize: '42px', fontWeight: 500, lineHeight: '44px' },
-  h1Bold: { fontSize: '42px', fontWeight: 650, lineHeight: '44px' },
+  h1Regular: { fontSize: '2.625rem', fontWeight: 400, lineHeight: 1.2 },
+  h1Medium: { fontSize: '2.625rem', fontWeight: 500, lineHeight: 1.2 },
+  h1Bold: { fontSize: '2.625rem', fontWeight: 650, lineHeight: 1.2 },
 
-  h2Regular: { fontSize: '36px', fontWeight: 400, lineHeight: '34px' },
-  h2Medium: { fontSize: '36px', fontWeight: 500, lineHeight: '34px' },
-  h2Bold: { fontSize: '36px', fontWeight: 650, lineHeight: '34px' },
+  h2Regular: { fontSize: '2.25rem', fontWeight: 400, lineHeight: 1.2 },
+  h2Medium: { fontSize: '2.25rem', fontWeight: 500, lineHeight: 1.2 },
+  h2Bold: { fontSize: '2.25rem', fontWeight: 650, lineHeight: 1.2 },
 
-  h3Regular: { fontSize: '28px', fontWeight: 400, lineHeight: '25px' },
-  h3Medium: { fontSize: '28px', fontWeight: 500, lineHeight: '25px' },
-  h3Bold: { fontSize: '28px', fontWeight: 650, lineHeight: '25px' },
+  h3Regular: { fontSize: '1.75rem', fontWeight: 400, lineHeight: 1.2 },
+  h3Medium: { fontSize: '1.75rem', fontWeight: 500, lineHeight: 1.2 },
+  h3Bold: { fontSize: '1.75rem', fontWeight: 650, lineHeight: 1.2 },
 
-  h4Regular: { fontSize: '21px', fontWeight: 400, lineHeight: '23px' },
-  h4Medium: { fontSize: '21px', fontWeight: 500, lineHeight: '23px' },
-  h4Bold: { fontSize: '21px', fontWeight: 650, lineHeight: '23px' },
+  h4Regular: { fontSize: '1.313rem', fontWeight: 400, lineHeight: 1.2 },
+  h4Medium: { fontSize: '1.313rem', fontWeight: 500, lineHeight: 1.2 },
+  h4Bold: { fontSize: '1.313rem', fontWeight: 650, lineHeight: 1.2 },
 
-  baseRegular: { fontSize: '16px', fontWeight: 400, lineHeight: '24px' },
-  baseMedium: { fontSize: '16px', fontWeight: 500, lineHeight: '24px' },
-  baseBold: { fontSize: '16px', fontWeight: 650, lineHeight: '24px' },
+  baseRegular: { fontSize: '1rem', fontWeight: 400, lineHeight: 1.2 },
+  baseMedium: { fontSize: '1rem', fontWeight: 500, lineHeight: 1.2 },
+  baseBold: { fontSize: '1rem', fontWeight: 650, lineHeight: 1.2 },
 
-  smallRegular: { fontSize: '14px', fontWeight: 400, lineHeight: '19.5px' },
-  smallMedium: { fontSize: '14px', fontWeight: 500, lineHeight: '19.5px' },
-  smallBold: { fontSize: '14px', fontWeight: 650, lineHeight: '19.5px' },
+  smallRegular: { fontSize: '0.875rem', fontWeight: 400, lineHeight: 1.2 },
+  smallMedium: { fontSize: '0.875rem', fontWeight: 500, lineHeight: 1.2 },
+  smallBold: { fontSize: '0.875rem', fontWeight: 650, lineHeight: 1.2 },
 };

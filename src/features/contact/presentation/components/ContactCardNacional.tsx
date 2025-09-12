@@ -1,5 +1,6 @@
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import { LocationOn, AccessTime, Phone, HorizontalRule } from '@mui/icons-material';
+import { AppTypography } from 'ui';
 
 interface Props {
   ciudad: string;
@@ -20,39 +21,39 @@ export const ContactCardNacional = ({ direccion, horarios, contacto, mapEmbed }:
       <Box flex={1}>
         <Box display="flex" alignItems="center" mb={1}>
           <LocationOn color="info" sx={{ mr: 1 }} />
-          <Typography>{direccion}</Typography>
+          <AppTypography variant="h4Regular">{direccion}</AppTypography>
         </Box>
 
         <Divider sx={{ my: 1 }} />
 
         <Box display="flex" alignItems="center" mb={1}>
           <AccessTime color="info" sx={{ mr: 1 }} />
-          <Typography>
+          <AppTypography variant="h4Regular">
             <strong>{horarios.dias}:</strong> {horarios.semana}
-          </Typography>
+          </AppTypography>
         </Box>
 
         <Box display="flex" alignItems="center" mb={1}>
           <AccessTime color="info" sx={{ mr: 1 }} />
-          <Typography>
+          <AppTypography variant="h4Regular">
             <strong>Sábados:</strong> {horarios.sabado}
-          </Typography>
+          </AppTypography>
         </Box>
 
         <Box display="flex" alignItems="center" mb={1}>
           <AccessTime color="info" sx={{ mr: 1 }} />
-          <Typography>
+          <AppTypography variant="h4Regular">
             <strong>Domingos y Feriados:</strong> {horarios.feriados}
-          </Typography>
+          </AppTypography>
         </Box>
 
         <Divider sx={{ my: 1 }} />
 
         <Box display="flex" alignItems="center">
           <Phone color="info" sx={{ mr: 1 }} />
-          <Typography>
+          <AppTypography variant="h4Regular">
             <strong>Contacto:</strong> {contacto.join(' - ')}
-          </Typography>
+          </AppTypography>
         </Box>
       </Box>
 

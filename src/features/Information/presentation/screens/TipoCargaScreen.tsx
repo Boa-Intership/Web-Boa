@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
-import { BoAButton } from 'ui';
+import { AppTypography, BoAButton } from 'ui';
 import { InfoTipoCarga } from 'ui';
 import { useTheme } from '@mui/material/styles';
 import { cargaData } from '../components/cargaData';

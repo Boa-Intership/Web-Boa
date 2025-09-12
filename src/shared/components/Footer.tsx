@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Grid, Icon, IconButton } from '@mui/material';
-import { AppBox, AppContainer } from 'ui';
+import { AppBox, AppContainer, AppTypography } from 'ui';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -82,7 +82,9 @@ const Footer: React.FC = () => (
         {/* Acerca de BoA */}
         <Grid item xs={12} sm={6} md={3}>
           <FooterSection align="left">
-            <Typography sx={sxTitle}>Acerca de BoA</Typography>
+            <AppTypography variant="h4Regular" sx={sxTitle}>
+              Acerca de BoA
+            </AppTypography>
             <LinkButton href="#">BoA Institucional</LinkButton>
             <LinkButton href="#">Perfil Corporativo</LinkButton>
             <LinkButton href="#">Avisos Importantes</LinkButton>
@@ -95,7 +97,9 @@ const Footer: React.FC = () => (
 
         <Grid item xs={12} sm={6} md={3}>
           <FooterSection align="left">
-            <Typography sx={sxTitle}>Información legal</Typography>
+            <AppTypography variant="h4Regular" sx={sxTitle}>
+              Información legal
+            </AppTypography>
             <LinkButton href="#">Nuestras Tarifas</LinkButton>
             <LinkButton href="#">Contrato de Transporte</LinkButton>
             <LinkButton href="#">Derechos y Responsabilidades</LinkButton>
@@ -107,7 +111,9 @@ const Footer: React.FC = () => (
         {/* Contáctanos */}
         <Grid item xs={12} sm={6} md={3}>
           <FooterSection align="left">
-            <Typography sx={sxTitle}>Contáctanos</Typography>
+            <AppTypography variant="h4Regular" sx={sxTitle}>
+              Contáctanos
+            </AppTypography>
             <LinkButton href="#">Contact Center</LinkButton>
             <LinkButton href="#">Nuestras Oficinas</LinkButton>
             <LinkButton href="#">Whatsapp</LinkButton>
@@ -116,7 +122,9 @@ const Footer: React.FC = () => (
         {/* Enlaces Rápidos */}
         <Grid item xs={12} sm={6} md={3}>
           <FooterSection align="left">
-            <Typography sx={sxTitle}>Enlaces Rápidos</Typography>
+            <AppTypography variant="h4Regular" sx={sxTitle}>
+              Enlaces Rápidos
+            </AppTypography>
             <LinkButton href="#">BoACargo</LinkButton>
             <LinkButton href="#">Mapa de Sitio</LinkButton>
           </FooterSection>
@@ -140,8 +148,8 @@ const Footer: React.FC = () => (
         </Grid>
         <Grid item xs={12}>
           <Box>
-            <Typography
-              variant="inherit"
+            <AppTypography
+              variant="h4Regular"
               align="center"
               sx={{
                 color: grey[400],
@@ -151,7 +159,7 @@ const Footer: React.FC = () => (
               gutterBottom
             >
               Copyright © 2025 Boliviana de Aviación. Todos los derechos reservados
-            </Typography>
+            </AppTypography>
           </Box>
         </Grid>
       </Grid>

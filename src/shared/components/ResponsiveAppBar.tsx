@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { AppTypography } from 'ui';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -87,7 +88,9 @@ const ResponsiveAppBar: React.FC = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                  <AppTypography variant="h4Regular" sx={{ textAlign: 'center' }}>
+                    {page}
+                  </AppTypography>
                 </MenuItem>
               ))}
             </Menu>
@@ -146,7 +149,9 @@ const ResponsiveAppBar: React.FC = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                  <AppTypography variant="h4Regular" sx={{ textAlign: 'center' }}>
+                    {setting}
+                  </AppTypography>
                 </MenuItem>
               ))}
             </Menu>

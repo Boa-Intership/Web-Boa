@@ -1,5 +1,6 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { Person, LocationOn, Inventory2, ReceiptLong, TaskAlt } from '@mui/icons-material';
+import { AppTypography } from 'ui';
 
 const steps = [
   { label: 'Datos personales', icon: <Person /> },
@@ -40,8 +41,8 @@ const StepHeader = ({ activeStep }: Props) => {
               >
                 {step.icon}
               </Box>
-              <Typography
-                variant="caption"
+              <AppTypography
+                variant="h4Regular"
                 align="center"
                 sx={{
                   mt: 1,
@@ -51,7 +52,7 @@ const StepHeader = ({ activeStep }: Props) => {
                 }}
               >
                 {step.label}
-              </Typography>
+              </AppTypography>
             </Box>
 
             {/* Línea entre pasos */}

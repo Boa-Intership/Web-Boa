@@ -3,6 +3,7 @@ import { AppContainer, AppGrid, AppStack, AppTypography, AppButton } from 'ui';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate } from 'react-router-dom';
+import { AppTypography } from 'ui';
 
 interface OfficePreview {
   ciudad: string;
@@ -63,13 +64,13 @@ const OfficePreviewSection: React.FC = () => {
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <LocationOnIcon sx={{ color: 'primary.main', fontSize: 28, mr: 1 }} />
-                  <Typography variant="subtitle1" fontWeight={600}>
+                  <AppTypography variant="h4Regular" fontWeight={600}>
                     {office.ciudad}
-                  </Typography>
+                  </AppTypography>
                 </Box>
-                <Typography variant="body2" color="text.secondary">
+                <AppTypography variant="h4Regular" color="text.secondary">
                   {office.direccion}
-                </Typography>
+                </AppTypography>
               </CardContent>
             </Card>
           </AppGrid>

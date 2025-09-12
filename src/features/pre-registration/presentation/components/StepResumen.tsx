@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CheckCircle } from '@mui/icons-material';
 import { ROUTES } from '../../../../router/routes';
 import ResumenEnvio from '../components/ResumenEnvio';
+import { AppTypography } from 'ui';
 
 const StepResumen = ({ formData, onBack }: any) => {
   const navigate = useNavigate();
@@ -36,19 +37,19 @@ const StepResumen = ({ formData, onBack }: any) => {
       <Grid container spacing={2} mt={3}>
         <Grid item xs={12} sm={4}>
           <Alert severity="warning">
-            <Typography fontWeight="bold">Precio estimado</Typography>
+            <AppTypography variant="h4Bold">Precio estimado</AppTypography>
             El precio final puede variar tras inspección física.
           </Alert>
         </Grid>
         <Grid item xs={12} sm={4}>
           <Alert severity="info">
-            <Typography fontWeight="bold">Vigencia</Typography>
+            <AppTypography variant="h4Bold">Vigencia</AppTypography>
             El pre-registro es válido por 1 día calendario.
           </Alert>
         </Grid>
         <Grid item xs={12} sm={4}>
           <Alert severity="success">
-            <Typography fontWeight="bold">Garantía</Typography>
+            <AppTypography variant="h4Bold">Garantía</AppTypography>
             Su paquete está asegurado durante todo el transporte.
           </Alert>
         </Grid>

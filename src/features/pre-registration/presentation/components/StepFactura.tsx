@@ -8,11 +8,11 @@ import {
   FormControlLabel,
   FormControl,
   TextField,
-  Typography,
   Paper,
   Divider,
 } from '@mui/material';
 import { ReceiptLong } from '@mui/icons-material';
+import { AppTypography } from 'ui';
 
 const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
   const [tipoDocumento, setTipoDocumento] = useState(data?.tipoDocumento || 'CI');
@@ -63,16 +63,16 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
       <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
         <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
           <ReceiptLong color="primary" />
-          <Typography variant="h5" color="primary">
+          <AppTypography variant="h4Regular" color="primary">
             Datos para la Factura
-          </Typography>
+          </AppTypography>
         </Box>
 
         {/* Selección de tipo de documento */}
         <FormControl component="fieldset" sx={{ mt: 2 }}>
-          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+          <AppTypography variant="h4Regular" fontWeight="bold" gutterBottom>
             Tipo de Documento
-          </Typography>
+          </AppTypography>
           <RadioGroup row value={tipoDocumento} onChange={(e) => setTipoDocumento(e.target.value)}>
             <FormControlLabel value="NIT" control={<Radio />} label="NIT" />
             <FormControlLabel value="CI" control={<Radio />} label="CI" />
@@ -114,19 +114,19 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
 
         {/* Estimación del costo */}
         <Box mt={4}>
-          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+          <AppTypography variant="h4Bold" gutterBottom>
             Estimación de Precio
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 1, pl: 2 }}>
+          </AppTypography>
+          <AppTypography variant="h4Regular" sx={{ mb: 1, pl: 2 }}>
             <strong>Tipo de Carga:</strong> {carga?.tipo || 'No definido'}
-          </Typography>
-          <Typography variant="body1" sx={{ pl: 2 }}>
+          </AppTypography>
+          <AppTypography variant="h4Regular" sx={{ pl: 2 }}>
             <strong>Ruta:</strong> {ruta?.origen} → {ruta?.destino}
-          </Typography>
+          </AppTypography>
           <Divider sx={{ my: 2 }} />
-          <Typography variant="h6" color="primary">
+          <AppTypography variant="h4Regular" color="primary">
             Total Estimado: <strong>{precioEstimado} Bs.</strong>
-          </Typography>
+          </AppTypography>
         </Box>
       </Paper>
       {/* Navegación */}
