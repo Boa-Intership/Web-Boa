@@ -10,6 +10,28 @@ interface AppTypographyProps extends Omit<TypographyProps, 'variant'> {
   responsive?: boolean;
 }
 
+// Mapeo de variantes personalizadas a elementos HTML
+const variantToComponent: Record<string, string> = {
+  h1Regular: 'h1',
+  h1Medium: 'h1',
+  h1Bold: 'h1',
+  h2Regular: 'h2',
+  h2Medium: 'h2',
+  h2Bold: 'h2',
+  h3Regular: 'h3',
+  h3Medium: 'h3',
+  h3Bold: 'h3',
+  h4Regular: 'h4',
+  h4Medium: 'h4',
+  h4Bold: 'h4',
+  baseRegular: 'p',
+  baseMedium: 'p',
+  baseBold: 'p',
+  smallRegular: 'p',
+  smallMedium: 'p',
+  smallBold: 'p',
+};
+
 const AppTypography: React.FC<AppTypographyProps> = ({
   children,
   variant = 'body1',
@@ -18,6 +40,15 @@ const AppTypography: React.FC<AppTypographyProps> = ({
   ...rest
 }) => {
   const theme = useTheme();
+
+  const getComponent = () => {
+    if (rest.component) return rest.component;
+
+    if (variant && variant in variantToComponent) {
+      return variantToComponent[variant as string];
+    }
+    return variant as string;
+  };
 
   const stylesFromTheme =
     variant in typographyVariants
@@ -37,8 +68,8 @@ const AppTypography: React.FC<AppTypographyProps> = ({
 
   return (
     <Typography
-      variant={variant as any}
-      component={rest.component||variant}
+      variant={variant in typographyVariants ? undefined : (variant as any)}
+      component={getComponent()}
       sx={{
         fontFamily: `"Lato", sans-serif`,
         fontWeight,
