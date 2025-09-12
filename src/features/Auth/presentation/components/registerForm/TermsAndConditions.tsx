@@ -4,7 +4,7 @@ import { FormControlLabel, Checkbox, Link, Typography } from '@mui/material';
 const TermsAndConditions = () => {
   return (
     <FormControlLabel
-      control={<Checkbox color="secondary" name="terms" value="yes" />}
+      control={<Checkbox color={'primary'} name="terms" value="yes" />}
       label={
         <Typography>
           Estoy de acuerdo con los{' '}

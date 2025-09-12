@@ -23,5 +23,4 @@ export const typographyVariants = {
   smallRegular: { fontSize: '14px', fontWeight: 400, lineHeight: '19.5px' },
   smallMedium: { fontSize: '14px', fontWeight: 500, lineHeight: '19.5px' },
   smallBold: { fontSize: '14px', fontWeight: 900, lineHeight: '19.5px' },
-
 };

@@ -1,14 +1,15 @@
 import React from 'react';
-import { TextField, MenuItem, Grid, Typography } from '@mui/material';
+import { TextField, MenuItem, Grid, Typography, Stack, Box } from '@mui/material';
 import { AppTypography } from 'ui';
-
 
 const UserDataForm = () => {
   return (
     <>
-      <Typography color={'primary.main'}>
-        Datos de Usuario
-      </Typography>
+      <Box sx={{ mb: '20px' }}>
+        <AppTypography variant="h4Regular" color={'primary.main'}>
+          Datos de Usuario
+        </AppTypography>
+      </Box>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField
@@ -62,18 +63,12 @@ const UserDataForm = () => {
             fullWidth
             defaultValue="CI"
           >
-            <MenuItem value='1'>CI</MenuItem>
-            <MenuItem value='5'>NIT</MenuItem>
+            <MenuItem value="1">CI</MenuItem>
+            <MenuItem value="5">NIT</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={8}>
-          <TextField
-            required
-            id="ci_nit"
-            name="ci_nit"
-            label="CI o NIT"
-            fullWidth
-          />
+          <TextField required id="ci_nit" name="ci_nit" label="CI o NIT" fullWidth />
         </Grid>
         <Grid item xs={12}>
           <TextField
