@@ -1,6 +1,6 @@
-import { Paper, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Paper, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { reglasContrato } from '../components/reglasData';
-import { AppContainer } from 'ui';
+import { AppContainer, AppTypography } from 'ui';
 import { useTheme } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReactMarkdown from 'react-markdown';
@@ -10,26 +10,25 @@ function TerminosScreen() {
   const theme = useTheme();
   return (
     <AppContainer sx={{ py: 4 }}>
-      <Typography variant="h4" fontWeight={'bold'} mb={2} color={theme.palette.primary.main}>
+      <AppTypography variant="h4Bold" mb={2} color={theme.palette.primary.main}>
         Terminos y Condiciones
-      </Typography>
-      <Typography variant="body1" component="div" textAlign={'justify'}>
+      </AppTypography>
+      <AppTypography variant="h4Regular" component="div" textAlign={'justify'}>
         <ReactMarkdown>{terminosData.infoSeguridadCarga}</ReactMarkdown>
-      </Typography>
-      <Typography
-        variant="h6"
-        fontWeight="bold"
+      </AppTypography>
+      <AppTypography
+        variant="h4Bold"
         color={theme.palette.primary.main}
         textAlign="center"
         mt={4}
         mb={2}
       >
         {terminosData.subtitulo}
-      </Typography>
+      </AppTypography>
 
       <ReactMarkdown
         components={{
-          p: ({ node, ...props }) => <Typography mb={2} ml={1} {...props} />,
+          p: ({ node, ...props }) => <AppTypography variant="h4Regular" mb={2} ml={1} {...props} />,
         }}
       >
         {terminosData.nota}
@@ -50,14 +49,14 @@ function TerminosScreen() {
             aria-controls={`panel${index}-content`}
             id={`panel${index}-header`}
           >
-            <Typography component="span" fontWeight="bold" color={theme.palette.primary.main}>
+            <AppTypography variant="h4Bold" component="span" color={theme.palette.primary.main}>
               {regla.titulo}
-            </Typography>
+            </AppTypography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography variant="body1" component="div" textAlign={'justify'}>
+            <AppTypography variant="h4Regular" component="div" textAlign={'justify'}>
               <ReactMarkdown>{regla.contenido}</ReactMarkdown>
-            </Typography>
+            </AppTypography>
           </AccordionDetails>
         </Accordion>
       ))}

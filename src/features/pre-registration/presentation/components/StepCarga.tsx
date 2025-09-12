@@ -5,7 +5,6 @@ import {
   Grid,
   MenuItem,
   TextField,
-  Typography,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -24,6 +23,7 @@ import {
   AddCircle,
   Inventory2Outlined,
 } from '@mui/icons-material';
+import { AppTypography } from 'ui';
 
 const tiposCarga = [
   { label: 'Carga general', codigo: 'CG' },
@@ -130,9 +130,9 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
       <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
         <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
           <Inventory2 color="primary" />
-          <Typography variant="h5" color="primary">
+          <AppTypography variant="h4Regular" color="primary">
             Información de la Carga
-          </Typography>
+          </AppTypography>
         </Box>
 
         {/* Tipo de carga */}
@@ -159,16 +159,16 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
         {/* Detalle de ítems agregados */}
         <Box mt={3}>
           <Box display="flex" alignItems="center" justifyContent="space-between">
-            <Typography variant="h6" color="primary">
+            <AppTypography variant="h4Regular" color="primary">
               Paquetes Agregados
-            </Typography>
+            </AppTypography>
             <IconButton color="primary" onClick={() => setModalOpen(true)}>
               <AddCircle />
             </IconButton>
           </Box>
 
           {detalles.length === 0 ? (
-            //<Typography color='text.secondary' mt={2}>No hay paquetes agregados</Typography>
+            //<AppTypography variant="h4Regular" color='text.secondary' mt={2}>No hay paquetes agregados</AppTypography>
             <Box
               sx={{
                 //backgroundColor: '#4a6b91',
@@ -179,12 +179,12 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
               }}
             >
               <Inventory2Outlined sx={{ fontSize: 60, mb: 1, opacity: 0.8 }} />
-              <Typography variant="h6" fontWeight="bold">
+              <AppTypography variant="h4Regular" fontWeight="bold">
                 No hay paquetes agregados
-              </Typography>
-              <Typography variant="body2" mt={1} sx={{ opacity: 0.8 }}>
+              </AppTypography>
+              <AppTypography variant="h4Regular" mt={1} sx={{ opacity: 0.8 }}>
                 Toca el botón <strong>+</strong> para agregar tu primer paquete
-              </Typography>
+              </AppTypography>
             </Box>
           ) : (
             <Box mt={2} display="flex" flexDirection="column">
@@ -200,10 +200,12 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                   }}
                 >
                   <Box>
-                    <Typography fontWeight={600}>{item.descripcion}</Typography>
-                    <Typography variant="body2">
+                    <AppTypography variant="h4Regular" fontWeight={600}>
+                      {item.descripcion}
+                    </AppTypography>
+                    <AppTypography variant="h4Regular">
                       {item.peso}kg • {item.alto}×{item.ancho}×{item.largo}cm • {item.piezas} piezas
-                    </Typography>
+                    </AppTypography>
                   </Box>
                   <Box>
                     <IconButton onClick={() => handleVisualizarItem(item)}>
@@ -223,12 +225,12 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
         </Box>
 
         <Box mt={4}>
-          <Typography variant="body2">
+          <AppTypography variant="h4Regular">
             Peso Total: <strong>{pesoTotal.toFixed(2)} kg</strong>
-          </Typography>
-          <Typography variant="body2">
+          </AppTypography>
+          <AppTypography variant="h4Regular">
             Costo Estimado: <strong>Bs {costoEstimado.toFixed(2)}</strong>
-          </Typography>
+          </AppTypography>
         </Box>
       </Paper>
 
@@ -287,19 +289,19 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
         <DialogContent dividers>
           {paqueteSeleccionado && (
             <Box display="flex" flexDirection="column" gap={1}>
-              <Typography>
+              <AppTypography variant="h4Regular">
                 <strong>Descripción:</strong> {paqueteSeleccionado.descripcion}
-              </Typography>
-              <Typography>
+              </AppTypography>
+              <AppTypography variant="h4Regular">
                 <strong>Peso:</strong> {paqueteSeleccionado.peso} kg
-              </Typography>
-              <Typography>
+              </AppTypography>
+              <AppTypography variant="h4Regular">
                 <strong>Dimensiones:</strong> {paqueteSeleccionado.alto} ×{' '}
                 {paqueteSeleccionado.ancho} × {paqueteSeleccionado.largo} cm
-              </Typography>
-              <Typography>
+              </AppTypography>
+              <AppTypography variant="h4Regular">
                 <strong>Piezas:</strong> {paqueteSeleccionado.piezas}
-              </Typography>
+              </AppTypography>
             </Box>
           )}
         </DialogContent>
@@ -355,7 +357,9 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
       >
         <DialogTitle>Eliminar Paquete</DialogTitle>
         <DialogContent dividers>
-          <Typography>¿Estás seguro de que deseas eliminar este paquete?</Typography>
+          <AppTypography variant="h4Regular">
+            ¿Estás seguro de que deseas eliminar este paquete?
+          </AppTypography>
         </DialogContent>
         <DialogActions>
           <Button onClick={cancelarEliminacion}>Cancelar</Button>

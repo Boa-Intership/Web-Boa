@@ -2,9 +2,9 @@ import React from 'react';
 import AppContainer from '../../../../shared/components/AppContainer';
 import AppButton from '../../../../shared/components/AppButton';
 import AppStack from '../../../../shared/components/AppStack';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { AppBox } from 'ui';
+import { AppBox, AppTypography } from 'ui';
 
 const FinalCTASection: React.FC = () => {
   const navigate = useNavigate();
@@ -20,12 +20,12 @@ const FinalCTASection: React.FC = () => {
       }}
     >
       <AppContainer>
-        <Typography variant="h4" fontWeight={700} mb={2} color="primary">
+        <AppTypography variant="h4Bold" mb={2} color="primary">
           ¿Listo para comenzar con BOA Cargo?
-        </Typography>
-        <Typography variant="h6" fontWeight={400} mb={5}>
+        </AppTypography>
+        <AppTypography variant="h4Regular" fontWeight={400} mb={5}>
           Registra tu envío o contáctanos ahora y descubre la mejor experiencia en carga aérea.
-        </Typography>
+        </AppTypography>
         <AppStack
           direction={{ xs: 'column', sm: 'row' }}
           spacing={3}

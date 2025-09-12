@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ExampleType from './ExampleType';
 import { Box, Typography, Grid, Stack } from '@mui/material';
-import { BoAButton } from 'ui';
+import { AppTypography, BoAButton } from 'ui';
 import { useTheme } from '@mui/material/styles';
 
 interface Detail {
@@ -31,19 +31,13 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
 
   return (
     <Box>
-      <Typography
-        id="modal-title"
-        variant="h5"
-        fontWeight="bold"
-        color={theme.palette.primary.main}
-        mb={2}
-      >
+      <AppTypography variant="h4Bold" id="modal-title" color={theme.palette.primary.main} mb={2}>
         {title}
-      </Typography>
+      </AppTypography>
 
-      <Typography variant="body2" textAlign={'justify'} mb={2}>
+      <AppTypography variant="h4Regular" textAlign={'justify'} mb={2}>
         {description}
-      </Typography>
+      </AppTypography>
 
       <Box
         sx={{
@@ -52,9 +46,9 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
           flexDirection: { xs: 'column', sm: 'row', md: 'row' },
         }}
       >
-        <Typography variant="h6" fontWeight="bold" color={theme.palette.primary.main}>
+        <AppTypography variant="h4Bold" color={theme.palette.primary.main}>
           {subtitle}
-        </Typography>
+        </AppTypography>
 
         {/* Botones dinámicos */}
         {details && details.length > 0 && (
@@ -78,9 +72,9 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
         <Grid container spacing={2}>
           <Grid item>
             {details[selectedDetail].description.map((desc, i) => (
-              <Typography key={i} variant="body2" gutterBottom>
+              <AppTypography variant="h4Regular" key={i} gutterBottom>
                 • {desc}
-              </Typography>
+              </AppTypography>
             ))}
           </Grid>
           {/* Imagen (si existe) */}
@@ -111,15 +105,12 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
 
       {example && example.length > 0 && (
         <Box>
-          <Typography
-            variant="subtitle1"
-            fontWeight={'bold'}
-            mt={2}
-            color={theme.palette.primary.main}
-          >
+          <AppTypography variant="h4Bold" mt={2} color={theme.palette.primary.main}>
             ¿Que cargas pueden entrar a esta categoria?
-          </Typography>
-          <Typography variant="body2">Ejemplos comunes de {title} en BoA Cargo:</Typography>
+          </AppTypography>
+          <AppTypography variant="h4Regular">
+            Ejemplos comunes de {title} en BoA Cargo:
+          </AppTypography>
           <Grid container spacing={2} mt={2} sx={{ justifyContent: 'center' }}>
             {example.map((item, index) => (
               <Grid item key={index} xs={12} sm={6} md={4}>

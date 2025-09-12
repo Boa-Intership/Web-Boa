@@ -15,6 +15,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+import { AppTypography } from 'ui';
 
 const MobileDrawer: React.FC<{
   open: boolean;
@@ -60,9 +61,9 @@ const MobileDrawer: React.FC<{
         }}
         role="presentation"
       >
-        <Typography variant="h6" fontWeight={'bold'} color="primary.main" sx={{ ml: 2 }}>
+        <AppTypography variant="h4Bold" color="primary.main" sx={{ ml: 2 }}>
           Menú
-        </Typography>
+        </AppTypography>
 
         <List>
           {navItems.map((item) => (
@@ -85,9 +86,9 @@ const MobileDrawer: React.FC<{
                   {item.columns.map((col, i) => (
                     <Box key={i}>
                       {/* {col.title && (
-                        <Typography fontWeight={'bold'} ml={2}>
+                        <AppTypography variant="h4Bold" ml={2}>
                           {col.title}
-                        </Typography>
+                        </AppTypography>
                       )} */}
                       {col.links.map((l) => (
                         <ListItemButton

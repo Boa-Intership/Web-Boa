@@ -226,7 +226,9 @@ const AppAppBar: React.FC = () => {
       </AppBar>
 
       {/* Spacer para evitar salto de contenido */}
-      <Box sx={{ height: { xs: 48, md: 64 } }} />
+      <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ width: '1px', height: { xs: 50, md: 55 } }}></Box>
+      </Toolbar>
 
       {/* Drawer para mobile */}
       <MobileDrawer

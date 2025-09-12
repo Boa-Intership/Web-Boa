@@ -1,4 +1,4 @@
-import { AppBox, AppContainer } from 'ui';
+import { AppBox, AppContainer, AppTypography } from 'ui';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Typography, Accordion, AccordionSummary, AccordionDetails, Box } from '@mui/material';
 
@@ -43,9 +43,9 @@ const faqs = [
 const FAQSection = () => (
   <AppContainer sx={{ xs: 5, md: 8 }}>
     <Box sx={{ mb: 6, textAlign: 'center' }}>
-      <Typography variant="h4" fontWeight="bold" mb={2} color="primary">
+      <AppTypography variant="h4Bold" mb={2} color="primary">
         Preguntas Frecuentes
-      </Typography>
+      </AppTypography>
     </Box>
     <Box sx={{ maxWidth: 700, mx: 'auto' }}>
       {faqs.map((faq, idx) => (
@@ -55,14 +55,14 @@ const FAQSection = () => (
             aria-controls={`faq-content-${idx}`}
             id={`faq-header-${idx}`}
           >
-            <Typography variant="subtitle1" fontWeight={600}>
+            <AppTypography variant="h4Regular" fontWeight={600}>
               {faq.question}
-            </Typography>
+            </AppTypography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography variant="body2" color="text.secondary">
+            <AppTypography variant="h4Regular" color="text.secondary">
               {faq.answer}
-            </Typography>
+            </AppTypography>
           </AccordionDetails>
         </Accordion>
       ))}

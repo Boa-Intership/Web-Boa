@@ -3,10 +3,11 @@ import AppBox from '../../../../shared/components/AppBox';
 import AppContainer from '../../../../shared/components/AppContainer';
 import AppGrid from '../../../../shared/components/AppGrid';
 import AppButton from '../../../../shared/components/AppButton';
-import { Card, CardContent, Typography, Box } from '@mui/material';
+import { Card, CardContent, Box } from '@mui/material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupsIcon from '@mui/icons-material/Groups';
+import { AppTypography } from 'ui';
 
 const clients = [
   //   {
@@ -31,9 +32,9 @@ const clients = [
 const ServicesSection: React.FC = () => (
   <AppBox sx={{ py: { xs: 5, md: 8 }, background: 'background.paper' }}>
     <AppContainer>
-      <Typography variant="h4" fontWeight={700} textAlign="center" mb={4} color="primary">
+      <AppTypography variant="h4Bold" textAlign="center" mb={4} color="primary">
         Clientes
-      </Typography>
+      </AppTypography>
       <AppGrid
         container
         spacing={4}
@@ -61,12 +62,12 @@ const ServicesSection: React.FC = () => (
               }}
             >
               {client.icon}
-              <Typography variant="h6" fontWeight={600} textAlign="center" mb={1}>
+              <AppTypography variant="h4Regular" fontWeight={600} textAlign="center" mb={1}>
                 {client.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" textAlign="center" mb={3}>
+              </AppTypography>
+              <AppTypography variant="h4Regular" color="text.secondary" textAlign="center" mb={3}>
                 {client.description}
-              </Typography>
+              </AppTypography>
               <AppButton variant="contained" size="small">
                 Más información
               </AppButton>

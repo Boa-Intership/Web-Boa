@@ -1,18 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Box,
-  Chip,
-  Container,
-} from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Box, Chip, Container } from '@mui/material';
 
 import { ContactCardNacional } from '../components/ContactCardNacional';
 import { ContactCardInternacional } from '../components/ContactCardInternacional';
 import { ExpandMore, Home, Public } from '@mui/icons-material';
+import { AppTypography } from 'ui';
 
 const oficinasNacionales = [
   {
@@ -246,12 +239,12 @@ export default function ContactScreen() {
 
   return (
     <Container sx={{ py: 4, minHeight: '80vh' }}>
-      <Typography variant="h4" fontWeight="bold" color="primary">
+      <AppTypography variant="h4Bold" color="primary">
         Nuestras Oficinas
-      </Typography>
-      <Typography variant="body1" color="textSecondary" mt={1}>
+      </AppTypography>
+      <AppTypography variant="h4Regular" color="textSecondary" mt={1}>
         Información detallada de horarios de atención y contacto
-      </Typography>
+      </AppTypography>
 
       <Box sx={{ display: 'flex', gap: 2, my: 2 }}>
         <Chip
@@ -285,9 +278,9 @@ export default function ContactScreen() {
           sx={{ my: 2, backgroundColor: '#FAFAFA' }}
         >
           <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography fontWeight="bold" fontSize="1.1rem" color="primary" my={1}>
+            <AppTypography variant="h4Bold" color="primary" my={1}>
               {oficina.ciudad}
-            </Typography>
+            </AppTypography>
           </AccordionSummary>
           <AccordionDetails>
             {tabIndex === 0 ? (

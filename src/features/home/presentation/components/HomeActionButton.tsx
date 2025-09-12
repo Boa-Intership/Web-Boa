@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Typography, Box } from '@mui/material';
+import { AppTypography } from 'ui';
 
 interface HomeActionButtonProps {
   label: string;
@@ -46,13 +47,13 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({
     >
       {icon && <Box sx={{ fontSize: 40 }}>{icon}</Box>}
 
-      <Typography variant="h6" fontWeight="bold" textAlign="center">
+      <AppTypography variant="h4Bold" textAlign="center">
         {label}
-      </Typography>
+      </AppTypography>
 
       {description && (
-        <Typography
-          variant="body2"
+        <AppTypography
+          variant="h4Regular"
           align="center"
           sx={{
             textAlign: 'center',
@@ -60,7 +61,7 @@ const HomeActionButton: React.FC<HomeActionButtonProps> = ({
           }}
         >
           {description}
-        </Typography>
+        </AppTypography>
       )}
     </Button>
   );

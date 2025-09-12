@@ -1,5 +1,5 @@
 import { AppBox, AppContainer, AppGrid, AppButton } from 'ui';
-import { Typography, Box, Divider, Stack } from '@mui/material';
+import { Box, Divider, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import welcomeImg from '@/assets/welcome.webp';
 import { FC } from 'react';
@@ -54,7 +54,8 @@ const WelcomeSection: FC = () => {
               }}
             >
               <Box sx={{ mb: 3 }}>
-                <Typography
+                <AppTypography
+                  variant="h4Regular"
                   component="h1"
                   sx={{
                     position: 'relative',
@@ -64,7 +65,8 @@ const WelcomeSection: FC = () => {
                     lineHeight: 1.3,
                   }}
                 >
-                  <Typography
+                  <AppTypography
+                    variant="h4Regular"
                     component="mark"
                     sx={{
                       position: 'relative',
@@ -92,9 +94,10 @@ const WelcomeSection: FC = () => {
                       {' '}
                       <img src={headline} />
                     </Box>{' '}
-                  </Typography>
+                  </AppTypography>
                   {/*tus{' '}*/}
-                  <Typography
+                  <AppTypography
+                    variant="h4Regular"
                     component="span"
                     sx={{
                       fontSize: 'inherit',
@@ -130,10 +133,10 @@ const WelcomeSection: FC = () => {
                         />
                       </g>
                     </svg>
-                  </Typography>
+                  </AppTypography>
                   <br />
                   de forma segura
-                </Typography>
+                </AppTypography>
               </Box>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
               <AppTypography variant="baseMedium">

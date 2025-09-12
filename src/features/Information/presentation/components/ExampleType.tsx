@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import { AppTypography } from 'ui';
 
 type ExampleTypeProps = {
   title: string;
@@ -60,10 +61,10 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
           width: '90%',
         }}
       >
-        <Typography variant="subtitle1" color="primary.dark" fontWeight="bold">
+        <AppTypography variant="h4Bold" color="primary.dark">
           {title}
-        </Typography>
-        <Typography variant="body2">{description}</Typography>
+        </AppTypography>
+        <AppTypography variant="h4Regular">{description}</AppTypography>
       </Box>
     </Box>
   );

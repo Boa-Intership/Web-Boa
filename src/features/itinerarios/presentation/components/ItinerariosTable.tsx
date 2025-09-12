@@ -7,7 +7,6 @@ import {
   Chip,
   Paper,
   Box,
-  Typography,
   Stack,
   Avatar,
   TableContainer,
@@ -17,6 +16,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Itinerario, DIAS_ORDEN } from '../../domain/Itinerario';
 import { getFlightStatus, FRANJA_COLORS } from '../../domain/getFlightStatus';
 import { alpha } from '@mui/material/styles';
+import { AppTypography } from 'ui';
 
 interface Props {
   items: Itinerario[];
@@ -32,11 +32,11 @@ export default function ItinerariosTable({ items, showEmptyState, onResetAll }: 
           <Avatar sx={{ width: 72, height: 72, bgcolor: '#F3F4F6' }}>
             <FlightTakeoffIcon fontSize="large" sx={{ color: '#9CA3AF' }} />
           </Avatar>
-          <Typography variant="h6">No se encontraron vuelos</Typography>
-          <Typography variant="body2" color="text.secondary">
+          <AppTypography variant="h4Regular">No se encontraron vuelos</AppTypography>
+          <AppTypography variant="h4Regular" color="text.secondary">
             No hay vuelos disponibles con los filtros seleccionados. Intenta cambiar los criterios
             de búsqueda.
-          </Typography>
+          </AppTypography>
           {onResetAll && (
             <Chip
               label="Ver todos los vuelos"

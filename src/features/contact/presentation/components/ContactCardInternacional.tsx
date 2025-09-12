@@ -1,5 +1,6 @@
 import { Box, Typography, Divider } from '@mui/material';
 import { LocationOn, Email, Phone } from '@mui/icons-material';
+import { AppTypography } from 'ui';
 
 interface Props {
   ciudad: string;
@@ -15,23 +16,23 @@ export const ContactCardInternacional = ({ direccion, contacto, email, mapEmbed 
       <Box flex={1}>
         <Box display="flex" alignItems="center" mb={1}>
           <LocationOn color="info" sx={{ mr: 1 }} />
-          <Typography>{direccion}</Typography>
+          <AppTypography variant="h4Regular">{direccion}</AppTypography>
         </Box>
 
         <Divider sx={{ my: 1 }} />
 
         <Box display="flex" alignItems="center" mb={1}>
           <Phone color="info" sx={{ mr: 1 }} />
-          <Typography>
+          <AppTypography variant="h4Regular">
             <strong>Contacto:</strong> {contacto.join(' - ')}
-          </Typography>
+          </AppTypography>
         </Box>
 
         <Box display="flex" alignItems="center" mb={1}>
           <Email color="info" sx={{ mr: 1 }} />
-          <Typography>
+          <AppTypography variant="h4Regular">
             <strong>Email:</strong> {email}
-          </Typography>
+          </AppTypography>
         </Box>
       </Box>
 

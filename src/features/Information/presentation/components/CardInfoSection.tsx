@@ -8,14 +8,15 @@ import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
+import { AppTypography } from 'ui';
 
 export default function CardInfoSection() {
   const navigate = useNavigate();
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center">
-      <Typography variant="h4" fontWeight={'bold'} color="primary.main" marginBottom={6}>
+      <AppTypography variant="h4Bold" color="primary.main" marginBottom={6}>
         Tipos de carga en BoA Cargo
-      </Typography>
+      </AppTypography>
       <Grid container spacing={4} sx={{ justifyContent: 'center', alignItems: 'center' }}>
         <Grid item>
           <ButtonCardInfo

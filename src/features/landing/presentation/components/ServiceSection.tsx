@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, List, ListItem } from '@mui/material';
+import { Box, List, ListItem } from '@mui/material';
 import aboutImg from 'assets/call.webp';
 import { AppBox, AppContainer, AppGrid, AppButton, AppTypography } from 'ui';
 import { ROUTES } from 'router/routes';
@@ -60,9 +60,9 @@ const ServiceSection: React.FC = () => {
               <AppTypography variant="h4Bold" color="primary">
                 Atención al Cliente
               </AppTypography>
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+              <AppTypography variant="h4Regular" color="text.secondary" sx={{ mb: 3 }}>
                 {data.paragraph}
-              </Typography>
+              </AppTypography>
               <AppGrid container spacing={2}>
                 <AppGrid item xs={12} sm={6}>
                   <List>
