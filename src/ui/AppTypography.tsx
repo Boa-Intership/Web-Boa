@@ -81,7 +81,7 @@ const AppTypography: React.FC<AppTypographyProps> = ({
         fontFamily: `"Lato", sans-serif`,
         fontWeight,
         lineHeight,
-        textAlign,
+        ...(textAlign ? { textAlign } : { textAlign: 'left' }),
         ...responsiveStyles,
         ...sx,
       }}

@@ -7,17 +7,13 @@ const AppButton = (props: ButtonProps) => {
     <Button
       variant={props.variant || 'contained'}
       sx={{
-        // minHeight: { xs: 15, md: 40 },
         textTransform: 'none',
         borderRadius: 7,
-        // boxShadow: '0 4px 16px rgba(46,92,154,0.15)',
-        // transition: 'box-shadow 0.2s, transform 0.2s',
-        // '&:hover': {
-        //   boxShadow: '0 8px 24px rgba(46,92,154,0.25)',
-        //   transform: 'translateY(-2px) scale(1.04)',
-        // },
-        '&:focus': {
-          boxShadow: '0 4px 16px rgba(46,92,154,0.15)',
+        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+        boxShadow: '0 2px 4px #002E6E', // predeterminado
+        '&:hover': {
+          transform: 'translateY(-2px) scale(1.05)',
+          boxShadow: '0 2px 4px #005B96', // hover
         },
         ...(sx || {}),
       }}

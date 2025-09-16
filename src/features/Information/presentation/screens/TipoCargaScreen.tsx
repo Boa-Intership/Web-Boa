@@ -13,7 +13,7 @@ import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
-import { AppStack, AppTypography } from 'ui';
+import { AppStack } from 'ui';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL

@@ -42,8 +42,8 @@ const faqs = [
 
 const FAQSection = () => (
   <AppContainer sx={{ xs: 5, md: 8 }}>
-    <Box sx={{ mb: 2, textAlign: 'center' }}>
-      <AppTypography variant="h4Bold" color="primary">
+    <Box sx={{ mb: 2 }}>
+      <AppTypography variant="h2Bold" color="primary" textAlign="center">
         Preguntas Frecuentes
       </AppTypography>
     </Box>
@@ -55,10 +55,10 @@ const FAQSection = () => (
             aria-controls={`faq-content-${idx}`}
             id={`faq-header-${idx}`}
           >
-            <AppTypography variant="smallBold">{faq.question}</AppTypography>
+            <AppTypography variant="baseBold">{faq.question}</AppTypography>
           </AccordionSummary>
           <AccordionDetails>
-            <AppTypography variant="smallRegular" color="text.secondary">
+            <AppTypography variant="baseRegular" color="text.secondary">
               {faq.answer}
             </AppTypography>
           </AccordionDetails>
