@@ -49,10 +49,12 @@ function TipoCargaScreen() {
       <AppTypography variant="h2Bold" color="primary" mb={2}>
         Tipos de carga
       </AppTypography>
-      <AppTypography variant="baseRegular" mb={2}>
-        {`Al analizar los distintos tipos de carga transportada por vía aérea, se dividen en dos grupos principales: carga general y carga especial.Esta última se divide en subgrupos especializados más pequeños. Analizaremos estos subgrupos con mayor detalle más adelante.
-
-        Si tiene preguntas respecto a los requisitos para los envíos aéreos, le invitamos a comunicarse con nuestro Call Center de su ciudad de residencia.`}
+      <AppTypography variant="baseRegular" mb={2} textAlign="justify">
+        De acuerdo con la IATA, la carga transportada por vía aérea se clasifica en dos grandes
+        categorías: carga general y carga especial. Esta última comprende diversos subgrupos con
+        requisitos específicos. Para obtener información o resolver cualquier consulta sobre los
+        requisitos de envío, le invitamos a comunicarse con el Call Center de BoA Cargo en su ciudad
+        de residencia..
       </AppTypography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={3} lg={3}>
@@ -85,7 +87,7 @@ function TipoCargaScreen() {
               selected={selected === 'animalesVivos'}
               icon={<PetsOutlinedIcon />}
             >
-              Animales Vivos
+              Animales Vivos(AVI)
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -121,21 +123,11 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('muestrasBiologicas')}
-              selected={selected === 'muestrasBiologicas'}
-              icon={<VaccinesIcon />}
-            >
-              Muestras Biológicas
-            </BoAButton>
-            <BoAButton
-              color={colorBoton}
-              hover={colorHover}
-              mainButton={mainButton}
-              onClick={() => setSelected('prohibidos')}
-              selected={selected === 'prohibidos'}
+              onClick={() => setSelected('peligrosas')}
+              selected={selected === 'peligrosas'}
               icon={<DangerousOutlinedIcon />}
             >
-              Prohibidos
+              Peligrosas
             </BoAButton>
           </AppStack>
         </Grid>
