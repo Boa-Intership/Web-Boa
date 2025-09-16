@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import BoAButton from '../../../../shared/components/BoAButton';
+import { AppTypography } from 'ui';
 
 interface ButtonCardInfoProps {
   title: string;
@@ -99,9 +100,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           color="primary.dark"
         >
           {icon}
-          <Typography variant="h6" fontWeight="bold">
-            {title}
-          </Typography>
+          <AppTypography variant="h4Bold">{title}</AppTypography>
         </Box>
 
         <Box
@@ -111,9 +110,9 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
             mb: 1,
           }}
         >
-          <Typography variant="body2" color="text.secondary" textAlign={'left'}>
+          <AppTypography variant="h4Regular" color="text.secondary" textAlign={'left'}>
             {description}
-          </Typography>
+          </AppTypography>
         </Box>
 
         {onClick && (

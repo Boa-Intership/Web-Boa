@@ -8,10 +8,10 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-  Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import type { NavColumn } from './types';
+import { AppTypography } from 'ui';
 
 const MegaMenu: React.FC<{
   open: boolean;
@@ -48,9 +48,9 @@ const MegaMenu: React.FC<{
             {columns?.map((col, i) => (
               <Box key={i} sx={{ minWidth: 160 }}>
                 {col.title && (
-                  <Typography variant="body2" fontWeight={'bold'} color="primary.main">
+                  <AppTypography variant="h4Bold" color="primary.main">
                     {col.title}
-                  </Typography>
+                  </AppTypography>
                 )}
                 <MenuList role="menu" dense>
                   {col.links.map((l) => (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
-import { BoAButton } from 'ui';
+import { AppTypography, BoAButton, AppStack } from 'ui';
 import { InfoTipoCarga } from 'ui';
 import { useTheme } from '@mui/material/styles';
 import { cargaData } from '../components/cargaData';
@@ -12,8 +12,6 @@ import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
-import VaccinesIcon from '@mui/icons-material/Vaccines';
-import { AppStack, AppTypography } from 'ui';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL

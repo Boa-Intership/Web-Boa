@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react';
-import { Box, Container, Typography, Stack } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
 import { ITINERARIOS_MOCK } from '../../data/itinerarios.mock';
 import { Ciudad, DiaCorto, Itinerario } from '../../domain/Itinerario';
 import { FRANJA_COLORS } from '../../domain/getFlightStatus';
 import ItinerariosFilters, { FiltersState } from '../components/ItinerariosFilters';
 import ItinerariosTable from '../components/ItinerariosTable';
+import { AppTypography } from 'ui';
 
 export default function ItinerariosScreen() {
   const [filters, setFilters] = useState<FiltersState>({});
@@ -36,9 +37,9 @@ export default function ItinerariosScreen() {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4, minHeight: '80vh' }}>
-      <Typography variant="h4" fontWeight="bold" color="primary" gutterBottom>
+      <AppTypography variant="h4Bold" color="primary" gutterBottom>
         Horarios de Vuelos
-      </Typography>
+      </AppTypography>
 
       <ItinerariosFilters
         cities={cities}
@@ -69,7 +70,7 @@ function Legend({ color, label }: { color: string; label: string }) {
   return (
     <Stack direction="row" spacing={1} alignItems="center">
       <Box sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: color }} />
-      <Typography variant="caption">{label}</Typography>
+      <AppTypography variant="h4Regular">{label}</AppTypography>
     </Stack>
   );
 }

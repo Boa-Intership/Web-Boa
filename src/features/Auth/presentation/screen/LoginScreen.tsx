@@ -3,11 +3,9 @@ import {
   Box,
   Button,
   Divider,
-  FormLabel,
   FormControl,
   Link,
   TextField,
-  Typography,
   Stack,
   Card as MuiCard,
   styled,
@@ -52,7 +50,7 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function Login(props: { disableCustomTheme?: boolean }) {
+export default function Login() {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
@@ -130,9 +128,7 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
           }}
         >
           <FormControl>
-            <FormLabel htmlFor="email" sx={{ fontSize: '14px' }}>
-              Correo
-            </FormLabel>
+            <AppTypography variant="smallRegular">Correo</AppTypography>
             <TextField
               error={emailError}
               helperText={emailErrorMessage}
@@ -150,9 +146,7 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
             />
           </FormControl>
           <FormControl>
-            <FormLabel htmlFor="password" sx={{ fontSize: '14px' }}>
-              Contraseña
-            </FormLabel>
+            <AppTypography variant="smallRegular">Contraseña</AppTypography>
             <TextField
               error={passwordError}
               helperText={passwordErrorMessage}
@@ -192,12 +186,12 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
           >
             Iniciar sesi&oacute;n con google
           </Button>
-          <Typography variant="body2" sx={{ textAlign: 'center' }}>
+          <AppTypography variant="smallRegular" sx={{ textAlign: 'center' }}>
             ¿No tienes una cuenta?{' '}
             <Link component={RouterLink} to={ROUTES.REGISTER} sx={{ alignSelf: 'center' }}>
               Crear una cuenta
             </Link>
-          </Typography>
+          </AppTypography>
         </Box>
       </Card>
     </SignInContainer>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ExampleType from './ExampleType';
 import { Box, Typography, Grid, Stack } from '@mui/material';
-import { BoAButton, AppTypography } from 'ui';
+import { AppTypography, BoAButton } from 'ui';
+import { useTheme } from '@mui/material/styles';
 
 interface Detail {
   title: string;

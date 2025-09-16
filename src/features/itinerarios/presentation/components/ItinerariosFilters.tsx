@@ -10,13 +10,13 @@ import {
   IconButton,
   Chip,
   Divider,
-  Typography,
   Tooltip,
   Button,
 } from '@mui/material';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Ciudad, DiaCorto } from '../../domain/Itinerario';
+import { AppTypography } from 'ui';
 
 export interface FiltersState {
   origin?: string; // código IATA o ""
@@ -61,9 +61,9 @@ export default function ItinerariosFilters({
     <Paper elevation={3} sx={{ p: 3, mb: 3, borderRadius: 4, bgcolor: '#FFFFFF' }}>
       <Stack direction="row" alignItems="center" spacing={1}>
         <FilterAltIcon sx={{ color: '#D98C00' }} />
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <AppTypography variant="h4Regular" sx={{ flexGrow: 1 }}>
           Filtrar Vuelos
-        </Typography>
+        </AppTypography>
         <Tooltip title="Limpiar filtros">
           <span>
             <IconButton onClick={onClear} disabled={!activeChips.length} color="primary">
@@ -126,7 +126,7 @@ export default function ItinerariosFilters({
       <Box mt={2}>
         {activeChips.length ? (
           <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
-            <Typography variant="body2">Filtros activos:</Typography>
+            <AppTypography variant="h4Regular">Filtros activos:</AppTypography>
             {activeChips.map((ch) => (
               <Chip
                 key={ch.key}
@@ -136,20 +136,20 @@ export default function ItinerariosFilters({
             ))}
           </Stack>
         ) : (
-          <Typography variant="body2" color="text.secondary">
+          <AppTypography variant="h4Regular" color="text.secondary">
             Sin filtros activos.
-          </Typography>
+          </AppTypography>
         )}
       </Box>
 
       <Divider sx={{ my: 2 }} />
 
       <Stack direction={{ xs: 'column', md: 'row' }} alignItems="center" spacing={1}>
-        <Typography variant="subtitle1">
+        <AppTypography variant="h4Regular">
           {activeChips.length
             ? `${filtered} vuelos encontrados con los filtros aplicados`
             : `${total} vuelos encontrados`}
-        </Typography>
+        </AppTypography>
         <Box flexGrow={1} />
         {/* Acceso rápido para ver todos si estás en vacío */}
         <Button size="small" onClick={onClear}>

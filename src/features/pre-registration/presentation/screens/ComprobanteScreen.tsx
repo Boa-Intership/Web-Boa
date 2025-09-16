@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Paper, Typography, Divider, Container } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ResumenEnvio from '../components/ResumenEnvio';
+import { AppTypography } from 'ui';
 
 const generarCodigo = () => {
   const random = Math.floor(100000 + Math.random() * 900000);
@@ -15,7 +16,9 @@ const ComprobanteScreen = () => {
   const formData = location.state?.formData;
 
   if (!formData) {
-    return <Typography variant="h6">No hay datos disponibles. Redirigiendo...</Typography>;
+    return (
+      <AppTypography variant="h4Regular">No hay datos disponibles. Redirigiendo...</AppTypography>
+    );
   }
 
   const codigo = generarCodigo();
@@ -24,15 +27,15 @@ const ComprobanteScreen = () => {
   return (
     <Container>
       <Box sx={{ maxWidth: 900, mx: 'auto', mt: 4 }}>
-        <Typography variant="h4" align="center" color="success.main" fontWeight="bold">
+        <AppTypography variant="h4Regular" align="center" color="success.main">
           ¡Pre-Registro Completado!
-        </Typography>
-        <Typography variant="h6" align="center" mt={1}>
+        </AppTypography>
+        <AppTypography variant="h4Bold" align="center" mt={1}>
           Su código de pre-registro es:
-        </Typography>
-        <Typography variant="h5" align="center" color="primary" fontWeight="bold" sx={{ my: 2 }}>
+        </AppTypography>
+        <AppTypography variant="h4Bold" align="center" color="primary" sx={{ my: 2 }}>
           {codigo}
-        </Typography>
+        </AppTypography>
 
         {/* Resumen del Envío */}
         <ResumenEnvio formData={formData} />

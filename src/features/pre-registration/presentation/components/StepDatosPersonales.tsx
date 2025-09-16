@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, Grid, TextField, Typography, Paper } from '@mui/material';
 import { Person } from '@mui/icons-material';
 import { validateField } from '../../domain/validators/validateDatosPersonales';
+import { AppTypography } from 'ui';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const [localData, setLocalData] = useState(
@@ -102,9 +103,9 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
           <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor: '#FAFAFA' }}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
               <Person color="primary" />
-              <Typography variant="h5" color="primary">
+              <AppTypography variant="h4Regular" color="primary">
                 Información del Remitente
-              </Typography>
+              </AppTypography>
             </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -132,9 +133,9 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
           <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor: '#FAFAFA' }}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
               <Person color="primary" />
-              <Typography variant="h5" color="primary">
+              <AppTypography variant="h4Regular" color="primary">
                 Información del Destinatario
-              </Typography>
+              </AppTypography>
             </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>

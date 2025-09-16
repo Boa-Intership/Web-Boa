@@ -1,12 +1,13 @@
 import React from 'react';
-import { TextField, MenuItem, Grid, Typography } from '@mui/material';
+import { TextField, MenuItem, Grid } from '@mui/material';
+import { AppTypography } from 'ui';
 
 const BillingDataForm = () => {
   return (
     <>
-      <Typography variant="h6" gutterBottom>
+      <AppTypography variant="h4Medium" gutterBottom>
         Datos de Facturación
-      </Typography>
+      </AppTypography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField required id="razonSocial" name="razonSocial" label="Razón Social" fullWidth />

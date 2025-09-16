@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import portada from 'assets/GGI_portada1.webp';
+import { AppTypography } from 'ui';
 
 interface HeroProps {
   tracking: string;
@@ -25,9 +26,8 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
       }}
     >
       <Box sx={{ width: '100%', py: { xs: 14, md: 14 }, px: 2 }}>
-        <Typography
-          variant="h4"
-          fontWeight="bold"
+        <AppTypography
+          variant="h4Bold"
           mb={2}
           sx={{
             fontSize: {
@@ -37,11 +37,11 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
           }}
         >
           Gestiona tus envíos de carga de forma rápida y sencilla.
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 3, color: 'grey.200', mx: 'auto' }}>
+        </AppTypography>
+        <AppTypography variant="h4Regular" sx={{ mb: 3, color: 'grey.200', mx: 'auto' }}>
           Realiza el seguimiento de tus envios en tiempo real, con la seguridad y confianza de BoA
           Cargo.
-        </Typography>
+        </AppTypography>
 
         {/* Buscador */}
         {/* <Stack
