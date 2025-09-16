@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -19,17 +19,11 @@ import {
   Visibility,
   Edit,
   Delete,
-  ViewInAr,
   LocalShipping,
   AddCircle,
   Inventory2Outlined,
 } from '@mui/icons-material';
-
-const tiposCarga = [
-  { label: 'Carga general', codigo: 'CG' },
-  { label: 'Animales vivos', codigo: 'AV' },
-  { label: 'Perecedero', codigo: 'PR' },
-];
+import { getCargoTypes, CargoType } from '../../data/services/cargo-type.service';
 
 const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const [tipo, setTipo] = useState(data?.tipo || '');
@@ -42,6 +36,20 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const [indiceEditado, setIndiceEditado] = useState<number | null>(null); // estado edicion
   const [openEliminar, setOpenEliminar] = useState(false); // estado eliminar
   const [indiceAEliminar, setIndiceAEliminar] = useState<number | null>(null); // estado eliminar
+  const [tiposCarga, setTiposCarga] = useState<CargoType[]>([]);
+
+  useEffect(() => {
+    const fetchTiposCarga = async () => {
+      try {
+        const tipos = await getCargoTypes();
+        setTiposCarga(tipos);
+      } catch (error) {
+        console.error('Error al obtener los tipos de carga:', error);
+      }
+    };
+
+    fetchTiposCarga();
+  }, []);
 
   const [nuevoItem, setNuevoItem] = useState({
     descripcion: '',
@@ -151,8 +159,8 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
             ),
           }}
         >
-          {tiposCarga.map(({ label, codigo }) => (
-            <MenuItem key={codigo} value={label}>{`${label} (${codigo})`}</MenuItem>
+          {tiposCarga.map(({ name, code, id }) => (
+            <MenuItem key={id} value={name}>{`${name} (${code})`}</MenuItem>
           ))}
         </TextField>
 

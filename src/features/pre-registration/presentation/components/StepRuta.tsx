@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Box, Button, Grid, MenuItem, TextField, Typography, Paper } from '@mui/material';
-import { LocationOn, FlightTakeoff, AirplanemodeActive } from '@mui/icons-material';
-import { Alert, AlertTitle, Chip } from '@mui/material';
+import { LocationOn, AirplanemodeActive } from '@mui/icons-material';
+import { Alert, Chip } from '@mui/material';
 import { getAirports, Airport } from '../../data/services/airport.service';
 
 const StepRuta = ({ data, setData, onNext, onBack }) => {
@@ -17,12 +17,16 @@ const StepRuta = ({ data, setData, onNext, onBack }) => {
     const fetchAirports = async () => {
       try {
         const airportsdata = await getAirports();
-        setAirports(airportsdata);
+        if (Array.isArray(airportsdata)) {
+          setAirports(airportsdata);
+        } else {
+          setAirports([]);
+        }
       } catch (error) {
         console.error('Error al obtener la lista de aeropuertos:', error);
+        setAirports([]);
       }
     };
-
     fetchAirports();
   }, []);
 
