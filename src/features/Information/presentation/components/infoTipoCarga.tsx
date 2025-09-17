@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ExampleType from './ExampleType';
-import { Box, Typography, Grid, Stack } from '@mui/material';
+import { Box, Alert, Grid, Stack } from '@mui/material';
 import { AppTypography, BoAButton } from 'ui';
 import { useTheme } from '@mui/material/styles';
 
@@ -21,23 +21,45 @@ interface infoTipoCargaProps {
   description: string;
   subtitle: string;
   details: Detail[];
+  notice?: string[];
   example: Example[];
   onClick: () => void;
 }
 
-function InfoTipoCarga({ title, description, details, subtitle, example }: infoTipoCargaProps) {
+function InfoTipoCarga({
+  title,
+  description,
+  details,
+  subtitle,
+  notice,
+  example,
+}: infoTipoCargaProps) {
   const [selectedDetail, setSelectedDetail] = useState<number | null>(0); // selecciona el primero por defecto
 
   return (
-    <Box>
+    <Box sx={{ mt: 2 }}>
       <AppTypography variant="h4Bold" color="primary" mb={2}>
         {title}
       </AppTypography>
 
-      <AppTypography variant="baseRegular" mb={3} textAlign="justify">
+      <AppTypography
+        variant="baseRegular"
+        mb={3}
+        textAlign="justify"
+        sx={{ whiteSpace: 'pre-line' }}
+      >
         {description}
       </AppTypography>
-
+      {/* ⚠️ Notices generales */}
+      {notice && notice.length > 0 && (
+        <Box mb={3}>
+          {notice.map((note, i) => (
+            <Alert key={i} severity="info" sx={{ mb: 1 }}>
+              {note}
+            </Alert>
+          ))}
+        </Box>
+      )}
       <Box
         sx={{
           display: 'flex',
@@ -106,9 +128,9 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
       {example && example.length > 0 && (
         <Box>
           <AppTypography variant="h4Bold" color="primary" mb={2}>
-            Ejemplos comunes de {title} en BoA Cargo:
+            Cargas comunes en {title}:
           </AppTypography>
-          <Grid container spacing={1} sx={{ justifyContent: 'center' }}>
+          <Grid container spacing={1} sx={{ width: '100%', justifyContent: 'center' }}>
             {example.map((item, index) => (
               <Grid item mb={2} key={index} xs={12} sm={6} md={6}>
                 <ExampleType title={item.title} description={item.description} image={item.image} />

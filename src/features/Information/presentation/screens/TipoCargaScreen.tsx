@@ -12,6 +12,7 @@ import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
+import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
@@ -36,6 +37,7 @@ function TipoCargaScreen() {
         description={data.description}
         subtitle={data.subtitle}
         details={data.details}
+        notice={data.notice}
         example={data.example}
         onClick={() => setSelected('')} // para cerrar o resetear
       />
@@ -52,9 +54,9 @@ function TipoCargaScreen() {
         categorías: carga general y carga especial. Esta última comprende diversos subgrupos con
         requisitos específicos. Para obtener información o resolver cualquier consulta sobre los
         requisitos de envío, le invitamos a comunicarse con el Call Center de BoA Cargo en su ciudad
-        de residencia..
+        de residencia.
       </AppTypography>
-      <Grid container spacing={4}>
+      <Grid container spacing={3}>
         <Grid item xs={12} md={3} lg={3}>
           <AppStack
             sx={{
@@ -64,7 +66,7 @@ function TipoCargaScreen() {
               p: 1,
             }}
           >
-            <AppTypography variant="h4Bold" color="primary.dark" mb={2}>
+            <AppTypography variant="h4Bold" color="primary.main" mb={2}>
               Categorías:
             </AppTypography>
             <BoAButton
@@ -75,7 +77,7 @@ function TipoCargaScreen() {
               selected={selected === 'cargaGeneral'}
               icon={<Inventory2OutlinedIcon />}
             >
-              Carga General
+              Carga General (CG)
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -85,7 +87,7 @@ function TipoCargaScreen() {
               selected={selected === 'animalesVivos'}
               icon={<PetsOutlinedIcon />}
             >
-              Animales Vivos(AVI)
+              Animales Vivos (AVI)
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -95,7 +97,7 @@ function TipoCargaScreen() {
               selected={selected === 'perecederos'}
               icon={<SetMealOutlinedIcon />}
             >
-              Perecederos
+              Perecederos (PCR)
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -105,7 +107,7 @@ function TipoCargaScreen() {
               selected={selected === 'restosHumanos'}
               icon={<LocalHospitalOutlinedIcon />}
             >
-              Restos Humanos
+              Restos Humanos (HUM)
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -115,17 +117,17 @@ function TipoCargaScreen() {
               selected={selected === 'cargaValiosa'}
               icon={<MonetizationOnOutlinedIcon />}
             >
-              Carga Valiosa
+              Carga Valiosa (VAL)
             </BoAButton>
             <BoAButton
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('peligrosas')}
-              selected={selected === 'peligrosas'}
-              icon={<DangerousOutlinedIcon />}
+              onClick={() => setSelected('otros')}
+              selected={selected === 'otros'}
+              icon={<QuizOutlinedIcon />}
             >
-              Peligrosas
+              Otros tipos
             </BoAButton>
           </AppStack>
         </Grid>

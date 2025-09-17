@@ -10,10 +10,10 @@ function TerminosScreen() {
   const theme = useTheme();
   return (
     <AppContainer sx={{ py: 4 }}>
-      <AppTypography variant="h4Bold" mb={2} color={theme.palette.primary.main}>
-        Terminos y Condiciones
+      <AppTypography variant="h2Bold" mb={2} color={theme.palette.primary.main}>
+        Terminos y condiciones
       </AppTypography>
-      <AppTypography variant="h4Regular" component="div" textAlign={'justify'}>
+      <AppTypography variant="baseRegular" component="div" textAlign={'justify'}>
         <ReactMarkdown>{terminosData.infoSeguridadCarga}</ReactMarkdown>
       </AppTypography>
       <AppTypography
@@ -28,7 +28,9 @@ function TerminosScreen() {
 
       <ReactMarkdown
         components={{
-          p: ({ node, ...props }) => <AppTypography variant="h4Regular" mb={2} ml={1} {...props} />,
+          p: ({ node, ...props }) => (
+            <AppTypography variant="baseRegular" mb={2} ml={1} {...props} />
+          ),
         }}
       >
         {terminosData.nota}
@@ -49,12 +51,12 @@ function TerminosScreen() {
             aria-controls={`panel${index}-content`}
             id={`panel${index}-header`}
           >
-            <AppTypography variant="h4Bold" component="span" color={theme.palette.primary.main}>
+            <AppTypography variant="baseBold" component="span" color={theme.palette.primary.main}>
               {regla.titulo}
             </AppTypography>
           </AccordionSummary>
           <AccordionDetails>
-            <AppTypography variant="h4Regular" component="div" textAlign={'justify'}>
+            <AppTypography variant="baseRegular" component="div" textAlign={'justify'}>
               <ReactMarkdown>{regla.contenido}</ReactMarkdown>
             </AppTypography>
           </AccordionDetails>

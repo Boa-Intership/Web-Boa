@@ -16,13 +16,14 @@ export interface InfoTipoCarga {
   description: string;
   subtitle: string;
   details: Detail[];
+  notice: string[];
   example: Example[];
 }
 
 // Creamos el objeto con los datos del tipo de carga
 export const cargaData: Record<string, InfoTipoCarga> = {
   cargaGeneral: {
-    title: 'Carga General',
+    title: 'Carga general',
     description:
       'La carga general son artículos que no se clasifican como carga especial y que no requieren precauciones adicionales ni manipulación especial durante el transporte aéreo. Estos tipos de artículos incluyen artículos minoristas y la mayoría de los bienes de consumo (con excepción de teléfonos móviles, tabletas y portátiles), productos secos, artículos de ferretería, textiles, etc. Piense en los objetos cotidianos; la mayoría de ellos se clasificarían en la categoría de carga general.',
     subtitle: 'Requisitos para el transporte de carga general',
@@ -61,6 +62,9 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         ],
       },
     ],
+    notice: [
+      'La carga dañada o embalada en forma inapropiada con señales de haber estado filtrando, sea esta carga general o mercancías peligrosas no será aceptada para el transporte.',
+    ],
     example: [
       {
         title: 'Bienes manufacturados',
@@ -69,7 +73,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       },
       {
         title: 'Material impreso y papelería',
-        description: 'Libros, revistas, catálogos, documentos',
+        description: 'Libros, revistas, catálogos',
         image: '/informacioPage/cargaGeneral/GGI_papeleria.webp',
       },
       {
@@ -85,9 +89,9 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     ],
   },
   animalesVivos: {
-    title: 'Animales Vivos',
+    title: 'Animales vivos',
     description:
-      'La categoría de animales vivos hace referencia al servicio especializado para el transporte aéreo de animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje.',
+      'Boliviana de Aviación ofrece un servicio seguro y confiable para el transporte de animales vivos, tanto a nivel nacional como internacional. Contamos con instalaciones y procedimientos diseñados para garantizar el bienestar de los animales durante todo el proceso, desde la carga hasta la entrega, asegurando condiciones adecuadas de temperatura, ventilación y manejo especializado. Este servicio está pensado para mascotas y animales domésticos, brindando tranquilidad y confianza a nuestros clientes en cada envío.',
     subtitle: 'Requisitos para el transporte de animales vivos',
     details: [
       {
@@ -97,7 +101,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Presentar animales vivos 2 horas antes del vuelo.',
           'El animal debe viajar en jaula adecuada, segura, con material absorbente, marcada, etiquetada y rotulada.',
           'El contenedor debe estar homologado por IATA: rígido, con ventilación, puerta metálica y espacio suficiente para que el animal pueda moverse con normalidad. No se aceptan jaulas de malla de alambre o soldada.',
-          'La edad mínima del animal es de 3 meses (excepto pollitos bebés).',
+          'La edad mínima del animal es de 3 meses.',
           'Presentar cartilla de vacunas (original + 2 copias). Deben haber pasado 30 días desde la vacuna antirrábica.',
           'Certificado veterinario que acredite buen estado de salud. Para especies distintas a perros y gatos, se requiere autorización del SENASAG.',
           'Los perros de musculatura fuerte y aspecto robusto deben llevar bozal.',
@@ -138,6 +142,10 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         imageUrl: [],
       },
     ],
+    notice: [
+      'Se clasifican como AVI cualquier animal aceptado para su transporte de acuerdo a la " Reglamentación para el Transporte de Animales Vivos de la IATA". LAR vigente.',
+      'Las mascotas (animales de compañía) que se presenten para el transporte deben ser mayores de 3 meses de edad y deben haber sido destetados, al menos, 5 días antes de la fecha del vuelo.',
+    ],
     example: [
       {
         title: 'Mascotas domésticas',
@@ -146,8 +154,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       },
       // {
       //   title: 'Animales exóticos (autorizados)',
-      //   description:
-      //     'Tortugas, iguanas.',
+      //   description: 'Tortugas, iguanas.',
       //   image: '/informacioPage/animalesVivos/GGI_exotico.webp',
       // },
     ],
@@ -155,8 +162,8 @@ export const cargaData: Record<string, InfoTipoCarga> = {
   perecederos: {
     title: 'Perecederos',
     description:
-      'La categoría de perecederos son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.',
-    subtitle:'Requisitos para el transporte de carga perecedera',
+      'La categoría de perecederos son aquellas mercancías que, cuando no se mantienen dentro de ciertas condiciones o elementos o no se tiene en consideración su ciclo de vida, pierden sus propiedades inherentes o la calidad de sus componentes, y como consecuencia dejan de ser útiles para lo que fueron destinados originalmente. Son suceptibles de deterioro o pérdida debido a cambios de clima,temperatura o cualquier otra situación normal. ',
+    subtitle: 'Requisitos para el transporte de carga perecedera',
     details: [
       {
         title: 'Nacional (Interior de Bolivia)',
@@ -201,10 +208,13 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         imageUrl: [],
       },
     ],
+    notice: [
+      'La aceptación y el manejo en el transporte de carga perecedera, debe cumplirse de acuerdo con los requisitos del Reglamento de carga perecedera (PCR) y otras reglamentaciones aplicables.',
+    ],
     example: [
       {
         title: 'Alimentos frescos',
-        description: '	Frutas, verduras, hortalizas, hierbas frescas',
+        description: 'Frutas, verduras, hortalizas, hierbas frescas',
         image: '/informacioPage/perecederos/GGI_frescos.webp',
       },
       {
@@ -259,7 +269,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.',
           'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.',
-           'Certificado forense',
+          'Certificado forense',
           'Certificado sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
           'Certificado de formolización, (embalsamamiento), cremación según sea aplicable.',
           'Autorización para traslado del cadáver, emitido por una Oficina Gubernamental(Alcaldía o Policía Boliviana) del departamento local donde se origina el embarque.',
@@ -272,6 +282,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         imageUrl: [],
       },
     ],
+    notice: [],
     example: [
       {
         title: 'Restos humanos en féretro',
@@ -287,9 +298,15 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     ],
   },
   cargaValiosa: {
-    title: 'Carga Valiosa',
-    description:
-      'Se considera carga valiosa a expediciones que contengan uno o más de los siguientes artículos y/o, cualquier artículo con un valor declarado para el transporte igual o superior al indicado en el tarifario por kilogramo bruto de peso. ',
+    title: 'Carga valiosa',
+    description: `Se considera carga valiosa a todo envío que incluya artículos de alto valor o con un valor declarado para el transporte igual o superior a lo establecido en el tarifario por kilogramo bruto de peso.Entre ellos se encuentran: 
+
+1) Artículos con valor declarado de USD 1.000 o más por kilo bruto. 
+2) Oro, platino y sus metales afines (paladio, iridio, osmio, rutenio y rodio), en barras, lingotes, láminas, alambres u otras formas. (Se excluyen isótopos radiactivos y aleaciones clasificadas como mercancías peligrosas). 
+3) Billetes de banco, valores, acciones, cheques de viajero, sellos, tarjetas bancarias o de crédito listas para su uso. 
+4) Piedras preciosas: diamantes, rubíes, esmeraldas, zafiros, ópalos y perlas auténticas (incluidas las cultivadas), así como joyería compuesta por estos artículos. 
+5) Joyería y relojes de oro, plata o platino. 
+6) Artículos de oro o platino no enchapados.`,
     subtitle: 'Requisitos para el transporte de carga valiosa',
     details: [
       {
@@ -319,6 +336,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         imageUrl: [],
       },
     ],
+    notice: [],
     example: [
       {
         title: 'Dinero en efectivo',
@@ -331,62 +349,29 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         image: '/informacioPage/valiosos/GGI_joyas.webp',
       },
       {
-        title: 'Obras de arte',
-        description: 'Pinturas, esculturas, piezas de colección.',
-        image: '/informacioPage/valiosos/GGI_obrasarte.webp',
-      },
-      {
-        title: 'Electrónica de alto valor',
-        description: 'Computadoras de última generación, equipos médicos portátiles.',
+        title: 'Electrónicos valiosos',
+        description: 'Equipos de computación, de audio.',
         image: '/informacioPage/valiosos/GGI_electronicosValiosos.webp',
-      },
-      {
-        title: 'Documentos valiosos',
-        description: 'Títulos de propiedad, bonos, valores bursátiles, contratos originales.',
-        image: '/informacioPage/valiosos/GGI_documentosvaliosos.webp',
       },
     ],
   },
-  peligrosas: {
-    title: 'Peligrosas',
+  otros: {
+    title: 'Otros tipos de carga',
     description:
-      'La categoría de Carga Peligrosa son aquellas mercancías que reúnen los criterios de una o más de las nueve clases de peligros de las Naciones Unidas, de acuerdo con las disposiciones de esta seción. ',
+      'Para obtener más información sobre otros tipos de carga, le recomendamos contactar a un agente de carga, quien le brindará asesoramiento y le ayudará a clasificar su envío de acuerdo con las especificaciones necesarias.',
     subtitle: '',
     details: [],
+    notice: [],
     example: [
       {
-        title: 'Explosivos',
-        description:
-          'municiones, material para expediciones,bengalas,fuegos artificiales, articulos pirotécnicos',
-        image: '/informacioPage/peligroso/explosive-symbol.webp',
+        title: 'Mercancias Peligrosas',
+        description: 'Según reglamento DGR de la IATA',
+        image: '/informacioPage/otroCarga/DGR.webp',
       },
       {
-        title: 'Solidos inflamables',
-        description:
-          'fosforo, articulos de facil ignicion,combustion expontanea o que al tacto con el agua emitan gases inflamables',
-        image: '/informacioPage/peligroso/Flammables.webp',
-      },
-      {
-        title: 'Gases comprimidos inflamables, no inflamables y venenosos',
-        description:
-          'extintores, botellas de oxigeno para bucear, licuados refrigerrados o disueltos',
-        image: '/informacioPage/peligroso/gasComprimido.webp',
-      },
-      {
-        title: 'Liquidos inflamables',
-        description:
-          'Bombonas de gas para recargar encendedores, pinturas, disolventes,combustibles liquidos o solidos,cerillas ',
-        image: '/informacioPage/peligroso/Flammables.webp',
-      },
-      {
-        title: 'Material radioactivo',
-        description: 'Material con isotopos radiactivos',
-        image: '/informacioPage/peligroso/nuclear.webp',
-      },
-      {
-        title: 'Materiales corrosivos y Oxidantes',
-        description: 'acidos alcalinos, mercurio, pilas humedas, peroxidos,acumuladores electricos',
-        image: '/informacioPage/peligroso/corrosivoOxidante.webp',
+        title: 'Suministros médicos',
+        description: 'Vacunas, medicamentos',
+        image: '/informacioPage/otroCarga/DGR.webp',
       },
     ],
   },

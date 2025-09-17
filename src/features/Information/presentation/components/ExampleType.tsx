@@ -21,8 +21,12 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
       <Box
         sx={{
           position: 'relative',
-          width: '100%',
-          borderRadius: 1,
+          width: '100%', //aqui
+          borderRadius: '9px',
+          height: 300,
+          // borderWidth: 2,
+          // borderStyle: 'solid',
+          // borderColor: 'primary.light',
           overflow: 'hidden',
           mb: 1,
         }}
@@ -33,7 +37,7 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
           alt={title}
           sx={{
             width: '100%',
-            height: '250px',
+            height: 'auto',
             objectFit: 'cover',
             display: 'block',
           }}
@@ -48,7 +52,7 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
             left: 0,
             width: '100%',
             height: '100%',
-            bgcolor: 'rgba(0, 45, 87, 0.2)', // azul semitransparente
+            bgcolor: 'rgba(135, 205, 233, 0.18)', // azul semitransparente
           }}
         />
       </Box>
@@ -56,7 +60,7 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
       {/* Texto */}
       <Box
         sx={{
-          textAlign: 'flex-start',
+          textAlign: 'start', //aqui
           flexDirection: 'column',
           width: '100%',
         }}
