@@ -32,6 +32,9 @@ export const registerSchema = z
       .regex(/[A-Z]/, 'La contraseña debe contener al menos una mayúscula')
       .regex(/[0-9]/, 'La contraseña debe contener al menos un número'),
     confirmPassword: z.string().min(1, 'Debes confirmar tu contraseña'),
+    docType: z.enum(['1', '5'], {
+      message: 'El tipo de documento es obligatorio',
+    }),
     nit: identificationSchema,
     number: phoneSchema,
     address: z.string().optional(),

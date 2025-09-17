@@ -1,10 +1,12 @@
 import React from 'react';
 import { TextField, MenuItem, Grid, Box } from '@mui/material';
+import { Control, Controller, FieldErrors } from 'react-hook-form';
 import { AppTypography } from 'ui';
+import { RegisterSchema } from '../../../domain/validators';
 
 interface FormFieldConfig {
   id: string;
-  name: string;
+  name: keyof RegisterSchema;
   label: string;
   type?: string;
   gridSize: { xs: number; sm?: number };
@@ -15,41 +17,60 @@ interface FormFieldConfig {
   defaultValue?: string;
 }
 
-const FormField: React.FC<FormFieldConfig> = ({
+interface FormFieldProps extends FormFieldConfig {
+  control: Control<RegisterSchema>;
+  errors: FieldErrors<RegisterSchema>;
+}
+
+const FormField: React.FC<FormFieldProps> = ({
   id,
   name,
   label,
   type = 'text',
   gridSize,
   required = false,
-  autoComplete,
   select = false,
   options = [],
   defaultValue,
+  control,
+  errors,
 }) => (
   <Grid item xs={gridSize.xs} sm={gridSize.sm || gridSize.xs}>
-    <TextField
-      select={select}
-      required={required}
-      id={id}
+    <Controller
       name={name}
-      label={label}
-      type={type}
-      fullWidth
-      autoComplete={autoComplete}
-      defaultValue={defaultValue}
-    >
-      {select &&
-        options.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-    </TextField>
+      control={control}
+      defaultValue={defaultValue || ''}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          select={select}
+          required={required}
+          id={id}
+          label={label}
+          type={type}
+          fullWidth
+          error={!!errors[name]}
+          helperText={errors[name]?.message}
+          color={errors[name] ? 'error' : 'primary'}
+        >
+          {select &&
+            options.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+        </TextField>
+      )}
+    />
   </Grid>
 );
 
-const UserDataForm = () => {
+interface UserDataFormProps {
+  control: Control<RegisterSchema>;
+  errors: FieldErrors<RegisterSchema>;
+}
+
+const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {
   const formFields: FormFieldConfig[] = [
     {
       id: 'email',
@@ -57,7 +78,6 @@ const UserDataForm = () => {
       label: 'Correo Electrónico',
       gridSize: { xs: 12 },
       required: true,
-      autoComplete: 'email',
     },
     {
       id: 'password',
@@ -66,7 +86,6 @@ const UserDataForm = () => {
       type: 'password',
       gridSize: { xs: 12, sm: 6 },
       required: true,
-      autoComplete: 'new-password',
     },
     {
       id: 'confirmPassword',
@@ -75,11 +94,10 @@ const UserDataForm = () => {
       type: 'password',
       gridSize: { xs: 12, sm: 6 },
       required: true,
-      autoComplete: 'new-password',
     },
     {
-      id: 'fullName',
-      name: 'fullName',
+      id: 'name',
+      name: 'name',
       label: 'Nombre Completo',
       gridSize: { xs: 12 },
       required: true,
@@ -92,26 +110,25 @@ const UserDataForm = () => {
       gridSize: { xs: 12, sm: 4 },
       required: true,
       select: true,
-      defaultValue: 'CI',
+      defaultValue: '1',
       options: [
         { value: '1', label: 'CI' },
         { value: '5', label: 'NIT' },
       ],
     },
     {
-      id: 'ci_nit',
-      name: 'ci_nit',
+      id: 'nit',
+      name: 'nit',
       label: 'CI o NIT',
       gridSize: { xs: 12, sm: 8 },
       required: true,
     },
     {
-      id: 'cellphone',
-      name: 'cellphone',
+      id: 'number',
+      name: 'number',
       label: 'Número de Celular',
       gridSize: { xs: 12 },
       required: true,
-      autoComplete: 'tel',
     },
     {
       id: 'address',
@@ -119,7 +136,6 @@ const UserDataForm = () => {
       label: 'Dirección',
       gridSize: { xs: 12 },
       required: false,
-      autoComplete: 'shipping address-line1',
     },
   ];
 
@@ -132,7 +148,7 @@ const UserDataForm = () => {
       </Box>
       <Grid container spacing={3}>
         {formFields.map((field) => (
-          <FormField key={field.id} {...field} />
+          <FormField key={field.id} {...field} control={control} errors={errors} />
         ))}
       </Grid>
     </>
