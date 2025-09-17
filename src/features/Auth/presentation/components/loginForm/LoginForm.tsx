@@ -19,6 +19,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
+    mode: 'onBlur',
     defaultValues: {
       email: '',
       password: '',
