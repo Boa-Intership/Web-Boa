@@ -4,7 +4,20 @@ import { RegisterFormData } from './types';
 const identificationSchema = z
   .string()
   .min(1, 'El número de identificación es obligatorio')
+  .max(10, 'El número de identificación no puede tener más de 10 dígitos')
   .regex(/^[0-9]+$/, 'Solo se permiten números en la identificación');
+
+const doctypeSchema = z.enum(['1', '5'], {
+  message: 'El tipo de documento es obligatorio',
+});
+
+const complementoSchema = z
+  .string()
+  .optional()
+  .refine(
+    (value) => !value || /^[a-zA-Z0-9]{0,2}$/.test(value),
+    'El complemento debe tener máximo 2 caracteres alfanuméricos'
+  );
 
 const phoneSchema = z
   .string()
@@ -32,10 +45,10 @@ export const registerSchema = z
       .regex(/[A-Z]/, 'La contraseña debe contener al menos una mayúscula')
       .regex(/[0-9]/, 'La contraseña debe contener al menos un número'),
     confirmPassword: z.string().min(1, 'Debes confirmar tu contraseña'),
-    docType: z.enum(['1', '5'], {
-      message: 'El tipo de documento es obligatorio',
-    }),
+    docType: doctypeSchema,
+    billingDocType: doctypeSchema,
     nit: identificationSchema,
+    nitComplemento: complementoSchema,
     number: phoneSchema,
     address: z.string().optional(),
     businessName: z
@@ -44,6 +57,7 @@ export const registerSchema = z
       .min(2, 'La razón social debe tener al menos 2 caracteres')
       .max(100, 'La razón social no puede tener más de 100 caracteres'),
     billingNit: identificationSchema,
+    billingNitComplemento: complementoSchema,
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Las contraseñas no coinciden',
