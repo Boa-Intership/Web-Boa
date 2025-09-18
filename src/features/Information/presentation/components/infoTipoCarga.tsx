@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ExampleType from './ExampleType';
 import { Box, Alert, Grid, Stack } from '@mui/material';
 import { AppTypography, BoAButton } from 'ui';
-import { useTheme } from '@mui/material/styles';
 
 interface Detail {
   title: string;

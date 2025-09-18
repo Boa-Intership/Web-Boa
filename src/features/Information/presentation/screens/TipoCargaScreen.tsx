@@ -1,6 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, Grid, Typography } from '@mui/material';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Box, Grid } from '@mui/material';
 import { AppTypography, BoAButton, AppStack } from 'ui';
 import { InfoTipoCarga } from 'ui';
 import { useTheme } from '@mui/material/styles';
@@ -11,12 +11,21 @@ import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
 import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
-import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
-  const [selected, setSelected] = React.useState<string>(tipo || 'cargaGeneral'); //valor inicial desde la URL
+  const [selected, setSelected] = React.useState(tipo || 'cargaGeneral'); //valor inicial desde la URL
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    // Si el usuario entra a /tipos-cargas sin :tipo
+    if (!tipo) {
+      navigate('/tipos-cargas/cargaGeneral', { replace: true });
+    } else {
+      setSelected(tipo);
+    }
+  }, [tipo, navigate]);
 
   const theme = useTheme();
   const colorBoton = theme.palette.primary.dark;
@@ -73,7 +82,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('cargaGeneral')}
+              onClick={() => navigate('/tipos-cargas/cargaGeneral')}
               selected={selected === 'cargaGeneral'}
               icon={<Inventory2OutlinedIcon />}
             >
@@ -83,7 +92,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('animalesVivos')}
+              onClick={() => navigate('/tipos-cargas/animalesVivos')}
               selected={selected === 'animalesVivos'}
               icon={<PetsOutlinedIcon />}
             >
@@ -93,7 +102,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('perecederos')}
+              onClick={() => navigate('/tipos-cargas/perecederos')}
               selected={selected === 'perecederos'}
               icon={<SetMealOutlinedIcon />}
             >
@@ -103,7 +112,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('restosHumanos')}
+              onClick={() => navigate('/tipos-cargas/restosHumanos')}
               selected={selected === 'restosHumanos'}
               icon={<LocalHospitalOutlinedIcon />}
             >
@@ -113,7 +122,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('cargaValiosa')}
+              onClick={() => navigate('/tipos-cargas/cargaValiosa')}
               selected={selected === 'cargaValiosa'}
               icon={<MonetizationOnOutlinedIcon />}
             >
@@ -123,7 +132,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('otros')}
+              onClick={() => navigate('/tipos-cargas/otros')}
               selected={selected === 'otros'}
               icon={<QuizOutlinedIcon />}
             >
