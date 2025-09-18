@@ -5,10 +5,25 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import UserDataForm from '../components/registerForm/UserDataForm';
 import BillingDataForm from '../components/registerForm/BillingDataForm';
 import TermsAndConditions from '../components/registerForm/TermsAndConditions';
+import EmailVerification from '../components/verification/EmailVerification';
+import RegistrationSuccess from '../components/verification/RegistrationSuccess';
 import { registerSchema, RegisterSchema } from '../../domain/validators';
+import { useTempRegistration, useEmailVerification } from '../../hooks/useTempRegistration';
 import { AppContainer, AppTypography } from 'ui';
 
 const Register = () => {
+  const {
+    saveTempData,
+    isEmailVerificationPending,
+    markEmailAsVerified,
+    getTempDataForRegistration,
+  } = useTempRegistration();
+  const { sendVerificationEmail } = useEmailVerification();
+
+  const [showVerification, setShowVerification] = React.useState(false);
+  const [showSuccess, setShowSuccess] = React.useState(false);
+  const [userEmail, setUserEmail] = React.useState('');
+
   const {
     control,
     handleSubmit,
@@ -32,16 +47,74 @@ const Register = () => {
   const [termsAccepted, setTermsAccepted] = React.useState(false);
   const [termsError, setTermsError] = React.useState('');
 
-  const onSubmit = (data: RegisterSchema) => {
+  // Verificar si hay una verificación pendiente al cargar
+  React.useEffect(() => {
+    if (isEmailVerificationPending()) {
+      setShowVerification(true);
+      // Recuperar email de datos temporales si existe
+      const tempData = getTempDataForRegistration();
+      if (tempData) {
+        setUserEmail(tempData.email);
+      }
+    }
+  }, [isEmailVerificationPending, getTempDataForRegistration]);
+
+  const onSubmit = async (data: RegisterSchema) => {
     if (!termsAccepted) {
       setTermsError('Debes aceptar los términos y condiciones');
       return;
     }
 
     setTermsError('');
-    console.log('Datos de registro:', data);
-    // Aquí puedes implementar la lógica de registro
-    // Por ejemplo: await registerUser(data);
+
+    try {
+      // Guardar datos temporalmente
+      saveTempData(data);
+      setUserEmail(data.email);
+
+      // Enviar email de verificación
+      const emailSent = await sendVerificationEmail(data.email);
+
+      if (emailSent) {
+        setShowVerification(true);
+      } else {
+        alert('Error al enviar el email de verificación. Por favor, intenta nuevamente.');
+      }
+    } catch (error) {
+      console.error('Error in registration process:', error);
+      alert('Error en el proceso de registro. Por favor, intenta nuevamente.');
+    }
+  };
+
+  const handleVerificationSuccess = async () => {
+    try {
+      // Marcar email como verificado
+      markEmailAsVerified();
+
+      // Obtener datos para registro final
+      const registrationData = getTempDataForRegistration();
+
+      if (registrationData) {
+        // Aquí harías la llamada al backend para guardar en BD
+        console.log('💾 Guardando en base de datos:', registrationData);
+
+        // Simular guardado
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Mostrar pantalla de éxito
+        setShowVerification(false);
+        setShowSuccess(true);
+      }
+    } catch (error) {
+      console.error('Error completing registration:', error);
+      alert('Error al completar el registro. Por favor, intenta nuevamente.');
+    }
+  };
+
+  const handleResendCode = async () => {
+    if (userEmail) {
+      await sendVerificationEmail(userEmail);
+    }
   };
 
   const handleTermsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +123,22 @@ const Register = () => {
       setTermsError('');
     }
   };
+
+  // Si estamos en modo éxito, mostrar el componente de éxito
+  if (showSuccess) {
+    return <RegistrationSuccess />;
+  }
+
+  // Si estamos en modo verificación, mostrar el componente de verificación
+  if (showVerification) {
+    return (
+      <EmailVerification
+        email={userEmail}
+        onVerificationSuccess={handleVerificationSuccess}
+        onResendCode={handleResendCode}
+      />
+    );
+  }
 
   return (
     <AppContainer>
@@ -71,7 +160,7 @@ const Register = () => {
         >
           <BillingDataForm control={control} errors={errors} />
 
-          <Box sx={{ mt: 3 }}>
+          <Box sx={{ mt: 2 }}>
             <TermsAndConditions
               checked={termsAccepted}
               onChange={handleTermsChange}
