@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ROUTES } from './router/routes';
 import HomeScreen from './features/home/presentation/screens/HomeScreen';
+import CorporateProfileScreen from './features/landing/presentation/screens/CorporateProfileScreen';
 import ContactScreen from './features/contact/presentation/screens/ContactScreen';
 import InformacionScreen from './features/Information/presentation/screens/InformacionScreen';
 import PreRegistroScreen from './features/pre-registration/presentation/screens/PreRegistroScreen';
@@ -32,6 +33,10 @@ const App: React.FC = () => (
         <Route path={ROUTES.REGISTER.replace('/', '')} element={<Register />} />
 
         <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
+        <Route
+          path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
+          element={<CorporateProfileScreen />}
+        />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
