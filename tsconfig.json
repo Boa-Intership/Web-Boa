@@ -19,7 +19,14 @@
       "pages/*": ["./src/pages/*"],
       "router/*": ["./src/router/*"]
     },
-  "types": ["node", "react", "react-dom", "vitest/globals", "@testing-library/jest-dom"]
+    "types": [
+      "node",
+      "react",
+      "react-dom",
+      "vitest/globals",
+      "@testing-library/jest-dom",
+      "vite/client"
+    ]
   },
   "include": ["src"]
 }

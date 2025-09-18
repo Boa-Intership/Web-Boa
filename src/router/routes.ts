@@ -27,4 +27,6 @@ export const ROUTES = {
   PREREGISTRO: '/preregistro',
   COMPROBANTE: '/comprobante',
   CONTACTO: '/contacto',
+
+  CORPORATE_PROFILE: '/perfil-corporativo',
 };

@@ -33,7 +33,7 @@ const OfficePreviewSection: React.FC = () => {
   return (
     <AppContainer sx={{ py: { xs: 7, md: 8 } }}>
       <AppStack textAlign="center" mb={2}>
-        <AppTypography variant="h4Bold" color="primary">
+        <AppTypography variant="h2Bold" color="primary">
           Nuestras oficinas
         </AppTypography>
       </AppStack>
@@ -63,11 +63,11 @@ const OfficePreviewSection: React.FC = () => {
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <LocationOnIcon sx={{ color: 'primary.main', fontSize: 28, mr: 1 }} />
-                  <AppTypography variant="h4Regular" fontWeight={600}>
+                  <AppTypography variant="h4Bold" fontWeight={600}>
                     {office.ciudad}
                   </AppTypography>
                 </Box>
-                <AppTypography variant="h4Regular" color="text.secondary">
+                <AppTypography variant="baseRegular" color="text.secondary">
                   {office.direccion}
                 </AppTypography>
               </CardContent>

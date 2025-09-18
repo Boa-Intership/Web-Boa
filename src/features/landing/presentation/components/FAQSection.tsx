@@ -41,31 +41,33 @@ const faqs = [
 ];
 
 const FAQSection = () => (
-  <AppContainer sx={{ xs: 5, md: 8 }}>
-    <Box sx={{ mb: 2, textAlign: 'center' }}>
-      <AppTypography variant="h4Bold" color="primary">
-        Preguntas Frecuentes
-      </AppTypography>
-    </Box>
-    <Box sx={{ maxWidth: 700, mx: 'auto' }}>
-      {faqs.map((faq, idx) => (
-        <Accordion key={idx} sx={{ mb: 2, boxShadow: 1 }}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`faq-content-${idx}`}
-            id={`faq-header-${idx}`}
-          >
-            <AppTypography variant="smallBold">{faq.question}</AppTypography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <AppTypography variant="smallRegular" color="text.secondary">
-              {faq.answer}
-            </AppTypography>
-          </AccordionDetails>
-        </Accordion>
-      ))}
-    </Box>
-  </AppContainer>
+  <AppBox>
+    <AppContainer sx={{ xs: 5, md: 8 }}>
+      <Box sx={{ mb: 2 }}>
+        <AppTypography variant="h2Bold" color="primary" textAlign="center">
+          Preguntas Frecuentes
+        </AppTypography>
+      </Box>
+      <Box sx={{ maxWidth: 700, mx: 'auto' }}>
+        {faqs.map((faq, idx) => (
+          <Accordion key={idx} sx={{ mb: 2, boxShadow: 1 }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls={`faq-content-${idx}`}
+              id={`faq-header-${idx}`}
+            >
+              <AppTypography variant="baseBold">{faq.question}</AppTypography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <AppTypography variant="baseRegular" color="text.secondary">
+                {faq.answer}
+              </AppTypography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </Box>
+    </AppContainer>
+  </AppBox>
 );
 
 export default FAQSection;
