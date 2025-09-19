@@ -19,7 +19,7 @@ import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
 import AppContainer from '../AppContainer';
-import { LogoCargo } from 'ui';
+import { AppButton, LogoCargo } from 'ui';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
@@ -27,10 +27,15 @@ import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 
 const navItems = [
+  // {
+  //   key: 'home',
+  //   label: 'Inicio',
+  //   route: ROUTES.HOME,
+  // },
   {
-    key: 'home',
-    label: 'Inicio',
-    route: ROUTES.HOME,
+    key: 'Pre-Registro',
+    label: 'Pre-Registro',
+    route: ROUTES.PREREGISTRO,
   },
   {
     key: 'itinerarios',
@@ -231,8 +236,39 @@ const AppAppBar: React.FC = () => {
               </Box>
             </Box>
 
-            {/* <Box sx={{ flexGrow: 1 }} /> */}
+            <Box sx={{ flexGrow: 1 }} />
 
+            <Box
+              id="_header-buttons"
+              data-testid="header-buttons"
+              sx={{ display: 'flex', gap: 1, alignItems: 'center' }}
+            >
+              <AppButton
+                variant="contained"
+                size="large"
+                onClick={() => navigate(ROUTES.LOGIN)}
+                sx={{
+                  textTransform: 'none',
+                  fontSize: { xs: '0.75rem', md: '1rem' },
+                  borderRadius: 2,
+                }}
+              >
+                Iniciar sesión
+              </AppButton>
+              <AppButton
+                variant="contained"
+                size="large"
+                onClick={() => navigate(ROUTES.PREREGISTRO)}
+                sx={{
+                  textTransform: 'none',
+                  fontSize: { xs: '0.75rem', md: '1rem' },
+                  borderRadius: 2,
+                }}
+                color="secondary"
+              >
+                Abrir cuenta
+              </AppButton>
+            </Box>
             {/* MENU HAMBURGUESA (mobile) */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>
               <IconButton
