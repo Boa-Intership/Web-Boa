@@ -10,6 +10,14 @@ export interface RegisterRequest {
   firstName: string;
   lastName: string;
   phone?: string;
+  nit: number;
+  complement?: string;
+}
+
+export interface SendCodeRequest {
+  email: string;
+  nit: number;
+  complement?: string;
 }
 
 export interface User {

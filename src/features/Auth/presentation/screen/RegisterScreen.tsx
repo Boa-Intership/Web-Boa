@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Box, Button } from '@mui/material';
+import { Paper, Box, Button, Alert } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import UserDataForm from '../components/registerForm/UserDataForm';
@@ -9,6 +9,7 @@ import EmailVerification from '../components/verification/EmailVerification';
 import RegistrationSuccess from '../components/verification/RegistrationSuccess';
 import { registerSchema, RegisterSchema } from '../../domain/validators';
 import { useTempRegistration, useEmailVerification } from '../../hooks/useTempRegistration';
+import { useSendVerificationCode } from '../useAuth.hooks';
 import { AppContainer, AppTypography } from 'ui';
 
 const Register = () => {
@@ -19,15 +20,17 @@ const Register = () => {
     getTempDataForRegistration,
   } = useTempRegistration();
   const { sendVerificationEmail } = useEmailVerification();
+  const sendCodeMutation = useSendVerificationCode();
 
   const [showVerification, setShowVerification] = React.useState(false);
   const [showSuccess, setShowSuccess] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState('');
+  const [apiError, setApiError] = React.useState<string>('');
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
     mode: 'onBlur',
@@ -66,23 +69,27 @@ const Register = () => {
     }
 
     setTermsError('');
+    setApiError('');
 
     try {
-      // Guardar datos temporalmente
+      // Llamar al backend para verificar email y NIT, y enviar código
+      await sendCodeMutation.mutateAsync({
+        email: data.email,
+        nit: parseInt(data.nit),
+        complement: data.nitComplemento || undefined,
+      });
+
+      // Si llegamos aquí, el código se envió exitosamente
+      // Guardar datos temporalmente para el siguiente paso
       saveTempData(data);
       setUserEmail(data.email);
-
-      // Enviar email de verificación
-      const emailSent = await sendVerificationEmail(data.email);
-
-      if (emailSent) {
-        setShowVerification(true);
-      } else {
-        alert('Error al enviar el email de verificación. Por favor, intenta nuevamente.');
-      }
-    } catch (error) {
-      console.error('Error in registration process:', error);
-      alert('Error en el proceso de registro. Por favor, intenta nuevamente.');
+      setShowVerification(true);
+    } catch (error: unknown) {
+      // Manejar errores específicos del backend
+      const apiError = error as { response?: { data?: { message?: string } } };
+      const errorMessage = apiError?.response?.data?.message || 'Error desconocido';
+      setApiError(errorMessage);
+      console.error('Error al enviar código de verificación:', error);
     }
   };
 
@@ -168,9 +175,24 @@ const Register = () => {
             />
           </Box>
 
+          {/* Mostrar errores de la API */}
+          {apiError && (
+            <Box sx={{ mt: 2 }}>
+              <Alert severity="error" onClose={() => setApiError('')}>
+                {apiError}
+              </Alert>
+            </Box>
+          )}
+
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-            <Button type="submit" variant="contained" color="primary" size="large">
-              {isSubmitting ? 'Registrando...' : 'Registrarse'}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="large"
+              disabled={sendCodeMutation.isPending}
+            >
+              {sendCodeMutation.isPending ? 'Verificando...' : 'Registrarse'}
             </Button>
           </Box>
         </Paper>

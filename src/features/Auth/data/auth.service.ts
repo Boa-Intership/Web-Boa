@@ -7,6 +7,7 @@ import {
   User,
   ForgotPasswordRequest,
   ResetPasswordRequest,
+  SendCodeRequest,
 } from '../domain/auth.types';
 
 export class AuthService {
@@ -118,6 +119,14 @@ export class AuthService {
    */
   async resendVerificationEmail(): Promise<ApiResponse<void>> {
     return await httpClient.post<void>(`${this.baseUrl}/resend-verification`);
+  }
+
+  /**
+   * Enviar código de verificación
+   * Verifica que el email y NIT no estén en uso antes de enviar el código
+   */
+  async sendVerificationCode(request: SendCodeRequest): Promise<ApiResponse<void>> {
+    return await httpClient.post<void>(API_CONFIG.ENDPOINTS.SEND_CODE, request);
   }
 
   // Métodos privados para manejo de tokens

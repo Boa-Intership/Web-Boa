@@ -6,6 +6,7 @@ import {
   ForgotPasswordRequest,
   ResetPasswordRequest,
   User,
+  SendCodeRequest,
 } from '../domain/auth.types';
 
 // Query keys para React Query
@@ -206,4 +207,20 @@ export const useAuth = () => {
     isLoading,
     error,
   };
+};
+
+/**
+ * Hook para enviar código de verificación
+ * Verifica email y NIT antes de enviar el código
+ */
+export const useSendVerificationCode = () => {
+  return useMutation({
+    mutationFn: (request: SendCodeRequest) => authService.sendVerificationCode(request),
+    onSuccess: () => {
+      console.log('Código de verificación enviado exitosamente');
+    },
+    onError: (error) => {
+      console.error('Error al enviar código de verificación:', error);
+    },
+  });
 };
