@@ -263,7 +263,7 @@ const AppAppBar: React.FC = () => {
               <AppButton
                 variant="contained"
                 size="large"
-                onClick={() => navigate(ROUTES.PREREGISTRO)}
+                onClick={() => navigate(ROUTES.REGISTER)}
                 sx={{
                   textTransform: 'none',
                   fontSize: { xs: '0.75rem', md: '1rem' },
