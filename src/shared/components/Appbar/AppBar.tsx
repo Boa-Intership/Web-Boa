@@ -10,6 +10,7 @@ import {
   Menu,
   MenuItem,
   Typography,
+  Icon,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PublicIcon from '@mui/icons-material/Public';
@@ -25,6 +26,8 @@ import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
+import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 
 const navItems = [
   // {
@@ -36,11 +39,13 @@ const navItems = [
     key: 'Pre-Registro',
     label: 'Pre-Registro',
     route: ROUTES.PREREGISTRO,
+    icon: <NoteAltOutlinedIcon />,
   },
   {
     key: 'itinerarios',
     label: 'Itinerario',
     route: ROUTES.ITINERARIOS,
+    icon: <TodayOutlinedIcon />,
   },
   {
     key: 'informacion',
@@ -139,7 +144,7 @@ const AppAppBar: React.FC = () => {
             />
 
             {/* SELECTOR DE IDIOMA/PAÍS */}
-            <Box sx={{ display: 'flex', alignItems: 'center', mr: { xs: 0, md: 2 } }}>
+            {/* <Box sx={{ display: 'flex', alignItems: 'center', mr: { xs: 0, md: 2 } }}>
               <Button
                 startIcon={<PublicIcon />}
                 endIcon={<KeyboardArrowDownOutlinedIcon />}
@@ -178,7 +183,7 @@ const AppAppBar: React.FC = () => {
                   </MenuItem>
                 ))}
               </Menu>
-            </Box>
+            </Box> */}
 
             <Box sx={{ flexGrow: 1 }} />
 
@@ -227,7 +232,7 @@ const AppAppBar: React.FC = () => {
                           label={item.label}
                           active={active}
                           onClick={() => navigate(item.route || ROUTES.HOME)}
-                          icon={item.icon}
+                          // icon={item.icon}
                         />
                       )}
                     </Box>
@@ -241,7 +246,7 @@ const AppAppBar: React.FC = () => {
             <Box
               id="_header-buttons"
               data-testid="header-buttons"
-              sx={{ display: 'flex', gap: 1, alignItems: 'center' }}
+              sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}
             >
               <AppButton
                 variant="contained"
