@@ -31,12 +31,13 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       {
         title: 'Nacional (Interior de Bolivia)',
         description: [
-          'La carga debe presentarse abierta para revisión total.',
-          'El cliente o agente de carga debe contar con material para reembalar después de la revisión.',
+          'La carga debe presentarse abierta para su total revisión.',
+          'El cliente o agente de carga debe contar con material para terminar de embalar después de la revisión.',
           'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
           'Para aceptar el envio se requiere documento de identidad vigente (carnet de identidad, licencia de conducir o pasaporte) y sello de la empresa si va a nombre de una empresa.',
           'La carga se recibe hasta 2 horas antes del vuelo y se entrega 1 hora después de su llegada.',
           'El envío y la recepción se realizan exclusivamente en oficinas de BoA Cargo.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
         ],
 
         imageUrl: [],
@@ -49,11 +50,11 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
           'La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.',
           'Se requiere documento de identidad vigente (carnet de identidad, licencia de conducir o pasaporte) y sello de la empresa si va a nombre de una empresa para aceptar el envío.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'La carga de exportación internacional se recibe y almacena hasta 24 horas antes de la salida del vuelo.',
           'El envío y la recepción se realizan únicamente en oficinas de BoA Cargo.',
           'Factura comercial de exportación.',
-          'Lista de empaque.',
+          'Si son más de un artículo que se quiere enviar, con ayuda del agente de carga se debe presentar una lista de empaque.',
           'Certificados (SENASAG, SENAVEX, SENARECON, etc.) según corresponda.',
           'Declaración de Exportación (DEX) emitida por Aduana mediante el sistema SUMA.',
           'Declaración General de Seguridad de Carga emitida por el agente de carga.',
@@ -92,7 +93,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     title: 'Animales vivos',
     description:
       'Boliviana de Aviación ofrece un servicio seguro y confiable para el transporte de animales vivos, tanto a nivel nacional como internacional. Contamos con instalaciones y procedimientos diseñados para garantizar el bienestar de los animales durante todo el proceso, desde la carga hasta la entrega, asegurando condiciones adecuadas de temperatura, ventilación y manejo especializado. Este servicio está pensado para mascotas y animales domésticos, brindando tranquilidad y confianza a nuestros clientes en cada envío.',
-    subtitle: 'Requisitos para el transporte de animales vivos',
+    subtitle: 'Requisitos para el transporte de animales vivos: Solo perros y gatos',
     details: [
       {
         title: 'Nacional (Interior de Bolivia)',
@@ -104,11 +105,12 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La edad mínima del animal es de 3 meses.',
           'Presentar cartilla de vacunas (original + 2 copias). Deben haber pasado 30 días desde la vacuna antirrábica.',
           'Certificado veterinario que acredite buen estado de salud. Para especies distintas a perros y gatos, se requiere autorización del SENASAG.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Los perros de musculatura fuerte y aspecto robusto deben llevar bozal.',
           'No se transportan perros ni gatos braquicéfalos (nariz achatada).',
           'El consignatario debe recoger al animal a la llegada del vuelo.',
           'Se recomienda no sedar animales domésticos.',
-          'Importante:BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información para las autorizaciones consulte con un agente de cargo.',
+          'Importante:BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información consulte con un agente de cargo.',
         ],
 
         imageUrl: [],
@@ -124,7 +126,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La edad mínima del animal es de 3 meses (excepto pollitos bebés).',
           'Presentar cartilla de vacunas (original + 2 copias). Deben haber pasado 30 días desde la vacuna antirrábica.',
           'Certificado veterinario que acredite buen estado de salud. Para especies distintas a perros y gatos, se requiere autorización del SENASAG.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Los perros de musculatura fuerte y aspecto robusto deben llevar bozal.',
           'No se transportan perros ni gatos braquicéfalos (nariz achatada).',
           'El consignatario debe recoger al animal a la llegada del vuelo.',
@@ -136,7 +138,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Declaración General de Seguridad de Carga emitida por el agente de carga.',
           'Para exportar mascotas a Estados Unidos, el agente de carga debe solicitar aprobación escrita al CDC enviando un correo a CDCanimalimports@cdc.gov con al menos 30 días hábiles de anticipación.',
           'Para envíos a EE.UU., toda la documentación debe presentarse también en inglés.',
-          'Importante: BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información para las autorizaciones consulte con un agente de cargo.',
+          'Importante: BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información consulte con un agente de cargo.',
         ],
 
         imageUrl: [],
@@ -147,11 +149,11 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       'Las mascotas (animales de compañía) que se presenten para el transporte deben ser mayores de 3 meses de edad y deben haber sido destetados, al menos, 5 días antes de la fecha del vuelo.',
     ],
     example: [
-      {
-        title: 'Mascotas domésticas',
-        description: 'Perros, gatos',
-        image: '/informacioPage/animalesVivos/GGI_mascotas.webp',
-      },
+      // {
+      //   title: 'Mascotas domésticas',
+      //   description: 'Perros, gatos',
+      //   image: '/informacioPage/animalesVivos/GGI_mascotas.webp',
+      // },
       // {
       //   title: 'Animales exóticos (autorizados)',
       //   description: 'Tortugas, iguanas.',
@@ -175,6 +177,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La carga debe embalarse de manera que proteja el producto transportado.',
           'Usar embalaje adecuado según el tipo de producto.',
           'El paquete debe estar marcado y rotulado con: nombre completo del consignatario, teléfono y ciudad.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Si la carga es sensible a la temperatura, debe incluir su propio refrigerante.',
           'El transporte se realiza a temperatura ambiente; el cliente debe tomar las previsiones necesarias para mantener la temperatura óptima.',
           'En productos con hielo seco (CO₂ sólido), se debe indicar en la etiqueta la cantidad exacta en kilogramos.',
@@ -192,7 +195,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La carga debe embalarse de manera que proteja el producto transportado.',
           'Usar embalaje adecuado según el tipo de producto.',
           'El paquete debe estar marcado y rotulado con: nombre completo del consignatario, teléfono y ciudad.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'En destinos donde no se hable español, la documentación, etiquetas y rótulos deben estar en inglés.',
           'La carga se recibe hasta 2 horas antes del vuelo y se entrega 1 hora después de la llegada.',
           'Si la carga es sensible a la temperatura, debe incluir su propio refrigerante.',
@@ -242,22 +245,21 @@ export const cargaData: Record<string, InfoTipoCarga> = {
   restosHumanos: {
     title: 'Restos humanos',
     description:
-      'la categoría de Restos Humanos se refiere al transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo (féretro) o de cenizas (urnas funerarias), cumpliendo con normas legales, sanitarias y logísticas estrictas.',
-    subtitle: 'Requisitos para el transporte de restos humanos',
+      'Boliviana de Aviación ofrece el transporte de restos humanos de cuerpo completo (féretro) en vuelos nacionales e internacionales, garantizando un servicio respetuoso y seguro. Para su aceptación es necesario contar con la documentación exigida por las autoridades competentes, como certificados médicos y de embalsamamiento, además de cumplir con las normativas de los países de origen, tránsito y destino.',
+    subtitle: 'Requisitos para el transporte de restos humanos: Solo féretro',
     details: [
       {
         title: 'Nacional (Interior de Bolivia)',
         description: [
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.',
           'Certificado forense',
           'Certificado sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
           'Certificado de formolización, (embalsamamiento), cremación según sea aplicable.',
           'Autorización para traslado del cadáver, emitido por una Oficina Gubernamental(Alcaldía o Policía Boliviana) del departamento local donde se origina el embarque.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Los restos humanos exhumados, cuya data de fallecimiento sea inferior a 5 años,  no serán aceptados para el transporte.',
-          'NOTA: Se deben presentar los documentos originales más tres copias de cada uno.',
         ],
         imageUrl: [],
       },
@@ -267,7 +269,6 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
           'La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.',
           'Certificado forense',
           'Certificado sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
@@ -278,23 +279,24 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La documentación señalada anteriormente así como cualquier otra documentación adicional que sea requerida, debe estar visada por el consulado del país de origen.',
           'Se recibe el transporte de restos humanos Internacional mediante Agentes de Carga.',
           'Declaración General de seguridad de Carga, emitido por el agente de carga.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
         ],
         imageUrl: [],
       },
     ],
-    notice: [],
+    notice: ['NOTA: Se deben presentar los documentos originales más tres copias de cada uno.'],
     example: [
-      {
-        title: 'Restos humanos en féretro',
-        description:
-          'El cuerpo del fallecido, preparado, embalsamado y colocado en un ataúd especial para vuelos.',
-        image: '/informacioPage/restosHumanos/GGI_ataud.webp',
-      },
-      {
-        title: 'Cenizas humanas (urnas)',
-        description: 'Restos cremados transportados en urnas funerarias adecuadas.',
-        image: '/informacioPage/restosHumanos/GGI_cenizas.webp',
-      },
+      // {
+      //   title: 'Restos humanos en féretro',
+      //   description:
+      //     'El cuerpo del fallecido, preparado, embalsamado y colocado en un ataúd especial para vuelos.',
+      //   image: '/informacioPage/restosHumanos/GGI_ataud.webp',
+      // },
+      // {
+      //   title: 'Cenizas humanas (urnas)',
+      //   description: 'Restos cremados transportados en urnas funerarias adecuadas.',
+      //   image: '/informacioPage/restosHumanos/GGI_cenizas.webp',
+      // },
     ],
   },
   cargaValiosa: {
@@ -315,8 +317,8 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'El transporte debe gestionarse a través de un agente de carga especializado en equipos porta valor certificado.',
           'El embalaje debe ser adecuado al peso y contenido, evitando manipulación indebida o extracción de componentes.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Presentar fotocopia del Formulario M-02 de compra y venta de minerales y metales, emitido y autorizado por SENARECOM.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
         ],
         imageUrl: [],
       },
@@ -371,7 +373,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       {
         title: 'Suministros médicos',
         description: 'Vacunas, medicamentos',
-        image: '/informacioPage/otroCarga/DGR.webp',
+        image: '/informacioPage/otroCarga/GGI_suministrosMedicos.webp',
       },
     ],
   },

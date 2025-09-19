@@ -70,9 +70,13 @@ function TipoCargaScreen() {
           <AppStack
             sx={{
               background: theme.palette.background.default,
-              // border: '1px solid #e6e5e5ff',
-              //borderRadius: 2,
               p: 1,
+              position: {
+                xs: 'static', //  en móviles no se queda fijo
+                md: 'sticky', //  desde md hacia arriba sí
+              },
+              top: { md: theme.spacing(10) }, // solo aplica en pantallas grandes
+              alignSelf: 'flex-start',
             }}
           >
             <AppTypography variant="h4Bold" color="primary.main" mb={2}>
@@ -86,7 +90,7 @@ function TipoCargaScreen() {
               selected={selected === 'cargaGeneral'}
               icon={<Inventory2OutlinedIcon />}
             >
-              Carga General (CG)
+              Carga General
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -96,7 +100,7 @@ function TipoCargaScreen() {
               selected={selected === 'animalesVivos'}
               icon={<PetsOutlinedIcon />}
             >
-              Animales Vivos (AVI)
+              Animales Vivos
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -106,7 +110,7 @@ function TipoCargaScreen() {
               selected={selected === 'perecederos'}
               icon={<SetMealOutlinedIcon />}
             >
-              Perecederos (PCR)
+              Perecederos
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -116,7 +120,7 @@ function TipoCargaScreen() {
               selected={selected === 'restosHumanos'}
               icon={<LocalHospitalOutlinedIcon />}
             >
-              Restos Humanos (HUM)
+              Restos Humanos
             </BoAButton>
             <BoAButton
               color={colorBoton}
@@ -126,7 +130,7 @@ function TipoCargaScreen() {
               selected={selected === 'cargaValiosa'}
               icon={<MonetizationOnOutlinedIcon />}
             >
-              Carga Valiosa (VAL)
+              Carga Valiosa
             </BoAButton>
             <BoAButton
               color={colorBoton}
