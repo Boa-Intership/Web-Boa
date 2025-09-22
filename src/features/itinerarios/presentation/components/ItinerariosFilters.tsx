@@ -126,7 +126,7 @@ export default function ItinerariosFilters({
       <Box mt={2}>
         {activeChips.length ? (
           <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
-            <AppTypography variant="h4Regular">Filtros activos:</AppTypography>
+            <AppTypography variant="baseRegular">Filtros activos:</AppTypography>
             {activeChips.map((ch) => (
               <Chip
                 key={ch.key}
@@ -136,7 +136,7 @@ export default function ItinerariosFilters({
             ))}
           </Stack>
         ) : (
-          <AppTypography variant="h4Regular" color="text.secondary">
+          <AppTypography variant="baseRegular" color="text.secondary">
             Sin filtros activos.
           </AppTypography>
         )}
@@ -145,7 +145,7 @@ export default function ItinerariosFilters({
       <Divider sx={{ my: 2 }} />
 
       <Stack direction={{ xs: 'column', md: 'row' }} alignItems="center" spacing={1}>
-        <AppTypography variant="h4Regular">
+        <AppTypography variant="baseRegular">
           {activeChips.length
             ? `${filtered} vuelos encontrados con los filtros aplicados`
             : `${total} vuelos encontrados`}

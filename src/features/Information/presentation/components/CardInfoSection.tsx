@@ -55,9 +55,9 @@ export default function CardInfoSection() {
         </Grid>
         <Grid item>
           <ButtonCardInfo
-            title="Carga Valiosa"
+            title="Carga Valorada"
             description="Se refiere a mercancías que tienen un alto valor económico, cultural o sensible, y que requieren medidas especiales de seguridad y custodia durante su transporte aéreo."
-            onClick={() => navigate('/tipos-cargas/cargaValiosa')}
+            onClick={() => navigate('/tipos-cargas/cargaValorada')}
             icon={<MonetizationOnOutlinedIcon />}
             imageUrl="/informacioPage/valiosos/GGI_dinero.webp"
           />

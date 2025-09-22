@@ -129,6 +129,10 @@ function InfoTipoCarga({
           <AppTypography variant="h4Bold" color="primary" mb={2}>
             Cargas comunes en {title}:
           </AppTypography>
+          <Alert severity="warning" sx={{ mb: 2 }}>
+            Las imagenes que se muestran son solo ejemplos y pueden no corresponder exactamente a la
+            carga que usted desea enviar.
+          </Alert>
           <Grid container spacing={1} sx={{ width: '100%', justifyContent: 'center' }}>
             {example.map((item, index) => (
               <Grid item mb={2} key={index} xs={12} sm={6} md={6}>
