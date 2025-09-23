@@ -1,19 +1,9 @@
 import * as React from 'react';
-import {
-  Box,
-  Button,
-  Divider,
-  FormControl,
-  Link,
-  TextField,
-  Stack,
-  Card as MuiCard,
-  styled,
-} from '@mui/material';
-import ForgotPassword from '../components/loginForm/ForgotPassword';
-import { ROUTES } from 'router/routes';
-import { Link as RouterLink } from 'react-router-dom';
-import { AppTypography } from 'ui';
+import { Stack, Card as MuiCard, styled, Alert, Box } from '@mui/material';
+import { LoginForm, SocialLoginSection } from '../components/loginForm';
+import { LoginSchema } from '../../domain/validators/loginSchema';
+import { useLogin } from '../useAuth.hooks';
+import { useNavigate } from 'react-router-dom';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -51,57 +41,48 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function Login() {
-  const [emailError, setEmailError] = React.useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [error, setError] = React.useState<string>('');
+  const loginMutation = useLogin();
+  const navigate = useNavigate();
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleLoginSubmit = async (data: LoginSchema) => {
+    setError('');
+
+    try {
+      const response = await loginMutation.mutateAsync({
+        email: data.email,
+        password: data.password,
+      });
+
+      // El backend retorna los tokens directamente en la respuesta
+      const hasToken = response.accessToken || (response.data && response.data.accessToken);
+
+      if (hasToken) {
+        navigate('/home');
+      } else {
+        setError('Error en la respuesta del servidor');
+      }
+    } catch (error: unknown) {
+      try {
+        // Manejar errores del backend
+        const apiError = error as {
+          response?: {
+            data?: {
+              message?: string;
+            };
+          };
+        };
+
+        const errorMessage = apiError?.response?.data?.message || 'Error al iniciar sesión';
+        setError(errorMessage);
+      } catch {
+        setError('Error inesperado al procesar la respuesta');
+      }
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (emailError || passwordError) {
-      event.preventDefault();
-      return;
-    }
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  const validateInputs = () => {
-    const email = document.getElementById('email') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
-
-    let isValid = true;
-
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true);
-      setEmailErrorMessage('Porfavor ingrese un correo valido');
-      isValid = false;
-    } else {
-      setEmailError(false);
-      setEmailErrorMessage('');
-    }
-
-    if (!password.value || password.value.length < 8) {
-      setPasswordError(true);
-      setPasswordErrorMessage('La contraseña debe ser de 8 caracteres como minimo');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage('');
-    }
-
-    return isValid;
+  const handleGoogleLogin = () => {
+    // Aquí puedes agregar la lógica de login con Google
   };
 
   return (
@@ -113,86 +94,16 @@ export default function Login() {
           borderRadius: '15px',
         }}
       >
-        <AppTypography color={'primary'} variant="h3Regular" sx={{ pb: '8px' }}>
-          Iniciar sesi&oacute;n
-        </AppTypography>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          noValidate
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            gap: 2,
-          }}
-        >
-          <FormControl>
-            <AppTypography variant="smallRegular">Correo</AppTypography>
-            <TextField
-              error={emailError}
-              helperText={emailErrorMessage}
-              id="email"
-              type="email"
-              name="email"
-              placeholder="tu@correo.com"
-              autoComplete="email"
-              autoFocus
-              required
-              fullWidth
-              variant="outlined"
-              color={emailError ? 'error' : 'primary'}
-              sx={{ pt: '8px' }}
-            />
-          </FormControl>
-          <FormControl>
-            <AppTypography variant="smallRegular">Contraseña</AppTypography>
-            <TextField
-              error={passwordError}
-              helperText={passwordErrorMessage}
-              name="password"
-              placeholder="••••••••"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              autoFocus
-              required
-              fullWidth
-              variant="outlined"
-              color={passwordError ? 'error' : 'primary'}
-              sx={{ pt: '8px' }}
-            />
-          </FormControl>
-          <ForgotPassword open={open} handleClose={handleClose} />
-          <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
-            Iniciar sesi&oacute;n
-          </Button>
-          <Link
-            component="button"
-            type="button"
-            onClick={handleClickOpen}
-            variant="body2"
-            sx={{ alignSelf: 'center' }}
-          >
-            ¿Olvidaste tu contraseña?
-          </Link>
-        </Box>
-        <Divider>o</Divider>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <Button
-            fullWidth
-            variant="outlined"
-            onClick={() => alert('Iniciar sesi&oacute;n con google')}
-          >
-            Iniciar sesi&oacute;n con google
-          </Button>
-          <AppTypography variant="smallRegular" sx={{ textAlign: 'center' }}>
-            ¿No tienes una cuenta?{' '}
-            <Link component={RouterLink} to={ROUTES.REGISTER} sx={{ alignSelf: 'center' }}>
-              Crear una cuenta
-            </Link>
-          </AppTypography>
-        </Box>
+        <LoginForm onSubmit={handleLoginSubmit} isLoading={loginMutation.isPending} />
+        {/* Mostrar errores de login */}
+        {error && (
+          <Box sx={{ mb: 2 }}>
+            <Alert severity="error" onClose={() => setError('')}>
+              {error}
+            </Alert>
+          </Box>
+        )}
+        <SocialLoginSection onGoogleLogin={handleGoogleLogin} />
       </Card>
     </SignInContainer>
   );
