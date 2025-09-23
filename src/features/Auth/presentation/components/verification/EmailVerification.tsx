@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Alert, Box, Button, Paper, Typography } from '@mui/material';
 import { AppContainer, AppTypography } from 'ui';
 import { CheckCircle, Email } from '@mui/icons-material';
+import { useValidateVerificationCode, useRegisterUser } from '../../useAuth.hooks';
 
 interface EmailVerificationProps {
   email: string;
@@ -15,10 +16,27 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
   onResendCode,
 }) => {
   const [code, setCode] = useState(['', '', '', '', '']);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [resendCooldown, setResendCooldown] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // Hook para validar código con el backend
+  const validateCodeMutation = useValidateVerificationCode();
+  const registerUserMutation = useRegisterUser();
+
+  // Función para obtener datos temporales
+  const getTempDataForRegistration = () => {
+    const tempData = sessionStorage.getItem('temp_registration_data');
+
+    if (tempData) {
+      try {
+        return JSON.parse(tempData);
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  };
 
   // Cooldown para reenvío
   useEffect(() => {
@@ -77,25 +95,95 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
   };
 
   const handleVerification = async (verificationCode: string) => {
-    setIsLoading(true);
     setError('');
 
     try {
-      // Simular verificación (aquí integrarías con tu API)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Paso 1: Validar código
+      await validateCodeMutation.mutateAsync({
+        email,
+        code: verificationCode,
+      });
 
-      // Código correcto de ejemplo: 12345
-      if (verificationCode === '12345') {
-        onVerificationSuccess();
-      } else {
-        setError('Código incorrecto. Por favor, verifica e intenta nuevamente.');
-        setCode(['', '', '', '', '']);
-        inputRefs.current[0]?.focus();
+      // Paso 2: Obtener datos temporales
+      const registrationData = getTempDataForRegistration();
+      if (!registrationData) {
+        throw new Error('No se encontraron datos de registro temporales');
       }
-    } catch (err) {
-      setError('Error al verificar el código. Intenta nuevamente.');
-    } finally {
-      setIsLoading(false);
+
+      // Paso 3: Preparar datos para el backend
+      const backendData = {
+        name: registrationData.name,
+        email: registrationData.email,
+        password: registrationData.password,
+        nit: parseInt(registrationData.nit),
+        complement: registrationData.nitComplemento || undefined,
+        documentType: parseInt(registrationData.docType),
+        phone: registrationData.number,
+        address: registrationData.address || undefined,
+        billingData: {
+          businessName: registrationData.businessName,
+          docType: parseInt(registrationData.billingDocType),
+          nit: parseInt(registrationData.billingNit),
+        },
+      };
+
+      // Paso 4: Registrar usuario en el backend
+      const registerResponse = await registerUserMutation.mutateAsync(backendData);
+
+      // El backend puede retornar directamente el usuario O envuelto en ApiResponse
+      // Verificamos si el response tiene directamente un id (usuario directo)
+      // o si está en response.data (ApiResponse wrapper)
+      const hasDirectId = registerResponse && 'id' in registerResponse && registerResponse.id;
+      const hasWrappedId =
+        registerResponse &&
+        'data' in registerResponse &&
+        registerResponse.data &&
+        'id' in registerResponse.data &&
+        registerResponse.data.id;
+
+      if (hasDirectId || hasWrappedId) {
+        // Limpiar datos temporales
+        sessionStorage.removeItem('temp_registration_data');
+        sessionStorage.removeItem('email_verification_pending');
+
+        // Llamar al callback de éxito para redirigir
+        onVerificationSuccess();
+        return; // Salir exitosamente sin llegar al catch
+      }
+
+      // Si llegamos aquí, el registro no fue exitoso
+      throw new Error('Error en el registro del usuario - respuesta inválida');
+    } catch (error: unknown) {
+      // Manejo mejorado de errores del backend
+      const apiError = error as {
+        response?: {
+          data?: {
+            message?: string | string[];
+          };
+        };
+        message?: string;
+      };
+
+      let errorMessage = 'Error al verificar el código o registrar usuario.';
+
+      // Priorizar el mensaje específico del backend
+      if (apiError?.response?.data?.message) {
+        if (Array.isArray(apiError.response.data.message)) {
+          errorMessage = apiError.response.data.message.join(', ');
+        } else {
+          errorMessage = apiError.response.data.message;
+        }
+      } else if (
+        apiError?.message &&
+        apiError.message !== 'Error en el registro del usuario - respuesta inválida'
+      ) {
+        // Usar el mensaje de error directo si no es nuestro mensaje genérico
+        errorMessage = apiError.message;
+      }
+
+      setError(errorMessage);
+      setCode(['', '', '', '', '']);
+      inputRefs.current[0]?.focus();
     }
   };
 
@@ -108,6 +196,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
   };
 
   const isCodeComplete = code.every((digit) => digit !== '');
+  const isLoading = validateCodeMutation.isPending || registerUserMutation.isPending;
 
   return (
     <AppContainer>
@@ -210,7 +299,11 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
           {isLoading && (
             <Box sx={{ mb: 3 }}>
               <AppTypography variant="smallRegular" color="primary.main">
-                Verificando código...
+                {validateCodeMutation.isPending
+                  ? 'Verificando código...'
+                  : registerUserMutation.isPending
+                    ? 'Registrando usuario...'
+                    : 'Procesando...'}
               </AppTypography>
             </Box>
           )}

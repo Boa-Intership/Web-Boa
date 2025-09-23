@@ -8,6 +8,7 @@ import {
   ForgotPasswordRequest,
   ResetPasswordRequest,
   SendCodeRequest,
+  ValidateCodeRequest,
 } from '../domain/auth.types';
 
 export class AuthService {
@@ -127,6 +128,21 @@ export class AuthService {
    */
   async sendVerificationCode(request: SendCodeRequest): Promise<ApiResponse<void>> {
     return await httpClient.post<void>(API_CONFIG.ENDPOINTS.SEND_CODE, request);
+  }
+
+  /**
+   * Validar código de verificación
+   */
+  async validateVerificationCode(request: ValidateCodeRequest): Promise<ApiResponse<void>> {
+    return await httpClient.post<void>(API_CONFIG.ENDPOINTS.VALIDATE_CODE, request);
+  }
+
+  /**
+   * Registrar usuario final después de validar código
+   * No maneja tokens, solo registra al usuario
+   */
+  async registerUser(userData: RegisterRequest): Promise<ApiResponse<User>> {
+    return await httpClient.post<User>(API_CONFIG.ENDPOINTS.REGISTER, userData);
   }
 
   // Métodos privados para manejo de tokens

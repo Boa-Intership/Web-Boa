@@ -7,6 +7,7 @@ import {
   ResetPasswordRequest,
   User,
   SendCodeRequest,
+  ValidateCodeRequest,
 } from '../domain/auth.types';
 
 // Query keys para React Query
@@ -221,6 +222,37 @@ export const useSendVerificationCode = () => {
     },
     onError: (error) => {
       console.error('Error al enviar código de verificación:', error);
+    },
+  });
+};
+
+/**
+ * Hook para validar código de verificación
+ */
+export const useValidateVerificationCode = () => {
+  return useMutation({
+    mutationFn: (request: ValidateCodeRequest) => authService.validateVerificationCode(request),
+    onSuccess: (data) => {
+      console.log('Código validado exitosamente:', data.data);
+    },
+    onError: (error) => {
+      console.error('Error al validar código:', error);
+    },
+  });
+};
+
+/**
+ * Hook para registrar usuario final
+ * No maneja login automático, solo registra al usuario
+ */
+export const useRegisterUser = () => {
+  return useMutation({
+    mutationFn: (userData: RegisterRequest) => authService.registerUser(userData),
+    onSuccess: (data) => {
+      console.log('Usuario registrado exitosamente:', data.data);
+    },
+    onError: (error) => {
+      console.error('Error al registrar usuario:', error);
     },
   });
 };

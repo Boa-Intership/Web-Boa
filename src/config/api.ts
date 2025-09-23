@@ -14,6 +14,8 @@ export const API_CONFIG = {
     SHIPMENTS: '/shipments',
     TRACKING: '/tracking',
     SEND_CODE: '/auth/send-code',
+    VALIDATE_CODE: '/auth/validate-code',
+    REGISTER: '/auth/register',
   },
 };
 

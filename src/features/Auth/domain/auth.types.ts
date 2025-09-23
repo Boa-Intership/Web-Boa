@@ -5,19 +5,30 @@ export interface LoginRequest {
 }
 
 export interface RegisterRequest {
+  name: string;
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
-  phone?: string;
   nit: number;
   complement?: string;
+  documentType: number;
+  phone: string;
+  address?: string;
+  billingData: {
+    businessName: string;
+    docType: number;
+    nit: number;
+  };
 }
 
 export interface SendCodeRequest {
   email: string;
   nit: number;
   complement?: string;
+}
+
+export interface ValidateCodeRequest {
+  email: string;
+  code: string;
 }
 
 export interface User {
