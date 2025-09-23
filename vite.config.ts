@@ -14,10 +14,17 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
+      // Proxy para CMS Strapi (local)
+      '/api/cms': {
         target: 'http://localhost:1337',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/api'),
+        rewrite: (path) => path.replace(/^\/api\/cms/, '/api'),
+      },
+      // Proxy para Backend API (AWS EC2)
+      '/api': {
+        target: 'http://54.92.214.122',
+        changeOrigin: true,
+        secure: false,
       },
     },
   },

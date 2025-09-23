@@ -15,7 +15,7 @@ interface StrapiResponse {
 }
 
 export class StrapiWelcomeContentRepository implements WelcomeContentRepository {
-  private readonly baseUrl = '/api';
+  private readonly baseUrl = '/api/cms';
 
   async getWelcomeContent(): Promise<WelcomeContent> {
     try {

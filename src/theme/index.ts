@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { typographyVariants } from './typography';
+import zIndex from '@mui/material/styles/zIndex';
 
 const theme = createTheme({
   components: {
@@ -12,12 +13,18 @@ const theme = createTheme({
         },
       },
     },
-    MuiIconButton: {
+    MuiCssBaseline: {
       styleOverrides: {
-        root: {
-          '&:focus': {
-            outline: 'none',
+        body: {
+          '& input:-webkit-autofill': {
+            WebkitBoxShadow: '0 0 0 30px #ffffff inset',
+            WebkitTextFillColor: '#2e5c9a',
           },
+          '& input:-webkit-autofill:hover, & input:-webkit-autofill:focus, & input:-webkit-autofill:active':
+            {
+              WebkitBoxShadow: '0 0 0 30px #f1f2f3 inset',
+              WebkitTextFillColor: '#2e5c9a',
+            },
         },
       },
     },
