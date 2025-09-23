@@ -4,7 +4,7 @@ import { Box, Alert, Grid, Stack } from '@mui/material';
 import { AppTypography, BoAButton } from 'ui';
 
 interface Detail {
-  title: string;
+  title?: string;
   description: string[];
   imageUrl?: string[];
 }
@@ -91,7 +91,7 @@ function InfoTipoCarga({
       {/* Mostrar contenido del detalle seleccionado */}
       {selectedDetail !== null && details[selectedDetail] && (
         <Grid container spacing={2} mb={3}>
-          <Grid item>
+          <Grid item minHeight={'10rem'}>
             {details[selectedDetail].description.map((desc, i) => (
               <AppTypography key={i} variant="baseRegular" mb={2} textAlign="justify">
                 ✔️ {desc}

@@ -16,21 +16,21 @@ export const ContactCardInternacional = ({ direccion, contacto, email, mapEmbed 
       <Box flex={1}>
         <Box display="flex" alignItems="center" mb={1}>
           <LocationOn color="info" sx={{ mr: 1 }} />
-          <AppTypography variant="h4Regular">{direccion}</AppTypography>
+          <AppTypography variant="baseRegular">{direccion}</AppTypography>
         </Box>
 
         <Divider sx={{ my: 1 }} />
 
         <Box display="flex" alignItems="center" mb={1}>
           <Phone color="info" sx={{ mr: 1 }} />
-          <AppTypography variant="h4Regular">
+          <AppTypography variant="baseRegular">
             <strong>Contacto:</strong> {contacto.join(' - ')}
           </AppTypography>
         </Box>
 
         <Box display="flex" alignItems="center" mb={1}>
           <Email color="info" sx={{ mr: 1 }} />
-          <AppTypography variant="h4Regular">
+          <AppTypography variant="baseRegular">
             <strong>Email:</strong> {email}
           </AppTypography>
         </Box>

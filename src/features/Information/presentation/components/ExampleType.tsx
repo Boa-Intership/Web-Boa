@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { AppTypography } from 'ui';
 
 type ExampleTypeProps = {
@@ -21,7 +21,7 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
       <Box
         sx={{
           position: 'relative',
-          width: '100%', //aqui
+          width: '95%', //aqui
           borderRadius: '9px',
           height: 300,
           // borderWidth: 2,
@@ -62,7 +62,7 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
         sx={{
           textAlign: 'start', //aqui
           flexDirection: 'column',
-          width: '100%',
+          width: '95%',
         }}
       >
         <AppTypography variant="baseBold" color="primary.dark">

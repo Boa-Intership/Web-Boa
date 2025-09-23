@@ -45,7 +45,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       {
         title: 'Internacional (Desde Bolivia)',
         description: [
-          'Para mayor información consulte con un agente de carga.',
+          'Para obtener información detallada sobre los requisitos y procedimientos relacionados con la carga general en envíos internacionales, le recomendamos consultar con un agente de carga de su confianza.',
           // 'El cliente debe contar con material para reembalar después de la revisión.',
           // 'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
           // 'La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.',
@@ -118,7 +118,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       {
         title: 'Internacional (Desde Bolivia)',
         description: [
-          'Para envios internacionales de animales vivos, contactese con su agente de carga de su confianza.',
+          'Para el transporte internacional de animales vivos, le recomendamos ponerse en contacto con un agente de carga de su confianza, quien le brindará la orientación necesaria sobre los requisitos y procedimientos establecidos.',
           // 'Presentar animales vivos 4 horas antes del vuelo.',
           // 'El animal debe viajar en jaula adecuada, segura, con material absorbente, marcada, etiquetada y rotulada.',
           // 'En destinos donde no se hable español, la documentación, etiquetas y rótulos deben estar en inglés.',
@@ -146,7 +146,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     ],
     notice: [
       'BoA Cargo transporta cualquier animal aceptado para su transporte de acuerdo a la " Reglamentación para el Transporte de Animales Vivos de la IATA". LAR vigente.',
-      'Importante: BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información consulte con un agente de cargo.',
+      // 'Importante: BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información consulte con un agente de cargo.',
     ],
     example: [
       // {
@@ -188,7 +188,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       {
         title: 'Internacional (Desde Bolivia)',
         description: [
-          'Reservar con al menos 48 horas de anticipación en oficinas de BoA Cargo.',
+          'Para el transporte internacional de carga perecedera, le recomendamos ponerse en contacto con un agente de carga de su confianza, quien le brindará la orientación necesaria sobre los requisitos y procedimientos establecidos.',
           // 'La carga se recibe hasta 4 horas antes del vuelo y se entrega 1 hora después de la llegada.',
           // 'La carga debe presentarse abierta para revisión total.',
           // 'El cliente debe contar con material para reembalar después de la revisión.',
@@ -212,7 +212,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       },
     ],
     notice: [
-      'La aceptación y el manejo en el transporte de carga perecedera, debe cumplirse de acuerdo con los requisitos del Reglamento de carga perecedera (PCR) y otras reglamentaciones aplicables.',
+      'BoA Cargo acepta y transporta carga perecedera, siempre que se cumpla con lo establecido en el Reglamento de Carga Perecedera (PCR) de la IATA y demás normativas aplicables.',
     ],
     example: [
       {
@@ -271,20 +271,20 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       {
         title: 'Internacional (Desde Bolivia)',
         description: [
-          'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
-          'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
-          'La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.',
-          'Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.',
-          'Certificado forense',
-          'Certificado sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
-          'Certificado de formolización, (embalsamamiento), cremación según sea aplicable.',
-          'Autorización para traslado del cadáver, emitido por una Oficina Gubernamental(Alcaldía o Policía Boliviana) del departamento local donde se origina el embarque.',
-          'Cualquier otro certificado que pudiera ser exigido por los países de tránsito o destino del féretro. ',
-          'Los restos humanos exhumados, cuya data de fallecimiento sea inferior a 5 años, no serán aceptados para el transporte.',
-          'La documentación señalada anteriormente así como cualquier otra documentación adicional que sea requerida, debe estar visada por el consulado del país de origen.',
-          'Se recibe el transporte de restos humanos Internacional mediante Agentes de Carga.',
-          'Declaración General de seguridad de Carga, emitido por el agente de carga.',
-          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Para el transporte internacional de restos humanos, le recomendamos ponerse en contacto con un agente de carga de su confianza, quien le brindará la orientación necesaria sobre los requisitos y procedimientos establecidos.',
+          // 'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
+          // 'La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.',
+          // 'Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.',
+          // 'Certificado forense',
+          // 'Certificado sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
+          // 'Certificado de formolización, (embalsamamiento), cremación según sea aplicable.',
+          // 'Autorización para traslado del cadáver, emitido por una Oficina Gubernamental(Alcaldía o Policía Boliviana) del departamento local donde se origina el embarque.',
+          // 'Cualquier otro certificado que pudiera ser exigido por los países de tránsito o destino del féretro. ',
+          // 'Los restos humanos exhumados, cuya data de fallecimiento sea inferior a 5 años, no serán aceptados para el transporte.',
+          // 'La documentación señalada anteriormente así como cualquier otra documentación adicional que sea requerida, debe estar visada por el consulado del país de origen.',
+          // 'Se recibe el transporte de restos humanos Internacional mediante Agentes de Carga.',
+          // 'Declaración General de seguridad de Carga, emitido por el agente de carga.',
+          // 'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
         ],
         imageUrl: [],
       },
@@ -310,7 +310,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     title: 'Carga valorada',
     description: `Se considera carga valiosa a todo envío que incluya artículos de alto valor o con un valor declarado para el transporte igual o superior a lo establecido en el tarifario por kilogramo bruto de peso.Entre ellos se encuentran: 
 
-1) Artículos con valor declarado de USD 1.000 más de un kilo bruto. 
+1) Artículos con valor declarado de USD 1.000 que pese desde un kilo bruto. 
 2) Oro, platino y sus metales afines (paladio, iridio, osmio, rutenio y rodio), en barras, lingotes, láminas, alambres u otras formas. (Se excluyen isótopos radiactivos y aleaciones clasificadas como mercancías peligrosas). 
 3) Billetes de banco, valores, acciones, cheques de viajero, sellos, tarjetas bancarias o de crédito listas para su uso. 
 4) Piedras preciosas: diamantes, rubíes, esmeraldas, zafiros, ópalos y perlas auténticas (incluidas las cultivadas), así como joyería compuesta por estos artículos. 
@@ -332,15 +332,15 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       {
         title: 'Internacional (Desde Bolivia)',
         description: [
-          'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
-          'El transporte debe gestionarse a través de un agente de carga especializado en equipos porta valor certificado.',
-          'El embalaje debe ser adecuado al peso y contenido, evitando manipulación indebida o extracción de componentes.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
-          'Requisitos de Exportación: Formulario M-03 (exportación de minerales y metales) y Formulario JDLP-001 (acta de inspección), ambos emitidos por SENARECOM.',
-          'Declaración de Exportación (DEX) emitida por la Aduana Nacional mediante el sistema SUMA.',
-          'Factura comercial y lista de empaque.',
-          'Declaración General de Seguridad de Carga emitida por el agente de carga.',
-          'En destinos donde no se hable español, la documentación, etiquetas y rótulos deben presentarse en inglés.',
+          'Para el transporte internacional de restos humanos, le recomendamos ponerse en contacto con un agente de carga de su confianza, quien le brindará la orientación necesaria sobre los requisitos y procedimientos establecidos.',
+          // 'El transporte debe gestionarse a través de un agente de carga especializado en equipos porta valor certificado.',
+          // 'El embalaje debe ser adecuado al peso y contenido, evitando manipulación indebida o extracción de componentes.',
+          // 'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          // 'Requisitos de Exportación: Formulario M-03 (exportación de minerales y metales) y Formulario JDLP-001 (acta de inspección), ambos emitidos por SENARECOM.',
+          // 'Declaración de Exportación (DEX) emitida por la Aduana Nacional mediante el sistema SUMA.',
+          // 'Factura comercial y lista de empaque.',
+          // 'Declaración General de Seguridad de Carga emitida por el agente de carga.',
+          // 'En destinos donde no se hable español, la documentación, etiquetas y rótulos deben presentarse en inglés.',
         ],
         imageUrl: [],
       },
@@ -364,12 +364,18 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       },
     ],
   },
-  otros: {
+  peligrosa: {
     title: 'Otros tipos de carga',
     description:
       'Para obtener más información sobre otros tipos de carga, le recomendamos contactar a un agente de carga, quien le brindará asesoramiento y le ayudará a clasificar su envío de acuerdo con las especificaciones necesarias.',
     subtitle: '',
-    details: [],
+    details: [
+      {
+        title: 'Carga peligrosa',
+        description: [],
+        imageUrl: ['/informacioPage/otroCarga/peligrososEtiquetas.png'],
+      },
+    ],
     notice: [],
     example: [
       {

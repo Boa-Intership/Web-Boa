@@ -134,11 +134,11 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => navigate('/tipos-cargas/otros')}
-              selected={selected === 'otros'}
+              onClick={() => navigate('/tipos-cargas/peligrosa')}
+              selected={selected === 'peligrosa'}
               icon={<QuizOutlinedIcon />}
             >
-              Otros tipos
+              Carga Peligrosa
             </BoAButton>
           </AppStack>
         </Grid>
