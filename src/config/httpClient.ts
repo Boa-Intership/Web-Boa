@@ -63,7 +63,11 @@ class HttpClient {
   private handleApiError(error: AxiosError<ApiError>): void {
     if (error.response?.status === 401) {
       this.clearAuthToken();
-      window.location.href = '/login';
+
+      // Solo redirigir si NO estamos ya en login
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
     }
 
     console.error('API Error:', {

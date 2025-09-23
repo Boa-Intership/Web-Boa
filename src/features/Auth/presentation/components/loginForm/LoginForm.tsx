@@ -8,9 +8,10 @@ import { loginSchema, LoginSchema } from '../../../domain/validators/loginSchema
 
 interface LoginFormProps {
   onSubmit: (data: LoginSchema) => void;
+  isLoading?: boolean;
 }
 
-export default function LoginForm({ onSubmit }: LoginFormProps) {
+export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProps) {
   const [open, setOpen] = React.useState(false);
 
   const {
@@ -102,8 +103,8 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
           />
         </FormControl>
         <ForgotPassword open={open} handleClose={handleClose} />
-        <Button type="submit" fullWidth variant="contained" disabled={isSubmitting}>
-          {isSubmitting ? 'Iniciando sesión...' : 'Iniciar sesión'}
+        <Button type="submit" fullWidth variant="contained" disabled={isSubmitting || isLoading}>
+          {isSubmitting || isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
         </Button>
         <Link
           component="button"

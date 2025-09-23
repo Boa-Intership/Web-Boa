@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Stack, Card as MuiCard, styled } from '@mui/material';
+import { Stack, Card as MuiCard, styled, Alert, Box } from '@mui/material';
 import { LoginForm, SocialLoginSection } from '../components/loginForm';
 import { LoginSchema } from '../../domain/validators/loginSchema';
+import { useLogin } from '../useAuth.hooks';
+import { useNavigate } from 'react-router-dom';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -39,13 +41,47 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function Login() {
-  const handleLoginSubmit = (data: LoginSchema) => {
-    console.log('Login data:', data);
-    // Aquí puedes agregar la lógica de autenticación
+  const [error, setError] = React.useState<string>('');
+  const loginMutation = useLogin();
+  const navigate = useNavigate();
+
+  const handleLoginSubmit = async (data: LoginSchema) => {
+    setError('');
+
+    try {
+      const response = await loginMutation.mutateAsync({
+        email: data.email,
+        password: data.password,
+      });
+
+      // El backend retorna los tokens directamente en la respuesta
+      const hasToken = response.accessToken || (response.data && response.data.accessToken);
+
+      if (hasToken) {
+        navigate('/home');
+      } else {
+        setError('Error en la respuesta del servidor');
+      }
+    } catch (error: unknown) {
+      try {
+        // Manejar errores del backend
+        const apiError = error as {
+          response?: {
+            data?: {
+              message?: string;
+            };
+          };
+        };
+
+        const errorMessage = apiError?.response?.data?.message || 'Error al iniciar sesión';
+        setError(errorMessage);
+      } catch {
+        setError('Error inesperado al procesar la respuesta');
+      }
+    }
   };
 
   const handleGoogleLogin = () => {
-    console.log('Google login clicked');
     // Aquí puedes agregar la lógica de login con Google
   };
 
@@ -58,7 +94,15 @@ export default function Login() {
           borderRadius: '15px',
         }}
       >
-        <LoginForm onSubmit={handleLoginSubmit} />
+        <LoginForm onSubmit={handleLoginSubmit} isLoading={loginMutation.isPending} />
+        {/* Mostrar errores de login */}
+        {error && (
+          <Box sx={{ mb: 2 }}>
+            <Alert severity="error" onClose={() => setError('')}>
+              {error}
+            </Alert>
+          </Box>
+        )}
         <SocialLoginSection onGoogleLogin={handleGoogleLogin} />
       </Card>
     </SignInContainer>

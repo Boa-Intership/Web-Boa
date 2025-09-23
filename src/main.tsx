@@ -4,7 +4,6 @@ import './index.css';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import App from './App';
 import theme from './theme';
-import './config/apiInterceptors';
 
 const Main: React.FC = () => (
   <ThemeProvider theme={theme}>

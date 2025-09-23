@@ -277,7 +277,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
                     border: '2px solid',
                     borderColor: error ? '#d32f2f' : digit ? '#1976d2' : '#e0e0e0',
                     borderRadius: 8,
-                    backgroundColor: digit ? '#e3f2fd' : '#fff',
+                    backgroundColor: digit ? '#ffffff' : '#fff',
                     color: '#1976d2',
                     outline: 'none',
                     transition: 'all 0.2s ease-in-out',
