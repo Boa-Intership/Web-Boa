@@ -21,28 +21,28 @@ export const ContactCardNacional = ({ direccion, horarios, contacto, mapEmbed }:
       <Box flex={1}>
         <Box display="flex" alignItems="center" mb={1}>
           <LocationOn color="info" sx={{ mr: 1 }} />
-          <AppTypography variant="h4Regular">{direccion}</AppTypography>
+          <AppTypography variant="baseRegular">{direccion}</AppTypography>
         </Box>
 
         <Divider sx={{ my: 1 }} />
 
         <Box display="flex" alignItems="center" mb={1}>
           <AccessTime color="info" sx={{ mr: 1 }} />
-          <AppTypography variant="h4Regular">
+          <AppTypography variant="baseRegular">
             <strong>{horarios.dias}:</strong> {horarios.semana}
           </AppTypography>
         </Box>
 
         <Box display="flex" alignItems="center" mb={1}>
           <AccessTime color="info" sx={{ mr: 1 }} />
-          <AppTypography variant="h4Regular">
+          <AppTypography variant="baseRegular">
             <strong>Sábados:</strong> {horarios.sabado}
           </AppTypography>
         </Box>
 
         <Box display="flex" alignItems="center" mb={1}>
           <AccessTime color="info" sx={{ mr: 1 }} />
-          <AppTypography variant="h4Regular">
+          <AppTypography variant="baseRegular">
             <strong>Domingos y Feriados:</strong> {horarios.feriados}
           </AppTypography>
         </Box>
@@ -51,7 +51,7 @@ export const ContactCardNacional = ({ direccion, horarios, contacto, mapEmbed }:
 
         <Box display="flex" alignItems="center">
           <Phone color="info" sx={{ mr: 1 }} />
-          <AppTypography variant="h4Regular">
+          <AppTypography variant="baseRegular">
             <strong>Contacto:</strong> {contacto.join(' - ')}
           </AppTypography>
         </Box>

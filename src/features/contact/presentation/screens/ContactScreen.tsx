@@ -17,7 +17,7 @@ const oficinasNacionales = [
       sabado: '08:00 - 16:00',
       feriados: 'No hay atención',
     },
-    contacto: ['(+591) 72223583', '(+591) (4) 4150000 int: 4243'],
+    contacto: ['(+591) 72223583', '(+591) (4) 4150000'],
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d466.46097572249175!2d-66.17292040539294!3d-17.41020684101914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e37396c09e0d11%3A0x237f368416d20b08!2sBoA%20Cargo!5e1!3m2!1ses-419!2sbo!4v1756733452865!5m2!1ses-419!2sbo',
   },
@@ -30,7 +30,7 @@ const oficinasNacionales = [
       sabado: '08:00 - 16:00',
       feriados: 'No hay atención',
     },
-    contacto: ['(+591) 71730180', '(2) 2166531 int: 2051'],
+    contacto: ['(+591) 71730180', '(2) 2166531'],
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d913.9996952671529!2d-68.17870070406249!3d-16.508407498958256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915edfa55ce2a94b%3A0x9c6b77f93da624ad!2sBoa%20Cargo!5e1!3m2!1ses-419!2sbo!4v1755658885105!5m2!1ses-419!2sbo',
   },
@@ -43,7 +43,7 @@ const oficinasNacionales = [
       sabado: '08:00-16:00',
       feriados: 'No hay atención',
     },
-    contacto: ['(+591) 72206649', '(+591) (3) 3148300 int: 3051'],
+    contacto: ['(+591) 72206649', '(+591) (3) 3148300'],
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1106.7446107713931!2d-63.13665556496211!3d-17.653025772924618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93f1e1e9759eefa1%3A0x796984b8f4e93738!2sBoa%20Cargo!5e1!3m2!1ses-419!2sbo!4v1756732579013!5m2!1ses-419!2sbo',
   },
@@ -56,7 +56,7 @@ const oficinasNacionales = [
       sabado: '08:30-12:30',
       feriados: 'No hay atención',
     },
-    contacto: ['(+591) 68581964', '(+591) (4) 6912325 int: 4850'],
+    contacto: ['(+591) 68581964', '(+591) (4) 6912325'],
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d739.6045702968908!2d-65.26463737211203!3d-19.0401604109328!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93fbc9004e30c38f%3A0xe4ea8e5941daf7d6!2sBoa%20Sucre!5e1!3m2!1ses-419!2sbo!4v1756733808018!5m2!1ses-419!2sbo',
   },
@@ -69,12 +69,12 @@ const oficinasNacionales = [
       sabado: '08:30-14:00',
       feriados: 'No hay atención',
     },
-    contacto: ['(+591) (4) 6114222 int: 4750'],
+    contacto: ['(+591) (4) 6114222 '],
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d445.79061172755195!2d-64.73568347480199!3d-21.535221559844434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x940647e1968755f9%3A0x93de1540736be998!2sBOA%20Agencia%20De%20Pasajes!5e1!3m2!1ses-419!2sbo!4v1756734018551!5m2!1ses-419!2sbo',
   },
   {
-    ciudad: 'Tarija Ato',
+    ciudad: 'Tarija Aeropuerto',
     direccion: 'Carga Aeropuerto Oriel Lea Plaza  a lado de mostradores de check in BoA',
     horarios: {
       dias: 'Lunes a Viernes',
@@ -113,7 +113,7 @@ const oficinasNacionales = [
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d425.71701968828353!2d-67.11512810584186!3d-17.971306254463993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e2b10ed57fe6af%3A0x65aa06787544bc4c!2sBOA%20CARGO!5e1!3m2!1ses-419!2sbo!4v1756734589965!5m2!1ses-419!2sbo',
   },
   {
-    ciudad: 'Oruro Ato',
+    ciudad: 'Oruro Aeropuerto',
     direccion: 'Aeropuerto de Oruro  Juan Mendoza',
     horarios: {
       dias: 'Lunes a Viernes',
@@ -239,10 +239,10 @@ export default function ContactScreen() {
 
   return (
     <Container sx={{ py: 4, minHeight: '80vh' }}>
-      <AppTypography variant="h4Bold" color="primary">
+      <AppTypography variant="h2Bold" color="primary">
         Nuestras Oficinas
       </AppTypography>
-      <AppTypography variant="h4Regular" color="textSecondary" mt={1}>
+      <AppTypography variant="baseRegular" color="textSecondary" mt={1}>
         Información detallada de horarios de atención y contacto
       </AppTypography>
 
