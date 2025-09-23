@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
-  Grid,
   MenuItem,
   TextField,
   Typography,
@@ -24,6 +23,7 @@ import {
   Inventory2Outlined,
 } from '@mui/icons-material';
 import { getCargoTypes, CargoType } from '../../data/services/cargo-type.service';
+import PaqueteFormDialog from './PaqueteFormDialog';
 
 const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const [tipo, setTipo] = useState(data?.tipo || '');
@@ -250,40 +250,15 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
       </Box>
 
       {/* Dialog de Agregar items */}
-      <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
-        <DialogTitle>Agregar Paquete</DialogTitle>
-        <DialogContent>
-          <Grid container spacing={2}>
-            {['descripcion', 'peso', 'piezas', 'alto', 'ancho', 'largo'].map((campo) => (
-              <Grid item xs={campo === 'descripcion' ? 12 : 6} key={campo}>
-                <TextField
-                  name={campo}
-                  label={campo.charAt(0).toUpperCase() + campo.slice(1)}
-                  value={nuevoItem[campo as keyof typeof nuevoItem]}
-                  onChange={handleChangeNuevoItem}
-                  fullWidth
-                  required
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        {(campo === 'peso' && 'kg') ||
-                          (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
-                          null}
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setModalOpen(false)}>Cancelar</Button>
-          <Button onClick={handleAgregarItem} variant="contained">
-            Agregar
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <PaqueteFormDialog
+        open={modalOpen}
+        title="Agregar Paquete"
+        values={nuevoItem}
+        onClose={() => setModalOpen(false)}
+        onChange={handleChangeNuevoItem}
+        onSubmit={handleAgregarItem}
+        submitLabel="Agregar"
+      />
 
       {/* Dialog visualización */}
       <Dialog
@@ -319,41 +294,15 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
       </Dialog>
 
       {/* Dialog edición */}
-      <Dialog open={openEditar} onClose={() => setOpenEditar(false)} fullWidth maxWidth="sm">
-        <DialogTitle>Editar Paquete</DialogTitle>
-        <DialogContent dividers>
-          {paqueteEditado && (
-            <Grid container spacing={2}>
-              {['descripcion', 'peso', 'piezas', 'alto', 'ancho', 'largo'].map((campo) => (
-                <Grid item xs={campo === 'descripcion' ? 12 : 6} key={campo}>
-                  <TextField
-                    name={campo}
-                    label={campo.charAt(0).toUpperCase() + campo.slice(1)}
-                    value={paqueteEditado[campo]}
-                    onChange={handleChangeEdicion}
-                    fullWidth
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          {(campo === 'peso' && 'kg') ||
-                            (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
-                            null}
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenEditar(false)}>Cancelar</Button>
-          <Button variant="contained" onClick={handleGuardarEdicion}>
-            Guardar
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <PaqueteFormDialog
+        open={openEditar}
+        title="Editar Paquete"
+        values={paqueteEditado || nuevoItem} // fallback por seguridad
+        onClose={() => setOpenEditar(false)}
+        onChange={handleChangeEdicion}
+        onSubmit={handleGuardarEdicion}
+        submitLabel="Guardar"
+      />
 
       {/* Dialog eliminación */}
       <Dialog

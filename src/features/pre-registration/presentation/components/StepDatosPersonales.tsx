@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Grid, TextField, Typography, Paper } from '@mui/material';
 import { Person } from '@mui/icons-material';
 import { validateField } from '../../domain/validators/validateDatosPersonales';
+import { getUserProfile } from '../../data/services/user.service';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const [localData, setLocalData] = useState(
@@ -18,6 +19,45 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     destinatario: {}
   });
   */
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const user = await getUserProfile(token);
+
+        setLocalData((prev: any) => ({
+          ...prev,
+          remitente: {
+            ...prev.remitente,
+            ci: user.nit || '',
+            celular: user.phone || '',
+            nombre: user.name || '',
+            correo: user.email || '',
+            direccion: user.address || '',
+          },
+        }));
+        /**
+        setLocalData((prev: any) => ({
+          ...prev,
+          remitente: {
+            ci: prev.remitente.ci || user.nit || '',
+            celular: prev.remitente.celular || user.phone || '',
+            nombre: prev.remitente.nombre || user.name || '',
+            correo: prev.remitente.correo || user.email || '',
+            direccion: prev.remitente.direccion || user.address || '',
+          },
+        }));
+         */
+      } catch (error) {
+        console.error('Error al obtener el perfil del usuario:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   // Cambiar desde aqui si un campo será requerido o no
   const fieldConfig: Record<string, Record<string, boolean>> = {
