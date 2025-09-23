@@ -12,6 +12,16 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      // Proxy para redirigir /api/* a http://192.168.150.220/*
+      '/api': {
+        target: 'http://192.168.150.220/',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
   resolve: {
     alias: {
       ui: path.resolve(__dirname, 'src/ui/index.ts'),
