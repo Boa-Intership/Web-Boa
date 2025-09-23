@@ -16,44 +16,45 @@ export interface InfoTipoCarga {
   description: string;
   subtitle: string;
   details: Detail[];
+  notice: string[];
   example: Example[];
 }
 
 // Creamos el objeto con los datos del tipo de carga
 export const cargaData: Record<string, InfoTipoCarga> = {
   cargaGeneral: {
-    title: 'Carga General',
+    title: 'Carga general',
     description:
-      'La categoría de Carga general se refiere a todo tipo de mercancía que no necesita condiciones especiales de manipulación, transporte o almacenamiento. Son bienes que pueden ser enviados por vía aérea sin requerir cuidados particulares como refrigeración, manejo delicado o documentación especial como ocurre con los animales vivos o perecederas.',
-    subtitle: 'Requisitos',
+      'La carga general son artículos que no se clasifican como carga especial y que no requieren precauciones adicionales ni manipulación especial durante el transporte aéreo. Estos tipos de artículos incluyen artículos minoristas y la mayoría de los bienes de consumo (con excepción de teléfonos móviles, tabletas y portátiles), productos secos, artículos de ferretería, textiles, etc. Piense en los objetos cotidianos; la mayoría de ellos se clasificarían en la categoría de carga general.',
+    subtitle: 'Requisitos para el transporte de carga general',
     details: [
       {
-        title: 'Nacional',
+        title: 'Nacional (Interior de Bolivia)',
         description: [
-          'La carga debe presentarse abierta para revisión total.',
-          'El cliente debe contar con material para reembalar después de la revisión.',
+          'La carga debe presentarse abierta para su total revisión.',
+          'El cliente o agente de carga debe contar con material para terminar de embalar después de la revisión.',
           'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
-          'Se requiere documento de identidad vigente (carnet de identidad, licencia de conducir o pasaporte) y sello de la empresa si va a nombre de una empresa para aceptar el envío.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Para aceptar el envio se requiere documento de identidad vigente (carnet de identidad, licencia de conducir o pasaporte) y sello de la empresa si va a nombre de una empresa.',
           'La carga se recibe hasta 2 horas antes del vuelo y se entrega 1 hora después de su llegada.',
-          'El envío y la recepción solo se realizan en oficinas de BoA Cargo.',
+          'El envío y la recepción se realizan exclusivamente en oficinas de BoA Cargo.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
         ],
 
         imageUrl: [],
       },
       {
-        title: 'Internacional',
+        title: 'Internacional (Desde Bolivia)',
         description: [
           'La carga debe presentarse abierta para revisión total.',
           'El cliente debe contar con material para reembalar después de la revisión.',
           'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
           'La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.',
           'Se requiere documento de identidad vigente (carnet de identidad, licencia de conducir o pasaporte) y sello de la empresa si va a nombre de una empresa para aceptar el envío.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'La carga de exportación internacional se recibe y almacena hasta 24 horas antes de la salida del vuelo.',
           'El envío y la recepción se realizan únicamente en oficinas de BoA Cargo.',
           'Factura comercial de exportación.',
-          'Lista de empaque.',
+          'Si son más de un artículo que se quiere enviar, con ayuda del agente de carga se debe presentar una lista de empaque.',
           'Certificados (SENASAG, SENAVEX, SENARECON, etc.) según corresponda.',
           'Declaración de Exportación (DEX) emitida por Aduana mediante el sistema SUMA.',
           'Declaración General de Seguridad de Carga emitida por el agente de carga.',
@@ -62,31 +63,19 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         ],
       },
     ],
+    notice: [
+      'La carga dañada o embalada en forma inapropiada con señales de haber estado filtrando, sea esta carga general o mercancías peligrosas no será aceptada para el transporte.',
+    ],
     example: [
       {
         title: 'Bienes manufacturados',
-        description: 'Ropa, calzado, juguetes, herramientas',
+        description: 'Ropa, calzado, juguetes',
         image: '/informacioPage/cargaGeneral/GGI_manu.webp',
       },
       {
-        title: 'Maquinaria y repuestos',
-        description: 'Motores, partes de vehículos, maquinaria liviana',
-        image: '/informacioPage/cargaGeneral/GGI_herramientas.webp',
-      },
-      {
         title: 'Material impreso y papelería',
-        description: 'Libros, revistas, catálogos, documentos',
+        description: 'Libros, revistas, catálogos',
         image: '/informacioPage/cargaGeneral/GGI_papeleria.webp',
-      },
-      {
-        title: 'Electrodomésticos y electrónicos',
-        description: 'Celulares, computadoras, impresoras',
-        image: '/informacioPage/cargaGeneral/GGI_electronicos.webp',
-      },
-      {
-        title: 'Productos de higiene o limpieza',
-        description: 'Detergentes, jabones, desinfectantes (no peligrosos)',
-        image: '/informacioPage/cargaGeneral/GGI_limpieza.webp',
       },
       {
         title: 'Efectos personales',
@@ -101,32 +90,33 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     ],
   },
   animalesVivos: {
-    title: 'Animales Vivos',
+    title: 'Animales vivos',
     description:
-      'La categoría de Animales Vivos hace referencia al servicio especializado para el transporte aéreo de animales vivos bajo condiciones específicas que garanticen su bienestar, seguridad y cumplimiento normativo durante todo el viaje.',
-    subtitle: 'Requisitos',
+      'Boliviana de Aviación ofrece un servicio seguro y confiable para el transporte de animales vivos, tanto a nivel nacional como internacional. Contamos con instalaciones y procedimientos diseñados para garantizar el bienestar de los animales durante todo el proceso, desde la carga hasta la entrega, asegurando condiciones adecuadas de temperatura, ventilación y manejo especializado. Este servicio está pensado para mascotas y animales domésticos, brindando tranquilidad y confianza a nuestros clientes en cada envío.',
+    subtitle: 'Requisitos para el transporte de animales vivos: Solo perros y gatos',
     details: [
       {
-        title: 'Nacional',
+        title: 'Nacional (Interior de Bolivia)',
         description: [
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'Presentar animales vivos 2 horas antes del vuelo.',
           'El animal debe viajar en jaula adecuada, segura, con material absorbente, marcada, etiquetada y rotulada.',
           'El contenedor debe estar homologado por IATA: rígido, con ventilación, puerta metálica y espacio suficiente para que el animal pueda moverse con normalidad. No se aceptan jaulas de malla de alambre o soldada.',
-          'La edad mínima del animal es de 3 meses (excepto pollitos bebés).',
+          'La edad mínima del animal es de 3 meses.',
           'Presentar cartilla de vacunas (original + 2 copias). Deben haber pasado 30 días desde la vacuna antirrábica.',
           'Certificado veterinario que acredite buen estado de salud. Para especies distintas a perros y gatos, se requiere autorización del SENASAG.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Los perros de musculatura fuerte y aspecto robusto deben llevar bozal.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'No se transportan perros ni gatos braquicéfalos (nariz achatada).',
           'El consignatario debe recoger al animal a la llegada del vuelo.',
-          'Se recomienda no sedar animales domésticos en vuelos nacionales e internacionales.',
+          'Se recomienda no sedar animales domésticos.',
+          'Importante:BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información consulte con un agente de cargo.',
         ],
 
         imageUrl: [],
       },
       {
-        title: 'Internacional',
+        title: 'Internacional (Desde Bolivia)',
         description: [
           'Reservar con al menos 48 horas de anticipación en oficinas de BoA Cargo.',
           'Presentar animales vivos 4 horas antes del vuelo.',
@@ -136,11 +126,11 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La edad mínima del animal es de 3 meses (excepto pollitos bebés).',
           'Presentar cartilla de vacunas (original + 2 copias). Deben haber pasado 30 días desde la vacuna antirrábica.',
           'Certificado veterinario que acredite buen estado de salud. Para especies distintas a perros y gatos, se requiere autorización del SENASAG.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Los perros de musculatura fuerte y aspecto robusto deben llevar bozal.',
           'No se transportan perros ni gatos braquicéfalos (nariz achatada).',
           'El consignatario debe recoger al animal a la llegada del vuelo.',
-          'Se recomienda no sedar animales domésticos en vuelos nacionales e internacionales.',
+          'Se recomienda no sedar animales domésticos',
           'Certificado zoosanitario que confirme que el animal está libre de enfermedades y parásitos.',
           'Todos los documentos deben estar validados por la embajada del país de destino cuando corresponda.',
           'Algunos países requieren microchip. El expedidor debe consultar en el consulado o embajada las restricciones y presentar la documentación al menos 4 horas antes del vuelo.',
@@ -148,48 +138,37 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Declaración General de Seguridad de Carga emitida por el agente de carga.',
           'Para exportar mascotas a Estados Unidos, el agente de carga debe solicitar aprobación escrita al CDC enviando un correo a CDCanimalimports@cdc.gov con al menos 30 días hábiles de anticipación.',
           'Para envíos a EE.UU., toda la documentación debe presentarse también en inglés.',
+          'Importante: BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información consulte con un agente de cargo.',
         ],
 
         imageUrl: [],
       },
     ],
+    notice: [
+      'Se clasifican como AVI cualquier animal aceptado para su transporte de acuerdo a la " Reglamentación para el Transporte de Animales Vivos de la IATA". LAR vigente.',
+      'Las mascotas (animales de compañía) que se presenten para el transporte deben ser mayores de 3 meses de edad y deben haber sido destetados, al menos, 5 días antes de la fecha del vuelo.',
+    ],
     example: [
-      {
-        title: 'Mascotas domésticas',
-        description: 'Perros, gatos',
-        image: '/informacioPage/animalesVivos/GGI_mascotas.webp',
-      },
-      {
-        title: 'Aves',
-        description: 'Canarios, loros, aves ornamentales',
-        image: '/informacioPage/animalesVivos/GGI_aves.webp',
-      },
-      {
-        title: ' Animales pequeños',
-        description: 'Conejos, hámsters, cobayos',
-        image: '/informacioPage/animalesVivos/GGI_aniPeque.webp',
-      },
-      {
-        title: 'Animales de granja (ocasional)',
-        description: 'Pollitos, cabritos, corderos',
-        image: '/informacioPage/animalesVivos/GGI_granja.webp',
-      },
-      {
-        title: 'Animales exóticos (autorizados)',
-        description:
-          'Tortugas, iguanas. Importante:BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES)',
-        image: '/informacioPage/animalesVivos/GGI_exotico.webp',
-      },
+      // {
+      //   title: 'Mascotas domésticas',
+      //   description: 'Perros, gatos',
+      //   image: '/informacioPage/animalesVivos/GGI_mascotas.webp',
+      // },
+      // {
+      //   title: 'Animales exóticos (autorizados)',
+      //   description: 'Tortugas, iguanas.',
+      //   image: '/informacioPage/animalesVivos/GGI_exotico.webp',
+      // },
     ],
   },
   perecederos: {
     title: 'Perecederos',
     description:
-      'La categoría de Perecederos son aquellos productos que tienen una vida útil limitada y que requieren condiciones especiales de temperatura, humedad o manejo para evitar su deterioro durante el transporte.',
-    subtitle: 'Requisitos',
+      'La categoría de perecederos son aquellas mercancías que, cuando no se mantienen dentro de ciertas condiciones o elementos o no se tiene en consideración su ciclo de vida, pierden sus propiedades inherentes o la calidad de sus componentes, y como consecuencia dejan de ser útiles para lo que fueron destinados originalmente. Son suceptibles de deterioro o pérdida debido a cambios de clima,temperatura o cualquier otra situación normal. ',
+    subtitle: 'Requisitos para el transporte de carga perecedera',
     details: [
       {
-        title: 'Nacional',
+        title: 'Nacional (Interior de Bolivia)',
         description: [
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'La carga se recibe hasta 2 horas antes del vuelo y se entrega 1 hora después de la llegada.',
@@ -198,15 +177,16 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La carga debe embalarse de manera que proteja el producto transportado.',
           'Usar embalaje adecuado según el tipo de producto.',
           'El paquete debe estar marcado y rotulado con: nombre completo del consignatario, teléfono y ciudad.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Si la carga es sensible a la temperatura, debe incluir su propio refrigerante.',
-          'El transporte se realiza a temperatura ambiente; el cliente debe prever medidas para mantener la temperatura óptima.',
+          'El transporte se realiza a temperatura ambiente; el cliente debe tomar las previsiones necesarias para mantener la temperatura óptima.',
           'En productos con hielo seco (CO₂ sólido), se debe indicar en la etiqueta la cantidad exacta en kilogramos.',
         ],
 
         imageUrl: [],
       },
       {
-        title: 'Internacional',
+        title: 'Internacional (Desde Bolivia)',
         description: [
           'Reservar con al menos 48 horas de anticipación en oficinas de BoA Cargo.',
           'La carga se recibe hasta 4 horas antes del vuelo y se entrega 1 hora después de la llegada.',
@@ -215,7 +195,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La carga debe embalarse de manera que proteja el producto transportado.',
           'Usar embalaje adecuado según el tipo de producto.',
           'El paquete debe estar marcado y rotulado con: nombre completo del consignatario, teléfono y ciudad.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'En destinos donde no se hable español, la documentación, etiquetas y rótulos deben estar en inglés.',
           'La carga se recibe hasta 2 horas antes del vuelo y se entrega 1 hora después de la llegada.',
           'Si la carga es sensible a la temperatura, debe incluir su propio refrigerante.',
@@ -231,10 +211,13 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         imageUrl: [],
       },
     ],
+    notice: [
+      'La aceptación y el manejo en el transporte de carga perecedera, debe cumplirse de acuerdo con los requisitos del Reglamento de carga perecedera (PCR) y otras reglamentaciones aplicables.',
+    ],
     example: [
       {
         title: 'Alimentos frescos',
-        description: '	Frutas, verduras, hortalizas, hierbas frescas',
+        description: 'Frutas, verduras, hortalizas, hierbas frescas',
         image: '/informacioPage/perecederos/GGI_frescos.webp',
       },
       {
@@ -262,32 +245,33 @@ export const cargaData: Record<string, InfoTipoCarga> = {
   restosHumanos: {
     title: 'Restos humanos',
     description:
-      'la categoría de Restos Humanos se refiere al transporte aéreo de personas fallecidas, ya sea en forma de cuerpo completo (féretro) o de cenizas (urnas funerarias), cumpliendo con normas legales, sanitarias y logísticas estrictas.',
-    subtitle: 'Requisitos',
+      'Boliviana de Aviación ofrece el transporte de restos humanos de cuerpo completo (féretro) en vuelos nacionales e internacionales, garantizando un servicio respetuoso y seguro. Para su aceptación es necesario contar con la documentación exigida por las autoridades competentes, como certificados médicos y de embalsamamiento, además de cumplir con las normativas de los países de origen, tránsito y destino.',
+    subtitle: 'Requisitos para el transporte de restos humanos: Solo féretro',
     details: [
       {
-        title: 'Nacional',
+        title: 'Nacional (Interior de Bolivia)',
         description: [
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.',
-          'Certificado forense sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
+          'Certificado forense',
+          'Certificado sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
           'Certificado de formolización, (embalsamamiento), cremación según sea aplicable.',
           'Autorización para traslado del cadáver, emitido por una Oficina Gubernamental(Alcaldía o Policía Boliviana) del departamento local donde se origina el embarque.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Los restos humanos exhumados, cuya data de fallecimiento sea inferior a 5 años,  no serán aceptados para el transporte.',
         ],
         imageUrl: [],
       },
       {
-        title: 'Internacional',
+        title: 'Internacional (Desde Bolivia)',
         description: [
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del consignatario, teléfono, ciudad-país).',
           'La documentación, etiquetas y rótulos deben estar en inglés para destinos donde no se hable español.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Certificado de Defunción original emitido por una Oficina Gubernamental(SERECI) donde se produjo el fallecimiento.',
-          'Certificado forense sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
+          'Certificado forense',
+          'Certificado sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original y dos copias) ',
           'Certificado de formolización, (embalsamamiento), cremación según sea aplicable.',
           'Autorización para traslado del cadáver, emitido por una Oficina Gubernamental(Alcaldía o Policía Boliviana) del departamento local donde se origina el embarque.',
           'Cualquier otro certificado que pudiera ser exigido por los países de tránsito o destino del féretro. ',
@@ -295,43 +279,51 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La documentación señalada anteriormente así como cualquier otra documentación adicional que sea requerida, debe estar visada por el consulado del país de origen.',
           'Se recibe el transporte de restos humanos Internacional mediante Agentes de Carga.',
           'Declaración General de seguridad de Carga, emitido por el agente de carga.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
         ],
         imageUrl: [],
       },
     ],
+    notice: ['NOTA: Se deben presentar los documentos originales más tres copias de cada uno.'],
     example: [
-      {
-        title: 'Restos humanos en féretro',
-        description:
-          'El cuerpo del fallecido, preparado, embalsamado y colocado en un ataúd especial para vuelos.',
-        image: '/informacioPage/restosHumanos/GGI_ataud.webp',
-      },
-      {
-        title: 'Cenizas humanas (urnas)',
-        description: 'Restos cremados transportados en urnas funerarias adecuadas.',
-        image: '/informacioPage/restosHumanos/GGI_cenizas.webp',
-      },
+      // {
+      //   title: 'Restos humanos en féretro',
+      //   description:
+      //     'El cuerpo del fallecido, preparado, embalsamado y colocado en un ataúd especial para vuelos.',
+      //   image: '/informacioPage/restosHumanos/GGI_ataud.webp',
+      // },
+      // {
+      //   title: 'Cenizas humanas (urnas)',
+      //   description: 'Restos cremados transportados en urnas funerarias adecuadas.',
+      //   image: '/informacioPage/restosHumanos/GGI_cenizas.webp',
+      // },
     ],
   },
   cargaValiosa: {
-    title: 'Carga Valiosa',
-    description:
-      'La categoría de Cargas Valiosas se refiere a mercancías que tienen un alto valor económico, cultural o sensible, y que requieren medidas especiales de seguridad y custodia durante su transporte aéreo.',
-    subtitle: 'Requisitos',
+    title: 'Carga valiosa',
+    description: `Se considera carga valiosa a todo envío que incluya artículos de alto valor o con un valor declarado para el transporte igual o superior a lo establecido en el tarifario por kilogramo bruto de peso.Entre ellos se encuentran: 
+
+1) Artículos con valor declarado de USD 1.000 o más por kilo bruto. 
+2) Oro, platino y sus metales afines (paladio, iridio, osmio, rutenio y rodio), en barras, lingotes, láminas, alambres u otras formas. (Se excluyen isótopos radiactivos y aleaciones clasificadas como mercancías peligrosas). 
+3) Billetes de banco, valores, acciones, cheques de viajero, sellos, tarjetas bancarias o de crédito listas para su uso. 
+4) Piedras preciosas: diamantes, rubíes, esmeraldas, zafiros, ópalos y perlas auténticas (incluidas las cultivadas), así como joyería compuesta por estos artículos. 
+5) Joyería y relojes de oro, plata o platino. 
+6) Artículos de oro o platino no enchapados.`,
+    subtitle: 'Requisitos para el transporte de carga valiosa',
     details: [
       {
-        title: 'Nacional',
+        title: 'Nacional (Interior de Bolivia)',
         description: [
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'El transporte debe gestionarse a través de un agente de carga especializado en equipos porta valor certificado.',
           'El embalaje debe ser adecuado al peso y contenido, evitando manipulación indebida o extracción de componentes.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Presentar fotocopia del Formulario M-02 de compra y venta de minerales y metales, emitido y autorizado por SENARECOM.',
+          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
         ],
         imageUrl: [],
       },
       {
-        title: 'Internacional',
+        title: 'Internacional (Desde Bolivia)',
         description: [
           'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
           'El transporte debe gestionarse a través de un agente de carga especializado en equipos porta valor certificado.',
@@ -346,6 +338,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         imageUrl: [],
       },
     ],
+    notice: [],
     example: [
       {
         title: 'Dinero en efectivo',
@@ -358,129 +351,29 @@ export const cargaData: Record<string, InfoTipoCarga> = {
         image: '/informacioPage/valiosos/GGI_joyas.webp',
       },
       {
-        title: 'Obras de arte',
-        description: 'Pinturas, esculturas, piezas de colección.',
-        image: '/informacioPage/valiosos/GGI_obrasarte.webp',
-      },
-      {
-        title: 'Electrónica de alto valor',
-        description: 'Computadoras de última generación, equipos médicos portátiles.',
+        title: 'Electrónicos valiosos',
+        description: 'Equipos de computación, de audio.',
         image: '/informacioPage/valiosos/GGI_electronicosValiosos.webp',
       },
-      {
-        title: 'Documentos valiosos',
-        description: 'Títulos de propiedad, bonos, valores bursátiles, contratos originales.',
-        image: '/informacioPage/valiosos/GGI_documentosvaliosos.webp',
-      },
     ],
   },
-  muestrasBiologicas: {
-    title: 'Muestras Biológicas',
+  otros: {
+    title: 'Otros tipos de carga',
     description:
-      'La categoría de Muestras Biológicas son un tipo de carga especial que corresponde a materiales de origen humano o animal que se transportan con fines médicos, diagnósticos, de investigación o control sanitario.',
-    subtitle: 'Requisitos',
-    details: [
-      {
-        title: 'Nacional',
-        description: [
-          'Reservar con al menos 24 horas para nacionales, en oficinas de BoA Cargo.',
-          'Embalaje combinado: externo, primario, secundario, absorbente y refrigerante (si aplica).',
-          'La aceptación se realiza según el formulario IATA Lista de Comprobación para Embarques UN 3373.',
-          'Las muestras biológicas que cumplen requisitos están exentas de inspección manual y Rayos X.',
-          'Certificado médico que indique que la muestra no es infecto-contagiosa, en hoja membretada, firmado y sellado por la institución que la emite.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
-        ],
-        imageUrl: [],
-      },
-      {
-        title: 'Internacional',
-        description: [
-          'Reservar con al menos 48 horas de anticipación para envíos internacionales, en oficinas de BoA Cargo.',
-          'Embalaje combinado: externo, primario, secundario, absorbente y refrigerante (si aplica).',
-          'La aceptación se realiza según el formulario IATA Lista de Comprobación para Embarques UN 3373.',
-          'Las muestras biológicas que cumplen requisitos están exentas de inspección manual y Rayos X.',
-          'Certificado médico que indique que la muestra no es infecto-contagiosa, en hoja membretada, firmado y sellado por la institución que la emite.',
-          'La Guía Aérea (Air Waybill) es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
-          'Certificado de traslado de muestra emitido por SEDES.',
-          'Declaración de Exportación (DEX) emitida por la Aduana mediante el sistema SUMA.',
-          'Factura comercial y lista de empaque.',
-          'Ficha técnica de descripción de la muestra.',
-          'Declaración General de Seguridad de Carga emitida por el agente de carga.',
-          'En envíos internacionales, el exportador debe gestionar el transporte mediante un agente de carga especializado.',
-          'En destinos donde no se hable español, la documentación, etiquetas y rótulos deben presentarse en inglés.',
-        ],
-        imageUrl: [],
-      },
-    ],
-    example: [
-      {
-        title: 'Categoría A: Sustancias infecciosas',
-        description: 'Muestras de virus peligrosos.',
-        image: '/informacioPage/muestrasBiologicas/GGI_categoriaA.webp',
-      },
-      {
-        title: 'Categoría B: Sustancias biológicas,no tan peligrosas',
-        description: 'Sangre, tejidos, fluidos para análisis comunes.',
-        image: '/informacioPage/muestrasBiologicas/GGI_categoriaB.webp',
-      },
-      {
-        title: 'Exentas: Muestras que no representan riesgo de infección',
-        description: 'Muestras de ADN, cabello, saliva no contaminada.',
-        image: '/informacioPage/muestrasBiologicas/GGI_exentos.webp',
-      },
-    ],
-  },
-  prohibidos: {
-    title: 'Peligrosos',
-    description:
-      'La categoría de Carga Prohibida hace referencia a todos aquellos objetos o sustancias que no están permitidos para su transporte por vía aérea, ya sea por riesgo a la seguridad, la salud pública, normas nacionales o internacionales, o por limitaciones técnicas de la aeronave.',
+      'Para obtener más información sobre otros tipos de carga, le recomendamos contactar a un agente de carga, quien le brindará asesoramiento y le ayudará a clasificar su envío de acuerdo con las especificaciones necesarias.',
     subtitle: '',
     details: [],
+    notice: [],
     example: [
       {
-        title: 'Explosivos',
-        description:
-          'municiones, material para expediciones,bengalas,fuegos artificiales, articulos pirotécnicos',
-        image: '/informacioPage/peligroso/explosive-symbol.webp',
+        title: 'Mercancias Peligrosas',
+        description: 'Según reglamento DGR de la IATA',
+        image: '/informacioPage/otroCarga/DGR.webp',
       },
       {
-        title: 'Solidos inflamables',
-        description:
-          'fosforo, articulos de facil ignicion,combustion expontanea o que al tacto con el agua emitan gases inflamables',
-        image: '/informacioPage/peligroso/Flammables.webp',
-      },
-      {
-        title: 'Venenos y sustancias infecciosas',
-        description: 'muestras para diagnosticos, sustancias toxicas o infecciosas y herbicidas',
-        image: '/informacioPage/peligroso/sustanciasInfecciosas.webp',
-      },
-      {
-        title: 'Gases comprimidos inflamables, no inflamables y venenosos',
-        description:
-          'extintores, botellas de oxigeno para bucear, licuados refrigerrados o disueltos',
-        image: '/informacioPage/peligroso/gasComprimido.webp',
-      },
-      {
-        title: 'Liquidos inflamables',
-        description:
-          'Bombonas de gas para recargar encendedores, pinturas, disolventes,combustibles liquidos o solidos,cerillas ',
-        image: '/informacioPage/peligroso/Flammables.webp',
-      },
-      {
-        title: 'Material radioactivo',
-        description: 'Material con isotopos radiactivos',
-        image: '/informacioPage/peligroso/nuclear.webp',
-      },
-      {
-        title: 'Materiales corrosivos y Oxidantes',
-        description: 'acidos alcalinos, mercurio, pilas humedas, peroxidos,acumuladores electricos',
-        image: '/informacioPage/peligroso/corrosivoOxidante.webp',
-      },
-      {
-        title: 'Pilas y baterias',
-        description:
-          'Ademas de otros articulos considerados peligrosos como material ferro-magnetico, hielo seco y baterias de coche',
-        image: '/informacioPage/peligroso/bateriasLitio.webp',
+        title: 'Suministros médicos',
+        description: 'Vacunas, medicamentos',
+        image: '/informacioPage/otroCarga/GGI_suministrosMedicos.webp',
       },
     ],
   },

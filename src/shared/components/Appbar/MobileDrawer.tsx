@@ -110,7 +110,7 @@ const MobileDrawer: React.FC<{
             </React.Fragment>
           ))}
 
-          {/* <ListItemButton
+          <ListItemButton
             onClick={() => {
               onClose();
               navigate('/login');
@@ -135,11 +135,8 @@ const MobileDrawer: React.FC<{
             <ListItemIcon sx={iconStyle}>
               <HowToRegOutlinedIcon />
             </ListItemIcon>
-            <ListItemText
-              primary="Registrarse"
-              primaryTypographyProps={{ fontWeight: 'bold' }}
-            />
-          </ListItemButton> */}
+            <ListItemText primary="Registrarse" primaryTypographyProps={{ fontWeight: 'bold' }} />
+          </ListItemButton>
         </List>
       </Box>
     </Drawer>

@@ -48,7 +48,7 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
         <AppTypography variant="h2Bold" color="primary">
           {title}
         </AppTypography>
-        <AppTypography variant="baseRegular" color="text.secondary">
+        <AppTypography variant="baseMedium" color="text.secondary">
           {subtitle}
         </AppTypography>
       </AppStack>
@@ -71,13 +71,13 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
               <AppTypography variant="h4Bold" mb={2}>
                 {section.title}
               </AppTypography>
-              <AppTypography variant="smallMedium" mb={2} color="text.secondary" textAlign="center">
+              <AppTypography variant="baseRegular" mb={2} color="text.secondary" textAlign="center">
                 {section.description}
               </AppTypography>
               <AppButton
                 variant="contained"
                 color="primary"
-                size="medium"
+                size="large"
                 onClick={() => navigate(section.link)}
                 sx={{ mt: 'auto' }}
               >

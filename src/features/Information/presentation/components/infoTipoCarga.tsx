@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ExampleType from './ExampleType';
-import { Box, Typography, Grid, Stack } from '@mui/material';
+import { Box, Alert, Grid, Stack } from '@mui/material';
 import { AppTypography, BoAButton } from 'ui';
-import { useTheme } from '@mui/material/styles';
 
 interface Detail {
   title: string;
@@ -21,28 +20,51 @@ interface infoTipoCargaProps {
   description: string;
   subtitle: string;
   details: Detail[];
+  notice?: string[];
   example: Example[];
   onClick: () => void;
 }
 
-function InfoTipoCarga({ title, description, details, subtitle, example }: infoTipoCargaProps) {
+function InfoTipoCarga({
+  title,
+  description,
+  details,
+  subtitle,
+  notice,
+  example,
+}: infoTipoCargaProps) {
   const [selectedDetail, setSelectedDetail] = useState<number | null>(0); // selecciona el primero por defecto
 
   return (
-    <Box>
+    <Box sx={{ mt: 2 }}>
       <AppTypography variant="h4Bold" color="primary" mb={2}>
         {title}
       </AppTypography>
 
-      <AppTypography variant="baseRegular" mb={3}>
+      <AppTypography
+        variant="baseRegular"
+        mb={3}
+        textAlign="justify"
+        sx={{ whiteSpace: 'pre-line' }}
+      >
         {description}
       </AppTypography>
-
+      {/* ⚠️ Notices generales */}
+      {notice && notice.length > 0 && (
+        <Box mb={3}>
+          {notice.map((note, i) => (
+            <Alert key={i} severity="info" sx={{ mb: 1 }}>
+              {note}
+            </Alert>
+          ))}
+        </Box>
+      )}
       <Box
         sx={{
           display: 'flex',
           gap: 2,
-          flexDirection: { xs: 'column', sm: 'row', md: 'row' },
+          flexDirection: 'column',
+          mb: 3,
         }}
       >
         <AppTypography variant="h4Bold" color="primary">
@@ -51,7 +73,7 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
 
         {/* Botones dinámicos */}
         {details && details.length > 0 && (
-          <Stack direction="row" spacing={2} flexWrap="wrap" mb={1}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} flexWrap="wrap">
             {details.map((item, index) => (
               <BoAButton
                 key={index}
@@ -71,8 +93,8 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
         <Grid container spacing={2} mb={3}>
           <Grid item>
             {details[selectedDetail].description.map((desc, i) => (
-              <AppTypography key={i} variant="baseRegular" mb={1}>
-                • {desc}
+              <AppTypography key={i} variant="baseRegular" mb={2} textAlign="justify">
+                ✔️ {desc}
               </AppTypography>
             ))}
           </Grid>
@@ -104,13 +126,10 @@ function InfoTipoCarga({ title, description, details, subtitle, example }: infoT
 
       {example && example.length > 0 && (
         <Box>
-          <AppTypography variant="h4Bold" color="primary" mb={1}>
-            ¿Que cargas pueden entrar a esta categoria?
+          <AppTypography variant="h4Bold" color="primary" mb={2}>
+            Cargas comunes en {title}:
           </AppTypography>
-          <AppTypography variant="baseRegular" mb={1}>
-            Ejemplos comunes de {title} en BoA Cargo:
-          </AppTypography>
-          <Grid container spacing={1} sx={{ justifyContent: 'center' }}>
+          <Grid container spacing={1} sx={{ width: '100%', justifyContent: 'center' }}>
             {example.map((item, index) => (
               <Grid item mb={2} key={index} xs={12} sm={6} md={6}>
                 <ExampleType title={item.title} description={item.description} image={item.image} />

@@ -27,18 +27,18 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
     >
       <Box sx={{ width: '100%', py: { xs: 14, md: 14 }, px: 2 }}>
         <AppTypography
-          variant="h4Bold"
+          variant="h1Bold"
           mb={2}
           sx={{
-            fontSize: {
-              xs: '1.3rem',
-              md: '2.125rem',
-            },
+            textAlign: 'center',
           }}
         >
           Gestiona tus envíos de carga de forma rápida y sencilla.
         </AppTypography>
-        <AppTypography variant="h4Regular" sx={{ mb: 3, color: 'grey.200', mx: 'auto' }}>
+        <AppTypography
+          variant="h4Regular"
+          sx={{ textAlign: 'center', color: 'grey.200', mx: 'auto' }}
+        >
           Realiza el seguimiento de tus envios en tiempo real, con la seguridad y confianza de BoA
           Cargo.
         </AppTypography>

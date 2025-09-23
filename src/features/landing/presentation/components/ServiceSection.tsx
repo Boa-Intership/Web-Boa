@@ -65,7 +65,7 @@ const ServiceSection: React.FC = () => {
               }}
             >
               <Stack sx={{ gap: 2, mb: 2 }}>
-                <AppTypography variant="h4Bold" color="primary">
+                <AppTypography variant="h2Bold" color="primary">
                   Atención al Cliente
                 </AppTypography>
                 <AppTypography variant="baseRegular" color="text.secondary">

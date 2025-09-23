@@ -48,7 +48,7 @@ const MegaMenu: React.FC<{
             {columns?.map((col, i) => (
               <Box key={i} sx={{ minWidth: 160 }}>
                 {col.title && (
-                  <AppTypography variant="h4Bold" color="primary.main">
+                  <AppTypography variant="baseBold" color="primary.main">
                     {col.title}
                   </AppTypography>
                 )}

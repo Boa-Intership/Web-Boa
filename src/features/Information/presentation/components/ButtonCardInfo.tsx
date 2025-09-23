@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import { Box, Card, CardMedia, CardContent } from '@mui/material';
 import BoAButton from '../../../../shared/components/BoAButton';
 import { AppTypography } from 'ui';
 
@@ -9,7 +9,6 @@ interface ButtonCardInfoProps {
   icon?: React.ReactNode;
   onClick?: () => void;
   imageUrl: string;
-  tag: string;
 }
 
 const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
@@ -18,9 +17,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
   icon,
   onClick,
   imageUrl,
-  tag,
 }) => {
-  const [hover, setHover] = useState(false);
   return (
     <Card
       sx={{
@@ -33,8 +30,6 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           boxShadow: 4,
         },
       }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
     >
       {/* Contenedor de imagen con overlay */}
       <Box sx={{ position: 'relative', height: 180 }}>
@@ -56,38 +51,11 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
           sx={{
             position: 'absolute',
             inset: 0, // shorthand: top:0, left:0, right:0, bottom:0
-            background:
-              'linear-gradient(180deg, rgba(0,51,102,0.55) 0%, rgba(0,115,230,0.35) 100%)',
+            background: '#2570b63b',
             borderTopLeftRadius: 12,
             borderTopRightRadius: 12,
-            opacity: hover ? 0.7 : 0.5, // más fuerte al hover
-            transition: 'opacity 0.3s ease',
           }}
         />
-        {hover && (
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              backgroundColor: 'rgba(45, 50, 54, 0.6)', // fondo semitransparente azul oscuro
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontWeight: 'bold',
-              fontSize: 20,
-              letterSpacing: 1,
-              transition: 'opacity 0.3s ease',
-              borderTopLeftRadius: 12,
-              borderTopRightRadius: 12,
-            }}
-          >
-            {tag}
-          </Box>
-        )}
       </Box>
 
       {/* Contenido */}
@@ -110,7 +78,7 @@ const ButtonCardInfo: React.FC<ButtonCardInfoProps> = ({
             mb: 1,
           }}
         >
-          <AppTypography variant="h4Regular" color="text.secondary" textAlign={'left'}>
+          <AppTypography variant="baseRegular" color="text.secondary" textAlign={'left'}>
             {description}
           </AppTypography>
         </Box>

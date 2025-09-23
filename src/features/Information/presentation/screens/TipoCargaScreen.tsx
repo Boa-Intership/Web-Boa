@@ -1,7 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, Grid, Typography } from '@mui/material';
-import { AppTypography, BoAButton } from 'ui';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Box, Grid } from '@mui/material';
+import { AppTypography, BoAButton, AppStack } from 'ui';
 import { InfoTipoCarga } from 'ui';
 import { useTheme } from '@mui/material/styles';
 import { cargaData } from '../components/cargaData';
@@ -11,13 +11,21 @@ import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
 import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
-import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
-import VaccinesIcon from '@mui/icons-material/Vaccines';
-import { AppStack, AppTypography } from 'ui';
+import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
-  const [selected, setSelected] = React.useState<string>(tipo || 'cargaGeneral'); //valor inicial desde la URL
+  const [selected, setSelected] = React.useState(tipo || 'cargaGeneral'); //valor inicial desde la URL
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    // Si el usuario entra a /tipos-cargas sin :tipo
+    if (!tipo) {
+      navigate('/tipos-cargas/cargaGeneral', { replace: true });
+    } else {
+      setSelected(tipo);
+    }
+  }, [tipo, navigate]);
 
   const theme = useTheme();
   const colorBoton = theme.palette.primary.dark;
@@ -38,6 +46,7 @@ function TipoCargaScreen() {
         description={data.description}
         subtitle={data.subtitle}
         details={data.details}
+        notice={data.notice}
         example={data.example}
         onClick={() => setSelected('')} // para cerrar o resetear
       />
@@ -49,29 +58,35 @@ function TipoCargaScreen() {
       <AppTypography variant="h2Bold" color="primary" mb={2}>
         Tipos de carga
       </AppTypography>
-      <AppTypography variant="baseRegular" mb={2}>
-        {`Al analizar los distintos tipos de carga transportada por vía aérea, se dividen en dos grupos principales: carga general y carga especial.Esta última se divide en subgrupos especializados más pequeños. Analizaremos estos subgrupos con mayor detalle más adelante.
-
-        Si tiene preguntas respecto a los requisitos para los envíos aéreos, le invitamos a comunicarse con nuestro Call Center de su ciudad de residencia.`}
+      <AppTypography variant="baseRegular" mb={2} textAlign="justify">
+        De acuerdo con la IATA, la carga transportada por vía aérea se clasifica en dos grandes
+        categorías: carga general y carga especial. Esta última comprende diversos subgrupos con
+        requisitos específicos. Para obtener información o resolver cualquier consulta sobre los
+        requisitos de envío, le invitamos a comunicarse con el Call Center de BoA Cargo en su ciudad
+        de residencia.
       </AppTypography>
-      <Grid container spacing={4}>
+      <Grid container spacing={3}>
         <Grid item xs={12} md={3} lg={3}>
           <AppStack
             sx={{
               background: theme.palette.background.default,
-              // border: '1px solid #e6e5e5ff',
-              //borderRadius: 2,
               p: 1,
+              position: {
+                xs: 'static', //  en móviles no se queda fijo
+                md: 'sticky', //  desde md hacia arriba sí
+              },
+              top: { md: theme.spacing(10) }, // solo aplica en pantallas grandes
+              alignSelf: 'flex-start',
             }}
           >
-            <AppTypography variant="h4Bold" color="primary.dark" mb={2}>
+            <AppTypography variant="h4Bold" color="primary.main" mb={2}>
               Categorías:
             </AppTypography>
             <BoAButton
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('cargaGeneral')}
+              onClick={() => navigate('/tipos-cargas/cargaGeneral')}
               selected={selected === 'cargaGeneral'}
               icon={<Inventory2OutlinedIcon />}
             >
@@ -81,7 +96,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('animalesVivos')}
+              onClick={() => navigate('/tipos-cargas/animalesVivos')}
               selected={selected === 'animalesVivos'}
               icon={<PetsOutlinedIcon />}
             >
@@ -91,7 +106,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('perecederos')}
+              onClick={() => navigate('/tipos-cargas/perecederos')}
               selected={selected === 'perecederos'}
               icon={<SetMealOutlinedIcon />}
             >
@@ -101,7 +116,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('restosHumanos')}
+              onClick={() => navigate('/tipos-cargas/restosHumanos')}
               selected={selected === 'restosHumanos'}
               icon={<LocalHospitalOutlinedIcon />}
             >
@@ -111,7 +126,7 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('cargaValiosa')}
+              onClick={() => navigate('/tipos-cargas/cargaValiosa')}
               selected={selected === 'cargaValiosa'}
               icon={<MonetizationOnOutlinedIcon />}
             >
@@ -121,21 +136,11 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => setSelected('muestrasBiologicas')}
-              selected={selected === 'muestrasBiologicas'}
-              icon={<VaccinesIcon />}
+              onClick={() => navigate('/tipos-cargas/otros')}
+              selected={selected === 'otros'}
+              icon={<QuizOutlinedIcon />}
             >
-              Muestras Biológicas
-            </BoAButton>
-            <BoAButton
-              color={colorBoton}
-              hover={colorHover}
-              mainButton={mainButton}
-              onClick={() => setSelected('prohibidos')}
-              selected={selected === 'prohibidos'}
-              icon={<DangerousOutlinedIcon />}
-            >
-              Prohibidos
+              Otros tipos
             </BoAButton>
           </AppStack>
         </Grid>

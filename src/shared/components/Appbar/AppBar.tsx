@@ -1,41 +1,52 @@
 import React from 'react';
-import { AppBar, Toolbar, Box, IconButton, useTheme, useMediaQuery } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+  Button,
+  Menu,
+  MenuItem,
+  Typography,
+  Icon,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import PublicIcon from '@mui/icons-material/Public';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ROUTES } from '../../../router/routes';
 import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
 import AppContainer from '../AppContainer';
-import { LogoCargo } from 'ui';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import { AppButton, LogoCargo } from 'ui';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import EventNoteIcon from '@mui/icons-material/EventNote';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
+import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 
-// ------------------ NAV ITEMS ------------------
 const navItems = [
+  // {
+  //   key: 'home',
+  //   label: 'Inicio',
+  //   route: ROUTES.HOME,
+  // },
   {
-    key: 'home',
-    label: 'Inicio',
-    route: ROUTES.HOME,
-    icon: <HomeOutlinedIcon />,
+    key: 'Pre-Registro',
+    label: 'Pre-Registro',
+    route: ROUTES.PREREGISTRO,
+    icon: <NoteAltOutlinedIcon />,
   },
   {
     key: 'itinerarios',
     label: 'Itinerario',
     route: ROUTES.ITINERARIOS,
-    icon: <EventNoteIcon />,
+    icon: <TodayOutlinedIcon />,
   },
-  // {
-  //   key: 'preRegistro',
-  //   label: 'Pre-registro',
-  //   route: ROUTES.PREREGISTRO,
-  //   icon: <AssignmentOutlinedIcon />,
-  // },
   {
     key: 'informacion',
     label: 'Información',
@@ -67,7 +78,11 @@ const navItems = [
 
 const HoverDelay = 150;
 
-// ------------------ APP BAR ------------------
+const LANGUAGES = [
+  { code: 'es', country: 'BO', label: 'Español | BO' },
+  { code: 'en', country: 'US', label: 'English | US' },
+];
+
 const AppAppBar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -77,23 +92,35 @@ const AppAppBar: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [openKey, setOpenKey] = React.useState<string | null>(null);
 
+  // Idioma
+  const [anchorLang, setAnchorLang] = React.useState<null | HTMLElement>(null);
+  const [selectedLang, setSelectedLang] = React.useState(LANGUAGES[0]);
+
   const anchors = React.useRef<Record<string, HTMLButtonElement | null>>({});
   const hoverTimeout = React.useRef<number | null>(null);
 
-  // -------- Hover menú --------
   const openMenu = (key: string) => {
     if (hoverTimeout.current) window.clearTimeout(hoverTimeout.current);
     setOpenKey(key);
   };
   const closeMenuWithDelay = (delay = HoverDelay) => {
     if (hoverTimeout.current) window.clearTimeout(hoverTimeout.current);
-
     hoverTimeout.current = window.setTimeout(() => setOpenKey(null), delay);
   };
   const handleClose = () => setOpenKey(null);
 
-  // -------- Detecta ruta activa --------
   const isActiveRoute = (route?: string) => (route ? location.pathname.startsWith(route) : false);
+
+  // Idioma/país
+  const handleLangClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorLang(event.currentTarget);
+  };
+  const handleLangClose = () => setAnchorLang(null);
+  const handleLangSelect = (lang: (typeof LANGUAGES)[0]) => {
+    setSelectedLang(lang);
+    setAnchorLang(null);
+    // Aquí podrías cambiar el idioma global de la app
+  };
 
   return (
     <>
@@ -101,24 +128,66 @@ const AppAppBar: React.FC = () => {
         position="fixed"
         sx={{
           bgcolor: '#1C2E5E',
-          //background: "linear-gradient(90deg, #003366 0%, #0073e6 100%)",
           boxShadow: 'none',
+          transition: 'background 0.3s',
         }}
       >
         <AppContainer sx={{ py: { xs: 1, md: 1 } }}>
-          <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center' }}>
-            {/* -------- LOGO -------- */}
+          <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', minHeight: 64 }}>
+            {/* LOGO */}
             <Box
               component="img"
               src={LogoCargo}
               alt="BOA Logo"
               onClick={() => navigate(ROUTES.LANDING)}
-              sx={{ height: { xs: 50, md: 55 }, cursor: 'pointer' }}
+              sx={{ height: { xs: 50, md: 55 }, cursor: 'pointer', mr: 2 }}
             />
+
+            {/* SELECTOR DE IDIOMA/PAÍS */}
+            {/* <Box sx={{ display: 'flex', alignItems: 'center', mr: { xs: 0, md: 2 } }}>
+              <Button
+                startIcon={<PublicIcon />}
+                endIcon={<KeyboardArrowDownOutlinedIcon />}
+                onClick={handleLangClick}
+                sx={{
+                  color: 'white',
+                  fontWeight: 'bold',
+                  borderRadius: 3,
+                  px: 2,
+                  textTransform: 'none',
+                  fontSize: { xs: '0.9rem', md: '1rem' },
+                  transition: 'background 0.2s',
+                  '&:hover': {
+                    background: 'rgba(255,255,255,0.08)',
+                  },
+                }}
+              >
+                <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                  {selectedLang.label}
+                </Typography>
+              </Button>
+              <Menu
+                anchorEl={anchorLang}
+                open={Boolean(anchorLang)}
+                onClose={handleLangClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+              >
+                {LANGUAGES.map((lang) => (
+                  <MenuItem
+                    key={lang.code}
+                    selected={lang.code === selectedLang.code}
+                    onClick={() => handleLangSelect(lang)}
+                  >
+                    {lang.label}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box> */}
 
             <Box sx={{ flexGrow: 1 }} />
 
-            {/* -------- NAV MENU (desktop) -------- */}
+            {/* NAV MENU (desktop) */}
             <Box component="nav" sx={{ display: { xs: 'none', md: 'block' } }}>
               <Box
                 component="ul"
@@ -146,7 +215,6 @@ const AppAppBar: React.FC = () => {
                             onClick={() => setOpenKey((k) => (k === item.key ? null : item.key))}
                             onMouseEnter={() => isMdUp && openMenu(item.key)}
                             onMouseLeave={() => isMdUp && closeMenuWithDelay()}
-                            icon={<KeyboardArrowDownOutlinedIcon />}
                           />
                           <MegaMenu
                             open={isOpen}
@@ -164,6 +232,7 @@ const AppAppBar: React.FC = () => {
                           label={item.label}
                           active={active}
                           onClick={() => navigate(item.route || ROUTES.HOME)}
+                          // icon={item.icon}
                         />
                       )}
                     </Box>
@@ -174,33 +243,38 @@ const AppAppBar: React.FC = () => {
 
             <Box sx={{ flexGrow: 1 }} />
 
-            {/* -------- BOTONES LOGIN/REGISTRO -------- */}
-            {/* <Box
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-                gap: 2,
-                alignItems: 'center',
-              }}
+            <Box
+              id="_header-buttons"
+              data-testid="header-buttons"
+              sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}
             >
               <AppButton
-                size="medium"
-                color="primary"
-                sx={{ fontSize: { xs: '0.75rem', md: '0.9rem' } }}
+                variant="contained"
+                size="large"
                 onClick={() => navigate(ROUTES.LOGIN)}
+                sx={{
+                  textTransform: 'none',
+                  fontSize: { xs: '0.75rem', md: '1rem' },
+                  borderRadius: 2,
+                }}
               >
                 Iniciar sesión
               </AppButton>
               <AppButton
-                size="medium"
+                variant="contained"
+                size="large"
+                onClick={() => navigate(ROUTES.REGISTER)}
+                sx={{
+                  textTransform: 'none',
+                  fontSize: { xs: '0.75rem', md: '1rem' },
+                  borderRadius: 2,
+                }}
                 color="secondary"
-                sx={{ fontSize: { xs: '0.75rem', md: '0.9rem' } }}
-                onClick={() => navigate(ROUTES.REGISTRO)}
               >
-                Registrarse
+                Abrir cuenta
               </AppButton>
-            </Box> */}
-
-            {/* -------- MENU HAMBURGUESA (mobile) -------- */}
+            </Box>
+            {/* MENU HAMBURGUESA (mobile) */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>
               <IconButton
                 onClick={() => setDrawerOpen(true)}
@@ -226,7 +300,7 @@ const AppAppBar: React.FC = () => {
       </AppBar>
 
       {/* Spacer para evitar salto de contenido */}
-      <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center' }}>
+      <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', minHeight: 64 }}>
         <Box sx={{ width: '1px', height: { xs: 50, md: 55 } }}></Box>
       </Toolbar>
 
