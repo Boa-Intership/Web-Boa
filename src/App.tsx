@@ -18,30 +18,32 @@ import Login from './features/Auth/presentation/screen/LoginScreen';
 import Register from './features/Auth/presentation/screen/RegisterScreen';
 
 const App: React.FC = () => (
-  <BrowserRouter>
-    <ScrollToTop />
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<LandingScreen />} />
-        <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
-        <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
-        <Route path={ROUTES.CONTACTO.replace('/', '')} element={<ContactScreen />} />
-        <Route path={ROUTES.PREREGISTRO.replace('/', '')} element={<PreRegistroScreen />} />
-        <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
-        <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
-        <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
-        <Route path={ROUTES.LOGIN.replace('/', '')} element={<Login />} />
-        <Route path={ROUTES.REGISTER.replace('/', '')} element={<Register />} />
+  <QueryProvider>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<LandingScreen />} />
+          <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
+          <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
+          <Route path={ROUTES.CONTACTO.replace('/', '')} element={<ContactScreen />} />
+          <Route path={ROUTES.PREREGISTRO.replace('/', '')} element={<PreRegistroScreen />} />
+          <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
+          <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
+          <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
+          <Route path={ROUTES.LOGIN.replace('/', '')} element={<Login />} />
+          <Route path={ROUTES.REGISTER.replace('/', '')} element={<Register />} />
 
-        <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
-        <Route
-          path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
-          element={<CorporateProfileScreen />}
-        />
-      </Route>
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-  </BrowserRouter>
+          <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
+          <Route
+            path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
+            element={<CorporateProfileScreen />}
+          />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
+  </QueryProvider>
 );
 
 export default App;

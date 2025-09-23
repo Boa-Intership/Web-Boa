@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'; // Temporalmente comentado
 import { useState, ReactNode } from 'react';
 
 interface QueryProviderProps {
@@ -52,7 +52,7 @@ export const QueryProvider = ({ children }: QueryProviderProps) => {
     <QueryClientProvider client={queryClient}>
       {children}
       {/* Solo mostrar devtools en desarrollo */}
-      {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
+      {/* {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />} */}
     </QueryClientProvider>
   );
 };
