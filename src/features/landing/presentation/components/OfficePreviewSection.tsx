@@ -1,45 +1,58 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { AppContainer, AppGrid, AppStack, AppTypography, AppButton } from 'ui';
-import { Card, CardContent, Typography, Box } from '@mui/material';
+import { Card, CardContent, Box, CircularProgress } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneIcon from '@mui/icons-material/Phone';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useNavigate } from 'react-router-dom';
+import { useOfficePreview } from '../hooks/useOfficePreview';
 
-interface OfficePreview {
-  ciudad: string;
-  direccion: string;
-  urlGoogleMaps: string;
-}
-
-const offices: OfficePreview[] = [
-  {
-    ciudad: 'Cochabamba',
-    direccion: 'Av. Killman ex Terminal Aeropuerto',
-    urlGoogleMaps: 'https://maps.app.goo.gl/eiNkgYLVVrbqGGnC8',
-  },
-  {
-    ciudad: 'La Paz',
-    direccion: 'Carga Aeropuerto Internacional El Alto',
-    urlGoogleMaps: 'https://maps.app.goo.gl/2JNVq6WC8aFRwicL7',
-  },
-  {
-    ciudad: 'Tarija Ciudad',
-    direccion: 'Calle General Trigo, zona centro',
-    urlGoogleMaps: 'https://maps.app.goo.gl/cSnMAV6Kh6ARomrN9',
-  },
-];
-
-const OfficePreviewSection: React.FC = () => {
+const OfficePreviewSection: FC = () => {
   const navigate = useNavigate();
+  const { data, loading, error } = useOfficePreview();
+
+  const handleButtonClick = () => {
+    if (data?.enlace_boton) {
+      navigate(data.enlace_boton);
+    }
+  };
+
+  if (loading) {
+    return (
+      <AppContainer sx={{ py: { xs: 7, md: 8 }, display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </AppContainer>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <AppContainer sx={{ py: { xs: 7, md: 8 }, textAlign: 'center' }}>
+        <AppTypography variant="baseRegular" color="error">
+          Error cargando la información de oficinas
+        </AppTypography>
+      </AppContainer>
+    );
+  }
   return (
     <AppContainer sx={{ py: { xs: 7, md: 8 } }}>
       <AppStack textAlign="center" mb={2}>
         <AppTypography variant="h2Bold" color="primary">
-          Nuestras oficinas
+          {data.titulo}
         </AppTypography>
+        {data.descripcion && (
+          <AppTypography
+            variant="baseRegular"
+            color="text.secondary"
+            sx={{ mt: 1, maxWidth: 800, mx: 'auto' }}
+          >
+            {data.descripcion}
+          </AppTypography>
+        )}
       </AppStack>
       <AppGrid container spacing={4} justifyContent="center">
-        {offices.map((office, idx) => (
-          <AppGrid item xs={12} sm={6} md={4} key={idx}>
+        {data.oficinas.map((office) => (
+          <AppGrid item xs={12} sm={6} md={4} key={office.id}>
             <Card
               sx={{
                 borderRadius: 4,
@@ -52,37 +65,59 @@ const OfficePreviewSection: React.FC = () => {
                   borderColor: 'primary.main',
                 },
                 background: 'background.default',
-                cursor: 'pointer',
+                cursor: office.imagen_url ? 'pointer' : 'default',
+                height: '100%',
               }}
               elevation={0}
-              onClick={() => window.open(office.urlGoogleMaps, '_blank')}
-              tabIndex={0}
-              role="button"
-              aria-label={`Ver ubicación de ${office.ciudad} en Google Maps`}
             >
+              {office.imagen_url && (
+                <Box
+                  component="img"
+                  src={office.imagen_url}
+                  alt={office.nombre}
+                  sx={{
+                    width: '100%',
+                    height: 200,
+                    objectFit: 'cover',
+                    borderTopLeftRadius: 4,
+                    borderTopRightRadius: 4,
+                  }}
+                />
+              )}
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <LocationOnIcon sx={{ color: 'primary.main', fontSize: 28, mr: 1 }} />
                   <AppTypography variant="h4Bold" fontWeight={600}>
-                    {office.ciudad}
+                    {office.nombre}
                   </AppTypography>
                 </Box>
-                <AppTypography variant="baseRegular" color="text.secondary">
+                <AppTypography variant="baseRegular" color="text.secondary" sx={{ mb: 2 }}>
                   {office.direccion}
                 </AppTypography>
+                {office.telefono && (
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                    <PhoneIcon sx={{ color: 'primary.main', fontSize: 20, mr: 1 }} />
+                    <AppTypography variant="baseRegular" color="text.secondary">
+                      {office.telefono}
+                    </AppTypography>
+                  </Box>
+                )}
+                {office.horarios && (
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <AccessTimeIcon sx={{ color: 'primary.main', fontSize: 20, mr: 1 }} />
+                    <AppTypography variant="baseRegular" color="text.secondary">
+                      {office.horarios}
+                    </AppTypography>
+                  </Box>
+                )}
               </CardContent>
             </Card>
           </AppGrid>
         ))}
       </AppGrid>
       <Box sx={{ textAlign: 'center', mt: 6 }}>
-        <AppButton
-          variant="contained"
-          color="primary"
-          size="large"
-          onClick={() => navigate('/contacto')}
-        >
-          Ver todas las oficinas
+        <AppButton variant="contained" color="primary" size="large" onClick={handleButtonClick}>
+          {data.texto_boton}
         </AppButton>
       </Box>
     </AppContainer>
