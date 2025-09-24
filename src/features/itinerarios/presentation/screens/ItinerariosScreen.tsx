@@ -37,8 +37,8 @@ export default function ItinerariosScreen() {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4, minHeight: '80vh' }}>
-      <AppTypography variant="h4Bold" color="primary" gutterBottom>
-        Horarios de Vuelos
+      <AppTypography variant="h2Bold" color="primary" gutterBottom>
+        Horarios de vuelos
       </AppTypography>
 
       <ItinerariosFilters
@@ -70,7 +70,7 @@ function Legend({ color, label }: { color: string; label: string }) {
   return (
     <Stack direction="row" spacing={1} alignItems="center">
       <Box sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: color }} />
-      <AppTypography variant="h4Regular">{label}</AppTypography>
+      <AppTypography variant="baseRegular">{label}</AppTypography>
     </Stack>
   );
 }

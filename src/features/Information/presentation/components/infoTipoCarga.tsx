@@ -2,9 +2,10 @@ import { useState } from 'react';
 import ExampleType from './ExampleType';
 import { Box, Alert, Grid, Stack } from '@mui/material';
 import { AppTypography, BoAButton } from 'ui';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 interface Detail {
-  title: string;
+  title?: string;
   description: string[];
   imageUrl?: string[];
 }
@@ -18,6 +19,7 @@ type Example = {
 interface infoTipoCargaProps {
   title: string;
   description: string;
+  imageUrl?: string;
   subtitle: string;
   details: Detail[];
   notice?: string[];
@@ -28,6 +30,7 @@ interface infoTipoCargaProps {
 function InfoTipoCarga({
   title,
   description,
+  imageUrl,
   details,
   subtitle,
   notice,
@@ -57,6 +60,23 @@ function InfoTipoCarga({
               {note}
             </Alert>
           ))}
+        </Box>
+      )}
+      {/* Imagen principal (si existe) */}
+      {imageUrl && imageUrl.length > 0 && (
+        <Box sx={{ width: '100%', justifyItems: 'center', position: 'relative', mb: 3 }}>
+          <Box
+            component="img"
+            src={imageUrl}
+            alt={title}
+            sx={{
+              width: '70%',
+              height: 'auto',
+              objectFit: 'cover',
+              display: 'block',
+            }}
+            loading="lazy"
+          />
         </Box>
       )}
       <Box
@@ -91,11 +111,14 @@ function InfoTipoCarga({
       {/* Mostrar contenido del detalle seleccionado */}
       {selectedDetail !== null && details[selectedDetail] && (
         <Grid container spacing={2} mb={3}>
-          <Grid item>
+          <Grid item minHeight={'10rem'}>
             {details[selectedDetail].description.map((desc, i) => (
-              <AppTypography key={i} variant="baseRegular" mb={2} textAlign="justify">
-                ✔️ {desc}
-              </AppTypography>
+              <Box key={i} sx={{ display: 'flex', gap: 2 }}>
+                <CheckCircleOutlineIcon sx={{ color: 'primary.dark' }} />
+                <AppTypography key={i} variant="baseRegular" mb={2} textAlign="justify">
+                  {desc}
+                </AppTypography>
+              </Box>
             ))}
           </Grid>
           {/* Imagen (si existe) */}
@@ -129,6 +152,10 @@ function InfoTipoCarga({
           <AppTypography variant="h4Bold" color="primary" mb={2}>
             Cargas comunes en {title}:
           </AppTypography>
+          <Alert severity="warning" sx={{ mb: 2 }}>
+            Las imagenes que se muestran son solo ejemplos y pueden no corresponder exactamente a la
+            carga que usted desea enviar.
+          </Alert>
           <Grid container spacing={1} sx={{ width: '100%', justifyContent: 'center' }}>
             {example.map((item, index) => (
               <Grid item mb={2} key={index} xs={12} sm={6} md={6}>

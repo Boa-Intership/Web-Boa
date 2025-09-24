@@ -4,6 +4,7 @@ import { LoginForm, SocialLoginSection } from '../components/loginForm';
 import { LoginSchema } from '../../domain/validators/loginSchema';
 import { useLogin } from '../useAuth.hooks';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../../shared/providers/AuthContext';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -44,6 +45,7 @@ export default function Login() {
   const [error, setError] = React.useState<string>('');
   const loginMutation = useLogin();
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLoginSubmit = async (data: LoginSchema) => {
     setError('');
@@ -58,7 +60,12 @@ export default function Login() {
       const hasToken = response.accessToken || (response.data && response.data.accessToken);
 
       if (hasToken) {
-        navigate('/home');
+        // Actualizar el contexto de autenticación
+        login({
+          name: data.email, // Usar el email como nombre temporal
+          email: data.email,
+        });
+        navigate('/');
       } else {
         setError('Error en la respuesta del servidor');
       }

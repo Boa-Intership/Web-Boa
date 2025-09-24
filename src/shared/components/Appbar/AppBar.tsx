@@ -28,6 +28,9 @@ import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { AuthSection } from './AuthSection';
+import { useAuth } from '../../providers/AuthContext';
 
 const navItems = [
   // {
@@ -243,37 +246,7 @@ const AppAppBar: React.FC = () => {
 
             <Box sx={{ flexGrow: 1 }} />
 
-            <Box
-              id="_header-buttons"
-              data-testid="header-buttons"
-              sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}
-            >
-              <AppButton
-                variant="contained"
-                size="large"
-                onClick={() => navigate(ROUTES.LOGIN)}
-                sx={{
-                  textTransform: 'none',
-                  fontSize: { xs: '0.75rem', md: '1rem' },
-                  borderRadius: 2,
-                }}
-              >
-                Iniciar sesión
-              </AppButton>
-              <AppButton
-                variant="contained"
-                size="large"
-                onClick={() => navigate(ROUTES.REGISTER)}
-                sx={{
-                  textTransform: 'none',
-                  fontSize: { xs: '0.75rem', md: '1rem' },
-                  borderRadius: 2,
-                }}
-                color="secondary"
-              >
-                Abrir cuenta
-              </AppButton>
-            </Box>
+            <AuthSection />
             {/* MENU HAMBURGUESA (mobile) */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>
               <IconButton
