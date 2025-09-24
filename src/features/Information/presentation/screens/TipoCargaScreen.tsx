@@ -12,6 +12,7 @@ import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
+import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
@@ -137,7 +138,7 @@ function TipoCargaScreen() {
               mainButton={mainButton}
               onClick={() => navigate('/tipos-cargas/peligrosa')}
               selected={selected === 'peligrosa'}
-              icon={<QuizOutlinedIcon />}
+              icon={<DangerousOutlinedIcon />}
             >
               Carga Peligrosa
             </BoAButton>
