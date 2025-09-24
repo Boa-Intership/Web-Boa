@@ -20,9 +20,10 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/cms/, '/api'),
       },
-      // Proxy para Backend API (AWS EC2)
+      // Proxy para Backend API - SOLO para desarrollo local
+      // En producción no se usa, va directo a VITE_BACKEND_API_URL
       '/api': {
-        target: 'http://54.92.214.122',
+        target: 'http://localhost:8080', // Cambiar por tu servidor de desarrollo
         changeOrigin: true,
         secure: false,
       },
