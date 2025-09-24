@@ -70,7 +70,7 @@ function InfoTipoCarga({
             src={imageUrl}
             alt={title}
             sx={{
-              width: '70%',
+              width: { xs: '100%', sm: '100%' },
               height: 'auto',
               objectFit: 'cover',
               display: 'block',

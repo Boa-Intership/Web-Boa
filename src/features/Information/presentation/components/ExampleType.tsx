@@ -37,7 +37,7 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
           alt={title}
           sx={{
             width: '100%',
-            height: 'auto',
+            height: { xs: 'auto', sm: '300px' },
             objectFit: 'cover',
             display: 'block',
           }}
@@ -48,6 +48,7 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
         <Box
           sx={{
             position: 'absolute',
+            borderRadius: '9px',
             top: 0,
             left: 0,
             width: '100%',
