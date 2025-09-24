@@ -44,6 +44,7 @@ function TipoCargaScreen() {
       <InfoTipoCarga
         title={data.title}
         description={data.description}
+        imageUrl={data.imageUrl}
         subtitle={data.subtitle}
         details={data.details}
         notice={data.notice}

@@ -62,7 +62,7 @@ export const AuthSection = () => {
           }}
           color="secondary"
         >
-          Abrir cuenta
+          Registrarse
         </AppButton>
       </Box>
     );

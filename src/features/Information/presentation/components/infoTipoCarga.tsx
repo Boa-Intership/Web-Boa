@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ExampleType from './ExampleType';
 import { Box, Alert, Grid, Stack } from '@mui/material';
 import { AppTypography, BoAButton } from 'ui';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 interface Detail {
   title?: string;
@@ -18,6 +19,7 @@ type Example = {
 interface infoTipoCargaProps {
   title: string;
   description: string;
+  imageUrl?: string;
   subtitle: string;
   details: Detail[];
   notice?: string[];
@@ -28,6 +30,7 @@ interface infoTipoCargaProps {
 function InfoTipoCarga({
   title,
   description,
+  imageUrl,
   details,
   subtitle,
   notice,
@@ -57,6 +60,23 @@ function InfoTipoCarga({
               {note}
             </Alert>
           ))}
+        </Box>
+      )}
+      {/* Imagen principal (si existe) */}
+      {imageUrl && imageUrl.length > 0 && (
+        <Box sx={{ width: '100%', justifyItems: 'center', position: 'relative', mb: 3 }}>
+          <Box
+            component="img"
+            src={imageUrl}
+            alt={title}
+            sx={{
+              width: '70%',
+              height: 'auto',
+              objectFit: 'cover',
+              display: 'block',
+            }}
+            loading="lazy"
+          />
         </Box>
       )}
       <Box
@@ -93,9 +113,12 @@ function InfoTipoCarga({
         <Grid container spacing={2} mb={3}>
           <Grid item minHeight={'10rem'}>
             {details[selectedDetail].description.map((desc, i) => (
-              <AppTypography key={i} variant="baseRegular" mb={2} textAlign="justify">
-                ✔️ {desc}
-              </AppTypography>
+              <Box key={i} sx={{ display: 'flex', gap: 2 }}>
+                <CheckCircleOutlineIcon sx={{ color: 'primary.dark' }} />
+                <AppTypography key={i} variant="baseRegular" mb={2} textAlign="justify">
+                  {desc}
+                </AppTypography>
+              </Box>
             ))}
           </Grid>
           {/* Imagen (si existe) */}

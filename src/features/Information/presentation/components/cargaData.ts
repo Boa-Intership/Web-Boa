@@ -14,6 +14,7 @@ interface Example {
 export interface InfoTipoCarga {
   title: string;
   description: string;
+  imageUrl?: string;
   subtitle: string;
   details: Detail[];
   notice: string[];
@@ -26,18 +27,20 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     title: 'Carga general',
     description:
       'La carga general son artículos que no se clasifican como carga especial y que no requieren precauciones adicionales ni manipulación especial durante el transporte aéreo. Estos tipos de artículos incluyen artículos minoristas y la mayoría de los bienes de consumo (con excepción de teléfonos móviles, tabletas y portátiles), productos secos, artículos de ferretería, textiles, etc. Piense en los objetos cotidianos; la mayoría de ellos se clasificarían en la categoría de carga general.',
-    subtitle: 'Requisitos para el transporte de carga general',
+    subtitle: 'Requisitos y condiciones para el transporte de carga general',
     details: [
       {
         title: 'Nacional (Interior de Bolivia)',
         description: [
-          'La carga debe presentarse abierta para su total revisión.',
-          'El cliente o agente de carga debe contar con material para terminar de embalar después de la revisión.',
-          'Usar embalaje adecuado con marcado, etiquetado y rotulado (nombre del destinatario, teléfono, ciudad-país).',
-          'Para aceptar el envio se requiere documento de identidad vigente (carnet de identidad, licencia de conducir o pasaporte)',
-          'La carga se recibe hasta 2 horas antes del vuelo y se entrega 1 hora después del arribo de la aeronave.',
-          'La recepción se realiza exclusivamente en oficinas de BoA Cargo.',
-          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'La carga debe presentarse abierta, sin estar empaquetada en su totalidad, para permitir la revisión por parte de los agentes de seguridad.',
+          'Para la aceptación del envío, es requisito presentar su documento de identidad vigente, el cual puede ser el carnet de identidad, la licencia de conducir o el pasaporte.',
+          'Tanto usted como su agente de carga deben llevar el material necesario, como cinta de embalaje y etiquetas, para poder terminar de embalar y cerrar la carga.',
+          'Asegúrese de que el empaque incluya el marcado, etiquetado y rotulado correspondiente, con la información del destinatario: nombre, teléfono, ciudad y país.',
+          'Una vez aceptada la carga para transporte aéreo, se le entregará una Guía Aérea por cada envío. Este documento principal contiene los datos del remitente y destinatario, origen, destino, descripción de la carga, peso, instrucciones especiales y un número único de rastreo.',
+          'El día del vuelo, usted debe entregar la carga como mínimo 2 horas antes de la salida del avión, debido al tiempo requerido para realizar los controles de seguridad en el aeropuerto.',
+          'La recepción de la carga se realiza exclusivamente en oficinas de BoA Cargo.',
+          'La persona autorizada para recoger la carga debe presentar su documento de identidad vigente (Cédula, Licencia de Conducir o Pasaporte).',
+          'La carga podrá ser recogida a partir de 1 hora después de que el avión haya aterrizado en destino.',
         ],
 
         imageUrl: [],
@@ -93,24 +96,24 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     title: 'Animales vivos',
     description:
       'Boliviana de Aviación ofrece un servicio seguro y confiable para el transporte de animales vivos, tanto a nivel nacional como internacional. Contamos con instalaciones y procedimientos diseñados para garantizar el bienestar de los animales durante todo el proceso, desde la carga hasta la entrega, asegurando condiciones adecuadas de temperatura, ventilación y manejo especializado. Este servicio está pensado para mascotas y animales domésticos, brindando tranquilidad y confianza a nuestros clientes en cada envío.',
-    subtitle: 'Requisitos para el transporte de animales vivos: Solo perros y gatos',
+    subtitle: 'Requisitos para el transporte de animales vivos: Solo animales domésticos',
     details: [
       {
         title: 'Nacional (Interior de Bolivia)',
         description: [
-          'Reservar con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
-          'Presentar animales vivos 2 horas antes del vuelo.',
+          'Reservar su envio con al menos 24 horas de anticipación en oficinas de BoA Cargo.',
+          'Presentar al animal 2 horas antes del vuelo, esto por controles de seguridad.',
           'El animal debe viajar en jaula adecuada, segura, con material absorbente, marcada, etiquetada y rotulada.',
           'El contenedor debe estar homologado por IATA: rígido, con ventilación, puerta metálica y espacio suficiente para que el animal pueda moverse con normalidad. No se aceptan jaulas de malla de alambre o soldada.',
           'La edad mínima del animal es de 3 meses.',
           'Presentar cartilla de vacunas (original + 2 copias). Deben haber pasado 30 días desde la vacuna antirrábica.',
           'Certificado veterinario que acredite buen estado de salud (original + 2 copias).',
           'Para especies distintas a perros y gatos, se requiere autorización del SENASAG.',
-          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
           'Los perros de musculatura fuerte y aspecto robusto deben llevar bozal.',
           'No se transportan perros ni gatos braquicéfalos (nariz achatada).',
+          'Una vez aceptado al animal para transporte aéreo, se le entregará una Guía Aérea por cada envío. Este documento principal contiene los datos del remitente y destinatario, origen, destino, descripción de la carga, peso, instrucciones especiales y un número único de rastreo.',
           'El destinatario debe recoger al animal a la llegada del vuelo.',
-          'Se recomienda no sedar animales domésticos.',
+          'Se recomienda no sedar animales.',
         ],
 
         imageUrl: [],
@@ -149,16 +152,16 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       // 'Importante: BoA no transporta animales salvajes o en peligro de extinción sin los permisos legales requeridos (como el CITES). Para mas información consulte con un agente de cargo.',
     ],
     example: [
-      // {
-      //   title: 'Mascotas domésticas',
-      //   description: 'Perros, gatos',
-      //   image: '/informacioPage/animalesVivos/GGI_mascotas.webp',
-      // },
-      // {
-      //   title: 'Animales exóticos (autorizados)',
-      //   description: 'Tortugas, iguanas.',
-      //   image: '/informacioPage/animalesVivos/GGI_exotico.webp',
-      // },
+      {
+        title: 'Los más comunes',
+        description: 'Perros, gatos',
+        image: '/informacioPage/animalesVivos/GGI_mascotas.webp',
+      },
+      {
+        title: 'Otros vistos',
+        description: 'Conejos, hamster.',
+        image: '/informacioPage/animalesVivos/GGI_aniPeque.webp',
+      },
     ],
   },
   perecederos: {
@@ -177,7 +180,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'La carga debe embalarse de manera que proteja el producto transportado.',
           'Usar embalaje adecuado según el tipo de producto.',
           'El paquete debe estar marcado y rotulado con: nombre completo del destinatario, teléfono y ciudad.',
-          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Una vez aceptado la carga para transporte aéreo, se le entregará una Guía Aérea por cada envío. Este documento principal contiene los datos del remitente y destinatario, origen, destino, descripción de la carga, peso, instrucciones especiales y un número único de rastreo.',
           'Si la carga es sensible a la temperatura, debe incluir su propio refrigerante.',
           'El transporte se realiza a temperatura ambiente; el cliente debe tomar las previsiones necesarias para mantener la temperatura óptima.',
           'En productos con hielo seco (CO₂ sólido), se debe indicar en la etiqueta la cantidad exacta en kilogramos.',
@@ -242,16 +245,16 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       },
       {
         title: 'Farmacéuticos y productos médicos',
-        description: 'Medicamentos, vacunas',
-        image: '/informacioPage/perecederos/GGI_flores.webp',
+        description: 'Medicamentos, vacunas que requieren refrigeración',
+        image: '/informacioPage/perecederos/vacunas.webp',
       },
     ],
   },
   restosHumanos: {
     title: 'Restos humanos',
     description:
-      'Boliviana de Aviación ofrece el transporte de restos humanos de cuerpo completo (féretro) en vuelos nacionales e internacionales, garantizando un servicio respetuoso y seguro. Para su aceptación es necesario contar con la documentación exigida por las autoridades competentes, como certificados médicos y de embalsamamiento, además de cumplir con las normativas de los países de origen, tránsito y destino.',
-    subtitle: 'Requisitos para el transporte de restos humanos: Solo féretro',
+      'Boliviana de Aviación ofrece el transporte de restos humanos de cuerpo completo (féretro) o cremados (cenizas) en vuelos nacionales e internacionales, garantizando un servicio respetuoso y seguro. Para su aceptación es necesario contar con la documentación exigida por las autoridades competentes, como certificados médicos y de embalsamamiento, además de cumplir con las normativas de los países de origen, tránsito y destino.',
+    subtitle: 'Requisitos para el transporte de restos humanos',
     details: [
       {
         title: 'Nacional (Interior de Bolivia)',
@@ -263,7 +266,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'Certificado sanitario emitido por el médico forense que compruebe que el difunto no falleció a causa de una enfermedad infectocontagiosa (original + 2 copias) ',
           'Certificado de formolización, (embalsamamiento), cremación según sea aplicable.',
           'Autorización para traslado del cadáver, emitido por una Oficina Gubernamental(Alcaldía o Policía Boliviana) del departamento local donde se origina el embarque.',
-          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Una vez aceptado la carga para transporte aéreo, se le entregará una Guía Aérea por cada envío. Este documento principal contiene los datos del remitente y destinatario, origen, destino, descripción de la carga, peso, instrucciones especiales y un número único de rastreo.',
           'Los restos humanos exhumados, cuya data de fallecimiento sea inferior a 5 años,  no serán aceptados para el transporte.',
         ],
         imageUrl: [],
@@ -290,20 +293,20 @@ export const cargaData: Record<string, InfoTipoCarga> = {
       },
     ],
     notice: [
-      'Se recomienda que para el traslado de restos humanos se contacte con su funeraria de confianza.',
+      'Se recomienda para el traslado de restos humanos se contacte con su funeraria de confianza.',
     ],
     example: [
-      // {
-      //   title: 'Restos humanos en féretro',
-      //   description:
-      //     'El cuerpo del fallecido, preparado, embalsamado y colocado en un ataúd especial para vuelos.',
-      //   image: '/informacioPage/restosHumanos/GGI_ataud.webp',
-      // },
-      // {
-      //   title: 'Cenizas humanas (urnas)',
-      //   description: 'Restos cremados transportados en urnas funerarias adecuadas.',
-      //   image: '/informacioPage/restosHumanos/GGI_cenizas.webp',
-      // },
+      {
+        title: 'Restos humanos en féretro',
+        description:
+          'El cuerpo del fallecido, preparado, embalsamado y colocado en un ataúd especial para vuelos.',
+        image: '/informacioPage/restosHumanos/ataud.webp',
+      },
+      {
+        title: 'Cenizas humanas (urnas)',
+        description: 'Restos cremados transportados en urnas funerarias adecuadas.',
+        image: '/informacioPage/restosHumanos/GGI_cenizas.webp',
+      },
     ],
   },
   cargaValorada: {
@@ -325,7 +328,7 @@ export const cargaData: Record<string, InfoTipoCarga> = {
           'El transporte debe gestionarse a través de un agente de carga especializado en equipos porta valor certificado.',
           'El embalaje debe ser adecuado al peso y contenido, evitando manipulación indebida o extracción de componentes.',
           'Presentar fotocopia del Formulario M-02 de compra y venta de minerales y metales, emitido y autorizado por SENARECOM.',
-          'Se entregará al cliente una guía aérea (Air Waybill) por cada envío, la cual es el documento principal del transporte de carga aérea. Contiene datos del remitente y destinatario, origen y destino, descripción de la carga, peso, instrucciones especiales y número único de rastreo.',
+          'Una vez aceptado la carga para transporte aéreo, se le entregará una Guía Aérea por cada envío. Este documento principal contiene los datos del remitente y destinatario, origen, destino, descripción de la carga, peso, instrucciones especiales y un número único de rastreo.',
         ],
         imageUrl: [],
       },
@@ -365,29 +368,32 @@ export const cargaData: Record<string, InfoTipoCarga> = {
     ],
   },
   peligrosa: {
-    title: 'Otros tipos de carga',
+    title: 'Carga peligrosa',
     description:
-      'Para obtener más información sobre otros tipos de carga, le recomendamos contactar a un agente de carga, quien le brindará asesoramiento y le ayudará a clasificar su envío de acuerdo con las especificaciones necesarias.',
+      'El transporte aéreo exige los más altos estándares de seguridad, especialmente en lo que respecta al transporte de mercancias peligrosas, no es necesariamente su uso común, sino su composición química o física y su potencial de causar daño en un vuelo. Estos deben ser identificadas, clasificadas, embaladas, marcadas y documentadas de acuerdo con regulaciones específicas y sumamente estrictas para garantizar la seguridad o inclusive algunos prohibirse para el transporte aéreo',
+    imageUrl: '/informacioPage/otroCarga/peligrososEtiquetas.png',
     subtitle: '',
     details: [
-      {
-        title: 'Carga peligrosa',
-        description: [],
-        imageUrl: ['/informacioPage/otroCarga/peligrososEtiquetas.png'],
-      },
+      // {
+      //   title: 'Carga peligrosa',
+      //   description: [],
+      //   imageUrl: ['/informacioPage/otroCarga/peligrososEtiquetas.png'],
+      // },
     ],
-    notice: [],
+    notice: [
+      'Las Mercancías Peligrosas sólo serán aceptados si cumplen con la Reglamentación de la IATA, los requerimientos de los países a través de los cuales dichas expediciones hayan de ser transportadas.',
+    ],
     example: [
-      {
-        title: 'Mercancias Peligrosas',
-        description: 'Según reglamento DGR de la IATA',
-        image: '/informacioPage/otroCarga/DGR.webp',
-      },
-      {
-        title: 'Suministros médicos',
-        description: 'Vacunas, medicamentos',
-        image: '/informacioPage/otroCarga/GGI_suministrosMedicos.webp',
-      },
+      // {
+      //   title: 'Mercancias Peligrosas',
+      //   description: 'Según reglamento DGR de la IATA',
+      //   image: '/informacioPage/otroCarga/DGR.webp',
+      // },
+      // {
+      //   title: 'Suministros médicos',
+      //   description: 'Vacunas, medicamentos',
+      //   image: '/informacioPage/otroCarga/GGI_suministrosMedicos.webp',
+      // },
     ],
   },
 };
