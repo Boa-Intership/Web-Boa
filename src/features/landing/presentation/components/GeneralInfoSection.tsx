@@ -1,61 +1,66 @@
 import React from 'react';
 import { AppContainer, AppButton, AppGrid, AppTypography, AppStack } from 'ui';
-import { Typography, Divider, Box, Stack } from '@mui/material';
+import { Divider, Box, CircularProgress, Alert } from '@mui/material';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import GavelIcon from '@mui/icons-material/Gavel';
 import { useNavigate } from 'react-router-dom';
+import { useGeneralInfo } from '../hooks/useGeneralInfo';
 
-interface SectionInfo {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  link: string;
-  buttonText: string;
-}
+// Mapeo simplificado de iconos
+const getIconComponent = (tipo: string): React.ReactNode => {
+  const iconProps = { sx: { fontSize: 48, mb: 2 } };
 
-const sections: SectionInfo[] = [
-  {
-    title: 'Tipos de carga y normativa',
-    description:
-      'Conoce los diferentes tipos de carga que puedes enviar y la normativa vigente para cada uno.',
-    icon: <LocalShippingIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />,
-    link: '/tipos-cargas',
-    buttonText: 'Ver más',
-  },
-  {
-    title: 'Términos y condiciones',
-    description:
-      'Consulta los términos y condiciones para el envío de paquetes y servicios de BOA Cargo.',
-    icon: <GavelIcon sx={{ fontSize: 48, color: 'secondary.main', mb: 2 }} />,
-    link: '/terminos',
-    buttonText: 'Leer términos',
-  },
-];
+  switch (tipo) {
+    case 'envio':
+      return <LocalShippingIcon {...iconProps} sx={{ ...iconProps.sx, color: 'primary.main' }} />;
+    case 'legal':
+      return <GavelIcon {...iconProps} sx={{ ...iconProps.sx, color: 'secondary.main' }} />;
+    case 'documentos':
+      return <LocalShippingIcon {...iconProps} sx={{ ...iconProps.sx, color: 'success.main' }} />;
+    case 'soporte':
+      return <GavelIcon {...iconProps} sx={{ ...iconProps.sx, color: 'warning.main' }} />;
+    default:
+      return <LocalShippingIcon {...iconProps} sx={{ ...iconProps.sx, color: 'primary.main' }} />;
+  }
+};
 
-interface GeneralInfoSectionProps {
-  title?: string;
-  subtitle?: string;
-}
-
-const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
-  title = 'Información General',
-  subtitle = 'Encuentra aquí información relevante sobre nuestros servicios, normativa y condiciones para tus envíos.',
-}) => {
+const GeneralInfoSection: React.FC = () => {
   const navigate = useNavigate();
+  const { data, loading, error } = useGeneralInfo();
+
+  if (loading) {
+    return (
+      <AppContainer sx={{ py: { xs: 6, md: 8 }, textAlign: 'center' }}>
+        <CircularProgress />
+      </AppContainer>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <AppContainer sx={{ py: { xs: 6, md: 8 } }}>
+        <Alert severity="error">
+          Error cargando información general: {error || 'Datos no disponibles'}
+        </Alert>
+      </AppContainer>
+    );
+  }
   return (
     <AppContainer sx={{ py: { xs: 6, md: 8 } }}>
       <AppStack alignItems="center" mb={2} textAlign={'center'}>
         <AppTypography variant="h2Bold" color="primary">
-          {title}
+          {data.titulo}
         </AppTypography>
-        <AppTypography variant="baseMedium" color="text.secondary">
-          {subtitle}
-        </AppTypography>
+        {data.subtitulo && (
+          <AppTypography variant="baseMedium" color="text.secondary">
+            {data.subtitulo}
+          </AppTypography>
+        )}
       </AppStack>
       <Divider sx={{ mb: 4 }} />
       <AppGrid container spacing={4} justifyContent="center">
-        {sections.map((section) => (
-          <AppGrid item xs={12} sm={6} key={section.title}>
+        {data.elementos.map((elemento) => (
+          <AppGrid item xs={12} sm={6} key={elemento.id}>
             <Box
               sx={{
                 p: 4,
@@ -67,21 +72,21 @@ const GeneralInfoSection: React.FC<GeneralInfoSectionProps> = ({
                 height: '100%',
               }}
             >
-              {section.icon}
+              {getIconComponent(elemento.icono)}
               <AppTypography variant="h4Bold" mb={2}>
-                {section.title}
+                {elemento.titulo}
               </AppTypography>
               <AppTypography variant="baseRegular" mb={2} color="text.secondary" textAlign="center">
-                {section.description}
+                {elemento.descripcion}
               </AppTypography>
               <AppButton
                 variant="contained"
                 color="primary"
                 size="large"
-                onClick={() => navigate(section.link)}
+                onClick={() => navigate(elemento.enlace)}
                 sx={{ mt: 'auto' }}
               >
-                {section.buttonText}
+                {elemento.texto_boton}
               </AppButton>
             </Box>
           </AppGrid>

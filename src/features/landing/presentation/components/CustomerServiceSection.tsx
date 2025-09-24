@@ -1,35 +1,37 @@
-import React from 'react';
-import { Box, Typography, List, ListItem, Stack } from '@mui/material';
-import aboutImg from 'assets/call.webp';
+import React, { FC } from 'react';
+import { Box, List, ListItem, Stack, CircularProgress } from '@mui/material';
 import { AppBox, AppContainer, AppGrid, AppButton, AppTypography } from 'ui';
-import { ROUTES } from 'router/routes';
 import { useNavigate } from 'react-router-dom';
+import { useCustomerService } from '../hooks/useCustomerService';
+import aboutImg from '@/assets/call.webp';
 
-interface CustomerServiceData {
-  paragraph: string;
-  Why: string[];
-  Why2: string[];
-}
-
-const data: CustomerServiceData = {
-  paragraph:
-    'Nuestro equipo de atención al cliente está disponible para ayudarte con tus envíos, dudas y solicitudes. Contáctanos para recibir soporte personalizado y eficiente.',
-  Why: [
-    'Soporte por teléfono y correo',
-    'Chat en vivo disponible',
-    'Horarios extendidos de atención',
-    'Personal capacitado',
-  ],
-  Why2: [
-    'Respuestas rápidas',
-    'Seguimiento de casos',
-    'Atención en todo el país',
-    'Soluciones personalizadas',
-  ],
-};
-
-const ServiceSection: React.FC = () => {
+const CustomerServiceSection: FC = () => {
   const navigate = useNavigate();
+  const { data, loading, error } = useCustomerService();
+
+  const handleButtonClick = () => {
+    if (data?.enlace_boton) {
+      navigate(data.enlace_boton);
+    }
+  };
+
+  if (loading) {
+    return (
+      <AppBox sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+        <CircularProgress />
+      </AppBox>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <AppBox sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+        <AppTypography variant="baseRegular" color="error">
+          Error cargando la sección de atención al cliente
+        </AppTypography>
+      </AppBox>
+    );
+  }
 
   return (
     <AppBox>
@@ -47,8 +49,8 @@ const ServiceSection: React.FC = () => {
           >
             <Box
               component="img"
-              src={aboutImg}
-              alt="Atención al Cliente"
+              src={data.imagen_url || aboutImg}
+              alt={data.titulo}
               sx={{
                 width: { xs: '105%', md: '115%' },
                 borderRadius: 6,
@@ -60,36 +62,36 @@ const ServiceSection: React.FC = () => {
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 1, // espacio entre elementos
+                gap: 1,
                 alignItems: 'flex-start',
               }}
             >
               <Stack sx={{ gap: 2, mb: 2 }}>
                 <AppTypography variant="h2Bold" color="primary">
-                  Atención al Cliente
+                  {data.titulo}
                 </AppTypography>
                 <AppTypography variant="baseRegular" color="text.secondary">
-                  {data.paragraph}
+                  {data.descripcion}
                 </AppTypography>
               </Stack>
               <AppGrid container>
                 <AppGrid>
                   <List>
-                    {data.Why.map((d, i) => (
-                      <ListItem key={`why-${i}`}>{d}</ListItem>
+                    {data.elementos_izquierda.map((item) => (
+                      <ListItem key={item.id}>{item.texto}</ListItem>
                     ))}
                   </List>
                 </AppGrid>
                 <AppGrid>
                   <List>
-                    {data.Why2.map((d, i) => (
-                      <ListItem key={`why2-${i}`}>{d}</ListItem>
+                    {data.elementos_derecha.map((item) => (
+                      <ListItem key={item.id}>{item.texto}</ListItem>
                     ))}
                   </List>
                 </AppGrid>
               </AppGrid>
-              <AppButton size="large" color="primary" onClick={() => navigate(ROUTES.CONTACTO)}>
-                Contáctanos
+              <AppButton size="large" color="primary" onClick={handleButtonClick}>
+                {data.texto_boton}
               </AppButton>
             </AppBox>
           </AppGrid>
@@ -99,4 +101,4 @@ const ServiceSection: React.FC = () => {
   );
 };
 
-export default ServiceSection;
+export default CustomerServiceSection;
