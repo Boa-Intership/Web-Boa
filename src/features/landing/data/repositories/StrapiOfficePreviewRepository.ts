@@ -30,7 +30,10 @@ interface StrapiOfficePreviewResponse {
 }
 
 export class StrapiOfficePreviewRepository implements OfficePreviewRepository {
-  private readonly baseUrl = '/api/cms';
+  private readonly baseUrl =
+    import.meta.env.VITE_APP_ENV === 'production'
+      ? `${import.meta.env.VITE_STRAPI_URL}/api`
+      : '/api/cms';
 
   async getOfficePreview(): Promise<OfficePreviewContent> {
     try {

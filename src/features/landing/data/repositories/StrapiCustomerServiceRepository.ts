@@ -28,7 +28,10 @@ interface StrapiCustomerServiceResponse {
 }
 
 export class StrapiCustomerServiceRepository implements CustomerServiceRepository {
-  private readonly baseUrl = '/api/cms';
+  private readonly baseUrl =
+    import.meta.env.VITE_APP_ENV === 'production'
+      ? `${import.meta.env.VITE_STRAPI_URL}/api`
+      : '/api/cms';
 
   async getCustomerService(): Promise<CustomerServiceContent> {
     try {
