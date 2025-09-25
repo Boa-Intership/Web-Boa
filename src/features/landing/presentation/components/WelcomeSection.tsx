@@ -1,11 +1,9 @@
-import { AppBox, AppContainer, AppGrid, AppButton } from 'ui';
+import { AppTypography, AppBox, AppContainer, AppGrid, AppButton } from 'ui';
 import { Box, Divider, Stack, CircularProgress, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import welcomeImg from '@/assets/welcome.webp';
 import { FC } from 'react';
-import headline from '@/assets/headline-curve.svg';
 import { ROUTES } from 'router/routes';
-import { AppTypography } from 'ui';
 import { useWelcomeContent } from '../hooks/useWelcomeContent';
 
 interface Exp {

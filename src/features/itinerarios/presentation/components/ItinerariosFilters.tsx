@@ -81,12 +81,63 @@ export default function ItinerariosFilters({
             value={value.origin ?? ''}
             onChange={(e) => onChange({ ...value, origin: e.target.value || undefined })}
           >
-            <MenuItem value="">Todas las ciudades</MenuItem>
-            {cities.map((c) => (
-              <MenuItem key={c.codigo} value={c.codigo}>
-                {c.nombre} ({c.codigo})
-              </MenuItem>
-            ))}
+            <MenuItem
+              value=""
+              disabled
+              sx={{ fontSize: '1rem ', fontWeight: 'bold', color: 'text.secondary' }}
+            >
+              ─ Vuelos Nacionales ─
+            </MenuItem>
+            {cities
+              .map((c, index) => {
+                const bolivianCities = [
+                  'LPB',
+                  'CBB',
+                  'VVI',
+                  'SRE',
+                  'TJA',
+                  'UYU',
+                  'ORU',
+                  'RBQ',
+                  'TDD',
+                  'CIJ',
+                  'BYC',
+                ];
+                const isBolivian = bolivianCities.includes(c.codigo);
+                const prevCity = cities[index - 1];
+                const prevIsBolivian = prevCity ? bolivianCities.includes(prevCity.codigo) : true;
+
+                // Mostrar separador cuando cambiamos de bolivianas a internacionales
+                const showSeparator = index > 0 && prevIsBolivian && !isBolivian;
+
+                const items = [];
+
+                if (showSeparator) {
+                  items.push(
+                    <MenuItem
+                      key={`separator-${c.codigo}`}
+                      disabled
+                      sx={{
+                        fontSize: '0.75rem',
+                        fontWeight: 'bold',
+                        color: 'text.secondary',
+                        textAlign: 'center',
+                      }}
+                    >
+                      ── Vuelos Internacionales ──
+                    </MenuItem>
+                  );
+                }
+
+                items.push(
+                  <MenuItem key={c.codigo} value={c.codigo}>
+                    {c.nombre} ({c.codigo})
+                  </MenuItem>
+                );
+
+                return items;
+              })
+              .flat()}
           </Select>
         </FormControl>
 
@@ -97,12 +148,63 @@ export default function ItinerariosFilters({
             value={value.destination ?? ''}
             onChange={(e) => onChange({ ...value, destination: e.target.value || undefined })}
           >
-            <MenuItem value="">Todas las ciudades</MenuItem>
-            {cities.map((c) => (
-              <MenuItem key={c.codigo} value={c.codigo}>
-                {c.nombre} ({c.codigo})
-              </MenuItem>
-            ))}
+            <MenuItem
+              value=""
+              disabled
+              sx={{ fontSize: '1rem', fontWeight: 'bold', color: 'text.secondary' }}
+            >
+              ─ Vuelos Nacionales ─
+            </MenuItem>
+            {cities
+              .map((c, index) => {
+                const bolivianCities = [
+                  'LPB',
+                  'CBB',
+                  'VVI',
+                  'SRE',
+                  'TJA',
+                  'UYU',
+                  'ORU',
+                  'RBQ',
+                  'TDD',
+                  'CIJ',
+                  'BYC',
+                ];
+                const isBolivian = bolivianCities.includes(c.codigo);
+                const prevCity = cities[index - 1];
+                const prevIsBolivian = prevCity ? bolivianCities.includes(prevCity.codigo) : true;
+
+                // Mostrar separador cuando cambiamos de bolivianas a internacionales
+                const showSeparator = index > 0 && prevIsBolivian && !isBolivian;
+
+                const items = [];
+
+                if (showSeparator) {
+                  items.push(
+                    <MenuItem
+                      key={`separator-${c.codigo}`}
+                      disabled
+                      sx={{
+                        fontSize: '0.75rem',
+                        fontWeight: 'bold',
+                        color: 'text.secondary',
+                        textAlign: 'center',
+                      }}
+                    >
+                      ── Vuelos Internacionales ──
+                    </MenuItem>
+                  );
+                }
+
+                items.push(
+                  <MenuItem key={c.codigo} value={c.codigo}>
+                    {c.nombre} ({c.codigo})
+                  </MenuItem>
+                );
+
+                return items;
+              })
+              .flat()}
           </Select>
         </FormControl>
 

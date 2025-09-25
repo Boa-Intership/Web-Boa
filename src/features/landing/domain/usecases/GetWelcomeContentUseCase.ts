@@ -1,7 +1,7 @@
 import { WelcomeContent, WelcomeContentRepository } from '../entities/WelcomeContent';
 
 export class GetWelcomeContentUseCase {
-  constructor(private repository: WelcomeContentRepository) {}
+  constructor(private readonly repository: WelcomeContentRepository) {}
 
   async execute(): Promise<WelcomeContent> {
     try {

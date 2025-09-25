@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Grid, TextField, Typography, Paper } from '@mui/material';
 import { Person } from '@mui/icons-material';
 import { validateField } from '../../domain/validators/validateDatosPersonales';
-import { AppTypography } from 'ui';
+import { getUserProfile } from '../../data/services/user.service';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const [localData, setLocalData] = useState(
@@ -20,11 +20,71 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   });
   */
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const user = await getUserProfile(token);
+
+        setLocalData((prev: any) => ({
+          ...prev,
+          remitente: {
+            ...prev.remitente,
+            ci: user.nit || '',
+            celular: user.phone || '',
+            nombre: user.name || '',
+            correo: user.email || '',
+            direccion: user.address || '',
+          },
+        }));
+        /**
+        setLocalData((prev: any) => ({
+          ...prev,
+          remitente: {
+            ci: prev.remitente.ci || user.nit || '',
+            celular: prev.remitente.celular || user.phone || '',
+            nombre: prev.remitente.nombre || user.name || '',
+            correo: prev.remitente.correo || user.email || '',
+            direccion: prev.remitente.direccion || user.address || '',
+          },
+        }));
+         */
+      } catch (error) {
+        console.error('Error al obtener el perfil del usuario:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  // Cambiar desde aqui si un campo será requerido o no
+  const fieldConfig: Record<string, Record<string, boolean>> = {
+    remitente: {
+      ci: true,
+      celular: true,
+      nombre: true,
+      correo: true,
+      direccion: false,
+    },
+    destinatario: {
+      ci: false,
+      celular: true,
+      nombre: true,
+      correo: false,
+      direccion: false,
+    },
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     tipo: 'remitente' | 'destinatario'
   ) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === 'ci' || name === 'celular') {
+      value = value.replace(/\D/g, ''); // elimina todo lo que NO sea digito
+    }
     // Validar el campo individualmente
     const error = validateField(name, value);
     setLocalData((prev: any) => ({
@@ -48,25 +108,15 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     const newErrors: any = { remitente: {}, destinatario: {} };
     let isValid = true;
 
-    const requiredFieldsRemitente = ['ci', 'celular', 'nombre', 'correo'];
-    const requiredFieldsDestinatario = ['celular', 'nombre'];
-
-    requiredFieldsRemitente.forEach((field) => {
-      const value = localData.remitente?.[field] || '';
-      const error = validateField(field, value);
-      if (error) {
-        newErrors.remitente[field] = error;
-        isValid = false;
-      }
-    });
-
-    requiredFieldsDestinatario.forEach((field) => {
-      const value = localData.destinatario?.[field] || '';
-      const error = validateField(field, value);
-      if (error) {
-        newErrors.destinatario[field] = error;
-        isValid = false;
-      }
+    (Object.keys(fieldConfig) as ('remitente' | 'destinatario')[]).forEach((tipo) => {
+      Object.entries(fieldConfig[tipo]).forEach(([field, required]) => {
+        const value = localData[tipo]?.[field] || '';
+        const error = validateField(field, value, required);
+        if (error) {
+          newErrors[tipo][field] = error;
+          isValid = false;
+        }
+      });
     });
 
     setErrors(newErrors);
@@ -77,23 +127,27 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     }
   };
 
-  const renderTextField = (
-    tipo: 'remitente' | 'destinatario',
-    name: string,
-    label: string,
-    required = false
-  ) => (
-    <TextField
-      label={label}
-      name={name}
-      fullWidth
-      required={required}
-      value={localData[tipo]?.[name] || ''}
-      onChange={(e) => handleChange(e, tipo)}
-      error={!!errors[tipo]?.[name]}
-      helperText={errors[tipo]?.[name] || ''}
-    />
-  );
+  const renderTextField = (tipo: 'remitente' | 'destinatario', name: string, label: string) => {
+    const required = fieldConfig[tipo][name];
+    const isNumericField = name === 'ci' || name === 'celular';
+    return (
+      <TextField
+        label={label}
+        name={name}
+        fullWidth
+        required={required}
+        value={localData[tipo]?.[name] || ''}
+        onChange={(e) => handleChange(e, tipo)}
+        error={!!errors[tipo]?.[name]}
+        helperText={errors[tipo]?.[name] || ''}
+        inputProps={
+          isNumericField
+            ? { inputMode: 'numeric' } // para el teclado numerico en dispositivos moviles
+            : undefined
+        }
+      />
+    );
+  };
 
   return (
     <Box>
@@ -103,23 +157,22 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
           <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor: '#FAFAFA' }}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
               <Person color="primary" />
-              <AppTypography variant="h4Regular" color="primary">
+              <Typography variant="h5" color="primary">
                 Información del Remitente
-              </AppTypography>
+              </Typography>
             </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                {renderTextField('remitente', 'ci', 'CI', true)}
-                {/** {renderTextField('remitente', 'celular', 'Número Celular', true)} */}
+                {renderTextField('remitente', 'ci', 'CI')}
               </Grid>
               <Grid item xs={12} sm={6}>
-                {renderTextField('remitente', 'celular', 'Número Celular', true)}
+                {renderTextField('remitente', 'celular', 'Número Celular')}
               </Grid>
               <Grid item xs={12}>
-                {renderTextField('remitente', 'nombre', 'Nombre', true)}
+                {renderTextField('remitente', 'nombre', 'Nombre')}
               </Grid>
               <Grid item xs={12}>
-                {renderTextField('remitente', 'correo', 'Correo Electrónico', true)}
+                {renderTextField('remitente', 'correo', 'Correo Electrónico')}
               </Grid>
               <Grid item xs={12}>
                 {renderTextField('remitente', 'direccion', 'Dirección')}
@@ -133,19 +186,19 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
           <Paper elevation={2} sx={{ p: 2, borderRadius: 4, bgcolor: '#FAFAFA' }}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
               <Person color="primary" />
-              <AppTypography variant="h4Regular" color="primary">
+              <Typography variant="h5" color="primary">
                 Información del Destinatario
-              </AppTypography>
+              </Typography>
             </Box>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 {renderTextField('destinatario', 'ci', 'CI')}
               </Grid>
               <Grid item xs={12} sm={6}>
-                {renderTextField('destinatario', 'celular', 'Número Celular', true)}
+                {renderTextField('destinatario', 'celular', 'Número Celular')}
               </Grid>
               <Grid item xs={12}>
-                {renderTextField('destinatario', 'nombre', 'Nombre', true)}
+                {renderTextField('destinatario', 'nombre', 'Nombre')}
               </Grid>
               <Grid item xs={12}>
                 {renderTextField('destinatario', 'correo', 'Correo Electrónico')}

@@ -20,6 +20,7 @@ const RegistrationSuccess: React.FC = () => {
           alignItems: 'center',
           minHeight: '60vh',
           justifyContent: 'center',
+          textAlign: 'center',
         }}
       >
         <Paper
@@ -44,12 +45,20 @@ const RegistrationSuccess: React.FC = () => {
           </Box>
 
           {/* Título */}
-          <AppTypography variant="h4Regular" color="success.main" sx={{ mb: 2 }}>
+          <AppTypography
+            variant="h4Regular"
+            color="success.main"
+            sx={{ mb: 2, textAlign: 'center' }}
+          >
             ¡Registro completado!
           </AppTypography>
 
           {/* Descripción */}
-          <AppTypography variant="baseRegular" color="text.secondary" sx={{ mb: 4 }}>
+          <AppTypography
+            variant="baseRegular"
+            color="text.secondary"
+            sx={{ mb: 4, textAlign: 'center' }}
+          >
             Tu cuenta ha sido creada exitosamente. Ya puedes iniciar sesión y comenzar a usar
             nuestros servicios.
           </AppTypography>

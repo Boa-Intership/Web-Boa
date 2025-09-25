@@ -17,7 +17,7 @@ export interface ApiError {
 }
 
 class HttpClient {
-  private client: AxiosInstance;
+  private readonly client: AxiosInstance;
 
   constructor() {
     this.client = axios.create({

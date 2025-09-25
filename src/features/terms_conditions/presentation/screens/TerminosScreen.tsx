@@ -1,4 +1,4 @@
-import { Paper, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { reglasContrato } from '../components/reglasData';
 import { AppContainer, AppTypography } from 'ui';
 import { useTheme } from '@mui/material/styles';

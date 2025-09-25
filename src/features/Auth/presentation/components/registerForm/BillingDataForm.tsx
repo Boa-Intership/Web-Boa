@@ -1,5 +1,14 @@
 import React from 'react';
-import { TextField, MenuItem, Grid, Box } from '@mui/material';
+import {
+  TextField,
+  MenuItem,
+  Grid,
+  Box,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Control, Controller, FieldErrors, useWatch } from 'react-hook-form';
 import { AppTypography } from 'ui';
 import { RegisterSchema } from '../../../domain/validators';
@@ -54,6 +63,7 @@ const FormField: React.FC<FormFieldProps> = ({
             select={select}
             required={required}
             id={id}
+            name={String(name)}
             label={label}
             type={type}
             fullWidth
@@ -81,14 +91,25 @@ const FormField: React.FC<FormFieldProps> = ({
 interface BillingDataFormProps {
   control: Control<RegisterSchema>;
   errors: FieldErrors<RegisterSchema>;
+  onExpansionChange?: (expanded: boolean) => void; // Nueva prop
 }
 
-const BillingDataForm: React.FC<BillingDataFormProps> = ({ control, errors }) => {
+const BillingDataForm: React.FC<BillingDataFormProps> = ({
+  control,
+  errors,
+  onExpansionChange,
+}) => {
   const billingDocType = useWatch({
     control,
     name: 'billingDocType',
     defaultValue: '1',
   });
+
+  const [expanded, setExpanded] = React.useState(false);
+  const handleChange = (event: React.SyntheticEvent, isExpanded: boolean) => {
+    setExpanded(isExpanded);
+    onExpansionChange?.(isExpanded);
+  };
 
   // Función para controlar que solo se puedan escribir números
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -156,44 +177,66 @@ const BillingDataForm: React.FC<BillingDataFormProps> = ({ control, errors }) =>
   };
 
   return (
-    <>
-      <Box sx={{ mb: '20px' }}>
-        <AppTypography variant="h4Medium" color={'primary.main'}>
-          Datos de Facturación
+    <Accordion
+      expanded={expanded}
+      onChange={handleChange}
+      sx={{
+        boxShadow: 'none',
+        backgroundColor: 'transparent',
+        '&.Mui-expanded': {
+          margin: 0, // Quita el margen cuando está expandido
+        },
+      }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="billing-content"
+        id="billing-header"
+        sx={{
+          p: 0,
+          '&.Mui-expanded': {
+            margin: 0,
+          },
+        }}
+      >
+        <AppTypography variant="h4Regular" color="primary.main">
+          Datos de Facturación (Opcional)
         </AppTypography>
-      </Box>
-      <Grid container spacing={3}>
-        {formFields.map((field) => {
-          // Renderizar el campo
-          const fieldComponent = (
-            <FormField
-              key={field.id}
-              {...field}
-              control={control}
-              errors={errors}
-              onKeyDown={handleKeyDown}
-            />
-          );
-
-          // Si es el campo 'billingNit' y el tipo de documento es CI, agregar el complemento
-          if (field.id === 'billingNit' && billingDocType === '1') {
-            return (
-              <React.Fragment key={field.id}>
-                {fieldComponent}
-                <FormField
-                  key={billingComplementField.id}
-                  {...billingComplementField}
-                  control={control}
-                  errors={errors}
-                />
-              </React.Fragment>
+      </AccordionSummary>
+      <AccordionDetails sx={{ p: 0 }}>
+        <Grid container spacing={3}>
+          {formFields.map((field) => {
+            // Renderizar el campo
+            const fieldComponent = (
+              <FormField
+                key={field.id}
+                {...field}
+                control={control}
+                errors={errors}
+                onKeyDown={handleKeyDown}
+              />
             );
-          }
 
-          return fieldComponent;
-        })}
-      </Grid>
-    </>
+            // Si es el campo 'billingNit' y el tipo de documento es CI, agregar el complemento
+            if (field.id === 'billingNit' && billingDocType === '1') {
+              return (
+                <React.Fragment key={field.id}>
+                  {fieldComponent}
+                  <FormField
+                    key={billingComplementField.id}
+                    {...billingComplementField}
+                    control={control}
+                    errors={errors}
+                  />
+                </React.Fragment>
+              );
+            }
+
+            return fieldComponent;
+          })}
+        </Grid>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 

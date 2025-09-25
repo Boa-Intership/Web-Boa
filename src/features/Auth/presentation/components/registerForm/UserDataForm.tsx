@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField, MenuItem, Grid, Box } from '@mui/material';
-import { Control, Controller, FieldErrors, useWatch } from 'react-hook-form';
+import { Control, Controller, FieldErrors } from 'react-hook-form';
 import { AppTypography } from 'ui';
 import { RegisterSchema } from '../../../domain/validators';
 
@@ -53,6 +53,7 @@ const FormField: React.FC<FormFieldProps> = ({
             select={select}
             required={required}
             id={id}
+            name={String(name)}
             label={label}
             type={type}
             fullWidth
@@ -82,11 +83,6 @@ interface UserDataFormProps {
 }
 
 const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {
-  const docType = useWatch({
-    control,
-    name: 'docType',
-    defaultValue: '1',
-  });
   // Función para controlar que solo se puedan escribir números
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const isNumericField =
@@ -146,30 +142,26 @@ const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {
       autoComplete: 'name',
     },
     {
-      id: 'docType',
-      name: 'docType',
-      label: 'Tipo de Documento',
+      id: 'ci',
+      name: 'ci',
+      label: 'CI',
       gridSize: { xs: 12, sm: 4 },
       required: true,
-      select: true,
-      defaultValue: '1',
-      options: [
-        { value: '1', label: 'CI' },
-        { value: '5', label: 'NIT' },
-      ],
     },
     {
-      id: 'nit',
-      name: 'nit',
-      label: 'CI o NIT',
-      gridSize: { xs: 12, sm: docType === '1' ? 6 : 8 },
-      required: true,
+      id: 'nitComplemento',
+      name: 'nitComplemento',
+      label: 'Complemento',
+      gridSize: { xs: 12, sm: 2 },
+      required: false,
+      placeholder: 'Ej: A1',
+      inputProps: { maxLength: 3 },
     },
     {
       id: 'number',
       name: 'number',
       label: 'Número de Celular',
-      gridSize: { xs: 12 },
+      gridSize: { xs: 12, sm: 6 },
       required: true,
     },
     {
@@ -182,25 +174,14 @@ const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {
     },
   ];
 
-  // Campo de complemento condicional para incluir después del NIT
-  const nitComplementField: FormFieldConfig = {
-    id: 'nitComplemento',
-    name: 'nitComplemento',
-    label: 'Complemento',
-    gridSize: { xs: 12, sm: 2 },
-    required: false,
-    placeholder: 'Ej: A1',
-    inputProps: { maxLength: 3 },
-  };
-
   return (
     <>
       <Box sx={{ mb: '20px' }}>
         <AppTypography variant="h4Regular" color={'primary.main'}>
-          Datos de Usuario
+          Datos personales
         </AppTypography>
       </Box>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} mb={3}>
         {formFields.map((field) => {
           // Renderizar el campo
           const fieldComponent = (
@@ -212,21 +193,6 @@ const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {
               onKeyDown={handleKeyDown}
             />
           );
-
-          // Si es el campo 'nit' y el tipo de documento es CI, agregar el complemento
-          if (field.id === 'nit' && docType === '1') {
-            return (
-              <React.Fragment key={field.id}>
-                {fieldComponent}
-                <FormField
-                  key={nitComplementField.id}
-                  {...nitComplementField}
-                  control={control}
-                  errors={errors}
-                />
-              </React.Fragment>
-            );
-          }
 
           return fieldComponent;
         })}

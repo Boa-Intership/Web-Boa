@@ -1,36 +1,19 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  IconButton,
-  useTheme,
-  useMediaQuery,
-  Button,
-  Menu,
-  MenuItem,
-  Typography,
-  Icon,
-} from '@mui/material';
+import { AppBar, Toolbar, Box, IconButton, useTheme, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import PublicIcon from '@mui/icons-material/Public';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ROUTES } from '../../../router/routes';
+import { ROUTES } from 'router/routes';
 import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
-import AppContainer from '../AppContainer';
-import { AppButton, LogoCargo } from 'ui';
+import { LogoCargo, AppContainer } from 'ui';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { AuthSection } from './AuthSection';
-import { useAuth } from '../../providers/AuthContext';
 
 const navItems = [
   // {
@@ -136,7 +119,15 @@ const AppAppBar: React.FC = () => {
         }}
       >
         <AppContainer sx={{ py: { xs: 1, md: 1 } }}>
-          <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', minHeight: 64 }}>
+          <Toolbar
+            disableGutters
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              minHeight: { xs: 64, md: 64 }, // Altura fija
+              height: { xs: 64, md: 64 },
+            }}
+          >
             {/* LOGO */}
             <Box
               component="img"
@@ -273,9 +264,12 @@ const AppAppBar: React.FC = () => {
       </AppBar>
 
       {/* Spacer para evitar salto de contenido */}
-      <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', minHeight: 64 }}>
-        <Box sx={{ width: '1px', height: { xs: 50, md: 55 } }}></Box>
-      </Toolbar>
+      <Box
+        sx={{
+          height: { xs: 'calc(64px + 16px)', md: 'calc(64px + 16px)' }, // 64px del Toolbar + 16px del padding (8px arriba + 8px abajo)
+          width: '100%',
+        }}
+      />
 
       {/* Drawer para mobile */}
       <MobileDrawer

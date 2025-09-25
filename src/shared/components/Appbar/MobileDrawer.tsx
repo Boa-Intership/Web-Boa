@@ -56,12 +56,7 @@ const MobileDrawer: React.FC<{
         },
       }}
     >
-      <Box
-        sx={{
-          p: 2,
-        }}
-        role="presentation"
-      >
+      <Box sx={{ p: 2 }} role="presentation">
         <AppTypography variant="h4Bold" color="primary.main" sx={{ ml: 2 }}>
           Menú
         </AppTypography>

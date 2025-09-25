@@ -1,7 +1,7 @@
 import { GeneralInfoContent, GeneralInfoRepository } from '../entities/GeneralInfoContent';
 
 export class GetGeneralInfoUseCase {
-  constructor(private repository: GeneralInfoRepository) {}
+  constructor(private readonly repository: GeneralInfoRepository) {}
 
   async execute(): Promise<GeneralInfoContent> {
     try {

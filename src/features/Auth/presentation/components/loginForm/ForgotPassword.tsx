@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import { TextField } from '@mui/material';
 
 interface ForgotPasswordProps {
   open: boolean;
@@ -18,38 +18,39 @@ export default function ForgotPassword({ open, handleClose }: ForgotPasswordProp
       open={open}
       onClose={handleClose}
       PaperProps={{
-        paper: {
-          component: 'form',
-          onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            handleClose();
-          },
-          sx: { backgroundImage: 'none' },
+        component: 'form',
+        onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+          event.preventDefault();
+          handleClose();
+        },
+        sx: {
+          backgroundImage: 'none',
+          backgroundColor: 'background.default',
+          borderRadius: 2,
         },
       }}
     >
-      <DialogTitle>Reset password</DialogTitle>
+      <DialogTitle color="primary.main">Restablecer contraseña</DialogTitle>
       <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
         <DialogContentText>
-          Enter your account&apos;s email address, and we&apos;ll send you a link to reset your
-          password.
+          Ingresa la dirección de correo electrónico de tu cuenta y te enviaremos un enlace para
+          restablecer tu contraseña.
         </DialogContentText>
-        <OutlinedInput
-          autoFocus
+        <TextField
           required
           margin="dense"
           id="email"
           name="email"
-          label="Email address"
-          placeholder="Email address"
+          label="Email"
+          placeholder="Dirección de correo electrónico"
           type="email"
           fullWidth
         />
       </DialogContent>
       <DialogActions sx={{ pb: 3, px: 3 }}>
-        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>Canelar</Button>
         <Button variant="contained" type="submit">
-          Continue
+          Continuar
         </Button>
       </DialogActions>
     </Dialog>
