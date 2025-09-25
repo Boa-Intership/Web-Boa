@@ -218,12 +218,14 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
           alignItems: 'center',
           minHeight: '60vh',
           justifyContent: 'center',
+          m: { xs: 2, sm: '50px' }, // Menos margen en móviles
+          px: { xs: 1, sm: 0 }, // Padding horizontal en móviles
         }}
       >
         <Paper
           elevation={3}
           sx={{
-            p: 4,
+            p: { xs: 3, sm: 4 }, // Menos padding en móviles
             maxWidth: 500,
             width: '100%',
             textAlign: 'center',
@@ -236,21 +238,39 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
           <Box sx={{ mb: 3 }}>
             <Email
               sx={{
-                fontSize: 64,
+                fontSize: { xs: 48, sm: 64 }, // Icono más pequeño en móviles
                 color: 'primary.main',
               }}
             />
           </Box>
 
-          <AppTypography variant="h3Medium" color="primary.main" sx={{ mb: 2 }}>
+          <AppTypography
+            variant="h3Medium"
+            color="primary.main"
+            textAlign={'center'}
+            sx={{
+              mb: 2,
+            }}
+          >
             Verifica tu correo electrónico
           </AppTypography>
 
           <Alert severity="info" icon={false} sx={{ mb: 4, justifyContent: 'center' }}>
-            Hemos enviado un código de verificación de 5 dígitos a:
-            <AppTypography variant="baseRegular" color="primary.main">
-              {email}
-            </AppTypography>
+            <Box sx={{ textAlign: 'center' }}>
+              <AppTypography variant="smallRegular" sx={{ mb: 1, fontSize: { xs: '0.85rem' } }}>
+                Hemos enviado un código de verificación de 5 dígitos a:
+              </AppTypography>
+              <AppTypography
+                variant="baseRegular"
+                color="primary.main"
+                sx={{
+                  wordBreak: 'break-word', // Romper email largo en móviles
+                  fontSize: { xs: '0.85rem', sm: '1rem' },
+                }}
+              >
+                {email}
+              </AppTypography>
+            </Box>
           </Alert>
 
           {/* Inputs del código */}
@@ -263,8 +283,12 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                gap: 2,
+                gap: { xs: 1, sm: 2 }, // Menos gap en móviles
                 mb: 2,
+                flexWrap: 'nowrap',
+                width: '100%',
+                maxWidth: { xs: '280px', sm: '400px' }, // Ancho máximo controlado
+                mx: 'auto',
               }}
             >
               {code.map((digit, index) => (
@@ -281,10 +305,10 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
                   onPaste={index === 0 ? handlePaste : undefined}
                   maxLength={1}
                   style={{
-                    width: 60,
-                    height: 60,
+                    width: window.innerWidth < 600 ? 45 : 60, // Responsive width
+                    height: window.innerWidth < 600 ? 45 : 60, // Responsive height
                     textAlign: 'center',
-                    fontSize: '1.5rem',
+                    fontSize: window.innerWidth < 600 ? '1.2rem' : '1.5rem', // Responsive font
                     fontWeight: 'bold',
                     border: '2px solid',
                     borderColor: error ? '#d32f2f' : digit ? '#1976d2' : '#e0e0e0',
@@ -293,6 +317,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
                     color: '#1976d2',
                     outline: 'none',
                     transition: 'all 0.2s ease-in-out',
+                    flex: '0 0 auto', // No crecer ni encogerse
                   }}
                   disabled={isLoading}
                 />

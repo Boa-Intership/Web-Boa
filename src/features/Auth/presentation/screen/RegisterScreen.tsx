@@ -1,18 +1,5 @@
 import React from 'react';
-import {
-  Paper,
-  Box,
-  Button,
-  Alert,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Grid,
-  Divider,
-} from '@mui/material';
+import { Paper, Box, Button, Alert, Grid, Divider } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -197,7 +184,7 @@ const Register = () => {
   };
 
   return (
-    <AppContainer>
+    <AppContainer sx={{ p: '20px 0' }}>
       <AppTypography variant="h3Medium" color={'primary.main'} sx={{ pb: '10px' }}>
         Registro de cuenta
       </AppTypography>
