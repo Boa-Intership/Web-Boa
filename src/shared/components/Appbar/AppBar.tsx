@@ -1,33 +1,19 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  IconButton,
-  useTheme,
-  useMediaQuery,
-  Button,
-  Menu,
-  MenuItem,
-  Typography,
-  Icon,
-} from '@mui/material';
+import { AppBar, Toolbar, Box, IconButton, useTheme, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import PublicIcon from '@mui/icons-material/Public';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ROUTES } from '../../../router/routes';
+import { ROUTES } from 'router/routes';
 import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
-import AppContainer from '../AppContainer';
-import { AppButton, LogoCargo } from 'ui';
+import { LogoCargo, AppContainer } from 'ui';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
+import { AuthSection } from './AuthSection';
 
 const navItems = [
   // {
@@ -251,37 +237,7 @@ const AppAppBar: React.FC = () => {
 
             <Box sx={{ flexGrow: 1 }} />
 
-            <Box
-              id="_header-buttons"
-              data-testid="header-buttons"
-              sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}
-            >
-              <AppButton
-                variant="contained"
-                size="large"
-                onClick={() => navigate(ROUTES.LOGIN)}
-                sx={{
-                  textTransform: 'none',
-                  fontSize: { xs: '0.75rem', md: '1rem' },
-                  borderRadius: 2,
-                }}
-              >
-                Iniciar sesión
-              </AppButton>
-              <AppButton
-                variant="contained"
-                size="large"
-                onClick={() => navigate(ROUTES.REGISTER)}
-                sx={{
-                  textTransform: 'none',
-                  fontSize: { xs: '0.75rem', md: '1rem' },
-                  borderRadius: 2,
-                }}
-                color="secondary"
-              >
-                Abrir cuenta
-              </AppButton>
-            </Box>
+            <AuthSection />
             {/* MENU HAMBURGUESA (mobile) */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>
               <IconButton

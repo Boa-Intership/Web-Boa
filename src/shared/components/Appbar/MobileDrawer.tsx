@@ -7,15 +7,15 @@ import {
   ListItemText,
   ListItemIcon,
   Divider,
-  Typography,
 } from '@mui/material';
 import type { NavItem } from './types';
 import { alpha, useTheme } from '@mui/material/styles';
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
-import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
-import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { AppTypography } from 'ui';
+import { useAuth } from '../../providers/AuthContext';
 
 const MobileDrawer: React.FC<{
   open: boolean;
@@ -24,6 +24,7 @@ const MobileDrawer: React.FC<{
   navigate: (to: string) => void;
 }> = ({ open, onClose, navItems, navigate }) => {
   const theme = useTheme();
+  const { isAuthenticated, user, logout } = useAuth();
   const buttonStyle = {
     color: 'grey.600',
     borderRadius: 2,
@@ -55,12 +56,7 @@ const MobileDrawer: React.FC<{
         },
       }}
     >
-      <Box
-        sx={{
-          p: 2,
-        }}
-        role="presentation"
-      >
+      <Box sx={{ p: 2 }} role="presentation">
         <AppTypography variant="h4Bold" color="primary.main" sx={{ ml: 2 }}>
           Menú
         </AppTypography>
@@ -110,33 +106,70 @@ const MobileDrawer: React.FC<{
             </React.Fragment>
           ))}
 
-          <ListItemButton
-            onClick={() => {
-              onClose();
-              navigate('/login');
-            }}
-            sx={buttonStyle}
-          >
-            <ListItemIcon sx={iconStyle}>
-              <LoginIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Iniciar sesión"
-              primaryTypographyProps={{ fontWeight: 'bold' }}
-            />
-          </ListItemButton>
-          <ListItemButton
-            onClick={() => {
-              onClose();
-              navigate('/registro');
-            }}
-            sx={buttonStyle}
-          >
-            <ListItemIcon sx={iconStyle}>
-              <HowToRegOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Registrarse" primaryTypographyProps={{ fontWeight: 'bold' }} />
-          </ListItemButton>
+          <Divider sx={{ my: 2 }} />
+
+          {/* Sección de autenticación */}
+          {!isAuthenticated ? (
+            <>
+              <ListItemButton
+                onClick={() => {
+                  onClose();
+                  navigate('/login');
+                }}
+                sx={buttonStyle}
+              >
+                <ListItemIcon sx={iconStyle}>
+                  <LoginIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Iniciar sesión"
+                  primaryTypographyProps={{ fontWeight: 'bold' }}
+                />
+              </ListItemButton>
+              <ListItemButton
+                onClick={() => {
+                  onClose();
+                  navigate('/registro');
+                }}
+                sx={buttonStyle}
+              >
+                <ListItemIcon sx={iconStyle}>
+                  <HowToRegOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Registrarse"
+                  primaryTypographyProps={{ fontWeight: 'bold' }}
+                />
+              </ListItemButton>
+            </>
+          ) : (
+            <>
+              <ListItemButton sx={buttonStyle}>
+                <ListItemIcon sx={iconStyle}>
+                  <AccountCircleOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={user?.name || 'Mi Perfil'}
+                  primaryTypographyProps={{ fontWeight: 'bold' }}
+                />
+              </ListItemButton>
+              <ListItemButton
+                onClick={() => {
+                  onClose();
+                  logout();
+                }}
+                sx={buttonStyle}
+              >
+                <ListItemIcon sx={iconStyle}>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Cerrar sesión"
+                  primaryTypographyProps={{ fontWeight: 'bold' }}
+                />
+              </ListItemButton>
+            </>
+          )}
         </List>
       </Box>
     </Drawer>

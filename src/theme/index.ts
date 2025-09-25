@@ -1,6 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 import { typographyVariants } from './typography';
-import zIndex from '@mui/material/styles/zIndex';
 
 const theme = createTheme({
   components: {

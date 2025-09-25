@@ -12,6 +12,7 @@ import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
+import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
@@ -44,6 +45,7 @@ function TipoCargaScreen() {
       <InfoTipoCarga
         title={data.title}
         description={data.description}
+        imageUrl={data.imageUrl}
         subtitle={data.subtitle}
         details={data.details}
         notice={data.notice}
@@ -61,9 +63,7 @@ function TipoCargaScreen() {
       <AppTypography variant="baseRegular" mb={2} textAlign="justify">
         De acuerdo con la IATA, la carga transportada por vía aérea se clasifica en dos grandes
         categorías: carga general y carga especial. Esta última comprende diversos subgrupos con
-        requisitos específicos. Para obtener información o resolver cualquier consulta sobre los
-        requisitos de envío, le invitamos a comunicarse con el Call Center de BoA Cargo en su ciudad
-        de residencia.
+        requisitos específicos.
       </AppTypography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} lg={3}>
@@ -126,21 +126,21 @@ function TipoCargaScreen() {
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => navigate('/tipos-cargas/cargaValiosa')}
-              selected={selected === 'cargaValiosa'}
+              onClick={() => navigate('/tipos-cargas/cargaValorada')}
+              selected={selected === 'cargaValorada'}
               icon={<MonetizationOnOutlinedIcon />}
             >
-              Carga Valiosa
+              Carga Valorada
             </BoAButton>
             <BoAButton
               color={colorBoton}
               hover={colorHover}
               mainButton={mainButton}
-              onClick={() => navigate('/tipos-cargas/otros')}
-              selected={selected === 'otros'}
-              icon={<QuizOutlinedIcon />}
+              onClick={() => navigate('/tipos-cargas/peligrosa')}
+              selected={selected === 'peligrosa'}
+              icon={<DangerousOutlinedIcon />}
             >
-              Otros tipos
+              Carga Peligrosa
             </BoAButton>
           </AppStack>
         </Grid>

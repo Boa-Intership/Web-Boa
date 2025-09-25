@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Card, CardMedia, CardContent } from '@mui/material';
 import BoAButton from '../../../../shared/components/BoAButton';
 import { AppTypography } from 'ui';

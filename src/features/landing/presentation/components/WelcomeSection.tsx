@@ -1,11 +1,10 @@
-import { AppBox, AppContainer, AppGrid, AppButton } from 'ui';
-import { Box, Divider, Stack } from '@mui/material';
+import { AppTypography, AppBox, AppContainer, AppGrid, AppButton } from 'ui';
+import { Box, Divider, Stack, CircularProgress, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import welcomeImg from '@/assets/welcome.webp';
 import { FC } from 'react';
-import headline from '@/assets/headline-curve.svg';
 import { ROUTES } from 'router/routes';
-import { AppTypography } from 'ui';
+import { useWelcomeContent } from '../hooks/useWelcomeContent';
 
 interface Exp {
   label: string;
@@ -31,6 +30,30 @@ const ExpItem: FC<{ item: Exp }> = ({ item }) => (
 
 const WelcomeSection: FC = () => {
   const navigate = useNavigate();
+  const { data, loading, error } = useWelcomeContent();
+
+  if (loading) {
+    return (
+      <AppBox sx={{ py: { xs: 4, md: 7 }, display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </AppBox>
+    );
+  }
+
+  if (error) {
+    return (
+      <AppBox sx={{ py: { xs: 4, md: 7 } }}>
+        <AppContainer>
+          <Alert severity="error">Error cargando contenido: {error}</Alert>
+        </AppContainer>
+      </AppBox>
+    );
+  }
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <AppBox sx={{ py: { xs: 4, md: 7 } }}>
       <AppContainer>
@@ -78,8 +101,8 @@ const WelcomeSection: FC = () => {
                     }}
                   >
                     {' '}
-                    Envía{' '}
-                    <Box
+                    {data.title}{' '}
+                    {/* <Box
                       sx={{
                         position: 'absolute',
                         top: { xs: 15, md: 25 },
@@ -93,7 +116,7 @@ const WelcomeSection: FC = () => {
                     >
                       {' '}
                       <img src={headline} />
-                    </Box>{' '}
+                    </Box>{' '} */}
                   </AppTypography>
                   {/*tus{' '}*/}
                   <AppTypography
@@ -115,9 +138,9 @@ const WelcomeSection: FC = () => {
                     }}
                   >
                     {' '}
-                    paquetes
+                    {data.highlightedWord}
                     {/* SVG decorativo/acento */}
-                    <svg version="1.1" viewBox="0 0 3183 3072">
+                    {/* <svg version="1.1" viewBox="0 0 3183 3072">
                       <g>
                         <path
                           fill="#F57C00"
@@ -132,24 +155,21 @@ const WelcomeSection: FC = () => {
                           d="M566 3c0,0 0,0 0,0 -219,-26 -427,134 -462,356 -44,271 -255,1921 90,1962 245,62 628,-1392 704,-1869 36,-221 -114,-424 -332,-449z"
                         />
                       </g>
-                    </svg>
+                    </svg> */}
                   </AppTypography>
                   <br />
-                  de forma segura
+                  {data.subtitle}
                 </AppTypography>
               </Box>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
-              <AppTypography variant="baseRegular">
-                SERVICIOS DE CARGA AEREA PARA ENVIOS NACIONALES E INTERNACIONALES. GESTIONA TUS
-                PAQUETES CON FACILIDAD Y TRANSPARENCIA.
-              </AppTypography>
+              <AppTypography variant="baseRegular">{data.description}</AppTypography>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
               <AppButton
                 size="large"
                 sx={{ fontSize: { xs: '1rem', md: '1.2rem' } }}
                 onClick={() => navigate(ROUTES.HOME)}
               >
-                Comenzar
+                {data.buttonText}
               </AppButton>
             </AppBox>
           </AppGrid>

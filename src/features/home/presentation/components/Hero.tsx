@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import portada from 'assets/GGI_portada1.webp';
 import { AppTypography } from 'ui';
 

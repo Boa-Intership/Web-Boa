@@ -3,12 +3,10 @@ import React from 'react';
 import WelcomeSection from '../components/WelcomeSection';
 import GeneralInfoSection from '../components/GeneralInfoSection';
 import FAQSection from '../components/FAQSection';
-import CustomerServiceSection from '../components/ServiceSection';
+import CustomerServiceSection from '../components/CustomerServiceSection';
 import OfficePreviewSection from '../components/OfficePreviewSection';
 import NewsSection from '../components/NewsSection';
 import AboutUsSection from '../components/AboutUsSection';
-// import ServicesSection from '../components/ServicesSection';
-// import FinalCTASection from '../components/FinalCTASection';
 
 const LandingScreen: React.FC = () => (
   <>
@@ -19,8 +17,6 @@ const LandingScreen: React.FC = () => (
     <AboutUsSection />
     <NewsSection />
     <FAQSection />
-    {/*<ServicesSection />*/}
-    {/*<ServicesSection />*/}
     {/*<FinalCTASection />*/}
   </>
 );
