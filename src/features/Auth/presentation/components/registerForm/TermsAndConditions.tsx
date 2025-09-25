@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControlLabel, Checkbox, Link } from '@mui/material';
+import { FormControlLabel, Checkbox, Link, Box } from '@mui/material';
 import { AppTypography } from 'ui';
 
 interface TermsAndConditionsProps {
@@ -10,7 +10,7 @@ interface TermsAndConditionsProps {
 
 const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ checked, onChange, error }) => {
   return (
-    <>
+    <Box>
       <FormControlLabel
         control={
           <Checkbox
@@ -39,11 +39,11 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ checked, onChan
         }
       />
       {error && (
-        <AppTypography variant="smallRegular" color="error.main" sx={{ mt: 1, ml: 4 }}>
+        <AppTypography variant="smallRegular" color="error.main" sx={{ ml: 4, mb: 2 }}>
           {error}
         </AppTypography>
       )}
-    </>
+    </Box>
   );
 };
 

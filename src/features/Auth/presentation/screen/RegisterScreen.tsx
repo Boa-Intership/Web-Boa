@@ -1,5 +1,19 @@
 import React from 'react';
-import { Paper, Box, Button, Alert } from '@mui/material';
+import {
+  Paper,
+  Box,
+  Button,
+  Alert,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Grid,
+  Divider,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import UserDataForm from '../components/registerForm/UserDataForm';
@@ -11,6 +25,7 @@ import { registerSchema, RegisterSchema } from '../../domain/validators';
 import { useTempRegistration } from '../../hooks/useTempRegistration';
 import { useSendVerificationCode } from '../useAuth.hooks';
 import { AppContainer, AppTypography } from 'ui';
+import { createRegisterSchema } from '../../domain/validators/registerSchema';
 
 const Register = () => {
   const {
@@ -26,13 +41,19 @@ const Register = () => {
   const [showSuccess, setShowSuccess] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState('');
   const [apiError, setApiError] = React.useState<string>('');
+  const [isBillingExpanded, setIsBillingExpanded] = React.useState(false);
+
+  const dynamicSchema = React.useMemo(
+    () => createRegisterSchema(isBillingExpanded),
+    [isBillingExpanded]
+  );
 
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterSchema>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(dynamicSchema),
     mode: 'onBlur',
     defaultValues: {
       email: '',
@@ -42,8 +63,6 @@ const Register = () => {
       ci: '',
       number: '',
       address: '',
-      businessName: '',
-      billingNit: '',
     },
   });
 
@@ -80,8 +99,17 @@ const Register = () => {
       });
 
       // Si llegamos aquí, el código se envió exitosamente
-      // Guardar datos temporalmente para el siguiente paso
-      saveTempData(data);
+      const dataToSave = isBillingExpanded
+        ? data
+        : {
+            ...data,
+            billingDocType: undefined,
+            businessName: undefined,
+            billingNit: undefined,
+            billingNitComplemento: undefined,
+          };
+
+      saveTempData(dataToSave);
       setUserEmail(data.email);
       setShowVerification(true);
     } catch (error: unknown) {
@@ -95,13 +123,7 @@ const Register = () => {
 
   const handleVerificationSuccess = async () => {
     try {
-      // El usuario ya fue registrado exitosamente en EmailVerification.tsx
-      // Solo necesitamos limpiar y mostrar la pantalla de éxito
-
-      // Marcar email como verificado
       markEmailAsVerified();
-
-      // Limpiar datos temporales (por si no se limpiaron en EmailVerification)
       clearTempData();
 
       // Mostrar pantalla de éxito
@@ -170,6 +192,10 @@ const Register = () => {
     );
   }
 
+  const handleBillingExpansionChange = (expanded: boolean) => {
+    setIsBillingExpanded(expanded);
+  };
+
   return (
     <AppContainer>
       <AppTypography variant="h3Medium" color={'primary.main'} sx={{ pb: '10px' }}>
@@ -182,22 +208,12 @@ const Register = () => {
           sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 }, backgroundColor: 'background.default' }}
         >
           <UserDataForm control={control} errors={errors} />
-        </Paper>
-
-        <Paper
-          variant="outlined"
-          sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 }, backgroundColor: 'background.default' }}
-        >
-          <BillingDataForm control={control} errors={errors} />
-
-          <Box sx={{ mt: 2 }}>
-            <TermsAndConditions
-              checked={termsAccepted}
-              onChange={handleTermsChange}
-              error={termsError}
-            />
-          </Box>
-
+          <Divider />
+          <BillingDataForm
+            control={control}
+            errors={errors}
+            onExpansionChange={handleBillingExpansionChange}
+          />
           {/* Mostrar errores de la API */}
           {apiError && (
             <Box sx={{ mt: 2 }}>
@@ -206,8 +222,18 @@ const Register = () => {
               </Alert>
             </Box>
           )}
-
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
+          <Grid
+            container
+            justifyContent={'space-between'}
+            alignItems="center"
+            display="flex"
+            mt={6}
+          >
+            <TermsAndConditions
+              checked={termsAccepted}
+              onChange={handleTermsChange}
+              error={termsError}
+            />
             <Button
               type="submit"
               variant="contained"
@@ -217,7 +243,7 @@ const Register = () => {
             >
               {sendCodeMutation.isPending ? 'Verificando...' : 'Registrarse'}
             </Button>
-          </Box>
+          </Grid>
         </Paper>
       </Box>
     </AppContainer>

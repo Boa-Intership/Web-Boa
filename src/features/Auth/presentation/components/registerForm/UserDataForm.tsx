@@ -53,6 +53,7 @@ const FormField: React.FC<FormFieldProps> = ({
             select={select}
             required={required}
             id={id}
+            name={String(name)}
             label={label}
             type={type}
             fullWidth
@@ -177,10 +178,10 @@ const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {
     <>
       <Box sx={{ mb: '20px' }}>
         <AppTypography variant="h4Regular" color={'primary.main'}>
-          Datos de Usuario
+          Datos personales
         </AppTypography>
       </Box>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} mb={3}>
         {formFields.map((field) => {
           // Renderizar el campo
           const fieldComponent = (
