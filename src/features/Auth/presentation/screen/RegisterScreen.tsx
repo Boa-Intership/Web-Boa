@@ -39,7 +39,7 @@ const Register = () => {
       name: '',
       password: '',
       confirmPassword: '',
-      nit: '',
+      ci: '',
       number: '',
       address: '',
       businessName: '',
@@ -75,7 +75,7 @@ const Register = () => {
       // Llamar al backend para verificar email y NIT, y enviar código
       await sendCodeMutation.mutateAsync({
         email: data.email,
-        nit: parseInt(data.nit),
+        ci: parseInt(data.ci),
         complement: data.nitComplemento || undefined,
       });
 

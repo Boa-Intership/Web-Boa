@@ -45,9 +45,8 @@ export const registerSchema = z
       .regex(/[A-Z]/, 'La contraseña debe contener al menos una mayúscula')
       .regex(/[0-9]/, 'La contraseña debe contener al menos un número'),
     confirmPassword: z.string().min(1, 'Debes confirmar tu contraseña'),
-    docType: doctypeSchema,
     billingDocType: doctypeSchema,
-    nit: identificationSchema,
+    ci: identificationSchema,
     nitComplemento: complementoSchema,
     number: phoneSchema,
     address: z.string().optional(),

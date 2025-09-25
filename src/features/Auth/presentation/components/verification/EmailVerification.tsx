@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Alert, Box, Button, Paper, Typography } from '@mui/material';
 import { AppContainer, AppTypography } from 'ui';
 import { CheckCircle, Email } from '@mui/icons-material';
-import { useValidateVerificationCode, useRegisterUser } from '../../useAuth.hooks';
+import {
+  useValidateVerificationCode,
+  useRegisterUser,
+  useSendVerificationCode,
+} from '../../useAuth.hooks';
 
 interface EmailVerificationProps {
   email: string;
@@ -23,8 +27,8 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
   // Hook para validar código con el backend
   const validateCodeMutation = useValidateVerificationCode();
   const registerUserMutation = useRegisterUser();
+  const resendCodeMutation = useSendVerificationCode();
 
-  // Función para obtener datos temporales
   const getTempDataForRegistration = () => {
     const tempData = sessionStorage.getItem('temp_registration_data');
 
@@ -94,40 +98,39 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
     inputRefs.current[nextIndex]?.focus();
   };
 
+  const registrationData = getTempDataForRegistration();
+  if (!registrationData) {
+    throw new Error('No se encontraron datos de registro temporales');
+  }
   const handleVerification = async (verificationCode: string) => {
     setError('');
 
     try {
-      // Paso 1: Validar código
+      // Validar código
       await validateCodeMutation.mutateAsync({
         email,
         code: verificationCode,
       });
 
-      // Paso 2: Obtener datos temporales
-      const registrationData = getTempDataForRegistration();
-      if (!registrationData) {
-        throw new Error('No se encontraron datos de registro temporales');
-      }
-
-      // Paso 3: Preparar datos para el backend
+      // Preparar datos para el backend
       const backendData = {
         name: registrationData.name,
         email: registrationData.email,
         password: registrationData.password,
-        nit: parseInt(registrationData.nit),
+        ci: parseInt(registrationData.ci),
         complement: registrationData.nitComplemento || undefined,
-        documentType: parseInt(registrationData.docType),
         phone: registrationData.number,
         address: registrationData.address || undefined,
-        billingData: {
-          businessName: registrationData.businessName,
-          docType: parseInt(registrationData.billingDocType),
-          nit: parseInt(registrationData.billingNit),
-        },
+        ...(registrationData.billingNit && {
+          billingData: {
+            businessName: registrationData.businessName,
+            docType: parseInt(registrationData.billingDocType),
+            nit: parseInt(registrationData.billingNit),
+          },
+        }),
       };
 
-      // Paso 4: Registrar usuario en el backend
+      // Registrar usuario en el backend
       const registerResponse = await registerUserMutation.mutateAsync(backendData);
 
       // El backend puede retornar directamente el usuario O envuelto en ApiResponse
@@ -187,8 +190,16 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
     }
   };
 
-  const handleResend = () => {
+  const resendCodeData = {
+    email: registrationData.email,
+    ci: parseInt(registrationData.ci),
+    complement: registrationData.nitComplemento || undefined,
+  };
+
+  const handleResend = async () => {
     setResendCooldown(60);
+    await resendCodeMutation.mutateAsync(resendCodeData);
+
     onResendCode();
     setError('');
     setCode(['', '', '', '', '']);
@@ -217,6 +228,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
             width: '100%',
             textAlign: 'center',
             borderRadius: 3,
+            textAlignLast: 'center',
             backgroundColor: 'background.default',
           }}
         >

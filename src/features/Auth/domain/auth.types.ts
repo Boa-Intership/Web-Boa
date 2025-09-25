@@ -8,12 +8,11 @@ export interface RegisterRequest {
   name: string;
   email: string;
   password: string;
-  nit: number;
+  ci: number;
   complement?: string;
-  documentType: number;
   phone: string;
   address?: string;
-  billingData: {
+  billingData?: {
     businessName: string;
     docType: number;
     nit: number;
@@ -22,7 +21,7 @@ export interface RegisterRequest {
 
 export interface SendCodeRequest {
   email: string;
-  nit: number;
+  ci: number;
   complement?: string;
 }
 
