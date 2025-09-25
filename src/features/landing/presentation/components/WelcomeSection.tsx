@@ -103,7 +103,7 @@ const WelcomeSection: FC = () => {
                     }}
                   >
                     {' '}
-                    {data.title}{' '}
+                    {data.title}
                     {/* <Box
                       sx={{
                         position: 'absolute',
@@ -166,13 +166,13 @@ const WelcomeSection: FC = () => {
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
               <AppTypography variant="baseRegular">{data.description}</AppTypography>
               <Divider sx={{ my: 2, borderColor: 'transparent' }} />
-              <AppButton
+              {/* <AppButton
                 size="large"
                 sx={{ fontSize: { xs: '1rem', md: '1.2rem' } }}
                 onClick={() => navigate(ROUTES.HOME)}
               >
                 {data.buttonText}
-              </AppButton>
+              </AppButton> */}
             </AppBox>
           </AppGrid>
           {/*imagen*/}

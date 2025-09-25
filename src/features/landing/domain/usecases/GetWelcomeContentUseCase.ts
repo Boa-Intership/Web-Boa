@@ -16,9 +16,9 @@ export class GetWelcomeContentUseCase {
   private getDefaultContent(): WelcomeContent {
     return {
       id: 'default',
-      title: 'Envía',
-      highlightedWord: 'paquetes',
-      subtitle: 'de forma segura',
+      title: '¡Lleva ',
+      highlightedWord: 'tu carga',
+      subtitle: 'con nosotros!',
       description:
         'SERVICIOS DE CARGA AEREA PARA ENVIOS NACIONALES E INTERNACIONALES. GESTIONA TUS PAQUETES CON FACILIDAD Y TRANSPARENCIA.',
       buttonText: 'Comenzar',
