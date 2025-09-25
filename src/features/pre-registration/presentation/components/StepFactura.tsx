@@ -121,11 +121,14 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
             <strong>Tipo de Carga:</strong> {carga?.tipo || 'No definido'}
           </Typography>
           <Typography variant="body1" sx={{ pl: 2 }}>
-            <strong>Ruta:</strong> {ruta?.origen} → {ruta?.destino}
+            <strong>Ruta: </strong>
+            {ruta?.origen?.city?.cityName} ({ruta?.origen?.codStation}) →{' '}
+            {ruta?.destino?.city?.cityName} ({ruta?.destino?.codStation})
           </Typography>
           <Divider sx={{ my: 2 }} />
           <Typography variant="h6" color="primary">
-            Total Estimado: <strong>{precioEstimado} Bs.</strong>
+            {/*Total Estimado: <strong>{precioEstimado} Bs.</strong>*/}
+            Total Estimado: <strong>{carga?.costoEstimado} Bs.</strong>
           </Typography>
         </Box>
       </Paper>

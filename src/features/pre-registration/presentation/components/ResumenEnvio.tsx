@@ -85,11 +85,11 @@ const ResumenEnvio = ({ formData }: { formData: any }) => {
             </Box>
             <Typography>
               <strong>Origen: </strong>
-              {ruta.origen}
+              {ruta?.origen?.city?.cityName} ({ruta?.origen?.codStation})
             </Typography>
             <Typography>
               <strong>Destino: </strong>
-              {ruta.destino}
+              {ruta?.destino?.city?.cityName} ({ruta?.destino?.codStation})
             </Typography>
             <Typography>
               <strong>Tipo de Carga: </strong>
@@ -117,7 +117,7 @@ const ResumenEnvio = ({ formData }: { formData: any }) => {
               <Typography>Razón Social: {factura.razonSocial}</Typography>
             )}
             <Typography variant="h6" color="primary" fontWeight="bold" mt={2}>
-              Importe Total Estimado: Bs. {factura.precioEstimado}
+              Importe Total Estimado: Bs. {carga?.costoEstimado}
             </Typography>
           </Grid>
         </Grid>

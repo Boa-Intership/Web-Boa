@@ -39,7 +39,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://192.168.150.220',
+        //target: 'http://192.168.150.220',
+        target: 'http://ec2-54-92-229-60.compute-1.amazonaws.com',
         changeOrigin: true,
       },
     },

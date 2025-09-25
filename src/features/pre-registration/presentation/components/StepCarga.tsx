@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   MenuItem,
+  Grid,
   TextField,
   Typography,
   Dialog,
@@ -23,9 +24,14 @@ import {
   Inventory2Outlined,
 } from '@mui/icons-material';
 import { getCargoTypes, CargoType } from '../../data/services/cargo-type.service';
-import PaqueteFormDialog from './PaqueteFormDialog';
+import { calcularCostoPaquetes } from '../../data/services/package-cost.service';
+import {
+  validateDescripcion,
+  validateEntero,
+  validateDecimal,
+} from '../../domain/validators/validateCarga';
 
-const StepCarga = ({ data, setData, onNext, onBack }: any) => {
+const StepCarga = ({ data, setData, onNext, onBack, ruta }: any) => {
   const [tipo, setTipo] = useState(data?.tipo || '');
   const [detalles, setDetalles] = useState(data?.detalles || []);
   const [modalOpen, setModalOpen] = useState(false);
@@ -37,6 +43,9 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const [openEliminar, setOpenEliminar] = useState(false); // estado eliminar
   const [indiceAEliminar, setIndiceAEliminar] = useState<number | null>(null); // estado eliminar
   const [tiposCarga, setTiposCarga] = useState<CargoType[]>([]);
+  const [errores, setErrores] = useState<Record<string, string>>({});
+  const [pesoTotal, setPesoTotal] = useState(0);
+  const [costoEstimado, setCostoEstimado] = useState(0);
 
   useEffect(() => {
     const fetchTiposCarga = async () => {
@@ -51,6 +60,47 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
     fetchTiposCarga();
   }, []);
 
+  useEffect(() => {
+    const calcularCosto = async () => {
+      if (!tipo || detalles.length === 0 || !ruta?.origen?.id || !ruta?.destino?.id) return;
+
+      const cargoType = tiposCarga.find((t) => t.name === tipo);
+      if (!cargoType) return;
+
+      try {
+        const payload = detalles.map((p: any) => ({
+          description: p.descripcion,
+          weight: parseFloat(p.peso),
+          height: parseFloat(p.alto),
+          width: parseFloat(p.ancho),
+          length: parseFloat(p.largo),
+          pieces: parseInt(p.piezas),
+        }));
+
+        const res = await calcularCostoPaquetes(
+          ruta.origen.id,
+          ruta.destino.id,
+          cargoType.id,
+          payload
+        );
+
+        // Guardar en estado si deseas mostrar más adelante
+        setCostoEstimado(res.estimatedCost || 0);
+        setPesoTotal(res.packageWeight || 0);
+      } catch (error: any) {
+        console.error('Error al calcular el costo estimado:', error);
+        setCostoEstimado(0);
+        setPesoTotal(0);
+        // Si el error tiene response con message:
+        if (error.response?.data?.message) {
+          alert(error.response.data.message);
+        }
+      }
+    };
+
+    calcularCosto();
+  }, [tipo, detalles, data?.origenID, data?.destinoID, tiposCarga]);
+
   const [nuevoItem, setNuevoItem] = useState({
     descripcion: '',
     peso: '',
@@ -60,16 +110,49 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
     piezas: '',
   });
 
+  const validarCampos = (item: any) => {
+    let errores: Record<string, string> = {};
+
+    const campos = [
+      { nombre: 'descripcion', validador: validateDescripcion },
+      { nombre: 'piezas', validador: validateEntero },
+      { nombre: 'peso', validador: validateDecimal },
+      { nombre: 'alto', validador: validateDecimal },
+      { nombre: 'ancho', validador: validateDecimal },
+      { nombre: 'largo', validador: validateDecimal },
+    ];
+
+    campos.forEach(({ nombre, validador }) => {
+      const result = validador(item[nombre]);
+      if (!result.isValid) errores[nombre] = result.error;
+    });
+
+    return errores;
+  };
+
   const handleChangeNuevoItem = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNuevoItem((prev) => ({ ...prev, [name]: value }));
+
+    if (errores[name]) {
+      let result;
+      if (name === 'descripcion') result = validateDescripcion(value);
+      else if (name === 'piezas') result = validateEntero(value);
+      else result = validateDecimal(value);
+
+      setErrores((prev) => ({ ...prev, [name]: result.error }));
+    }
   };
 
   const handleAgregarItem = () => {
-    const valoresCompletos = Object.values(nuevoItem).every((v) => v !== '');
-    if (!valoresCompletos) return;
+    const errores = validarCampos(nuevoItem);
+    if (Object.keys(errores).length > 0) {
+      setErrores(errores);
+      return;
+    }
     setDetalles((prev: any) => [...prev, nuevoItem]);
     setNuevoItem({ descripcion: '', peso: '', alto: '', ancho: '', largo: '', piezas: '' });
+    setErrores({});
     setModalOpen(false);
   };
 
@@ -82,12 +165,18 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const handleEditarItem = (item: any, index: number) => {
     setPaqueteEditado(item);
     setIndiceEditado(index);
+    setErrores({});
     setOpenEditar(true);
   };
 
   // Guardar cambios de edición
   const handleGuardarEdicion = () => {
     if (!paqueteEditado || indiceEditado === null) return;
+    const errores = validarCampos(paqueteEditado);
+    if (Object.keys(errores).length > 0) {
+      setErrores(errores);
+      return;
+    }
 
     const nuevosDetalles = [...detalles];
     nuevosDetalles[indiceEditado] = paqueteEditado;
@@ -102,6 +191,15 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const handleChangeEdicion = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPaqueteEditado((prev: any) => ({ ...prev, [name]: value }));
+
+    if (errores[name]) {
+      let result;
+      if (name === 'descripcion') result = validateDescripcion(value);
+      else if (name === 'piezas') result = validateEntero(value);
+      else result = validateDecimal(value);
+
+      setErrores((prev) => ({ ...prev, [name]: result.error }));
+    }
   };
 
   const handleEliminarItem = (index: number) => {
@@ -126,12 +224,12 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
     if (!tipo || detalles.length === 0) {
       return alert('Selecciona tipo de carga y agrega al menos un paquete');
     }
-    setData({ tipo, detalles });
+    setData({ tipo, detalles, costoEstimado });
     onNext();
   };
 
-  const pesoTotal = detalles.reduce((acc, curr) => acc + parseFloat(curr.peso), 0);
-  const costoEstimado = pesoTotal * 10;
+  /*const pesoTotal = detalles.reduce((acc, curr) => acc + parseFloat(curr.peso), 0);
+  const costoEstimado = pesoTotal * 10;*/
 
   return (
     <Box>
@@ -250,15 +348,56 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
       </Box>
 
       {/* Dialog de Agregar items */}
-      <PaqueteFormDialog
-        open={modalOpen}
-        title="Agregar Paquete"
-        values={nuevoItem}
-        onClose={() => setModalOpen(false)}
-        onChange={handleChangeNuevoItem}
-        onSubmit={handleAgregarItem}
-        submitLabel="Agregar"
-      />
+      <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
+        <DialogTitle>Agregar Paquete</DialogTitle>
+        <DialogContent>
+          <Grid container spacing={2}>
+            {['descripcion', 'peso', 'piezas', 'alto', 'ancho', 'largo'].map((campo) => (
+              <Grid item xs={campo === 'descripcion' ? 12 : 6} key={campo}>
+                <TextField
+                  name={campo}
+                  label={campo.charAt(0).toUpperCase() + campo.slice(1)}
+                  value={nuevoItem[campo as keyof typeof nuevoItem]}
+                  onChange={handleChangeNuevoItem}
+                  fullWidth
+                  required
+                  inputProps={{
+                    inputMode:
+                      campo === 'piezas'
+                        ? 'numeric'
+                        : ['peso', 'alto', 'ancho', 'largo'].includes(campo)
+                          ? 'decimal'
+                          : 'text',
+                    pattern:
+                      campo === 'piezas'
+                        ? '[0-9]*'
+                        : ['peso', 'alto', 'ancho', 'largo'].includes(campo)
+                          ? '[0-9]*[.,]?[0-9]*'
+                          : undefined,
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        {(campo === 'peso' && 'kg') ||
+                          (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
+                          null}
+                      </InputAdornment>
+                    ),
+                  }}
+                  error={!!errores[campo]}
+                  helperText={errores[campo]}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setModalOpen(false)}>Cancelar</Button>
+          <Button onClick={handleAgregarItem} variant="contained">
+            Agregar
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Dialog visualización */}
       <Dialog
@@ -294,15 +433,57 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
       </Dialog>
 
       {/* Dialog edición */}
-      <PaqueteFormDialog
-        open={openEditar}
-        title="Editar Paquete"
-        values={paqueteEditado || nuevoItem} // fallback por seguridad
-        onClose={() => setOpenEditar(false)}
-        onChange={handleChangeEdicion}
-        onSubmit={handleGuardarEdicion}
-        submitLabel="Guardar"
-      />
+      <Dialog open={openEditar} onClose={() => setOpenEditar(false)} fullWidth maxWidth="sm">
+        <DialogTitle>Editar Paquete</DialogTitle>
+        <DialogContent dividers>
+          {paqueteEditado && (
+            <Grid container spacing={2}>
+              {['descripcion', 'peso', 'piezas', 'alto', 'ancho', 'largo'].map((campo) => (
+                <Grid item xs={campo === 'descripcion' ? 12 : 6} key={campo}>
+                  <TextField
+                    name={campo}
+                    label={campo.charAt(0).toUpperCase() + campo.slice(1)}
+                    value={paqueteEditado[campo]}
+                    onChange={handleChangeEdicion}
+                    fullWidth
+                    inputProps={{
+                      inputMode:
+                        campo === 'piezas'
+                          ? 'numeric'
+                          : ['peso', 'alto', 'ancho', 'largo'].includes(campo)
+                            ? 'decimal'
+                            : 'text',
+                      pattern:
+                        campo === 'piezas'
+                          ? '[0-9]*'
+                          : ['peso', 'alto', 'ancho', 'largo'].includes(campo)
+                            ? '[0-9]*[.,]?[0-9]*'
+                            : undefined,
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          {(campo === 'peso' && 'kg') ||
+                            (['alto', 'ancho', 'largo'].includes(campo) && 'cm') ||
+                            null}
+                        </InputAdornment>
+                      ),
+                    }}
+                    error={!!errores[campo]}
+                    helperText={errores[campo]}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenEditar(false)}>Cancelar</Button>
+          <Button variant="contained" onClick={handleGuardarEdicion}>
+            Guardar
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Dialog eliminación */}
       <Dialog

@@ -13,7 +13,7 @@ export default function PreRegistroScreen() {
   const [formData, setFormData] = useState({
     remitente: {},
     destinatario: {},
-    ruta: { origen: '', destino: '' },
+    ruta: {},
     carga: {},
     factura: {},
     resumen: {},
@@ -44,6 +44,7 @@ export default function PreRegistroScreen() {
       setData={(d) => setFormData({ ...formData, carga: d })}
       onNext={handleNext}
       onBack={handleBack}
+      ruta={formData.ruta}
     />,
     <StepFactura
       key="factura"

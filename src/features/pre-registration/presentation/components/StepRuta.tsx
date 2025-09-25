@@ -5,7 +5,7 @@ import { Alert, Chip } from '@mui/material';
 import { getAirports, Airport } from '../../data/services/airport.service';
 
 const StepRuta = ({ data, setData, onNext, onBack }) => {
-  const [localData, setLocalData] = useState(data || { origen: '', destino: '' });
+  const [localData, setLocalData] = useState(data || { origen: null, destino: null });
   const [showError, setShowError] = useState(false);
   const [airports, setAirports] = useState<Airport[]>([]);
   const findAirport = useCallback(
@@ -32,7 +32,8 @@ const StepRuta = ({ data, setData, onNext, onBack }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    const newData = { ...localData, [name]: value };
+    const airportSelected = airports.find((a) => a.codStation === value);
+    const newData = { ...localData, [name]: airportSelected || null };
     setLocalData(newData);
     if (newData.origen && newData.destino) {
       setShowError(false);
@@ -43,6 +44,7 @@ const StepRuta = ({ data, setData, onNext, onBack }) => {
     if (localData.origen && localData.destino) {
       setShowError(false);
       setData(localData);
+      console.log(localData);
       onNext();
     } else {
       setShowError(true);
@@ -52,7 +54,7 @@ const StepRuta = ({ data, setData, onNext, onBack }) => {
   // Selección compacta
   const renderAirportValue = useCallback(
     (value: unknown) => {
-      const a = findAirport(String(value ?? ''));
+      const a = findAirport(String((value as Airport)?.codStation ?? value ?? ''));
       if (!a) return '';
       return (
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -68,11 +70,11 @@ const StepRuta = ({ data, setData, onNext, onBack }) => {
 
   // Para NO repetir origen ni destino una vez seleccionado
   const airportsOrigenOptions = useMemo(
-    () => airports.filter((a) => a.codStation !== localData.destino),
+    () => airports.filter((a) => a.codStation !== localData.destino?.codStation),
     [airports, localData.destino]
   );
   const airportsDestinoOptions = useMemo(
-    () => airports.filter((a) => a.codStation !== localData.origen),
+    () => airports.filter((a) => a.codStation !== localData.origen?.codStation),
     [airports, localData.origen]
   );
 
@@ -126,7 +128,7 @@ const StepRuta = ({ data, setData, onNext, onBack }) => {
               select
               label="Origen"
               name="origen"
-              value={localData.origen}
+              value={localData.origen?.codStation || ''}
               onChange={handleChange}
               fullWidth
               required
@@ -140,7 +142,7 @@ const StepRuta = ({ data, setData, onNext, onBack }) => {
               select
               label="Destino"
               name="destino"
-              value={localData.destino}
+              value={localData.destino?.codStation || ''}
               onChange={handleChange}
               fullWidth
               required
