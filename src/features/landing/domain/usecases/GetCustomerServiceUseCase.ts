@@ -1,7 +1,10 @@
-import { CustomerServiceContent, CustomerServiceRepository } from '../entities/CustomerServiceContent';
+import {
+  CustomerServiceContent,
+  CustomerServiceRepository,
+} from '../entities/CustomerServiceContent';
 
 export class GetCustomerServiceUseCase {
-  constructor(private repository: CustomerServiceRepository) {}
+  constructor(private readonly repository: CustomerServiceRepository) {}
 
   async execute(): Promise<CustomerServiceContent> {
     try {
@@ -13,8 +16,12 @@ export class GetCustomerServiceUseCase {
       }
 
       // Ordenar elementos por orden
-      const sortedElementosIzquierda = [...customerService.elementos_izquierda].sort((a, b) => a.orden - b.orden);
-      const sortedElementosDerecha = [...customerService.elementos_derecha].sort((a, b) => a.orden - b.orden);
+      const sortedElementosIzquierda = [...customerService.elementos_izquierda].sort(
+        (a, b) => a.orden - b.orden
+      );
+      const sortedElementosDerecha = [...customerService.elementos_derecha].sort(
+        (a, b) => a.orden - b.orden
+      );
 
       return {
         ...customerService,

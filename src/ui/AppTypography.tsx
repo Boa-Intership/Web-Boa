@@ -71,8 +71,6 @@ const AppTypography: React.FC<AppTypographyProps> = ({
       }
     : { fontSize };
 
-  const isCustom = variant in typographyVariants;
-
   return (
     <Typography
       variant={variant in typographyVariants ? undefined : (variant as any)}

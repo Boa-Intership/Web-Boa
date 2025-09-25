@@ -1,36 +1,19 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  IconButton,
-  useTheme,
-  useMediaQuery,
-  Button,
-  Menu,
-  MenuItem,
-  Typography,
-  Icon,
-} from '@mui/material';
+import { AppBar, Toolbar, Box, IconButton, useTheme, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import PublicIcon from '@mui/icons-material/Public';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ROUTES } from '../../../router/routes';
+import { ROUTES } from 'router/routes';
 import NavButton from './NavButton';
 import MegaMenu from './MegaMenu';
 import MobileDrawer from './MobileDrawer';
-import AppContainer from '../AppContainer';
-import { AppButton, LogoCargo } from 'ui';
+import { LogoCargo, AppContainer } from 'ui';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { AuthSection } from './AuthSection';
-import { useAuth } from '../../providers/AuthContext';
 
 const navItems = [
   // {
