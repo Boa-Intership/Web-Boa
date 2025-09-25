@@ -184,7 +184,7 @@ const Register = () => {
   };
 
   return (
-    <AppContainer sx={{ p: '20px 0' }}>
+    <AppContainer sx={{ p: '20px' }}>
       <AppTypography variant="h3Medium" color={'primary.main'} sx={{ pb: '10px' }}>
         Registro de cuenta
       </AppTypography>
