@@ -21,6 +21,7 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
   const [razonSocial, setRazonSocial] = useState(data?.razonSocial || '');
   const [complemento, setComplemento] = useState(data?.complemento || '');
   const [precioEstimado, setPrecioEstimado] = useState<number>(0);
+  const [errorDocumento, setErrorDocumento] = useState(false); // para campo requerido
 
   // Simulación del cálculo del precio (reemplazar con un servicio real)
   useEffect(() => {
@@ -44,8 +45,9 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
   }, [carga, ruta]);
 
   const handleNextClick = () => {
-    if (!numeroDocumento) {
-      return alert('Por favor completa los datos requeridos para la factura.');
+    if (!numeroDocumento.trim()) {
+      setErrorDocumento(true);
+      return;
     }
 
     setData({
@@ -86,9 +88,14 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
             <TextField
               label={tipoDocumento}
               value={numeroDocumento}
-              onChange={(e) => setNumeroDocumento(e.target.value)}
+              onChange={(e) => {
+                setNumeroDocumento(e.target.value);
+                if (errorDocumento) setErrorDocumento(false); // limpia error al escribir
+              }}
               fullWidth
               required
+              error={errorDocumento}
+              helperText={errorDocumento ? 'Este campo es requerido' : ''}
             />
           </Grid>
 

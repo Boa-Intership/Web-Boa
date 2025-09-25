@@ -46,6 +46,7 @@ const StepCarga = ({ data, setData, onNext, onBack, ruta }: any) => {
   const [errores, setErrores] = useState<Record<string, string>>({});
   const [pesoTotal, setPesoTotal] = useState(0);
   const [costoEstimado, setCostoEstimado] = useState(0);
+  const [errorTipo, setErrorTipo] = useState(false);
 
   useEffect(() => {
     const fetchTiposCarga = async () => {
@@ -221,8 +222,13 @@ const StepCarga = ({ data, setData, onNext, onBack, ruta }: any) => {
   };
 
   const handleNextClick = () => {
-    if (!tipo || detalles.length === 0) {
-      return alert('Selecciona tipo de carga y agrega al menos un paquete');
+    if (!tipo) {
+      setErrorTipo(true);
+      return;
+    }
+    if (detalles.length === 0) {
+      alert('Agrega al menos un paquete');
+      return;
     }
     setData({ tipo, detalles, costoEstimado });
     onNext();
@@ -246,9 +252,14 @@ const StepCarga = ({ data, setData, onNext, onBack, ruta }: any) => {
           select
           label="Tipo de Carga"
           value={tipo}
-          onChange={(e) => setTipo(e.target.value)}
+          onChange={(e) => {
+            setTipo(e.target.value);
+            if (errorTipo) setErrorTipo(false);
+          }}
           fullWidth
           required
+          error={errorTipo}
+          helperText={errorTipo ? 'Este campo es requerido' : ''}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
