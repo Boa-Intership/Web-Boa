@@ -133,7 +133,15 @@ const AppAppBar: React.FC = () => {
         }}
       >
         <AppContainer sx={{ py: { xs: 1, md: 1 } }}>
-          <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', minHeight: 64 }}>
+          <Toolbar
+            disableGutters
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              minHeight: { xs: 64, md: 64 }, // Altura fija
+              height: { xs: 64, md: 64 },
+            }}
+          >
             {/* LOGO */}
             <Box
               component="img"
@@ -300,9 +308,12 @@ const AppAppBar: React.FC = () => {
       </AppBar>
 
       {/* Spacer para evitar salto de contenido */}
-      <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', minHeight: 64 }}>
-        <Box sx={{ width: '1px', height: { xs: 50, md: 55 } }}></Box>
-      </Toolbar>
+      <Box
+        sx={{
+          height: { xs: 'calc(64px + 16px)', md: 'calc(64px + 16px)' }, // 64px del Toolbar + 16px del padding (8px arriba + 8px abajo)
+          width: '100%',
+        }}
+      />
 
       {/* Drawer para mobile */}
       <MobileDrawer
