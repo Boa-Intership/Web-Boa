@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Itinerario, DIAS_ORDEN } from '../../domain/Itinerario';
+import { Itinerario } from '../../domain/Itinerario';
 import { getFlightStatus, FRANJA_COLORS } from '../../domain/getFlightStatus';
 import { alpha } from '@mui/material/styles';
 import { AppTypography } from 'ui';
