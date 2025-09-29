@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { RegisterFormData } from './types';
 
 const identificationSchema = z
   .string()
@@ -66,3 +65,5 @@ export const createRegisterSchema = (isBillingRequired: boolean) => {
       path: ['confirmPassword'],
     });
 };
+
+export type CreateRegisterSchema = z.infer<ReturnType<typeof createRegisterSchema>>;

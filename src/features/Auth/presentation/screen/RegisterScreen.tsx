@@ -1,6 +1,5 @@
 import React from 'react';
 import { Paper, Box, Button, Alert, Grid, Divider } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import UserDataForm from '../components/registerForm/UserDataForm';
@@ -8,11 +7,10 @@ import BillingDataForm from '../components/registerForm/BillingDataForm';
 import TermsAndConditions from '../components/registerForm/TermsAndConditions';
 import EmailVerification from '../components/verification/EmailVerification';
 import RegistrationSuccess from '../components/verification/RegistrationSuccess';
-import { registerSchema, RegisterSchema } from '../../domain/validators';
 import { useTempRegistration } from '../../hooks/useTempRegistration';
 import { useSendVerificationCode } from '../useAuth.hooks';
 import { AppContainer, AppTypography } from 'ui';
-import { createRegisterSchema } from '../../domain/validators/registerSchema';
+import { createRegisterSchema, CreateRegisterSchema } from '../../domain/validators';
 
 const Register = () => {
   const {
@@ -39,7 +37,7 @@ const Register = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterSchema>({
+  } = useForm<CreateRegisterSchema>({
     resolver: zodResolver(dynamicSchema),
     mode: 'onBlur',
     defaultValues: {
@@ -68,7 +66,7 @@ const Register = () => {
     }
   }, [isEmailVerificationPending, getTempDataForRegistration]);
 
-  const onSubmit = async (data: RegisterSchema) => {
+  const onSubmit = async (data: CreateRegisterSchema) => {
     if (!termsAccepted) {
       setTermsError('Debes aceptar los términos y condiciones');
       return;

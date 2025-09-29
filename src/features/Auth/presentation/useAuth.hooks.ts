@@ -40,27 +40,6 @@ export const useLogin = () => {
 };
 
 /**
- * Hook para registro
- */
-export const useRegister = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (userData: RegisterRequest) => authService.register(userData),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: AUTH_QUERY_KEYS.profile });
-
-      if (data.data?.user) {
-        queryClient.setQueryData(AUTH_QUERY_KEYS.profile, data.data.user);
-      }
-    },
-    onError: (error) => {
-      console.error('Register error:', error);
-    },
-  });
-};
-
-/**
  * Hook para logout
  */
 export const useLogout = () => {
@@ -161,18 +140,6 @@ export const useVerifyEmail = () => {
 };
 
 /**
- * Hook para reenviar email de verificación
- */
-export const useResendVerificationEmail = () => {
-  return useMutation({
-    mutationFn: () => authService.resendVerificationEmail(),
-    onError: (error) => {
-      console.error('Resend verification email error:', error);
-    },
-  });
-};
-
-/**
  * Hook para refrescar token
  */
 export const useRefreshToken = () => {
@@ -182,10 +149,6 @@ export const useRefreshToken = () => {
     mutationFn: () => authService.refreshToken(),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: AUTH_QUERY_KEYS.profile });
-
-      if (data.data?.user) {
-        queryClient.setQueryData(AUTH_QUERY_KEYS.profile, data.data.user);
-      }
     },
     onError: (error) => {
       console.error('Refresh token error:', error);

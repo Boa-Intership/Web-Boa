@@ -1,4 +1,4 @@
-import { httpClient, ApiResponse } from '../../../config/httpClient';
+import { httpClient } from '../../../config/httpClient';
 import { API_CONFIG } from '../../../config/api';
 import {
   LoginRequest,
@@ -17,29 +17,8 @@ export class AuthService {
   /**
    * Iniciar sesión
    */
-  async login(credentials: LoginRequest): Promise<ApiResponse<AuthResponse>> {
+  async login(credentials: LoginRequest) {
     const response = await httpClient.post<AuthResponse>(`${this.baseUrl}/login`, credentials);
-
-    // Guardar token automáticamente
-    if (response.success && response.data.accessToken) {
-      httpClient.setAuthToken(response.data.accessToken);
-      this.saveRefreshToken(response.data.refreshToken);
-    }
-
-    return response;
-  }
-
-  /**
-   * Registrar nuevo usuario
-   */
-  async register(userData: RegisterRequest): Promise<ApiResponse<AuthResponse>> {
-    const response = await httpClient.post<AuthResponse>(`${this.baseUrl}/register`, userData);
-
-    // Guardar token automáticamente si el registro es exitoso
-    if (response.success && response.data.accessToken) {
-      httpClient.setAuthToken(response.data.accessToken);
-      this.saveRefreshToken(response.data.refreshToken);
-    }
 
     return response;
   }
@@ -47,7 +26,7 @@ export class AuthService {
   /**
    * Cerrar sesión
    */
-  async logout(): Promise<ApiResponse<void>> {
+  async logout() {
     try {
       const response = await httpClient.post<void>(`${this.baseUrl}/logout`);
       this.clearTokens();
@@ -62,78 +41,57 @@ export class AuthService {
   /**
    * Obtener perfil del usuario actual
    */
-  async getProfile(): Promise<ApiResponse<User>> {
-    return await httpClient.get<User>(`${this.baseUrl}/profile`);
+  async getProfile() {
+    return await httpClient.get<User>(`${this.baseUrl}/me`);
   }
 
   /**
    * Actualizar perfil del usuario
    */
-  async updateProfile(userData: Partial<User>): Promise<ApiResponse<User>> {
-    return await httpClient.patch<User>(`${this.baseUrl}/profile`, userData);
+  async updateProfile(userData: Partial<User>) {
+    return await httpClient.put<User>(`${this.baseUrl}/user`, userData);
   }
 
   /**
    * Solicitar recuperación de contraseña
    */
-  async forgotPassword(request: ForgotPasswordRequest): Promise<ApiResponse<void>> {
+  async forgotPassword(request: ForgotPasswordRequest) {
     return await httpClient.post<void>(`${this.baseUrl}/forgot-password`, request);
   }
 
   /**
    * Restablecer contraseña
    */
-  async resetPassword(request: ResetPasswordRequest): Promise<ApiResponse<void>> {
+  async resetPassword(request: ResetPasswordRequest) {
     return await httpClient.post<void>(`${this.baseUrl}/reset-password`, request);
   }
 
   /**
    * Refrescar token de acceso
    */
-  async refreshToken(): Promise<ApiResponse<AuthResponse>> {
-    const refreshToken = this.getRefreshToken();
-    if (!refreshToken) {
-      throw new Error('No refresh token available');
-    }
-
-    const response = await httpClient.post<AuthResponse>(`${this.baseUrl}/refresh`, {
-      refreshToken,
-    });
-
-    if (response.success && response.data.accessToken) {
-      httpClient.setAuthToken(response.data.accessToken);
-      this.saveRefreshToken(response.data.refreshToken);
-    }
-
-    return response;
+  async refreshToken() {
+    return 0;
   }
 
   /**
    * Verificar email
    */
-  async verifyEmail(token: string): Promise<ApiResponse<void>> {
+  async verifyEmail(token: string) {
     return await httpClient.post<void>(`${this.baseUrl}/verify-email`, { token });
-  }
-
-  /**
-   * Reenviar email de verificación
-   */
-  async resendVerificationEmail(): Promise<ApiResponse<void>> {
-    return await httpClient.post<void>(`${this.baseUrl}/resend-verification`);
   }
 
   /**
    * Enviar código de verificación
    * Verifica que el email y NIT no estén en uso antes de enviar el código
    */
-  async sendVerificationCode(request: SendCodeRequest): Promise<ApiResponse<void>> {
+  async sendVerificationCode(request: SendCodeRequest) {
     return await httpClient.post<void>(API_CONFIG.ENDPOINTS.SEND_CODE, request);
   }
 
   /**
    * Validar código de verificación
    */
-  async validateVerificationCode(request: ValidateCodeRequest): Promise<ApiResponse<void>> {
+  async validateVerificationCode(request: ValidateCodeRequest) {
     return await httpClient.post<void>(API_CONFIG.ENDPOINTS.VALIDATE_CODE, request);
   }
 
@@ -141,17 +99,8 @@ export class AuthService {
    * Registrar usuario final después de validar código
    * No maneja tokens, solo registra al usuario
    */
-  async registerUser(userData: RegisterRequest): Promise<ApiResponse<User>> {
+  async registerUser(userData: RegisterRequest) {
     return await httpClient.post<User>(API_CONFIG.ENDPOINTS.REGISTER, userData);
-  }
-
-  // Métodos privados para manejo de tokens
-  private saveRefreshToken(token: string): void {
-    localStorage.setItem('refreshToken', token);
-  }
-
-  private getRefreshToken(): string | null {
-    return localStorage.getItem('refreshToken');
   }
 
   private clearTokens(): void {

@@ -1,14 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { API_CONFIG } from './api';
 
-// Tipos para las respuestas de la API
-export interface ApiResponse<T = unknown> {
-  data: T;
-  message?: string;
-  success: boolean;
-  statusCode: number;
-}
-
 export interface ApiError {
   message: string;
   statusCode: number;
@@ -46,7 +38,7 @@ class HttpClient {
 
     // Response interceptor - manejar errores globalmente
     this.client.interceptors.response.use(
-      (response: AxiosResponse<ApiResponse>) => {
+      (response: AxiosResponse) => {
         return response;
       },
       (error: AxiosError<ApiError>) => {
@@ -57,7 +49,7 @@ class HttpClient {
   }
 
   private getAuthToken(): string | null {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('accessToken');
   }
 
   private handleApiError(error: AxiosError<ApiError>): void {
@@ -81,43 +73,28 @@ class HttpClient {
     localStorage.removeItem('authToken');
   }
 
-  public async get<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
-    const response = await this.client.get<ApiResponse<T>>(url, config);
+  public async get<T = unknown>(url: string, config?: AxiosRequestConfig) {
+    const response = await this.client.get(url, config);
     return response.data;
   }
 
-  public async post<T = unknown>(
-    url: string,
-    data?: unknown,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<T>> {
-    const response = await this.client.post<ApiResponse<T>>(url, data, config);
+  public async post<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) {
+    const response = await this.client.post(url, data, config);
     return response.data;
   }
 
-  public async put<T = unknown>(
-    url: string,
-    data?: unknown,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<T>> {
-    const response = await this.client.put<ApiResponse<T>>(url, data, config);
+  public async put<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) {
+    const response = await this.client.put(url, data, config);
     return response.data;
   }
 
-  public async patch<T = unknown>(
-    url: string,
-    data?: unknown,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<T>> {
-    const response = await this.client.patch<ApiResponse<T>>(url, data, config);
+  public async patch<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) {
+    const response = await this.client.patch(url, data, config);
     return response.data;
   }
 
-  public async delete<T = unknown>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<T>> {
-    const response = await this.client.delete<ApiResponse<T>>(url, config);
+  public async delete<T = unknown>(url: string, config?: AxiosRequestConfig) {
+    const response = await this.client.delete(url, config);
     return response.data;
   }
 
@@ -125,7 +102,7 @@ class HttpClient {
     url: string,
     file: File,
     onProgress?: (percent: number) => void
-  ): Promise<ApiResponse<T>> {
+  ) {
     const formData = new FormData();
     formData.append('file', file);
 
@@ -141,12 +118,8 @@ class HttpClient {
       },
     };
 
-    const response = await this.client.post<ApiResponse<T>>(url, formData, config);
+    const response = await this.client.post(url, formData, config);
     return response.data;
-  }
-
-  public setAuthToken(token: string): void {
-    localStorage.setItem('authToken', token);
   }
 
   public getAxiosInstance(): AxiosInstance {

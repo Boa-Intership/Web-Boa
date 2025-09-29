@@ -57,14 +57,17 @@ export default function Login() {
       });
 
       // El backend retorna los tokens directamente en la respuesta
-      const hasToken = response.accessToken || (response.data && response.data.accessToken);
+      const hasToken = response.accessToken;
 
       if (hasToken) {
         // Actualizar el contexto de autenticación
-        login({
-          name: data.email, // Usar el email como nombre temporal
-          email: data.email,
-        });
+        login(
+          {
+            name: data.email, // Usar el email como nombre temporal
+            email: data.email,
+          },
+          response.accessToken
+        );
         navigate('/');
       } else {
         setError('Error en la respuesta del servidor');
