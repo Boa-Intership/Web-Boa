@@ -1,4 +1,4 @@
-import { Box, Grid, Paper } from '@mui/material';
+import { Box, Grid, Paper, Typography } from '@mui/material';
 import { Person, Inventory2, ReceiptLong, TaskAlt } from '@mui/icons-material';
 import { AppTypography } from 'ui';
 
@@ -10,9 +10,9 @@ const ResumenEnvio = ({ formData }: { formData: any }) => {
       <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
         <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
           <TaskAlt color="primary" />
-          <AppTypography variant="h4Regular" color="primary">
+          <Typography variant="h5" color="primary">
             Resumen del Envío
-          </AppTypography>
+          </Typography>
         </Box>
 
         <Grid container spacing={3}>
@@ -20,106 +20,106 @@ const ResumenEnvio = ({ formData }: { formData: any }) => {
           <Grid item xs={12} sm={6}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={1}>
               <Person sx={{ color: '#424647' }} />
-              <AppTypography variant="h4Regular" sx={{ color: '#424647' }}>
+              <Typography variant="h6" sx={{ color: '#424647' }}>
                 Remitente
-              </AppTypography>
+              </Typography>
             </Box>
-            <AppTypography variant="h4Regular">
+            <Typography>
               <strong>CI: </strong>
               {remitente.ci}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Nombre: </strong>
               {remitente.nombre}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Celular: </strong>
               {remitente.celular}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Correo: </strong>
               {remitente.correo}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Dirección: </strong>
               {remitente.direccion}
-            </AppTypography>
+            </Typography>
           </Grid>
 
           {/* Destinatario */}
           <Grid item xs={12} sm={6}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={1}>
               <Person sx={{ color: '#424647' }} />
-              <AppTypography variant="h4Regular" sx={{ color: '#424647' }}>
+              <Typography variant="h6" sx={{ color: '#424647' }}>
                 Destinatario
-              </AppTypography>
+              </Typography>
             </Box>
-            <AppTypography variant="h4Regular">
+            <Typography>
               <strong>CI: </strong>
               {destinatario.ci}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Nombre: </strong>
               {destinatario.nombre}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Celular: </strong>
               {destinatario.celular}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Correo: </strong>
               {destinatario.correo}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Dirección: </strong>
               {destinatario.direccion}
-            </AppTypography>
+            </Typography>
           </Grid>
 
           {/* Ruta y Carga */}
           <Grid item xs={12} sm={6}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={1}>
               <Inventory2 sx={{ color: '#424647' }} />
-              <AppTypography variant="h4Regular" sx={{ color: '#424647' }}>
+              <Typography variant="h6" sx={{ color: '#424647' }}>
                 Ruta y Servicio
-              </AppTypography>
+              </Typography>
             </Box>
-            <AppTypography variant="h4Regular">
+            <Typography>
               <strong>Origen: </strong>
-              {ruta.origen}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+              {ruta?.origen?.city?.cityName} ({ruta?.origen?.codStation})
+            </Typography>
+            <Typography>
               <strong>Destino: </strong>
-              {ruta.destino}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+              {ruta?.destino?.city?.cityName} ({ruta?.destino?.codStation})
+            </Typography>
+            <Typography>
               <strong>Tipo de Carga: </strong>
               {carga.tipo}
-            </AppTypography>
-            <AppTypography variant="h4Regular">
+            </Typography>
+            <Typography>
               <strong>Nro. Ítems: </strong>
               {carga.detalles.length}
-            </AppTypography>
+            </Typography>
           </Grid>
 
           {/* Estimación y Factura */}
           <Grid item xs={12} sm={6}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={1}>
               <ReceiptLong sx={{ color: '#424647' }} />
-              <AppTypography variant="h4Regular" sx={{ color: '#424647' }}>
+              <Typography variant="h6" sx={{ color: '#424647' }}>
                 Facturación e Importe
-              </AppTypography>
+              </Typography>
             </Box>
-            <AppTypography variant="h4Regular">
+            <Typography>
               <strong>Documento: </strong>
               {factura.tipoDocumento} - {factura.numeroDocumento}
-            </AppTypography>
+            </Typography>
             {factura.tipoDocumento === 'NIT' && (
-              <AppTypography variant="h4Regular">Razón Social: {factura.razonSocial}</AppTypography>
+              <Typography>Razón Social: {factura.razonSocial}</Typography>
             )}
-            <AppTypography variant="h4Regular" color="primary" fontWeight="bold" mt={2}>
-              Importe Total Estimado: Bs. {factura.precioEstimado}
-            </AppTypography>
+            <Typography variant="h6" color="primary" fontWeight="bold" mt={2}>
+              Importe Total Estimado: Bs. {carga?.costoEstimado}
+            </Typography>
           </Grid>
         </Grid>
       </Paper>

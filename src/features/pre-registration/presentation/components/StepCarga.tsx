@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
-  Grid,
   MenuItem,
+  Grid,
   TextField,
   Dialog,
   DialogTitle,
@@ -12,26 +12,26 @@ import {
   IconButton,
   Paper,
   InputAdornment,
+  Typography,
 } from '@mui/material';
 import {
   Inventory2,
   Visibility,
   Edit,
   Delete,
-  ViewInAr,
   LocalShipping,
   AddCircle,
   Inventory2Outlined,
 } from '@mui/icons-material';
-import { AppTypography } from 'ui';
+import { getCargoTypes, CargoType } from '../../data/services/cargo-type.service';
+import { calcularCostoPaquetes } from '../../data/services/package-cost.service';
+import {
+  validateDescripcion,
+  validateEntero,
+  validateDecimal,
+} from '../../domain/validators/validateCarga';
 
-const tiposCarga = [
-  { label: 'Carga general', codigo: 'CG' },
-  { label: 'Animales vivos', codigo: 'AV' },
-  { label: 'Perecedero', codigo: 'PR' },
-];
-
-const StepCarga = ({ data, setData, onNext, onBack }: any) => {
+const StepCarga = ({ data, setData, onNext, onBack, ruta }: any) => {
   const [tipo, setTipo] = useState(data?.tipo || '');
   const [detalles, setDetalles] = useState(data?.detalles || []);
   const [modalOpen, setModalOpen] = useState(false);
@@ -42,6 +42,65 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const [indiceEditado, setIndiceEditado] = useState<number | null>(null); // estado edicion
   const [openEliminar, setOpenEliminar] = useState(false); // estado eliminar
   const [indiceAEliminar, setIndiceAEliminar] = useState<number | null>(null); // estado eliminar
+  const [tiposCarga, setTiposCarga] = useState<CargoType[]>([]);
+  const [errores, setErrores] = useState<Record<string, string>>({});
+  const [pesoTotal, setPesoTotal] = useState(0);
+  const [costoEstimado, setCostoEstimado] = useState(0);
+  const [errorTipo, setErrorTipo] = useState(false);
+
+  useEffect(() => {
+    const fetchTiposCarga = async () => {
+      try {
+        const tipos = await getCargoTypes();
+        setTiposCarga(tipos);
+      } catch (error) {
+        console.error('Error al obtener los tipos de carga:', error);
+      }
+    };
+
+    fetchTiposCarga();
+  }, []);
+
+  useEffect(() => {
+    const calcularCosto = async () => {
+      if (!tipo || detalles.length === 0 || !ruta?.origen?.id || !ruta?.destino?.id) return;
+
+      const cargoType = tiposCarga.find((t) => t.name === tipo);
+      if (!cargoType) return;
+
+      try {
+        const payload = detalles.map((p: any) => ({
+          description: p.descripcion,
+          weight: parseFloat(p.peso),
+          height: parseFloat(p.alto),
+          width: parseFloat(p.ancho),
+          length: parseFloat(p.largo),
+          pieces: parseInt(p.piezas),
+        }));
+
+        const res = await calcularCostoPaquetes(
+          ruta.origen.id,
+          ruta.destino.id,
+          cargoType.id,
+          payload
+        );
+
+        // Guardar en estado si deseas mostrar más adelante
+        setCostoEstimado(res.estimatedCost || 0);
+        setPesoTotal(res.packageWeight || 0);
+      } catch (error: any) {
+        console.error('Error al calcular el costo estimado:', error);
+        setCostoEstimado(0);
+        setPesoTotal(0);
+        // Si el error tiene response con message:
+        if (error.response?.data?.message) {
+          alert(error.response.data.message);
+        }
+      }
+    };
+
+    calcularCosto();
+  }, [tipo, detalles, data?.origenID, data?.destinoID, tiposCarga]);
 
   const [nuevoItem, setNuevoItem] = useState({
     descripcion: '',
@@ -52,16 +111,49 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
     piezas: '',
   });
 
+  const validarCampos = (item: any) => {
+    let errores: Record<string, string> = {};
+
+    const campos = [
+      { nombre: 'descripcion', validador: validateDescripcion },
+      { nombre: 'piezas', validador: validateEntero },
+      { nombre: 'peso', validador: validateDecimal },
+      { nombre: 'alto', validador: validateDecimal },
+      { nombre: 'ancho', validador: validateDecimal },
+      { nombre: 'largo', validador: validateDecimal },
+    ];
+
+    campos.forEach(({ nombre, validador }) => {
+      const result = validador(item[nombre]);
+      if (!result.isValid) errores[nombre] = result.error;
+    });
+
+    return errores;
+  };
+
   const handleChangeNuevoItem = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNuevoItem((prev) => ({ ...prev, [name]: value }));
+
+    if (errores[name]) {
+      let result;
+      if (name === 'descripcion') result = validateDescripcion(value);
+      else if (name === 'piezas') result = validateEntero(value);
+      else result = validateDecimal(value);
+
+      setErrores((prev) => ({ ...prev, [name]: result.error }));
+    }
   };
 
   const handleAgregarItem = () => {
-    const valoresCompletos = Object.values(nuevoItem).every((v) => v !== '');
-    if (!valoresCompletos) return;
+    const errores = validarCampos(nuevoItem);
+    if (Object.keys(errores).length > 0) {
+      setErrores(errores);
+      return;
+    }
     setDetalles((prev: any) => [...prev, nuevoItem]);
     setNuevoItem({ descripcion: '', peso: '', alto: '', ancho: '', largo: '', piezas: '' });
+    setErrores({});
     setModalOpen(false);
   };
 
@@ -74,12 +166,18 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const handleEditarItem = (item: any, index: number) => {
     setPaqueteEditado(item);
     setIndiceEditado(index);
+    setErrores({});
     setOpenEditar(true);
   };
 
   // Guardar cambios de edición
   const handleGuardarEdicion = () => {
     if (!paqueteEditado || indiceEditado === null) return;
+    const errores = validarCampos(paqueteEditado);
+    if (Object.keys(errores).length > 0) {
+      setErrores(errores);
+      return;
+    }
 
     const nuevosDetalles = [...detalles];
     nuevosDetalles[indiceEditado] = paqueteEditado;
@@ -94,6 +192,15 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   const handleChangeEdicion = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPaqueteEditado((prev: any) => ({ ...prev, [name]: value }));
+
+    if (errores[name]) {
+      let result;
+      if (name === 'descripcion') result = validateDescripcion(value);
+      else if (name === 'piezas') result = validateEntero(value);
+      else result = validateDecimal(value);
+
+      setErrores((prev) => ({ ...prev, [name]: result.error }));
+    }
   };
 
   const handleEliminarItem = (index: number) => {
@@ -115,24 +222,29 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
   };
 
   const handleNextClick = () => {
-    if (!tipo || detalles.length === 0) {
-      return alert('Selecciona tipo de carga y agrega al menos un paquete');
+    if (!tipo) {
+      setErrorTipo(true);
+      return;
     }
-    setData({ tipo, detalles });
+    if (detalles.length === 0) {
+      alert('Agrega al menos un paquete');
+      return;
+    }
+    setData({ tipo, detalles, costoEstimado });
     onNext();
   };
 
-  const pesoTotal = detalles.reduce((acc, curr) => acc + parseFloat(curr.peso), 0);
-  const costoEstimado = pesoTotal * 10;
+  /*const pesoTotal = detalles.reduce((acc, curr) => acc + parseFloat(curr.peso), 0);
+  const costoEstimado = pesoTotal * 10;*/
 
   return (
     <Box>
       <Paper elevation={2} sx={{ p: 3, borderRadius: 4, bgcolor: '#FAFAFA' }}>
         <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
           <Inventory2 color="primary" />
-          <AppTypography variant="h4Regular" color="primary">
+          <Typography variant="h5" color="primary">
             Información de la Carga
-          </AppTypography>
+          </Typography>
         </Box>
 
         {/* Tipo de carga */}
@@ -140,9 +252,14 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
           select
           label="Tipo de Carga"
           value={tipo}
-          onChange={(e) => setTipo(e.target.value)}
+          onChange={(e) => {
+            setTipo(e.target.value);
+            if (errorTipo) setErrorTipo(false);
+          }}
           fullWidth
           required
+          error={errorTipo}
+          helperText={errorTipo ? 'Este campo es requerido' : ''}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -151,24 +268,24 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
             ),
           }}
         >
-          {tiposCarga.map(({ label, codigo }) => (
-            <MenuItem key={codigo} value={label}>{`${label} (${codigo})`}</MenuItem>
+          {tiposCarga.map(({ name, code, id }) => (
+            <MenuItem key={id} value={name}>{`${name} (${code})`}</MenuItem>
           ))}
         </TextField>
 
         {/* Detalle de ítems agregados */}
         <Box mt={3}>
           <Box display="flex" alignItems="center" justifyContent="space-between">
-            <AppTypography variant="h4Regular" color="primary">
+            <Typography variant="h6" color="primary">
               Paquetes Agregados
-            </AppTypography>
+            </Typography>
             <IconButton color="primary" onClick={() => setModalOpen(true)}>
               <AddCircle />
             </IconButton>
           </Box>
 
           {detalles.length === 0 ? (
-            //<AppTypography variant="h4Regular" color='text.secondary' mt={2}>No hay paquetes agregados</AppTypography>
+            //<Typography variant="h4Regular" color='text.secondary' mt={2}>No hay paquetes agregados</Typography>
             <Box
               sx={{
                 //backgroundColor: '#4a6b91',
@@ -179,12 +296,12 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
               }}
             >
               <Inventory2Outlined sx={{ fontSize: 60, mb: 1, opacity: 0.8 }} />
-              <AppTypography variant="h4Regular" fontWeight="bold">
+              <Typography variant="h6" fontWeight="bold">
                 No hay paquetes agregados
-              </AppTypography>
-              <AppTypography variant="h4Regular" mt={1} sx={{ opacity: 0.8 }}>
+              </Typography>
+              <Typography variant="body2" mt={1} sx={{ opacity: 0.8 }}>
                 Toca el botón <strong>+</strong> para agregar tu primer paquete
-              </AppTypography>
+              </Typography>
             </Box>
           ) : (
             <Box mt={2} display="flex" flexDirection="column">
@@ -200,12 +317,10 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                   }}
                 >
                   <Box>
-                    <AppTypography variant="h4Regular" fontWeight={600}>
-                      {item.descripcion}
-                    </AppTypography>
-                    <AppTypography variant="h4Regular">
+                    <Typography fontWeight={600}>{item.descripcion}</Typography>
+                    <Typography variant="body2">
                       {item.peso}kg • {item.alto}×{item.ancho}×{item.largo}cm • {item.piezas} piezas
-                    </AppTypography>
+                    </Typography>
                   </Box>
                   <Box>
                     <IconButton onClick={() => handleVisualizarItem(item)}>
@@ -225,12 +340,12 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
         </Box>
 
         <Box mt={4}>
-          <AppTypography variant="h4Regular">
+          <Typography variant="body2">
             Peso Total: <strong>{pesoTotal.toFixed(2)} kg</strong>
-          </AppTypography>
-          <AppTypography variant="h4Regular">
+          </Typography>
+          <Typography variant="body2">
             Costo Estimado: <strong>Bs {costoEstimado.toFixed(2)}</strong>
-          </AppTypography>
+          </Typography>
         </Box>
       </Paper>
 
@@ -257,6 +372,20 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                   onChange={handleChangeNuevoItem}
                   fullWidth
                   required
+                  inputProps={{
+                    inputMode:
+                      campo === 'piezas'
+                        ? 'numeric'
+                        : ['peso', 'alto', 'ancho', 'largo'].includes(campo)
+                          ? 'decimal'
+                          : 'text',
+                    pattern:
+                      campo === 'piezas'
+                        ? '[0-9]*'
+                        : ['peso', 'alto', 'ancho', 'largo'].includes(campo)
+                          ? '[0-9]*[.,]?[0-9]*'
+                          : undefined,
+                  }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -266,6 +395,8 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                       </InputAdornment>
                     ),
                   }}
+                  error={!!errores[campo]}
+                  helperText={errores[campo]}
                 />
               </Grid>
             ))}
@@ -289,19 +420,19 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
         <DialogContent dividers>
           {paqueteSeleccionado && (
             <Box display="flex" flexDirection="column" gap={1}>
-              <AppTypography variant="h4Regular">
+              <Typography>
                 <strong>Descripción:</strong> {paqueteSeleccionado.descripcion}
-              </AppTypography>
-              <AppTypography variant="h4Regular">
+              </Typography>
+              <Typography>
                 <strong>Peso:</strong> {paqueteSeleccionado.peso} kg
-              </AppTypography>
-              <AppTypography variant="h4Regular">
+              </Typography>
+              <Typography>
                 <strong>Dimensiones:</strong> {paqueteSeleccionado.alto} ×{' '}
                 {paqueteSeleccionado.ancho} × {paqueteSeleccionado.largo} cm
-              </AppTypography>
-              <AppTypography variant="h4Regular">
+              </Typography>
+              <Typography>
                 <strong>Piezas:</strong> {paqueteSeleccionado.piezas}
-              </AppTypography>
+              </Typography>
             </Box>
           )}
         </DialogContent>
@@ -326,6 +457,20 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                     value={paqueteEditado[campo]}
                     onChange={handleChangeEdicion}
                     fullWidth
+                    inputProps={{
+                      inputMode:
+                        campo === 'piezas'
+                          ? 'numeric'
+                          : ['peso', 'alto', 'ancho', 'largo'].includes(campo)
+                            ? 'decimal'
+                            : 'text',
+                      pattern:
+                        campo === 'piezas'
+                          ? '[0-9]*'
+                          : ['peso', 'alto', 'ancho', 'largo'].includes(campo)
+                            ? '[0-9]*[.,]?[0-9]*'
+                            : undefined,
+                    }}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -335,6 +480,8 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
                         </InputAdornment>
                       ),
                     }}
+                    error={!!errores[campo]}
+                    helperText={errores[campo]}
                   />
                 </Grid>
               ))}
@@ -357,9 +504,7 @@ const StepCarga = ({ data, setData, onNext, onBack }: any) => {
       >
         <DialogTitle>Eliminar Paquete</DialogTitle>
         <DialogContent dividers>
-          <AppTypography variant="h4Regular">
-            ¿Estás seguro de que deseas eliminar este paquete?
-          </AppTypography>
+          <Typography>¿Estás seguro de que deseas eliminar este paquete?</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={cancelarEliminacion}>Cancelar</Button>
