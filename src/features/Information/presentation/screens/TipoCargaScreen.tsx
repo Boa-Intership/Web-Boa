@@ -11,8 +11,8 @@ import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
 import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
-import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
+import { Breadcrumb } from 'ui';
 
 function TipoCargaScreen() {
   const { tipo } = useParams<{ tipo: string }>(); //obtiene el valor de la URL
@@ -32,6 +32,16 @@ function TipoCargaScreen() {
   const colorBoton = theme.palette.primary.dark;
   const colorHover = theme.palette.primary.main;
   const mainButton = false;
+
+  // Mapeo para nombres legibles en el breadcrumb
+  const breadcrumbMap: Record<string, string> = {
+    cargaGeneral: 'Carga General',
+    animalesVivos: 'Animales Vivos',
+    perecederos: 'Perecederos',
+    restosHumanos: 'Restos Humanos',
+    cargaValorada: 'Carga Valorada',
+    peligrosa: 'Carga Peligrosa',
+  };
 
   const renderContent = () => {
     if (!selected) {
@@ -57,6 +67,10 @@ function TipoCargaScreen() {
 
   return (
     <AppContainer sx={{ py: 4 }}>
+      <Breadcrumb
+        nameSection="Tipos de carga"
+        selected={breadcrumbMap[selected] || 'selecciona una categoría'}
+      />
       <AppTypography variant="h2Bold" color="primary" mb={2}>
         Tipos de carga
       </AppTypography>
