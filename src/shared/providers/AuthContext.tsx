@@ -9,7 +9,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
   token: string | null;
-  login: (userData: User, token: string) => void;
+  login: (userData: User, token: string, rToken: string) => void;
   logout: () => void;
 }
 
@@ -20,12 +20,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  const login = (userData: User, accessToken: string) => {
+  const login = (userData: User, accessToken: string, refreshToken: string) => {
     setToken(accessToken);
     setUser(userData);
     setIsAuthenticated(true);
     // Guardar el token en localStorage para persistencia
     localStorage.setItem('token', accessToken);
+    localStorage.setItem('rToken', refreshToken);
   };
 
   const logout = () => {
@@ -34,6 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setToken(null);
     // Limpiar el token del localStorage
     localStorage.removeItem('token');
+    localStorage.removeItem('rToken');
   };
 
   // Verificar token existente al cargar la aplicación

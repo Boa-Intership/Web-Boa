@@ -66,7 +66,8 @@ export default function Login() {
             name: data.email, // Usar el email como nombre temporal
             email: data.email,
           },
-          response.accessToken
+          response.accessToken,
+          response.refreshToken
         );
         navigate('/');
       } else {

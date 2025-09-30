@@ -49,17 +49,12 @@ class HttpClient {
   }
 
   private getAuthToken(): string | null {
-    return localStorage.getItem('accessToken');
+    return localStorage.getItem('token');
   }
 
   private handleApiError(error: AxiosError<ApiError>): void {
     if (error.response?.status === 401) {
       this.clearAuthToken();
-
-      // Solo redirigir si NO estamos ya en login
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
-      }
     }
 
     console.error('API Error:', {
@@ -70,7 +65,8 @@ class HttpClient {
   }
 
   private clearAuthToken(): void {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');
+    localStorage.removeItem('rToken');
   }
 
   public async get<T = unknown>(url: string, config?: AxiosRequestConfig) {
