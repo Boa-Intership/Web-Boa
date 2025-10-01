@@ -17,6 +17,7 @@ import ItinerariosScreen from './features/itinerarios/presentation/screens/Itine
 import TerminosScreen from './features/terms_conditions/presentation/screens/TerminosScreen';
 import Login from './features/Auth/presentation/screen/LoginScreen';
 import Register from './features/Auth/presentation/screen/RegisterScreen';
+import ProtectedRoute from 'router/ProtectedRoute';
 
 const App: React.FC = () => (
   <QueryProvider>
@@ -29,7 +30,14 @@ const App: React.FC = () => (
             <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
             <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
             <Route path={ROUTES.CONTACTO.replace('/', '')} element={<ContactScreen />} />
-            <Route path={ROUTES.PREREGISTRO.replace('/', '')} element={<PreRegistroScreen />} />
+            <Route
+              path={ROUTES.PREREGISTRO.replace('/', '')}
+              element={
+                <ProtectedRoute>
+                  <PreRegistroScreen />
+                </ProtectedRoute>
+              }
+            />
             <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
             <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
             <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
