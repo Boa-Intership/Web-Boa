@@ -14,10 +14,13 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["./src/*"],
       "ui": ["src/ui/index.ts"],
       "ui/*": ["./src/ui/*"],
       "pages/*": ["./src/pages/*"],
-      "router/*": ["./src/router/*"]
+      "router/*": ["./src/router/*"],
+      "@config": ["src/config/index.ts"],
+      "@config/*": ["src/config/*"]
     },
     "types": [
       "node",

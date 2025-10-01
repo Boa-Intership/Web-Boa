@@ -5,7 +5,6 @@ import { LoginSchema } from '../../domain/validators/loginSchema';
 import { useLogin } from '../useAuth.hooks';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../shared/providers/AuthContext';
-import { useLocation } from 'react-router-dom';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',

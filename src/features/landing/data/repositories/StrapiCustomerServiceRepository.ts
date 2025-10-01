@@ -3,6 +3,7 @@ import {
   CustomerServiceRepository,
   CustomerServiceItem,
 } from '../../domain/entities/CustomerServiceContent';
+import { strapiClient } from '@/config';
 
 // Tipos para mapear la respuesta de Strapi
 interface StrapiCustomerServiceItemData {
@@ -28,22 +29,11 @@ interface StrapiCustomerServiceResponse {
 }
 
 export class StrapiCustomerServiceRepository implements CustomerServiceRepository {
-  private readonly baseUrl =
-    import.meta.env.VITE_APP_ENV === 'production'
-      ? `${import.meta.env.VITE_STRAPI_URL}/api`
-      : '/api/cms';
-
   async getCustomerService(): Promise<CustomerServiceContent> {
     try {
-      const response = await fetch(
-        `${this.baseUrl}/atencion-clientes?populate[elementos_izquierda]=*&populate[elementos_derecha]=*&filters[activo][$eq]=true&sort=createdAt:desc`
+      const result = await strapiClient.get<StrapiCustomerServiceResponse>(
+        '/atencion-clientes?populate[elementos_izquierda]=*&populate[elementos_derecha]=*&filters[activo][$eq]=true&sort=createdAt:desc'
       );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: StrapiCustomerServiceResponse = await response.json();
 
       if (!result.data || result.data.length === 0) {
         throw new Error('No active customer service found');

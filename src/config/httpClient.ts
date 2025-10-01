@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { API_CONFIG } from './api';
+import { STRAPI_CONFIG } from './strapi';
 
 export interface ApiError {
   message: string;
@@ -10,12 +11,16 @@ export interface ApiError {
 
 class HttpClient {
   private readonly client: AxiosInstance;
+  private readonly isStrapi: boolean;
 
-  constructor() {
+  constructor(useStrapi = false) {
+    this.isStrapi = useStrapi;
+    const config = useStrapi ? STRAPI_CONFIG : API_CONFIG;
+
     this.client = axios.create({
-      baseURL: API_CONFIG.BASE_URL,
-      timeout: API_CONFIG.TIMEOUT,
-      headers: API_CONFIG.HEADERS,
+      baseURL: config.BASE_URL,
+      timeout: config.TIMEOUT,
+      headers: config.HEADERS,
     });
 
     this.setupInterceptors();
@@ -123,5 +128,11 @@ class HttpClient {
   }
 }
 
+// Cliente HTTP para la API principal
 export const httpClient = new HttpClient();
+
+// Cliente HTTP para Strapi
+export const strapiClient = new HttpClient(true);
+
+// Exportar el cliente principal por defecto
 export default httpClient;

@@ -34,7 +34,8 @@ export default defineConfig({
       ui: path.resolve(__dirname, 'src/ui/index.ts'),
       assets: path.resolve(__dirname, 'src/assets'),
       router: path.resolve(__dirname, 'src/router'),
-      '@': path.resolve(__dirname, 'src'), // 👈 atajo recomendado
+      '@': path.resolve(__dirname, 'src'),
+      '@config': path.resolve(__dirname, 'src/config'),
     },
   },
   test: {
