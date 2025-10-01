@@ -18,6 +18,7 @@ import TerminosScreen from './features/terms_conditions/presentation/screens/Ter
 import Login from './features/Auth/presentation/screen/LoginScreen';
 import Register from './features/Auth/presentation/screen/RegisterScreen';
 import ProtectedRoute from 'router/ProtectedRoute';
+import PublicRoute from 'router/PublicRoute';
 
 const App: React.FC = () => (
   <QueryProvider>
@@ -41,8 +42,22 @@ const App: React.FC = () => (
             <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
             <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
             <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
-            <Route path={ROUTES.LOGIN.replace('/', '')} element={<Login />} />
-            <Route path={ROUTES.REGISTER.replace('/', '')} element={<Register />} />
+            <Route
+              path={ROUTES.LOGIN.replace('/', '')}
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path={ROUTES.REGISTER.replace('/', '')}
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            />
 
             <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
             <Route
