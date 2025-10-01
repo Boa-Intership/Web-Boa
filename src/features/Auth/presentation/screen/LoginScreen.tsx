@@ -5,6 +5,7 @@ import { LoginSchema } from '../../domain/validators/loginSchema';
 import { useLogin } from '../useAuth.hooks';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../shared/providers/AuthContext';
+import { useLocation } from 'react-router-dom';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -42,6 +43,8 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function Login() {
+  const location = useLocation();
+
   const [error, setError] = React.useState<string>('');
   const loginMutation = useLogin();
   const navigate = useNavigate();
@@ -69,7 +72,9 @@ export default function Login() {
           response.accessToken,
           response.refreshToken
         );
-        navigate('/');
+
+        const from = location.state?.from?.pathname || '/';
+        navigate(from);
       } else {
         setError('Error en la respuesta del servidor');
       }
