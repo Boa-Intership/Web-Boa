@@ -85,14 +85,12 @@ const StepCarga = ({ data, setData, onNext, onBack, ruta }: any) => {
           payload
         );
 
-        // Guardar en estado si deseas mostrar más adelante
         setCostoEstimado(res.estimatedCost || 0);
         setPesoTotal(res.packageWeight || 0);
       } catch (error: any) {
         console.error('Error al calcular el costo estimado:', error);
         setCostoEstimado(0);
         setPesoTotal(0);
-        // Si el error tiene response con message:
         if (error.response?.data?.message) {
           alert(error.response.data.message);
         }
@@ -230,7 +228,13 @@ const StepCarga = ({ data, setData, onNext, onBack, ruta }: any) => {
       alert('Agrega al menos un paquete');
       return;
     }
-    setData({ tipo, detalles, costoEstimado });
+    const tipoSeleccionado = tiposCarga.find((t) => t.name === tipo);
+    setData({
+      tipo,
+      tipoID: tipoSeleccionado?.id,
+      detalles,
+      costoEstimado,
+    });
     onNext();
   };
 

@@ -23,7 +23,7 @@ export default defineConfig({
       // Proxy para Backend API - SOLO para desarrollo local
       // En producción no se usa, va directo a VITE_BACKEND_API_URL
       '/api': {
-        target: 'http://ec2-54-92-229-60.compute-1.amazonaws.com', // Cambiar por tu servidor de desarrollo
+        target: 'http://192.168.150.220', // Cambiar por tu servidor de desarrollo
         changeOrigin: true,
         secure: false,
       },

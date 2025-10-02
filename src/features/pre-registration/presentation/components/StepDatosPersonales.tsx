@@ -32,11 +32,12 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
           ...prev,
           remitente: {
             ...prev.remitente,
-            ci: user.nit || '',
+            ci: user.ci || '',
             celular: user.phone || '',
             nombre: user.name || '',
             correo: user.email || '',
             direccion: user.address || '',
+            complemento: user.complement,
           },
         }));
         /**

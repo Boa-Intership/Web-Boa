@@ -6,10 +6,10 @@ export const calcularCostoPaquetes = async (
   cargoTypeID: number,
   packages: any[]
 ) => {
-  const token = localStorage.getItem('token'); // 👈 o donde lo tengas guardado
+  const token = localStorage.getItem('token');
 
   const response = await axios.post(
-    `http://localhost:5173/api/package/cost/${originID}/${destinationID}/${cargoTypeID}`,
+    `api/package/cost/${originID}/${destinationID}/${cargoTypeID}`,
     { packages },
     {
       headers: {
