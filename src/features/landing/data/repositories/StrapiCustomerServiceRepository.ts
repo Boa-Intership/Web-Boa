@@ -3,7 +3,7 @@ import {
   CustomerServiceRepository,
   CustomerServiceItem,
 } from '../../domain/entities/CustomerServiceContent';
-import { strapiClient, STRAPI_CONFIG } from '@/config';
+import { strapiClient } from '@/config';
 
 // Tipos para mapear la respuesta de Strapi
 interface StrapiCustomerServiceItemData {
@@ -36,19 +36,11 @@ export class StrapiCustomerServiceRepository implements CustomerServiceRepositor
       );
 
       if (!result.data || result.data.length === 0) {
-        if (STRAPI_CONFIG.IS_PRODUCTION) {
-          console.info('No active customer service found in Strapi, using fallback data');
-          return fallbackData.customerService;
-        }
         throw new Error('No active customer service found');
       }
 
       return this.mapStrapiToEntity(result.data[0]);
     } catch (error) {
-      if (STRAPI_CONFIG.IS_PRODUCTION) {
-        console.warn('Error fetching from Strapi, using fallback data:', error);
-        return fallbackData.customerService;
-      }
       console.error('Error fetching from Strapi:', error);
       throw error;
     }
