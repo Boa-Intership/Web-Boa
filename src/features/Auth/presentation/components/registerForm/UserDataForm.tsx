@@ -1,12 +1,13 @@
-import React from 'react';
-import { TextField, MenuItem, Grid, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, MenuItem, Grid, Box, IconButton, InputAdornment } from '@mui/material';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 import { AppTypography } from 'ui';
-import { RegisterSchema } from '../../../domain/validators';
+import { CreateRegisterSchema } from '../../../domain/validators';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 interface FormFieldConfig {
   id: string;
-  name: keyof RegisterSchema;
+  name: keyof CreateRegisterSchema;
   label: string;
   type?: string;
   gridSize: { xs: number; sm?: number };
@@ -20,8 +21,8 @@ interface FormFieldConfig {
 }
 
 interface FormFieldProps extends FormFieldConfig {
-  control: Control<RegisterSchema>;
-  errors: FieldErrors<RegisterSchema>;
+  control: Control<CreateRegisterSchema>;
+  errors: FieldErrors<CreateRegisterSchema>;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -41,6 +42,30 @@ const FormField: React.FC<FormFieldProps> = ({
   errors,
   onKeyDown,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+  const inputType = type === 'password' && showPassword ? 'text' : type;
+  const passwordAdornment =
+    type === 'password'
+      ? {
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleTogglePasswordVisibility}
+                onMouseDown={(event) => event.preventDefault()}
+                edge="end"
+                size="small"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }
+      : {};
+
   return (
     <Grid item xs={gridSize.xs} sm={gridSize.sm || gridSize.xs}>
       <Controller
@@ -55,10 +80,11 @@ const FormField: React.FC<FormFieldProps> = ({
             id={id}
             name={String(name)}
             label={label}
-            type={type}
+            type={inputType}
             fullWidth
             placeholder={placeholder}
             inputProps={inputProps}
+            InputProps={passwordAdornment}
             error={!!errors[name]}
             helperText={errors[name]?.message}
             color={errors[name] ? 'error' : 'primary'}
@@ -78,8 +104,8 @@ const FormField: React.FC<FormFieldProps> = ({
 };
 
 interface UserDataFormProps {
-  control: Control<RegisterSchema>;
-  errors: FieldErrors<RegisterSchema>;
+  control: Control<CreateRegisterSchema>;
+  errors: FieldErrors<CreateRegisterSchema>;
 }
 
 const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {
