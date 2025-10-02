@@ -4,6 +4,7 @@ import { Control, Controller, FieldErrors } from 'react-hook-form';
 import { AppTypography } from 'ui';
 import { CreateRegisterSchema } from '../../../domain/validators';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { MuiPhone } from './PhoneInput';
 
 interface FormFieldConfig {
   id: string;
@@ -65,6 +66,43 @@ const FormField: React.FC<FormFieldProps> = ({
           ),
         }
       : {};
+
+  if (name === 'number' || type === 'phone') {
+    return (
+      <Grid item xs={gridSize.xs} sm={gridSize.sm || gridSize.xs}>
+        <Controller
+          name={name}
+          control={control}
+          defaultValue={defaultValue || ''}
+          render={({ field }) => (
+            <Box>
+              {/* Label personalizado */}
+              <AppTypography
+                variant="body2"
+                sx={{
+                  mb: 1,
+                  color: errors[name] ? 'error.main' : 'text.secondary',
+                  fontWeight: required ? 600 : 400,
+                }}
+              ></AppTypography>
+
+              {/* Componente de teléfono */}
+              <MuiPhone
+                value={field.value || ''}
+                onChange={field.onChange}
+                label={label}
+                placeholder={placeholder || 'Número de teléfono'}
+                error={!!errors[name]}
+                helperText={errors[name]?.message}
+                fullWidth
+                required={required}
+              />
+            </Box>
+          )}
+        />
+      </Grid>
+    );
+  }
 
   return (
     <Grid item xs={gridSize.xs} sm={gridSize.sm || gridSize.xs}>
