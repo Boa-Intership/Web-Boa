@@ -23,7 +23,7 @@ export default defineConfig({
       // Proxy para Backend API - SOLO para desarrollo local
       // En producción no se usa, va directo a VITE_BACKEND_API_URL
       '/api': {
-        target: 'http://localhost:8080', // Cambiar por tu servidor de desarrollo
+        target: 'http://192.168.150.220s', // Cambiar por tu servidor de desarrollo
         changeOrigin: true,
         secure: false,
       },
