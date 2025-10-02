@@ -23,7 +23,7 @@ export default defineConfig({
       // Proxy para Backend API - SOLO para desarrollo local
       // En producción no se usa, va directo a VITE_BACKEND_API_URL
       '/api': {
-        target: 'http://ec2-54-92-229-60.compute-1.amazonaws.com', // Cambiar por tu servidor de desarrollo
+        target: 'http://localhost:8080', // Cambiar por tu servidor de desarrollo
         changeOrigin: true,
         secure: false,
       },
@@ -34,7 +34,8 @@ export default defineConfig({
       ui: path.resolve(__dirname, 'src/ui/index.ts'),
       assets: path.resolve(__dirname, 'src/assets'),
       router: path.resolve(__dirname, 'src/router'),
-      '@': path.resolve(__dirname, 'src'), // 👈 atajo recomendado
+      '@': path.resolve(__dirname, 'src'),
+      '@config': path.resolve(__dirname, 'src/config'),
     },
   },
   test: {

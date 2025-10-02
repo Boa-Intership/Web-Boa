@@ -42,6 +42,8 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function Login() {
+  const location = useLocation();
+
   const [error, setError] = React.useState<string>('');
   const loginMutation = useLogin();
   const navigate = useNavigate();
@@ -66,9 +68,12 @@ export default function Login() {
             name: data.email, // Usar el email como nombre temporal
             email: data.email,
           },
-          response.accessToken
+          response.accessToken,
+          response.refreshToken
         );
-        navigate('/');
+
+        const from = location.state?.from?.pathname || '/';
+        navigate(from);
       } else {
         setError('Error en la respuesta del servidor');
       }

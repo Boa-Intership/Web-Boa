@@ -28,7 +28,9 @@ export class AuthService {
    */
   async logout() {
     try {
-      const response = await httpClient.post<void>(`${this.baseUrl}/logout`);
+      const response = await httpClient.post<void>(`${this.baseUrl}/logout`, {
+        refreshToken: this.getRefreshToken(),
+      });
       this.clearTokens();
       return response;
     } catch (error) {
@@ -115,11 +117,12 @@ export class AuthService {
     return !!localStorage.getItem('authToken');
   }
 
-  /**
-   * Obtener token de acceso actual
-   */
   getAccessToken(): string | null {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('token');
+  }
+
+  getRefreshToken(): string | null {
+    return localStorage.getItem('rToken');
   }
 }
 

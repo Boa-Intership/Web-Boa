@@ -16,6 +16,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { AppTypography } from 'ui';
 import { useAuth } from '../../providers/AuthContext';
+import { useLogout } from '../../../features/Auth/presentation/useAuth.hooks';
 
 const MobileDrawer: React.FC<{
   open: boolean;
@@ -40,6 +41,20 @@ const MobileDrawer: React.FC<{
     color: 'primary.light',
     minWidth: 45,
     justifyContent: 'center',
+  };
+  const logoutMutation = useLogout();
+
+  const handleLogout = async () => {
+    try {
+      const response = await logoutMutation.mutateAsync();
+      if (response.message) {
+        onClose();
+        logout();
+        console.log('Sesión cerrada exitosamente:', response);
+      }
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   };
 
   return (
@@ -153,13 +168,7 @@ const MobileDrawer: React.FC<{
                   primaryTypographyProps={{ fontWeight: 'bold' }}
                 />
               </ListItemButton>
-              <ListItemButton
-                onClick={() => {
-                  onClose();
-                  logout();
-                }}
-                sx={buttonStyle}
-              >
+              <ListItemButton onClick={handleLogout} sx={buttonStyle}>
                 <ListItemIcon sx={iconStyle}>
                   <LogoutIcon />
                 </ListItemIcon>

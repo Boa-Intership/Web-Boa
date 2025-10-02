@@ -3,6 +3,7 @@ import {
   OfficePreviewRepository,
   OfficeInfo,
 } from '../../domain/entities/OfficePreviewContent';
+import { strapiClient } from '@/config';
 
 // Tipos para mapear la respuesta de Strapi
 interface StrapiOfficeData {
@@ -30,22 +31,11 @@ interface StrapiOfficePreviewResponse {
 }
 
 export class StrapiOfficePreviewRepository implements OfficePreviewRepository {
-  private readonly baseUrl =
-    import.meta.env.VITE_APP_ENV === 'production'
-      ? `${import.meta.env.VITE_STRAPI_URL}/api`
-      : '/api/cms';
-
   async getOfficePreview(): Promise<OfficePreviewContent> {
     try {
-      const response = await fetch(
-        `${this.baseUrl}/vista-oficinas?populate=*&filters[activo][$eq]=true&sort=createdAt:desc`
+      const result = await strapiClient.get<StrapiOfficePreviewResponse>(
+        '/vista-oficinas?populate=*&filters[activo][$eq]=true&sort=createdAt:desc'
       );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: StrapiOfficePreviewResponse = await response.json();
 
       if (!result.data || result.data.length === 0) {
         throw new Error('No active office preview found');

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { RegisterSchema } from '../domain/validators';
+import { CreateRegisterSchema } from '../domain/validators';
 
 const TEMP_REGISTRATION_KEY = 'temp_registration_data';
 const TEMP_EMAIL_VERIFICATION_KEY = 'email_verification_pending';
 
-export interface TempRegistrationData extends RegisterSchema {
+export interface TempRegistrationData extends CreateRegisterSchema {
   timestamp: number;
   verificationEmailSent: boolean;
 }
@@ -33,7 +33,7 @@ export const useTempRegistration = () => {
   }, []);
 
   // Guardar datos temporales
-  const saveTempData = (data: RegisterSchema) => {
+  const saveTempData = (data: CreateRegisterSchema) => {
     const tempData: TempRegistrationData = {
       ...data,
       timestamp: Date.now(),
@@ -63,7 +63,7 @@ export const useTempRegistration = () => {
   };
 
   // Obtener datos para registro final
-  const getTempDataForRegistration = (): RegisterSchema | null => {
+  const getTempDataForRegistration = (): CreateRegisterSchema | null => {
     if (!tempData) return null;
 
     const {

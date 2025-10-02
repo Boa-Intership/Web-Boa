@@ -3,6 +3,7 @@ import {
   GeneralInfoRepository,
   GeneralInfoItem,
 } from '../../domain/entities/GeneralInfoContent';
+import { strapiClient } from '@config';
 
 // Tipos para mapear la respuesta de Strapi
 interface StrapiGeneralInfoItemData {
@@ -28,22 +29,11 @@ interface StrapiGeneralInfoResponse {
 }
 
 export class StrapiGeneralInfoRepository implements GeneralInfoRepository {
-  private readonly baseUrl =
-    import.meta.env.VITE_APP_ENV === 'production'
-      ? `${import.meta.env.VITE_STRAPI_URL}/api`
-      : '/api/cms';
-
   async getGeneralInfo(): Promise<GeneralInfoContent> {
     try {
-      const response = await fetch(
-        `${this.baseUrl}/informacion-generals?populate=elementos&filters[activo][$eq]=true&sort=createdAt:desc`
+      const result = await strapiClient.get<StrapiGeneralInfoResponse>(
+        '/informacion-generals?populate=elementos&filters[activo][$eq]=true&sort=createdAt:desc'
       );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: StrapiGeneralInfoResponse = await response.json();
 
       if (!result.data || result.data.length === 0) {
         throw new Error('No active general info found');

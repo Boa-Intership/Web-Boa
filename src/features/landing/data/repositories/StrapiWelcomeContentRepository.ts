@@ -1,4 +1,5 @@
 import { WelcomeContent, WelcomeContentRepository } from '../../domain/entities/WelcomeContent';
+import { strapiClient } from '@/config';
 
 // Tipos para mapear la respuesta de Strapi
 interface StrapiWelcomeData {
@@ -15,17 +16,9 @@ interface StrapiResponse {
 }
 
 export class StrapiWelcomeContentRepository implements WelcomeContentRepository {
-  private readonly baseUrl = '/api/cms';
-
   async getWelcomeContent(): Promise<WelcomeContent> {
     try {
-      const response = await fetch(`${this.baseUrl}/bienvenidas`);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: StrapiResponse = await response.json();
+      const result = await strapiClient.get<StrapiResponse>('/bienvenidas?populate=*');
 
       if (!result.data || result.data.length === 0) {
         throw new Error('No welcome content found');

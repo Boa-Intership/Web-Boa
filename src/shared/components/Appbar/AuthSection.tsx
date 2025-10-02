@@ -16,12 +16,14 @@ import { AppButton, AppTypography } from 'ui';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
+import { useLogout } from '../../../features/Auth/presentation/useAuth.hooks';
 
 export const AuthSection = () => {
   const { isAuthenticated, logout, user } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const logoutMutation = useLogout();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -31,9 +33,17 @@ export const AuthSection = () => {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    handleClose();
-    logout();
+  const handleLogout = async () => {
+    try {
+      const response = await logoutMutation.mutateAsync();
+      if (response.message) {
+        handleClose();
+        logout();
+        console.log('Sesión cerrada exitosamente:', response);
+      }
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   };
 
   if (!isAuthenticated) {
