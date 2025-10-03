@@ -1,9 +1,9 @@
 import { AppTypography, AppBox, AppContainer, AppGrid, AppButton } from 'ui';
 import { Box, Divider, Stack, CircularProgress, Alert } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import welcomeImg from '@/assets/welcome.webp';
 import { FC } from 'react';
-import { ROUTES } from 'router/routes';
+// import { ROUTES } from 'router/routes';
 import { useWelcomeContent } from '../hooks/useWelcomeContent';
 
 interface Exp {
@@ -29,7 +29,7 @@ const ExpItem: FC<{ item: Exp }> = ({ item }) => (
 );
 
 const WelcomeSection: FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { data, loading, error } = useWelcomeContent();
 
   if (loading) {

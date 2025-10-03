@@ -3,7 +3,7 @@ import { Stack, Card as MuiCard, styled, Alert, Box } from '@mui/material';
 import { LoginForm, SocialLoginSection } from '../components/loginForm';
 import { LoginSchema } from '../../domain/validators/loginSchema';
 import { useLogin } from '../useAuth.hooks';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../shared/providers/AuthContext';
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -26,7 +26,6 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
-  height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
   minHeight: '100%',
   padding: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {

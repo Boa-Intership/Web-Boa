@@ -1,12 +1,14 @@
-import React from 'react';
-import { TextField, MenuItem, Grid, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, MenuItem, Grid, Box, IconButton, InputAdornment } from '@mui/material';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 import { AppTypography } from 'ui';
-import { RegisterSchema } from '../../../domain/validators';
+import { CreateRegisterSchema } from '../../../domain/validators';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { MuiPhone } from './PhoneInput';
 
 interface FormFieldConfig {
   id: string;
-  name: keyof RegisterSchema;
+  name: keyof CreateRegisterSchema;
   label: string;
   type?: string;
   gridSize: { xs: number; sm?: number };
@@ -20,8 +22,8 @@ interface FormFieldConfig {
 }
 
 interface FormFieldProps extends FormFieldConfig {
-  control: Control<RegisterSchema>;
-  errors: FieldErrors<RegisterSchema>;
+  control: Control<CreateRegisterSchema>;
+  errors: FieldErrors<CreateRegisterSchema>;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -41,6 +43,67 @@ const FormField: React.FC<FormFieldProps> = ({
   errors,
   onKeyDown,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+  const inputType = type === 'password' && showPassword ? 'text' : type;
+  const passwordAdornment =
+    type === 'password'
+      ? {
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleTogglePasswordVisibility}
+                onMouseDown={(event) => event.preventDefault()}
+                edge="end"
+                size="small"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }
+      : {};
+
+  if (name === 'number' || type === 'phone') {
+    return (
+      <Grid item xs={gridSize.xs} sm={gridSize.sm || gridSize.xs}>
+        <Controller
+          name={name}
+          control={control}
+          defaultValue={defaultValue || ''}
+          render={({ field }) => (
+            <Box>
+              {/* Label personalizado */}
+              <AppTypography
+                variant="body2"
+                sx={{
+                  mb: 1,
+                  color: errors[name] ? 'error.main' : 'text.secondary',
+                  fontWeight: required ? 600 : 400,
+                }}
+              ></AppTypography>
+
+              {/* Componente de teléfono */}
+              <MuiPhone
+                value={field.value || ''}
+                onChange={field.onChange}
+                label={label}
+                placeholder={placeholder || 'Número de teléfono'}
+                error={!!errors[name]}
+                helperText={errors[name]?.message}
+                fullWidth
+                required={required}
+              />
+            </Box>
+          )}
+        />
+      </Grid>
+    );
+  }
+
   return (
     <Grid item xs={gridSize.xs} sm={gridSize.sm || gridSize.xs}>
       <Controller
@@ -55,10 +118,11 @@ const FormField: React.FC<FormFieldProps> = ({
             id={id}
             name={String(name)}
             label={label}
-            type={type}
+            type={inputType}
             fullWidth
             placeholder={placeholder}
             inputProps={inputProps}
+            InputProps={passwordAdornment}
             error={!!errors[name]}
             helperText={errors[name]?.message}
             color={errors[name] ? 'error' : 'primary'}
@@ -78,8 +142,8 @@ const FormField: React.FC<FormFieldProps> = ({
 };
 
 interface UserDataFormProps {
-  control: Control<RegisterSchema>;
-  errors: FieldErrors<RegisterSchema>;
+  control: Control<CreateRegisterSchema>;
+  errors: FieldErrors<CreateRegisterSchema>;
 }
 
 const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {

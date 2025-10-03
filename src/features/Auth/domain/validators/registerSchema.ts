@@ -21,7 +21,10 @@ const complementoSchema = z
 const phoneSchema = z
   .string()
   .min(1, 'El número de celular es obligatorio')
-  .regex(/^[0-9]+$/, 'Solo se permiten números en el celular')
+  .refine((value) => {
+    // Validar que tenga formato internacional básico
+    return /^\+[1-9]\d{6,14}$/.test(value || '');
+  }, 'Ingresa un número de teléfono válido')
   .min(7, 'El celular debe tener al menos 7 dígitos')
   .max(15, 'El celular no puede tener más de 15 dígitos');
 
