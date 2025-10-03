@@ -19,6 +19,7 @@ import Login from './features/Auth/presentation/screen/LoginScreen';
 import Register from './features/Auth/presentation/screen/RegisterScreen';
 import ProtectedRoute from 'router/ProtectedRoute';
 import PublicRoute from 'router/PublicRoute';
+import { ProfileScreen } from './features/profile/presentation';
 
 const App: React.FC = () => (
   <QueryProvider>
@@ -60,6 +61,7 @@ const App: React.FC = () => (
             />
 
             <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
+            <Route path={ROUTES.PERFIL.replace('/', '')} element={<ProfileScreen />} />
             <Route
               path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
               element={<CorporateProfileScreen />}
