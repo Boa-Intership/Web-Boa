@@ -30,7 +30,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
     <Card
       elevation={0}
       sx={{
-        backgroundColor: 'primary.dark',
+        background: (theme) =>
+          `linear-gradient(135deg, 
+          ${theme.palette.primary.dark} 0% 80%, 
+        rgb(205, 35, 35) 80% 85%, 
+          ${theme.palette.warning.light} 85% 90%,
+          ${theme.palette.success.main} 90% 95%,
+          ${theme.palette.primary.dark} 95% 100%)`,
         color: 'white',
         borderRadius: 2,
         mb: 3,

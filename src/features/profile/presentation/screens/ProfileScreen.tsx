@@ -67,6 +67,9 @@ const ProfileScreen: React.FC = () => {
         </Grid>
       </Grid>
 
+      {/* Tarjeta principal del perfil */}
+      <ProfileCard user={mockUser} />
+
       {/* Contenido principal */}
       <Paper
         variant="outlined"
@@ -76,9 +79,6 @@ const ProfileScreen: React.FC = () => {
           borderRadius: 2,
         }}
       >
-        {/* Tarjeta principal del perfil */}
-        <ProfileCard user={mockUser} />
-
         {/* Información de contacto */}
         <ContactInfo user={mockUser} />
 
