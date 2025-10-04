@@ -35,6 +35,7 @@ interface TypographyStyle {
   fontSize: string;
   fontWeight: number;
   lineHeight: string;
+  letterSpacing: string;
 }
 const AppTypography: React.FC<AppTypographyProps> = ({
   children,
@@ -79,6 +80,7 @@ const AppTypography: React.FC<AppTypographyProps> = ({
         fontFamily: `"Lato", sans-serif`,
         fontWeight,
         lineHeight,
+        letterSpacing: stylesFromTheme.letterSpacing,
         ...(textAlign ? { textAlign } : { textAlign: 'left' }),
         ...responsiveStyles,
         ...sx,
