@@ -38,8 +38,6 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ user }) => {
           elevation={0}
           sx={{
             p: 3,
-            border: '1px dashed',
-            borderColor: 'divider',
             borderRadius: 2,
             backgroundColor: 'grey.50',
             textAlign: 'center',
@@ -62,15 +60,13 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ user }) => {
 
       <Grid container spacing={3}>
         {user.businessName && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <Paper
               elevation={0}
               sx={{
                 p: 2.5,
-                border: '1px solid',
-                borderColor: 'divider',
                 borderRadius: 2,
-                backgroundColor: 'background.paper',
+                backgroundColor: 'blue_light.main',
               }}
             >
               <Box display="flex" alignItems="center" gap={1.5}>
@@ -103,10 +99,8 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ user }) => {
               elevation={0}
               sx={{
                 p: 2.5,
-                border: '1px solid',
-                borderColor: 'divider',
                 borderRadius: 2,
-                backgroundColor: 'background.paper',
+                backgroundColor: 'blue_light.main',
               }}
             >
               <Box display="flex" alignItems="center" gap={1.5}>

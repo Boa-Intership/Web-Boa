@@ -45,13 +45,13 @@ const ProfileScreen: React.FC = () => {
       {/* Header con título y botón de edición */}
       <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
         <Grid item>
-          <AppTypography variant="h3Medium" color="primary.main">
+          <AppTypography variant="h3Bold" color="primary.main">
             Mi Perfil
           </AppTypography>
         </Grid>
         <Grid item>
           <Button
-            variant="contained"
+            variant="text"
             color="primary"
             startIcon={<Edit />}
             onClick={handleEditProfile}
@@ -70,43 +70,33 @@ const ProfileScreen: React.FC = () => {
       {/* Tarjeta principal del perfil */}
       <ProfileCard user={mockUser} />
 
-      {/* Contenido principal */}
-      <Paper
-        variant="outlined"
-        sx={{
-          p: { xs: 2, md: 3 },
-          backgroundColor: 'background.default',
-          borderRadius: 2,
-        }}
-      >
-        {/* Información de contacto */}
-        <ContactInfo user={mockUser} />
+      {/* Información de contacto */}
+      <ContactInfo user={mockUser} />
 
-        <Divider sx={{ my: 4 }} />
+      <Divider sx={{ my: 4 }} />
 
-        {/* Información de facturación */}
-        <BillingInfo user={mockUser} />
+      {/* Información de facturación */}
+      <BillingInfo user={mockUser} />
 
-        {/* Acciones adicionales */}
-        <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid', borderColor: 'divider' }}>
-          <Grid container spacing={2} justifyContent="center">
-            <Grid item>
-              <Button
-                variant="outlined"
-                color="primary"
-                startIcon={<Edit />}
-                onClick={handleEditProfile}
-                sx={{
-                  borderRadius: 2,
-                  textTransform: 'none',
-                }}
-              >
-                Modificar Datos
-              </Button>
-            </Grid>
+      {/* Acciones adicionales */}
+      <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid', borderColor: 'divider' }}>
+        <Grid container spacing={2} justifyContent="center">
+          <Grid item>
+            <Button
+              variant="outlined"
+              color="primary"
+              startIcon={<Edit />}
+              onClick={handleEditProfile}
+              sx={{
+                borderRadius: 2,
+                textTransform: 'none',
+              }}
+            >
+              Modificar Datos
+            </Button>
           </Grid>
-        </Box>
-      </Paper>
+        </Grid>
+      </Box>
     </AppContainer>
   );
 };

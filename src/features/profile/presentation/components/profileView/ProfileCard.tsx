@@ -6,7 +6,6 @@ import { AppTypography } from 'ui';
 // Tipo temporal para los datos del usuario (basado en el schema de registro)
 interface User {
   name: string;
-  email: string;
   ci: string;
   nitComplemento?: string;
 }
@@ -60,13 +59,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
             <AppTypography variant="h3Medium" sx={{ color: 'white', mb: 1 }}>
               {user.name}
             </AppTypography>
-
-            <Box display="flex" alignItems="center" gap={1} mb={1}>
-              <Email sx={{ fontSize: '1.2rem', opacity: 0.8 }} />
-              <AppTypography variant="body1" sx={{ color: 'rgba(255, 255, 255, 0.9)' }}>
-                {user.email}
-              </AppTypography>
-            </Box>
 
             <Chip
               label={`CI: ${user.ci}${user.nitComplemento ? `-${user.nitComplemento}` : ''}`}
