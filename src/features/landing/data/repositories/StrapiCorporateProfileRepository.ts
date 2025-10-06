@@ -19,15 +19,16 @@ interface StrapiResponse {
 }
 
 export class StrapiCorporateProfileRepository implements CorporateProfileRepository {
-  getCorporateProfileContent(): Promise<CorporateProfileContent> {
-    throw new Error('Method not implemented.');
-  }
-  async getPerfilCorporativo(): Promise<CorporateProfileContent> {
+  async getCorporateProfileContent(): Promise<CorporateProfileContent> {
     try {
-      // Petición a tu endpoint de Strapi
-      const result = await strapiClient.get<StrapiResponse>('/perfil-corporativo');
+      // Petición al endpoint de Strapi
+      const response = await strapiClient.get<StrapiResponse>('/perfil-corporativo');
 
-      return this.mapStrapiToEntity(result.data);
+      if (!response.data) {
+        throw new Error('No se encontró el perfil corporativo');
+      }
+
+      return this.mapStrapiToEntity(response.data);
     } catch (error) {
       console.error('Error fetching perfil corporativo:', error);
       throw error;

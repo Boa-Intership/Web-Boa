@@ -2,12 +2,35 @@ import React from 'react';
 import { AppBox, AppButton, AppContainer, AppStack, AppTypography } from 'ui';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'router/routes';
-import { Stack } from '@mui/material';
+import { Stack, Alert, CircularProgress } from '@mui/material';
 import { useCorporateProfile } from '../hooks/useCorporateProfile';
 
 const AboutUsSection: React.FC = () => {
   const navigate = useNavigate();
   const { data, loading, error } = useCorporateProfile();
+
+  if (loading) {
+    return (
+      <AppBox sx={{ py: { xs: 4, md: 7 }, display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </AppBox>
+    );
+  }
+
+  if (error) {
+    return (
+      <AppBox sx={{ py: { xs: 4, md: 7 } }}>
+        <AppContainer>
+          <Alert severity="error">Error cargando contenido: {error}</Alert>
+        </AppContainer>
+      </AppBox>
+    );
+  }
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <AppBox sx={{ py: { xs: 5, md: 8 }, background: 'background.paper' }}>
       <AppContainer>
