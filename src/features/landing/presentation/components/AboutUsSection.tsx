@@ -33,7 +33,7 @@ const AboutUsSection: React.FC = () => {
 
   return (
     <AppBox sx={{ py: { xs: 5, md: 8 }, background: 'background.paper' }}>
-      <Grid container spacing={3} sx={{ width: '90%', margin: 'auto' }}>
+      <Grid container spacing={2} sx={{ width: '90%', margin: 'auto' }}>
         <Grid
           item
           xs={12}
