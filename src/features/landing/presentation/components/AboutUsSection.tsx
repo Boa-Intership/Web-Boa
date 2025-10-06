@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBox, AppButton, AppContainer, AppStack, AppTypography } from 'ui';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'router/routes';
-import { Stack, Alert, CircularProgress } from '@mui/material';
+import { Alert, CircularProgress, Grid, Box } from '@mui/material';
 import { useCorporateProfile } from '../hooks/useCorporateProfile';
 
 const AboutUsSection: React.FC = () => {
@@ -33,21 +33,52 @@ const AboutUsSection: React.FC = () => {
 
   return (
     <AppBox sx={{ py: { xs: 5, md: 8 }, background: 'background.paper' }}>
-      <AppContainer>
-        <AppStack spacing={3} mb={5} sx={{ maxWidth: 700, mx: 'auto' }}>
-          <AppTypography variant="h2Bold" color="primary" textAlign="center">
+      <Grid container spacing={3} sx={{ width: '90%', margin: 'auto' }}>
+        <Grid
+          item
+          xs={12}
+          sm={data.imagenUrl ? 6 : 12}
+          display={'flex'}
+          justifyContent={'center'}
+          flexDirection={'column'}
+          gap={3}
+          sx={{
+            alignItems: data.imagenUrl ? 'flex-start' : 'center',
+            textAlign: data.imagenUrl ? 'left' : 'center',
+          }}
+        >
+          <AppTypography variant="h2Bold" color="primary">
             {data.titulo}
           </AppTypography>
-          <AppTypography variant="baseMedium" textAlign="center">
-            {data.descripcion}
-          </AppTypography>
-          <Stack direction="row" spacing={2} justifyContent="center">
-            <AppButton onClick={() => navigate(ROUTES.CORPORATE_PROFILE)} color="primary">
-              {data.textoBoton}
-            </AppButton>
-          </Stack>
-        </AppStack>
-      </AppContainer>
+          <AppTypography variant="baseMedium">{data.descripcion}</AppTypography>
+          <AppButton
+            onClick={() => navigate(ROUTES.CORPORATE_PROFILE)}
+            color="primary"
+            sx={{ width: 'fit-content' }}
+          >
+            {data.textoBoton}
+          </AppButton>
+        </Grid>
+        {data.imagenUrl && (
+          <Grid item xs={12} sm={6}>
+            <Box sx={{ width: '100%', justifyItems: 'center', position: 'relative', mb: 3 }}>
+              <Box
+                component="img"
+                src={data.imagenUrl}
+                alt={data.titulo}
+                sx={{
+                  width: '100%',
+                  height: '22rem',
+                  objectFit: 'cover',
+                  display: 'block',
+                  borderRadius: 2,
+                }}
+                loading="lazy"
+              />
+            </Box>
+          </Grid>
+        )}
+      </Grid>
     </AppBox>
   );
 };
