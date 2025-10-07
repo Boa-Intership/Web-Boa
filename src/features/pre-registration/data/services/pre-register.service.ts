@@ -31,3 +31,12 @@ export const downloadPreRegisterPDF = async (codePR: string) => {
   link.click();
   link.remove();
 };
+
+export const getAllPreRegisters = async (page: number = 1, limit: number = 5, token: string) => {
+  const response = await axios.get(`api/pre-register?page=${page}&limit=${limit}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};

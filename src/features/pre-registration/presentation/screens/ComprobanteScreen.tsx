@@ -41,7 +41,7 @@ const ComprobanteScreen = () => {
         <ResumenEnvio formData={formData} />
 
         {/* Botones */}
-        <Box display="flex" justifyContent="space-between" mt={4}>
+        <Box display="flex" justifyContent="space-between" my={4}>
           <Button variant="contained" color="primary" onClick={handleDownload}>
             Descargar Comprobante
           </Button>
