@@ -20,42 +20,19 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
   const [numeroDocumento, setNumeroDocumento] = useState(data?.numeroDocumento || '');
   const [razonSocial, setRazonSocial] = useState(data?.razonSocial || '');
   const [complemento, setComplemento] = useState(data?.complemento || '');
-  const [precioEstimado, setPrecioEstimado] = useState<number>(0);
-  const [errorDocumento, setErrorDocumento] = useState(false); // para campo requerido
-
-  // Simulación del cálculo del precio (reemplazar con un servicio real)
-  useEffect(() => {
-    if (!carga || !carga.detalles || carga.detalles.length === 0) return;
-
-    let base = 50; // precio base
-    let totalPiezas = carga.detalles.reduce(
-      (sum: number, item: any) => sum + Number(item.piezas || 0),
-      0
-    );
-    let pesoTotal = carga.detalles.reduce(
-      (sum: number, item: any) => sum + Number(item.peso || 0),
-      0
-    );
-
-    const factorCarga = carga.tipo === 'Carga frágil' ? 1.2 : 1;
-    const factorRuta = ruta?.origen !== ruta?.destino ? 1.1 : 1;
-
-    const precio = (base + pesoTotal * 5 + totalPiezas * 10) * factorCarga * factorRuta;
-    setPrecioEstimado(Math.round(precio));
-  }, [carga, ruta]);
+  //const [errorDocumento, setErrorDocumento] = useState(false); // para campo requerido
 
   const handleNextClick = () => {
-    if (!numeroDocumento.trim()) {
+    /*if (!numeroDocumento.trim()) {
       setErrorDocumento(true);
       return;
-    }
+    }*/
 
     setData({
       tipoDocumento,
       numeroDocumento,
       razonSocial: tipoDocumento === 'NIT' ? razonSocial : '',
       complemento: tipoDocumento === 'CI' ? complemento : '',
-      precioEstimado,
     });
 
     onNext();
@@ -90,12 +67,12 @@ const StepFactura = ({ data, setData, onNext, onBack, carga, ruta }: any) => {
               value={numeroDocumento}
               onChange={(e) => {
                 setNumeroDocumento(e.target.value);
-                if (errorDocumento) setErrorDocumento(false); // limpia error al escribir
+                //if (errorDocumento) setErrorDocumento(false); // limpia error al escribir
               }}
               fullWidth
-              required
+              /*required
               error={errorDocumento}
-              helperText={errorDocumento ? 'Este campo es requerido' : ''}
+              helperText={errorDocumento ? 'Este campo es requerido' : ''}*/
             />
           </Grid>
 
