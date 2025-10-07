@@ -1,10 +1,11 @@
-import React from 'react';
-import { Paper, Box, Button, Grid, Divider, IconButton } from '@mui/material';
-import { Edit } from '@mui/icons-material';
+import React, { useState } from 'react';
+import { Box, Button, Grid, Alert, Snackbar } from '@mui/material';
+import { Lock, Check } from '@mui/icons-material';
 import { AppContainer, AppTypography } from 'ui';
 import ProfileCard from '../components/profileView/ProfileCard';
 import ContactInfo from '../components/profileView/ContactInfo';
 import BillingInfo from '../components/profileView/BillingInfo';
+import UserData from '../components/profileView/UserData';
 
 // Tipo temporal para simular datos del usuario
 interface User {
@@ -21,9 +22,9 @@ interface User {
 }
 
 const ProfileScreen: React.FC = () => {
-  // Datos de ejemplo - en una implementación real esto vendría de un hook o contexto
-  const mockUser: User = {
-    name: 'Juan Carlos Pérez',
+  // Estado para datos editables del usuario
+  const [userData, setUserData] = useState<User>({
+    name: 'Juan Carlos Pérez Pereira',
     email: 'juan.perez@ejemplo.com',
     ci: '12345678',
     nitComplemento: 'A1',
@@ -33,70 +34,153 @@ const ProfileScreen: React.FC = () => {
     billingDocType: '5',
     billingNit: '98765432',
     billingNitComplemento: '1A',
+  });
+
+  const [originalData, setOriginalData] = useState<User>(userData);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  // Verificar si hay cambios
+  const checkForChanges = (newData: User) => {
+    const hasChanges = JSON.stringify(newData) !== JSON.stringify(originalData);
+    setHasChanges(hasChanges);
   };
 
-  const handleEditProfile = () => {
-    console.log('Navegar a edición de perfil');
-    // TODO: Implementar navegación a la pantalla de edición
+  // Actualizar datos
+  const handleUserDataChange = (field: keyof User, value: string) => {
+    const newData = { ...userData, [field]: value };
+    setUserData(newData);
+    checkForChanges(newData);
+  };
+
+  // Guardar cambios
+  const handleSaveChanges = async () => {
+    try {
+      // TODO: Implementar llamada a la API
+      console.log('Guardando cambios:', userData);
+
+      setOriginalData(userData);
+      setHasChanges(false);
+      setShowSuccess(true);
+    } catch (error) {
+      console.error('Error saving changes:', error);
+    }
+  };
+
+  // Cancelar cambios
+  const handleCancelChanges = () => {
+    setUserData(originalData);
+    setHasChanges(false);
+  };
+
+  // Cambiar contraseña
+  const handleChangePassword = () => {
+    console.log('Abrir modal de cambio de contraseña');
+    // TODO: Implementar modal de cambio de contraseña
   };
 
   return (
     <AppContainer sx={{ p: '20px' }}>
-      {/* Header con título y botón de edición */}
+      {/* Header con título */}
       <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
         <Grid item>
           <AppTypography variant="h3Bold" color="primary.main">
             Mi Perfil
           </AppTypography>
         </Grid>
-        <Grid item>
-          <Button
-            variant="text"
-            color="primary"
-            startIcon={<Edit />}
-            onClick={handleEditProfile}
-            sx={{
-              borderRadius: 2,
-              textTransform: 'none',
-              fontWeight: 600,
-              px: 3,
-            }}
-          >
-            Editar Perfil
-          </Button>
-        </Grid>
       </Grid>
 
-      {/* Tarjeta principal del perfil */}
-      <ProfileCard user={mockUser} />
+      {/* Tarjeta principal del perfil - Solo lectura */}
 
-      {/* Información de contacto */}
-      <ContactInfo user={mockUser} />
+      {/* Layout de dos columnas */}
+      <Grid container spacing={4} mb={2}>
+        {/* Columna izquierda - Información de contacto */}
+        <Grid item xs={12} lg={6}>
+          <ProfileCard user={userData} />
+          <UserData user={userData} isEditable={true} onUserDataChange={handleUserDataChange} />
+          <BillingInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} />
+        </Grid>
 
-      <Divider sx={{ my: 4 }} />
-
-      {/* Información de facturación */}
-      <BillingInfo user={mockUser} />
-
-      {/* Acciones adicionales */}
-      <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid', borderColor: 'divider' }}>
-        <Grid container spacing={2} justifyContent="center">
-          <Grid item>
+        {/* Columna derecha - Información de facturación */}
+        <Grid item xs={12} lg={6}>
+          <ContactInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} />
+          <Grid item mt={4}>
             <Button
               variant="outlined"
               color="primary"
-              startIcon={<Edit />}
-              onClick={handleEditProfile}
+              fullWidth
+              startIcon={<Lock />}
+              onClick={handleChangePassword}
               sx={{
                 borderRadius: 2,
                 textTransform: 'none',
+                fontWeight: 500,
+                px: 3,
               }}
             >
-              Modificar Datos
+              Cambiar Contraseña
             </Button>
           </Grid>
         </Grid>
-      </Box>
+      </Grid>
+
+      {/* Botones de acción - Solo aparecen si hay cambios */}
+      {hasChanges && (
+        <Box
+          sx={{
+            mt: 4,
+            borderRadius: 2,
+            borderColor: 'divider',
+            display: 'flex',
+            justifyContent: 'end',
+            gap: 1,
+            flexDirection: { xs: 'column', sm: 'row' },
+          }}
+        >
+          <Button
+            variant="text"
+            color="primary"
+            onClick={handleCancelChanges}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              minWidth: 120,
+            }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSaveChanges}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              minWidth: 120,
+            }}
+          >
+            Guardar
+          </Button>
+        </Box>
+      )}
+
+      {/* Snackbar de éxito */}
+      <Snackbar
+        open={showSuccess}
+        autoHideDuration={3000}
+        onClose={() => setShowSuccess(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={() => setShowSuccess(false)}
+          severity="success"
+          sx={{ width: '100%' }}
+          icon={<Check />}
+        >
+          Perfil actualizado exitosamente
+        </Alert>
+      </Snackbar>
     </AppContainer>
   );
 };

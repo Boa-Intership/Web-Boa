@@ -7,6 +7,7 @@ import { AppTypography } from 'ui';
 interface User {
   name: string;
   ci: string;
+  email: string;
   nitComplemento?: string;
 }
 
@@ -32,16 +33,16 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
         background: (theme) =>
           `linear-gradient(135deg, 
           ${theme.palette.primary.dark} 0% 80%, 
-        rgb(205, 35, 35) 80% 85%, 
-          ${theme.palette.warning.light} 85% 90%,
-          ${theme.palette.success.main} 90% 95%,
-          ${theme.palette.primary.dark} 95% 100%)`,
+        rgb(205, 35, 35) 80% 83.3%, 
+          ${theme.palette.warning.light} 83.3% 86.6%,
+          ${theme.palette.success.main} 86.6% 90%,
+          ${theme.palette.primary.dark} 90% 100%)`,
         color: 'white',
         borderRadius: 2,
         mb: 3,
       }}
     >
-      <CardContent sx={{ p: 3 }}>
+      <CardContent sx={{ p: 2.3 }}>
         <Box display="flex" alignItems="center" gap={3}>
           <Avatar
             sx={{
@@ -56,22 +57,19 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
           </Avatar>
 
           <Box flex={1}>
-            <AppTypography variant="h3Medium" sx={{ color: 'white', mb: 1 }}>
+            <AppTypography variant="h3Medium" sx={{ color: 'white' }}>
               {user.name}
             </AppTypography>
-
-            <Chip
-              label={`CI: ${user.ci}${user.nitComplemento ? `-${user.nitComplemento}` : ''}`}
-              variant="outlined"
-              size="small"
-              sx={{
-                color: 'white',
-                borderColor: 'rgba(255, 255, 255, 0.5)',
-                '& .MuiChip-label': {
-                  fontWeight: 500,
-                },
-              }}
-            />
+            <AppTypography
+              variant="baseRegular"
+              display="flex"
+              alignItems="center"
+              gap={0.5}
+              sx={{ color: 'white', mb: 1 }}
+            >
+              <Email sx={{ fontSize: '1rem', mr: 0.5 }} />
+              {user.email}
+            </AppTypography>
           </Box>
         </Box>
       </CardContent>
