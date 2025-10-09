@@ -4,7 +4,7 @@ import { Control, Controller, FieldErrors } from 'react-hook-form';
 import { AppTypography } from 'ui';
 import { CreateRegisterSchema } from '../../../domain/validators';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { MuiPhone } from './PhoneInput';
+import { MuiPhone } from '../../../../../shared/components/PhoneInput';
 
 interface FormFieldConfig {
   id: string;
