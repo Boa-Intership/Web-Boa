@@ -12,48 +12,42 @@ interface StrapiCustomerServiceItemData {
   orden: number;
 }
 
-interface StrapiCustomerServiceData {
-  titulo: string;
-  descripcion?: string;
-  image_url?: string;
-  texto_boton: string;
-  enlace_boton: string;
-  elementos_izquierda: {
-    data: Array<{
-      id: number;
-      attributes: StrapiCustomerServiceItemData;
-    }>;
-  };
-  elementos_derecha: {
-    data: Array<{
-      id: number;
-      attributes: StrapiCustomerServiceItemData;
-    }>;
-  };
-}
-
 interface StrapiCustomerServiceResponse {
   data: {
     id: number;
-    attributes: StrapiCustomerServiceData;
+    documentId: string;
+    titulo: string;
+    descripcion: string;
+    image_url: string | null;
+    texto_boton: string;
+    enlace_boton: string;
+    activo: boolean;
+    elementos_izquierda: Array<{
+      id: number;
+      texto: string;
+      orden: number;
+    }>;
+    elementos_derecha: Array<{
+      id: number;
+      texto: string;
+      orden: number;
+    }>;
   };
+  meta: Record<string, unknown>;
 }
 
 export class StrapiCustomerServiceRepository implements CustomerServiceRepository {
   async getCustomerService(): Promise<CustomerServiceContent> {
     try {
       const result = await strapiClient.get<StrapiCustomerServiceResponse>(
-        '/atencion-cliente?populate[elementos_izquierda]=*&populate[elementos_derecha]=*'
+        '/atencion-cliente?populate=*'
       );
 
       if (!result.data) {
         throw new Error('No customer service found');
       }
 
-      return this.mapStrapiToEntity({
-        id: result.data.id,
-        ...result.data.attributes,
-      });
+      return this.mapStrapiToEntity(result.data);
     } catch (error) {
       console.error('Error fetching from Strapi:', error);
       throw error;
@@ -61,21 +55,21 @@ export class StrapiCustomerServiceRepository implements CustomerServiceRepositor
   }
 
   private mapStrapiToEntity(
-    strapiData: StrapiCustomerServiceData & { id: number }
+    strapiData: StrapiCustomerServiceResponse['data']
   ): CustomerServiceContent {
-    const elementos_izquierda: CustomerServiceItem[] = (strapiData.elementos_izquierda?.data || [])
+    const elementos_izquierda: CustomerServiceItem[] = (strapiData.elementos_izquierda || [])
       .map((item) => ({
         id: item.id.toString(),
-        texto: item.attributes.texto,
-        orden: item.attributes.orden,
+        texto: item.texto,
+        orden: item.orden,
       }))
       .sort((a, b) => a.orden - b.orden);
 
-    const elementos_derecha: CustomerServiceItem[] = (strapiData.elementos_derecha?.data || [])
+    const elementos_derecha: CustomerServiceItem[] = (strapiData.elementos_derecha || [])
       .map((item) => ({
         id: item.id.toString(),
-        texto: item.attributes.texto,
-        orden: item.attributes.orden,
+        texto: item.texto,
+        orden: item.orden,
       }))
       .sort((a, b) => a.orden - b.orden);
 
@@ -83,10 +77,10 @@ export class StrapiCustomerServiceRepository implements CustomerServiceRepositor
       id: strapiData.id.toString(),
       titulo: strapiData.titulo,
       descripcion: strapiData.descripcion,
-      imagen_url: strapiData.image_url,
+      imagen_url: strapiData.image_url || undefined,
       texto_boton: strapiData.texto_boton,
       enlace_boton: strapiData.enlace_boton,
-      activo: true,
+      activo: strapiData.activo,
       elementos_izquierda,
       elementos_derecha,
     };
