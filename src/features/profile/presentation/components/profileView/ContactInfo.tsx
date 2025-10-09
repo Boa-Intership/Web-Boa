@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Grid, Paper, TextField } from '@mui/material';
 import { Phone, LocationOn, Email } from '@mui/icons-material';
 import { AppTypography } from 'ui';
+import { MuiPhone } from '@/shared/components/PhoneInput';
 
 interface User {
   number: string;
@@ -96,13 +97,12 @@ const ContactInfo: React.FC<ContactInfoProps> = ({
                 </AppTypography>
               </Box>
               {isEditable ? (
-                <TextField
+                <MuiPhone
+                  value={user.number || ''}
+                  onChange={(value) => handleFieldChange('number', value)}
                   fullWidth
                   variant="outlined"
                   size="small"
-                  value={user.number}
-                  onChange={(e) => handleFieldChange('number', e.target.value)}
-                  type="tel"
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       borderRadius: 1,

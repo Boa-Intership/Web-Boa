@@ -40,6 +40,18 @@ const ProfileScreen: React.FC = () => {
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+
+  const handleToggleNameEdit = () => {
+    if (isEditingName) {
+      // Si está cancelando, restaurar datos originales
+      setUserData({
+        ...userData,
+        name: originalData.name,
+      });
+    }
+    setIsEditingName(!isEditingName);
+  };
 
   // Verificar si hay cambios
   const checkForChanges = (newData: User) => {
@@ -98,7 +110,12 @@ const ProfileScreen: React.FC = () => {
         {/* Columna izquierda - Información de contacto */}
         <Grid item xs={12} lg={6}>
           <ProfileCard user={userData} />
-          <UserData user={userData} isEditable={true} onUserDataChange={handleUserDataChange} />
+          <UserData
+            user={userData}
+            isEditable={isEditingName}
+            onUserDataChange={handleUserDataChange}
+            onToggleEditName={handleToggleNameEdit}
+          />
           <BillingInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} />
         </Grid>
 
