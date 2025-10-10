@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Grid, Paper, TextField } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { Phone, LocationOn, Email } from '@mui/icons-material';
 import { AppTypography } from 'ui';
+import DataCard from './DataCard';
 import { MuiPhone } from '@/shared/components/PhoneInput';
 
 interface User {
@@ -19,16 +20,11 @@ interface User {
 
 interface ContactInfoProps {
   user: User;
-  isEditable?: boolean;
-  onUserDataChange?: (field: keyof User, value: string) => void;
+  onUserDataChange?: (field: string, value: string) => void;
 }
 
-const ContactInfo: React.FC<ContactInfoProps> = ({
-  user,
-  isEditable = false,
-  onUserDataChange,
-}) => {
-  const handleFieldChange = (field: keyof User, value: string) => {
+const ContactInfo: React.FC<ContactInfoProps> = ({ user, onUserDataChange }) => {
+  const handleFieldChange = (field: string, value: string) => {
     if (onUserDataChange) {
       onUserDataChange(field, value);
     }
@@ -43,116 +39,63 @@ const ContactInfo: React.FC<ContactInfoProps> = ({
       <Grid container spacing={3}>
         {/* Email */}
         <Grid item xs={12}>
-          <Box display="flex" alignItems="flex-start" gap={2}>
-            <Box sx={{ flex: 1 }}>
-              <Box display={'flex'} alignItems="center" gap={0.5}>
-                <Email
-                  sx={{
-                    fontSize: '1.3rem',
-                    color: 'primary.main',
-                    mb: 1,
-                  }}
-                />
-                <AppTypography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
-                  Correo Electrónico
-                </AppTypography>
-              </Box>
-              {isEditable ? (
-                <TextField
-                  fullWidth
-                  disabled={true}
-                  variant="outlined"
-                  size="small"
-                  value={user.email}
-                  onChange={(e) => handleFieldChange('email', e.target.value)}
-                  type="email"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 1,
-                    },
-                  }}
-                />
-              ) : (
-                <AppTypography variant="body1" color="text.primary" fontWeight={500}>
-                  {user.email}
-                </AppTypography>
-              )}
-            </Box>
-          </Box>
+          <DataCard
+            icon={
+              <Email
+                sx={{
+                  fontSize: '1.3rem',
+                  color: 'primary.light',
+                }}
+              />
+            }
+            label="Correo Electrónico"
+            value={user.email}
+            field="email"
+            onValueChange={handleFieldChange}
+            type="email"
+            variant="standard"
+            editable={false}
+          />
         </Grid>
-        {/* Celular */}
+
+        {/* Teléfono */}
         <Grid item xs={12}>
-          <Box display="flex" alignItems="flex-start" gap={2}>
-            <Box sx={{ flex: 1 }}>
-              <Box display={'flex'} alignItems="center" gap={0.5}>
-                <Phone
-                  sx={{
-                    fontSize: '1.3rem',
-                    color: 'primary.main',
-                    mb: 1,
-                  }}
-                />
-                <AppTypography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
-                  Número de Celular
-                </AppTypography>
-              </Box>
-              {isEditable ? (
-                <MuiPhone
-                  value={user.number || ''}
-                  onChange={(value) => handleFieldChange('number', value)}
-                  fullWidth
-                  variant="outlined"
-                  size="small"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 1,
-                    },
-                  }}
-                />
-              ) : (
-                <AppTypography variant="body1" color="text.primary" fontWeight={500}>
-                  {user.number}
-                </AppTypography>
-              )}
-            </Box>
-          </Box>
+          <DataCard
+            icon={
+              <Phone
+                sx={{
+                  fontSize: '1.3rem',
+                  color: 'primary.light',
+                }}
+              />
+            }
+            label="Número de Celular"
+            value={user.number}
+            field="number"
+            onValueChange={handleFieldChange}
+            type="tel"
+            variant="standard"
+          />
         </Grid>
+
         {/* Dirección */}
         <Grid item xs={12}>
-          <Box display="flex" alignItems="flex-start" gap={2}>
-            <Box sx={{ flex: 1 }}>
-              <Box display={'flex'} alignItems="center" gap={0.5}>
-                <LocationOn
-                  sx={{
-                    fontSize: '1.3rem',
-                    color: 'primary.main',
-                    mb: 1,
-                  }}
-                />
-                <AppTypography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
-                  Dirección
-                </AppTypography>
-              </Box>
-              {isEditable ? (
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  size="small"
-                  value={user.address || ''}
-                  onChange={(e) => handleFieldChange('address', e.target.value)}
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 1,
-                    },
-                  }}
-                />
-              ) : (
-                <AppTypography variant="body1" color="text.primary" fontWeight={500}>
-                  {user.address || 'No registrada'}
-                </AppTypography>
-              )}
-            </Box>
-          </Box>
+          <DataCard
+            icon={
+              <LocationOn
+                sx={{
+                  fontSize: '1.3rem',
+                  color: 'primary.light',
+                }}
+              />
+            }
+            label="Dirección"
+            value={user.address || ''}
+            field="address"
+            onValueChange={handleFieldChange}
+            placeholder="Ingresa tu dirección"
+            variant="standard"
+          />
         </Grid>
       </Grid>
     </Box>

@@ -42,7 +42,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
         mb: 3,
       }}
     >
-      <CardContent sx={{ p: 2.3 }}>
+      <CardContent sx={{ p: 3.5 }}>
         <Box display="flex" alignItems="center" gap={3}>
           <Avatar
             sx={{

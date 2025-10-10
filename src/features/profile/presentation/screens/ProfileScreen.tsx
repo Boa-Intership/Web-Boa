@@ -40,17 +40,11 @@ const ProfileScreen: React.FC = () => {
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [isEditingName, setIsEditingName] = useState(false);
-
-  const handleToggleNameEdit = () => {
-    if (isEditingName) {
-      // Si está cancelando, restaurar datos originales
-      setUserData({
-        ...userData,
-        name: originalData.name,
-      });
-    }
-    setIsEditingName(!isEditingName);
+  // Función para cancelar todas las ediciones activas de DataCard
+  const handleCancelAllEdits = () => {
+    // Aquí puedes agregar lógica adicional si necesitas cancelar ediciones específicas
+    setUserData(originalData);
+    setHasChanges(false);
   };
 
   // Verificar si hay cambios
@@ -82,8 +76,7 @@ const ProfileScreen: React.FC = () => {
 
   // Cancelar cambios
   const handleCancelChanges = () => {
-    setUserData(originalData);
-    setHasChanges(false);
+    handleCancelAllEdits();
   };
 
   // Cambiar contraseña
@@ -110,18 +103,13 @@ const ProfileScreen: React.FC = () => {
         {/* Columna izquierda - Información de contacto */}
         <Grid item xs={12} lg={6}>
           <ProfileCard user={userData} />
-          <UserData
-            user={userData}
-            isEditable={isEditingName}
-            onUserDataChange={handleUserDataChange}
-            onToggleEditName={handleToggleNameEdit}
-          />
-          <BillingInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} />
+          <UserData user={userData} onUserDataChange={handleUserDataChange} />
+          {/* <BillingInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} /> */}
         </Grid>
 
         {/* Columna derecha - Información de facturación */}
         <Grid item xs={12} lg={6}>
-          <ContactInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} />
+          <ContactInfo user={userData} onUserDataChange={handleUserDataChange} />
           <Grid item mt={4}>
             <Button
               variant="outlined"
