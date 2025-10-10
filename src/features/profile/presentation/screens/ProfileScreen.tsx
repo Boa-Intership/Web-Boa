@@ -40,11 +40,15 @@ const ProfileScreen: React.FC = () => {
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [resetDataCards, setResetDataCards] = useState(false);
+
   // Función para cancelar todas las ediciones activas de DataCard
   const handleCancelAllEdits = () => {
-    // Aquí puedes agregar lógica adicional si necesitas cancelar ediciones específicas
     setUserData(originalData);
     setHasChanges(false);
+
+    setResetDataCards(true);
+    setTimeout(() => setResetDataCards(false), 100);
   };
 
   // Verificar si hay cambios
@@ -69,6 +73,9 @@ const ProfileScreen: React.FC = () => {
       setOriginalData(userData);
       setHasChanges(false);
       setShowSuccess(true);
+
+      setResetDataCards(true);
+      setTimeout(() => setResetDataCards(false), 100);
     } catch (error) {
       console.error('Error saving changes:', error);
     }
@@ -103,13 +110,21 @@ const ProfileScreen: React.FC = () => {
         {/* Columna izquierda - Información de contacto */}
         <Grid item xs={12} lg={6}>
           <ProfileCard user={userData} />
-          <UserData user={userData} onUserDataChange={handleUserDataChange} />
+          <UserData
+            user={userData}
+            onUserDataChange={handleUserDataChange}
+            resetEditingState={resetDataCards}
+          />
           {/* <BillingInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} /> */}
         </Grid>
 
         {/* Columna derecha - Información de facturación */}
         <Grid item xs={12} lg={6}>
-          <ContactInfo user={userData} onUserDataChange={handleUserDataChange} />
+          <ContactInfo
+            user={userData}
+            onUserDataChange={handleUserDataChange}
+            resetEditingState={resetDataCards}
+          />
           <Grid item mt={4}>
             <Button
               variant="outlined"

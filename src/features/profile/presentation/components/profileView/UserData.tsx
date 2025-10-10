@@ -12,9 +12,10 @@ interface User {
 interface UserDataProps {
   user: User;
   onUserDataChange?: (field: string, value: string) => void;
+  resetEditingState?: boolean;
 }
 
-const UserData: React.FC<UserDataProps> = ({ user, onUserDataChange }) => {
+const UserData: React.FC<UserDataProps> = ({ user, onUserDataChange, resetEditingState }) => {
   const handleFieldChange = (field: string, value: string) => {
     if (onUserDataChange) {
       onUserDataChange(field, value);
@@ -40,6 +41,7 @@ const UserData: React.FC<UserDataProps> = ({ user, onUserDataChange }) => {
             field="name"
             onValueChange={handleFieldChange}
             variant="standard"
+            resetEditingState={resetEditingState}
           />
         </Grid>
 
@@ -60,6 +62,7 @@ const UserData: React.FC<UserDataProps> = ({ user, onUserDataChange }) => {
             onValueChange={handleFieldChange}
             variant="standard"
             editable={false}
+            resetEditingState={resetEditingState}
           />
         </Grid>
       </Grid>

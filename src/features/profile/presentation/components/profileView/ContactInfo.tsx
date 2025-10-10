@@ -21,9 +21,10 @@ interface User {
 interface ContactInfoProps {
   user: User;
   onUserDataChange?: (field: string, value: string) => void;
+  resetEditingState?: boolean;
 }
 
-const ContactInfo: React.FC<ContactInfoProps> = ({ user, onUserDataChange }) => {
+const ContactInfo: React.FC<ContactInfoProps> = ({ user, onUserDataChange, resetEditingState }) => {
   const handleFieldChange = (field: string, value: string) => {
     if (onUserDataChange) {
       onUserDataChange(field, value);
@@ -55,6 +56,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ user, onUserDataChange }) => 
             type="email"
             variant="standard"
             editable={false}
+            resetEditingState={resetEditingState}
           />
         </Grid>
 
@@ -75,6 +77,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ user, onUserDataChange }) => 
             onValueChange={handleFieldChange}
             type="tel"
             variant="standard"
+            resetEditingState={resetEditingState}
           />
         </Grid>
 
@@ -95,6 +98,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ user, onUserDataChange }) => 
             onValueChange={handleFieldChange}
             placeholder="Ingresa tu dirección"
             variant="standard"
+            resetEditingState={resetEditingState}
           />
         </Grid>
       </Grid>

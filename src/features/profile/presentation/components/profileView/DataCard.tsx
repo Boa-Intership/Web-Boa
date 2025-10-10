@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Paper, TextField, Link } from '@mui/material';
 import { AppTypography } from 'ui';
+import { MuiPhone } from '@/shared/components/PhoneInput';
 
 interface DataCardProps {
   icon: React.ReactNode;
@@ -14,6 +15,7 @@ interface DataCardProps {
   variant?: 'standard' | 'outlined';
   backgroundColor?: string;
   editable?: boolean;
+  resetEditingState?: boolean; // ✅ Nueva prop para resetear estado
 }
 
 const DataCard: React.FC<DataCardProps> = ({
@@ -28,9 +30,36 @@ const DataCard: React.FC<DataCardProps> = ({
   variant = 'standard',
   backgroundColor,
   editable = true,
+  resetEditingState = false,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [originalValue, setOriginalValue] = useState(value);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isEditing) {
+      // Usar setTimeout para asegurar que el DOM se haya actualizado
+      const timer = setTimeout(() => {
+        if (type === 'tel' && phoneRef.current) {
+          phoneRef.current.focus();
+        } else if (inputRef.current) {
+          // Para TextField normal
+          inputRef.current.focus();
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isEditing, type]);
+
+  React.useEffect(() => {
+    if (resetEditingState && isEditing) {
+      setIsEditing(false);
+      setOriginalValue(value); // Actualizar valor original también
+    }
+  }, [resetEditingState, isEditing, value]);
 
   const handleToggleEdit = () => {
     if (isEditing) {
@@ -83,23 +112,39 @@ const DataCard: React.FC<DataCardProps> = ({
           </AppTypography>
 
           {isEditing ? (
-            <TextField
-              fullWidth
-              variant={variant}
-              size="small"
-              value={value}
-              onChange={(e) => handleValueChange(e.target.value)}
-              type={type}
-              multiline={multiline}
-              rows={multiline ? 2 : 1}
-              placeholder={placeholder}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1,
-                },
-                color: 'secondary.main',
-              }}
-            />
+            type === 'tel' ? (
+              <MuiPhone
+                inputRef={phoneRef}
+                value={value}
+                onChange={(phone) => handleValueChange(phone || '')}
+                label=""
+                placeholder={placeholder || 'Número de teléfono'}
+                error={false}
+                helperText=""
+                fullWidth
+                required={false}
+                variant="standard"
+              />
+            ) : (
+              <TextField
+                inputRef={inputRef}
+                fullWidth
+                variant={variant}
+                size="small"
+                value={value}
+                onChange={(e) => handleValueChange(e.target.value)}
+                type={type}
+                multiline={multiline}
+                rows={multiline ? 2 : 1}
+                placeholder={placeholder}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: 1,
+                  },
+                  color: 'secondary.main',
+                }}
+              />
+            )
           ) : (
             <AppTypography
               variant="body1"

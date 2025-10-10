@@ -22,6 +22,7 @@ import {
 export interface MUIPhoneProps extends BaseTextFieldProps {
   value: string;
   onChange: (phone: string) => void;
+  inputRef?: React.Ref<HTMLInputElement>;
 }
 
 export const MuiPhone: React.FC<MUIPhoneProps> = ({
@@ -31,9 +32,17 @@ export const MuiPhone: React.FC<MUIPhoneProps> = ({
   helperText,
   label,
   placeholder,
+  variant,
+  inputRef: externalInputRef,
   ...otherProps
 }) => {
-  const { inputValue, handlePhoneValueChange, inputRef, country, setCountry } = usePhoneInput({
+  const {
+    inputValue,
+    handlePhoneValueChange,
+    inputRef: internalInputRef,
+    country,
+    setCountry,
+  } = usePhoneInput({
     defaultCountry: 'bo',
     value,
     countries: defaultCountries,
@@ -42,18 +51,20 @@ export const MuiPhone: React.FC<MUIPhoneProps> = ({
     },
   });
 
+  const finalInputRef = externalInputRef || internalInputRef;
+
   return (
     <Box>
       <TextField
         {...otherProps}
-        variant="outlined"
+        variant={variant || 'outlined'}
         label={label}
         color="primary"
         placeholder={placeholder || 'Número de teléfono'}
         value={inputValue}
         onChange={handlePhoneValueChange}
         type="tel"
-        inputRef={inputRef}
+        inputRef={finalInputRef}
         error={error}
         InputProps={{
           startAdornment: (
