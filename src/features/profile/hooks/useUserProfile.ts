@@ -1,0 +1,67 @@
+import { useState, useEffect } from 'react';
+import { httpClient } from '@/config/httpClient';
+
+interface UserRole {
+  id: number;
+  name: string;
+  description: string;
+}
+
+interface UserProfileResponse {
+  id: number;
+  nit: string;
+  documentType: number;
+  complement: string | null;
+  name: string;
+  address: string | null;
+  phone: string;
+  email: string;
+  roles: UserRole[];
+}
+
+interface UseUserProfileReturn {
+  userData: UserProfileResponse | null;
+  loading: boolean;
+  error: string | null;
+  refetch: () => Promise<void>;
+}
+
+export const useUserProfile = (): UseUserProfileReturn => {
+  const [userData, setUserData] = useState<UserProfileResponse | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchUserProfile = async () => {
+    // No hacer nada si ya hay datos cargados
+    if (userData) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await httpClient.get<UserProfileResponse>('/user/me');
+      setUserData(response);
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Error al obtener datos del usuario';
+      setError(errorMessage);
+      console.error('Error fetching user profile:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return {
+    userData,
+    loading,
+    error,
+    refetch: fetchUserProfile,
+  };
+};
+
+export default useUserProfile;
