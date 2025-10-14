@@ -6,6 +6,8 @@ import ProfileCard from '../components/profileView/ProfileCard';
 import ContactInfo from '../components/profileView/ContactInfo';
 import BillingInfo from '../components/profileView/BillingInfo';
 import UserData from '../components/profileView/UserData';
+import ChangePasswordModal from '../components/modals/ChangePasswordModal';
+import { useChangePassword } from '../../hooks/useChangePassword';
 
 // Tipo temporal para simular datos del usuario
 interface User {
@@ -39,8 +41,15 @@ const ProfileScreen: React.FC = () => {
   const [originalData, setOriginalData] = useState<User>(userData);
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [resetDataCards, setResetDataCards] = useState(false);
+  const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
+
+  // Hook para cambio de contraseña
+  const { changePassword } = useChangePassword({
+    onSuccess: () => {
+      setShowSuccess(true);
+    },
+  });
 
   // Función para cancelar todas las ediciones activas de DataCard
   const handleCancelAllEdits = () => {
@@ -88,8 +97,15 @@ const ProfileScreen: React.FC = () => {
 
   // Cambiar contraseña
   const handleChangePassword = () => {
-    console.log('Abrir modal de cambio de contraseña');
-    // TODO: Implementar modal de cambio de contraseña
+    setChangePasswordModalOpen(true);
+  };
+
+  // Función para enviar cambio de contraseña a la API
+  const handlePasswordSubmit = async (
+    currentPassword: string,
+    newPassword: string
+  ): Promise<void> => {
+    return changePassword(currentPassword, newPassword);
   };
 
   return (
@@ -201,6 +217,13 @@ const ProfileScreen: React.FC = () => {
           Perfil actualizado exitosamente
         </Alert>
       </Snackbar>
+
+      {/* Modal de cambio de contraseña */}
+      <ChangePasswordModal
+        open={changePasswordModalOpen}
+        onClose={() => setChangePasswordModalOpen(false)}
+        onSubmit={handlePasswordSubmit}
+      />
     </AppContainer>
   );
 };
