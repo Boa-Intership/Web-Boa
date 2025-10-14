@@ -61,7 +61,14 @@ const App: React.FC = () => (
             />
 
             <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
-            <Route path={ROUTES.PERFIL.replace('/', '')} element={<ProfileScreen />} />
+            <Route
+              path={ROUTES.PERFIL.replace('/', '')}
+              element={
+                <ProtectedRoute>
+                  <ProfileScreen />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
               element={<CorporateProfileScreen />}
