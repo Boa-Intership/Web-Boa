@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Button, Grid, Alert, Snackbar } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Button, Grid, Alert, Snackbar, CircularProgress } from '@mui/material';
 import { Lock, Check } from '@mui/icons-material';
 import { AppContainer, AppTypography } from 'ui';
 import ProfileCard from '../components/profileView/ProfileCard';
@@ -8,6 +8,7 @@ import BillingInfo from '../components/profileView/BillingInfo';
 import UserData from '../components/profileView/UserData';
 import ChangePasswordModal from '../components/modals/ChangePasswordModal';
 import { useChangePassword } from '../../hooks/useChangePassword';
+import { useUserProfile } from '../../hooks/useUserProfile';
 
 // Tipo temporal para simular datos del usuario
 interface User {
@@ -24,19 +25,42 @@ interface User {
 }
 
 const ProfileScreen: React.FC = () => {
+  // Hook para obtener datos del usuario desde la API
+  const { userData: apiUserData, loading: loadingProfile, error: profileError } = useUserProfile();
+
   // Estado para datos editables del usuario
   const [userData, setUserData] = useState<User>({
-    name: 'Juan Carlos Pérez Pereira',
-    email: 'juan.perez@ejemplo.com',
-    ci: '12345678',
-    nitComplemento: 'A1',
-    number: '+59172345678',
-    address: 'Av. Ballivián #123, Zona Sur, La Paz, Bolivia',
-    businessName: 'Empresa Ejemplo S.R.L.',
-    billingDocType: '5',
-    billingNit: '98765432',
-    billingNitComplemento: '1A',
+    name: '',
+    email: '',
+    ci: '',
+    nitComplemento: '',
+    number: '',
+    address: '',
+    businessName: '',
+    billingDocType: '',
+    billingNit: '',
+    billingNitComplemento: '',
   });
+
+  // Actualizar userData cuando lleguen los datos de la API
+  useEffect(() => {
+    if (apiUserData) {
+      const mappedData: User = {
+        name: apiUserData.name || '',
+        email: apiUserData.email || '',
+        ci: apiUserData.nit || '',
+        nitComplemento: apiUserData.complement || '',
+        number: apiUserData.phone ? `+591${apiUserData.phone}` : '',
+        address: apiUserData.address || '',
+        businessName: '',
+        billingDocType: String(apiUserData.documentType) || '',
+        billingNit: apiUserData.nit || '',
+        billingNitComplemento: apiUserData.complement || '',
+      };
+      setUserData(mappedData);
+      setOriginalData(mappedData);
+    }
+  }, [apiUserData]);
 
   const [originalData, setOriginalData] = useState<User>(userData);
   const [hasChanges, setHasChanges] = useState(false);
@@ -119,86 +143,103 @@ const ProfileScreen: React.FC = () => {
         </Grid>
       </Grid>
 
-      {/* Tarjeta principal del perfil - Solo lectura */}
+      {/* Estado de loading */}
+      {loadingProfile && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', py: 8 }}>
+          <CircularProgress />
+        </Box>
+      )}
 
-      {/* Layout de dos columnas */}
-      <Grid container spacing={4} mb={2}>
-        {/* Columna izquierda - Información de contacto */}
-        <Grid item xs={12} lg={6}>
-          <ProfileCard user={userData} />
-          <UserData
-            user={userData}
-            onUserDataChange={handleUserDataChange}
-            resetEditingState={resetDataCards}
-          />
-          {/* <BillingInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} /> */}
-        </Grid>
+      {/* Estado de error */}
+      {profileError && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {profileError}
+        </Alert>
+      )}
 
-        {/* Columna derecha - Información de facturación */}
-        <Grid item xs={12} lg={6}>
-          <ContactInfo
-            user={userData}
-            onUserDataChange={handleUserDataChange}
-            resetEditingState={resetDataCards}
-          />
-          <Grid item mt={4}>
-            <Button
-              variant="outlined"
-              color="primary"
-              fullWidth
-              startIcon={<Lock />}
-              onClick={handleChangePassword}
+      {/* Contenido del perfil - Solo mostrar cuando hay datos */}
+      {!loadingProfile && !profileError && userData && (
+        <>
+          {/* Layout de dos columnas */}
+          <Grid container spacing={4} mb={2}>
+            {/* Columna izquierda - Información de contacto */}
+            <Grid item xs={12} lg={6}>
+              <ProfileCard user={userData} />
+              <UserData
+                user={userData}
+                onUserDataChange={handleUserDataChange}
+                resetEditingState={resetDataCards}
+              />
+              {/* <BillingInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} /> */}
+            </Grid>
+
+            {/* Columna derecha - Información de facturación */}
+            <Grid item xs={12} lg={6}>
+              <ContactInfo
+                user={userData}
+                onUserDataChange={handleUserDataChange}
+                resetEditingState={resetDataCards}
+              />
+              <Grid item mt={4}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  fullWidth
+                  startIcon={<Lock />}
+                  onClick={handleChangePassword}
+                  sx={{
+                    borderRadius: 2,
+                    textTransform: 'none',
+                    fontWeight: 500,
+                    px: 3,
+                  }}
+                >
+                  Cambiar Contraseña
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          {/* Botones de acción - Solo aparecen si hay cambios */}
+          {hasChanges && (
+            <Box
               sx={{
+                mt: 4,
                 borderRadius: 2,
-                textTransform: 'none',
-                fontWeight: 500,
-                px: 3,
+                borderColor: 'divider',
+                display: 'flex',
+                justifyContent: 'end',
+                gap: 1,
+                flexDirection: { xs: 'column', sm: 'row' },
               }}
             >
-              Cambiar Contraseña
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
-
-      {/* Botones de acción - Solo aparecen si hay cambios */}
-      {hasChanges && (
-        <Box
-          sx={{
-            mt: 4,
-            borderRadius: 2,
-            borderColor: 'divider',
-            display: 'flex',
-            justifyContent: 'end',
-            gap: 1,
-            flexDirection: { xs: 'column', sm: 'row' },
-          }}
-        >
-          <Button
-            variant="text"
-            color="primary"
-            onClick={handleCancelChanges}
-            sx={{
-              borderRadius: 2,
-              textTransform: 'none',
-              minWidth: 120,
-            }}
-          >
-            Cancelar
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSaveChanges}
-            sx={{
-              borderRadius: 2,
-              textTransform: 'none',
-              minWidth: 120,
-            }}
-          >
-            Guardar
-          </Button>
-        </Box>
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleCancelChanges}
+                sx={{
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  minWidth: 120,
+                }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSaveChanges}
+                sx={{
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  minWidth: 120,
+                }}
+              >
+                Guardar
+              </Button>
+            </Box>
+          )}
+        </>
       )}
 
       {/* Snackbar de éxito */}
