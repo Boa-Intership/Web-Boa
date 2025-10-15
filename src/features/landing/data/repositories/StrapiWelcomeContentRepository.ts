@@ -2,36 +2,35 @@ import { WelcomeContent, WelcomeContentRepository } from '../../domain/entities/
 import { strapiClient } from '@/config';
 
 // Tipos para mapear la respuesta de Strapi
-interface StrapiWelcomeData {
-  id: number;
-  title: string;
-  title2: string;
-  title3: string;
-  description: string;
-  button_text: string;
-}
-
 interface StrapiResponse {
-  data: StrapiWelcomeData[];
+  data: {
+    id: number;
+    documentId: string;
+    title: string;
+    title2: string;
+    title3: string;
+    description: string;
+    button_text: string;
+  };
 }
 
 export class StrapiWelcomeContentRepository implements WelcomeContentRepository {
   async getWelcomeContent(): Promise<WelcomeContent> {
     try {
-      const result = await strapiClient.get<StrapiResponse>('/bienvenidas?populate=*');
+      const result = await strapiClient.get<StrapiResponse>('/bienvenida?populate=*');
 
-      if (!result.data || result.data.length === 0) {
+      if (!result.data) {
         throw new Error('No welcome content found');
       }
 
-      return this.mapStrapiToEntity(result.data[0]);
+      return this.mapStrapiToEntity(result.data);
     } catch (error) {
       console.error('Error fetching from Strapi:', error);
       throw error;
     }
   }
 
-  private mapStrapiToEntity(strapiData: StrapiWelcomeData): WelcomeContent {
+  private mapStrapiToEntity(strapiData: StrapiResponse['data']): WelcomeContent {
     return {
       id: strapiData.id.toString(),
       title: strapiData.title,
