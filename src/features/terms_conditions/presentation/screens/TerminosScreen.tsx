@@ -5,12 +5,10 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material';
-import { reglasContrato } from '../components/reglasData';
 import { AppContainer, AppTypography, AppBox } from 'ui';
 import { useTheme } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReactMarkdown from 'react-markdown';
-import { terminosData } from '../components/terminosData';
 import { useTerms } from '../hooks/useTerms';
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { Alerta } from '../../../Information/presentation/components/TipoAlerta';
