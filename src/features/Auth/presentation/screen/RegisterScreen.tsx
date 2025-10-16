@@ -7,7 +7,7 @@ import BillingDataForm from '../components/register_form/BillingDataForm';
 import TermsAndConditions from '../components/register_form/TermsAndConditions';
 import EmailVerification from '../components/verification/EmailVerification';
 import RegistrationSuccess from '../components/verification/RegistrationSuccess';
-import { useTempRegistration } from '../../hooks/useTempRegistration';
+import { useTempRegistration } from '../components/register_form/useTempRegistration';
 import { useSendVerificationCode } from '../useAuth.hooks';
 import { AppContainer, AppTypography } from 'ui';
 import { createRegisterSchema, CreateRegisterSchema } from '../../domain/validators';
