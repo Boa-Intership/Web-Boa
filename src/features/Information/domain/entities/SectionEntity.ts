@@ -4,6 +4,7 @@ export interface ContenidoSeccion {
   id: number;
   //contenido,requisitos
   titulo: string;
+  slug: string;
   contenido?: BlocksContent | null;
   icono?: string | null;
   //galeria

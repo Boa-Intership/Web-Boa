@@ -26,11 +26,38 @@ interface StrapiResponseCategories {
 export class StrapiCategoriesRepository implements CategoryRepository {
   async getCategoryByDocumentId(documentId: string): Promise<CategoryEntity | null> {
     try {
-      const response = await strapiClient.get(`/categorias-cargas/${documentId}?populate=*
-`);
+      console.log('entrando a la endpoint con documentId:', documentId);
+      const response = await strapiClient.get(`/categorias-cargas/${documentId}?populate=*`);
 
       if (!response.data || !response.data.data) {
         console.warn('No hay datos recibidos desde strapi');
+        return null;
+      }
+
+      // response.data.data is expected to be a single category object
+      return this.mapStrapiToSingleEntity(response.data.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error('Error fetching category:', {
+          message: error.message,
+          status: error.response?.status,
+          data: error.response?.data,
+        });
+      } else {
+        console.error('Error fetching category:', error);
+      }
+      return null;
+    }
+  }
+  async getCategoryBySlug(slug: string): Promise<CategoryEntity | null> {
+    try {
+      console.log('entrando a la endpoint con slug:', slug);
+      const response = await strapiClient.get(
+        `/categorias-cargas?filters[slug][$contains]=${slug}&populate=seccions`
+      );
+
+      if (!response.data || !response.data.data) {
+        console.warn('No hay datos recibidos desde strapi con el slug', slug);
         return null;
       }
 

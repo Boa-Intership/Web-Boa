@@ -31,7 +31,9 @@ interface StrapiResponse {
 export class StrapiTermsRepository implements TermsRepository {
   async getTermsContent(): Promise<TermsEntity> {
     try {
-      const result = await strapiClient.get<StrapiResponse>('vista-terminos-condicione?populate=*');
+      const result = await strapiClient.get<StrapiResponse>(
+        '/vista-terminos-condicione?populate=*'
+      );
       if (!result.data) {
         throw new Error('No se encontraron datos de términos y condiciones');
       }
