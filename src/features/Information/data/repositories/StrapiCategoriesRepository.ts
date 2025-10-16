@@ -2,40 +2,40 @@ import { CategoryEntity, CategoryRepository } from '../../domain/entities/Catego
 import { strapiClient } from '@/config/httpClient';
 import axios from 'axios';
 
-interface StrapiSection {
+interface StrapiCategoryResponse {
   id: number;
   documentId: string;
   titulo: string;
+  slug: string;
+  icono?: string | null;
   orden: number;
   activo: boolean;
-}
-
-interface StrapiCategoryResponse {
-  data: {
+  seccions: Array<{
     id: number;
     documentId: string;
     titulo: string;
-    icono: string | null;
     orden: number;
     activo: boolean;
-    seccions: StrapiSection[];
-  };
+  }>;
+}
+interface StrapiResponseCategories {
+  data: StrapiCategoryResponse[];
   meta: Record<string, unknown>;
 }
 
 export class StrapiCategoriesRepository implements CategoryRepository {
   async getCategoryByDocumentId(documentId: string): Promise<CategoryEntity | null> {
     try {
-      const response = await strapiClient.get<StrapiCategoryResponse>(
-        `/categorias-cargas/${documentId}?populate=*`
-      );
+      const response = await strapiClient.get(`/categorias-cargas/${documentId}?populate=*
+`);
 
       if (!response.data || !response.data.data) {
-        console.warn('No data received from Strapi');
+        console.warn('No hay datos recibidos desde strapi');
         return null;
       }
 
-      return this.mapStrapiToEntity(response.data.data);
+      // response.data.data is expected to be a single category object
+      return this.mapStrapiToSingleEntity(response.data.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error('Error fetching category:', {
@@ -49,16 +49,16 @@ export class StrapiCategoriesRepository implements CategoryRepository {
       return null;
     }
   }
-
-  private mapStrapiToEntity(data: StrapiCategoryResponse['data']): CategoryEntity {
+  private mapStrapiToSingleEntity(item: StrapiCategoryResponse): CategoryEntity {
     return {
-      id: data.id,
-      documentId: data.documentId,
-      titulo: data.titulo,
-      icono: data.icono,
-      orden: data.orden,
-      activo: data.activo,
-      seccions: data.seccions.map((s) => ({
+      id: item.id,
+      documentId: item.documentId,
+      titulo: item.titulo,
+      slug: item.slug,
+      icono: item.icono,
+      orden: item.orden,
+      activo: item.activo,
+      seccions: item.seccions.map((s) => ({
         id: s.id,
         documentId: s.documentId,
         titulo: s.titulo,

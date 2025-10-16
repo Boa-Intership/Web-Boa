@@ -10,14 +10,28 @@ export const useCategoryByDocumentId = (documentId: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!documentId) {
+        console.warn('No se proporcionó documentId');
+        return;
+      }
+
       try {
+        console.log('Iniciando fetch para documentId:', documentId);
         setLoading(true);
         setError(null);
 
         const repository = new StrapiCategoriesRepository();
         const useCase = new GetCategoryByDocumentIdUseCase(repository);
 
+        console.log('Ejecutando useCase con documentId:', documentId);
         const categoryData = await useCase.execute(documentId);
+        console.log('Respuesta del useCase:', categoryData);
+
+        if (!categoryData) {
+          console.warn('No se encontró la categoría con documentId:', documentId);
+          setError('No se encontró la categoría');
+        }
+
         setData(categoryData);
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Error desconocido';

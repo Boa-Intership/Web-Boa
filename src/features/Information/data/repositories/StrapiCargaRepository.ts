@@ -12,6 +12,7 @@ interface StrapiViewCategoryData {
     id: number;
     documentId: string;
     titulo: string;
+    slug: string;
     icono: string;
     orden: number;
     activo: boolean;
@@ -54,6 +55,7 @@ export class StrapiCargaRepository implements viewCategoriesRepository {
         id: item.id,
         documentId: item.documentId,
         titulo: item.titulo,
+        slug: item.slug,
         icono: item.icono,
         orden: item.orden,
         activo: item.activo,

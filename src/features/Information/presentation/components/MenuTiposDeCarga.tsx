@@ -30,14 +30,19 @@ interface Props {
 }
 
 const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
+  console.log('Data recibida en MenuTiposDeCarga:', data);
+  console.log('Categorías disponibles:', data.categorias_cargas);
+
   const [expanded, setExpanded] = useState<string>(data.categorias_cargas[0]?.documentId || '');
-  console.log('categoria:', expanded);
+  console.log('ID de categoría expandida:', expanded);
 
   const handleExpand = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+    console.log('Cambiando categoría a:', isExpanded ? panel : '');
     setExpanded(isExpanded ? panel : '');
   };
 
-  const { data: cartegoryData, loading, error } = useCategoryByDocumentId(expanded || '');
+  const { data: categoryData, loading, error } = useCategoryByDocumentId(expanded || '');
+  console.log('data categoria:', categoryData?.titulo);
 
   // Mapa de nombre string -> componente
   const iconMap: Record<string, SvgIconComponent> = {
@@ -88,7 +93,7 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
               </Box>
             )}
             <Typography variant="subtitle2" fontWeight="bold">
-              {categoria.seccions.length}
+              {categoria.titulo}
             </Typography>
           </AccordionSummary>
 

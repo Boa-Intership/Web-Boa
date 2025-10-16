@@ -3,6 +3,7 @@ export interface CategoryEntity {
   id: number;
   documentId: string;
   titulo: string;
+  slug: string;
   icono?: string | null;
   orden: number;
   activo: boolean;
