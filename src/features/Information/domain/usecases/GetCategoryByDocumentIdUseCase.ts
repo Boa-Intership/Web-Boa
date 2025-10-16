@@ -1,10 +1,26 @@
-import { CategoryEntity } from '../entities/CategoryEntity';
-import { StrapiCargaRepository } from '../../data/repositories/StrapiCargaRepository';
+import { CategoryEntity, CategoryRepository } from '../entities/CategoryEntity';
 
 export class GetCategoryByDocumentIdUseCase {
-  constructor(private repository: StrapiCargaRepository) {}
+  constructor(private readonly repository: CategoryRepository) {}
 
   async execute(documentId: string): Promise<CategoryEntity | null> {
-    return await this.repository.getCategoryByDocumentId(documentId);
+    try {
+      return await this.repository.getCategoryByDocumentId(documentId);
+    } catch (error) {
+      console.error('Error fetching categorias:', error);
+      // Fallback: contenido por defecto
+      return this.getDefaultContent();
+    }
+  }
+  private getDefaultContent(): CategoryEntity {
+    return {
+      id: 0,
+      documentId: 'default',
+      titulo: 'Carga general',
+      icono: '',
+      orden: 0,
+      activo: true,
+      seccions: [],
+    };
   }
 }

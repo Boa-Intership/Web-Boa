@@ -15,7 +15,7 @@ export interface ContenidoSeccion {
 
 export interface SectionEntity {
   id: number;
-  documentoId: string;
+  documentId: string;
   titulo: string;
   orden: number;
   activo: boolean;
@@ -23,5 +23,5 @@ export interface SectionEntity {
 }
 
 export interface SectionRepository {
-  getSectionByDocumentId(documentoId: string): Promise<SectionEntity | null>;
+  getSectionByDocumentId(documentId: string): Promise<SectionEntity | null>;
 }

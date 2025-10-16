@@ -9,9 +9,12 @@ import {
   ListItemText,
   Box,
   Divider,
+  CircularProgress,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { TipoCarga, SeccionCarga } from '../../domain/entities/Carga';
+import { ViewCategoriesEntity } from '../../domain/entities/ViewCategoriesEntity';
+import { SectionEntity } from '../../domain/entities/SectionEntity';
+import { useCategoryByDocumentId } from '../hooks/useCategoryByDocumentId';
 
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
@@ -22,16 +25,19 @@ import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 import { SvgIconComponent } from '@mui/icons-material';
 
 interface Props {
-  data: TipoCarga;
-  onSelectSeccion?: (seccion: SeccionCarga) => void;
+  data: ViewCategoriesEntity;
+  onSelectSeccion?: (seccion: SectionEntity) => void;
 }
 
 const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
-  const [expanded, setExpanded] = useState<string | false>(false);
+  const [expanded, setExpanded] = useState<string>(data.categorias_cargas[0]?.documentId || '');
+  console.log('categoria:', expanded);
 
   const handleExpand = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false);
+    setExpanded(isExpanded ? panel : '');
   };
+
+  const { data: cartegoryData, loading, error } = useCategoryByDocumentId(expanded || '');
 
   // Mapa de nombre string -> componente
   const iconMap: Record<string, SvgIconComponent> = {
@@ -51,9 +57,9 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
 
       {data.categorias_cargas.map((categoria) => (
         <Accordion
-          key={categoria.documentoId}
-          expanded={expanded === categoria.documentoId}
-          onChange={handleExpand(categoria.documentoId)}
+          key={categoria.documentId}
+          expanded={expanded === categoria.documentId}
+          onChange={handleExpand(categoria.documentId)}
           sx={{
             borderRadius: 2,
             boxShadow: 'none',
@@ -66,9 +72,9 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
               border: '1px solid',
               borderColor: 'primary.dark',
               backgroundColor:
-                expanded === categoria.documentoId ? 'primary.dark' : 'background.default',
+                expanded === categoria.documentId ? 'primary.dark' : 'background.default',
               '&:hover': { backgroundColor: 'primary.dark' },
-              color: expanded === categoria.documentoId ? '#fafafa' : 'primary.dark',
+              color: expanded === categoria.documentId ? '#fafafa' : 'primary.dark',
               '&: hover': { color: '#fafafa' },
               borderRadius: 2,
             }}
@@ -82,7 +88,7 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
               </Box>
             )}
             <Typography variant="subtitle2" fontWeight="bold">
-              {categoria.titulo}
+              {categoria.seccions.length}
             </Typography>
           </AccordionSummary>
 
@@ -96,12 +102,11 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
             <List disablePadding>
               {categoria.seccions.length > 0 ? (
                 categoria.seccions.map((seccion) => (
-                  <React.Fragment key={seccion.documentoId}>
+                  <React.Fragment key={seccion.documentId}>
                     <ListItemButton
                       sx={{
                         pl: 3,
                         py: 1,
-                        backgroundColor: 'background.default',
                         '&:hover': { backgroundColor: '#E6EEF8' },
                       }}
                       onClick={() => onSelectSeccion?.(seccion)}
@@ -111,9 +116,9 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
                           <Typography
                             variant="body2"
                             sx={{
-                              color: 'primary.main',
+                              color: '#003366',
                               fontSize: '0.9rem',
-                              //textDecoration: 'underline',
+                              textDecoration: 'underline',
                             }}
                           >
                             {seccion.titulo}

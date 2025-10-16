@@ -17,10 +17,11 @@ const tipoToSeverity: Record<AlertaProps['tipo'], 'info' | 'warning' | 'error' |
 };
 
 export const Alerta: React.FC<AlertaProps> = ({ titulo, contenido, tipo }) => (
-  <Alert severity={tipoToSeverity[tipo]} sx={{ mb: 2 }}>
+  <Alert severity={tipoToSeverity[tipo]}>
     {titulo && <AlertTitle>{titulo}</AlertTitle>}
-    {contenido.map((block, i) =>
+    <BlocksRenderer content={contenido} />
+    {/* {contenido.map((block, i) =>
       block.children.map((child, j) => <span key={`${i}-${j}`}>{child.text}</span>)
-    )}
+    )} */}
   </Alert>
 );

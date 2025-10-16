@@ -3,29 +3,6 @@ import {
   ViewCategoriesEntity,
   viewCategoriesRepository,
 } from '../../domain/entities/ViewCategoriesEntity';
-import { CategoryEntity } from '../../domain/entities/CategoryEntity';
-import { SectionEntity } from '../../domain/entities/SectionEntity';
-
-interface StrapiCategoriesData {
-  id: number;
-  documentoId: string;
-  titulo: string;
-  icono: string;
-  orden: number;
-  activo: boolean;
-  seccions: Array<{
-    id: number;
-    documentoId: string;
-    titulo: string;
-    orden: number;
-    activo: boolean;
-  }>;
-}
-
-interface StrapiResponseCategories {
-  data: StrapiCategoriesData[];
-  meta: Record<string, unknown>;
-}
 
 interface StrapiViewCategoryData {
   id: number;
@@ -75,7 +52,7 @@ export class StrapiCargaRepository implements viewCategoriesRepository {
       descripcion: strapiData.descripcion,
       categorias_cargas: strapiData.categorias_cargas.map((item) => ({
         id: item.id,
-        documentoId: item.documentId,
+        documentId: item.documentId,
         titulo: item.titulo,
         icono: item.icono,
         orden: item.orden,

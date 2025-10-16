@@ -1,7 +1,7 @@
 import { SectionEntity } from './SectionEntity';
 export interface CategoryEntity {
   id: number;
-  documentoId: string;
+  documentId: string;
   titulo: string;
   icono?: string | null;
   orden: number;
@@ -10,5 +10,5 @@ export interface CategoryEntity {
 }
 
 export interface CategoryRepository {
-  getCategoryByDocumentId(documentoId: string): Promise<CategoryEntity | null>;
+  getCategoryByDocumentId(documentId: string): Promise<CategoryEntity | null>;
 }
