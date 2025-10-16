@@ -1,0 +1,1 @@
+export { useRouteAccess } from './useRouteAccess';
