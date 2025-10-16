@@ -1,20 +1,50 @@
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import { reglasContrato } from '../components/reglasData';
-import { AppContainer, AppTypography } from 'ui';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  CircularProgress,
+  Alert,
+} from '@mui/material';
+import { AppContainer, AppTypography, AppBox } from 'ui';
 import { useTheme } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReactMarkdown from 'react-markdown';
-import { terminosData } from '../components/terminosData';
+import { useTerms } from '../hooks/useTerms';
+import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+import { Alerta } from '../../../Information/presentation/components/TipoAlerta';
 
 function TerminosScreen() {
+  const { data: terminosData, loading, error } = useTerms();
   const theme = useTheme();
+
+  if (loading) {
+    return (
+      <AppBox sx={{ py: { xs: 4, md: 7 }, display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </AppBox>
+    );
+  }
+
+  if (error) {
+    return (
+      <AppBox sx={{ py: { xs: 4, md: 7 } }}>
+        <AppContainer>
+          <Alert severity="error">Error cargando contenido: {error}</Alert>
+        </AppContainer>
+      </AppBox>
+    );
+  }
+
+  if (!terminosData) {
+    return null;
+  }
   return (
     <AppContainer sx={{ py: 4 }}>
       <AppTypography variant="h2Bold" mb={2} color={theme.palette.primary.main}>
-        Terminos y condiciones
+        {terminosData.titulo}
       </AppTypography>
       <AppTypography variant="baseRegular" component="div" textAlign={'justify'}>
-        <ReactMarkdown>{terminosData.infoSeguridadCarga}</ReactMarkdown>
+        <BlocksRenderer content={terminosData.descripcion} />
       </AppTypography>
       <AppTypography
         variant="h4Bold"
@@ -23,19 +53,14 @@ function TerminosScreen() {
         mt={4}
         mb={2}
       >
-        {terminosData.subtitulo}
+        {terminosData.tituloContrato}
       </AppTypography>
-
-      <ReactMarkdown
-        components={{
-          p: ({ node, ...props }) => (
-            <AppTypography variant="baseRegular" mb={2} ml={1} {...props} />
-          ),
-        }}
-      >
-        {terminosData.nota}
-      </ReactMarkdown>
-      {reglasContrato.map((regla, index) => (
+      <Alerta
+        titulo={terminosData.aviso.titulo}
+        tipo={terminosData.aviso.tipo}
+        contenido={terminosData.aviso.contenido}
+      />
+      {terminosData.reglas.map((regla, index) => (
         <Accordion
           key={index}
           defaultExpanded={index === 0}
@@ -57,7 +82,7 @@ function TerminosScreen() {
           </AccordionSummary>
           <AccordionDetails>
             <AppTypography variant="baseRegular" component="div" textAlign={'justify'}>
-              <ReactMarkdown>{regla.contenido}</ReactMarkdown>
+              <BlocksRenderer content={regla.contenido} />
             </AppTypography>
           </AccordionDetails>
         </Accordion>
