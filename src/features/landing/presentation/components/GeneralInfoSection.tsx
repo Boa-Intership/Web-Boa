@@ -41,7 +41,7 @@ const GeneralInfoSection: React.FC = () => {
       </AppStack>
       <Divider sx={{ mb: 2 }} />
 
-      <AppGrid container justifyContent="space-around">
+      <AppGrid container justifyContent="space-around" spacing={4}>
         {data.elementos.map((elemento) => (
           <AppGrid item xs={12} sm={6} md={5} key={elemento.id}>
             <Box

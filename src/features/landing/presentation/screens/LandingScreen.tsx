@@ -10,6 +10,10 @@ import AboutUsSection from '../components/AboutUsSection';
 import { useCorporateProfile } from '../hooks/useCorporateProfile';
 import { useFAQ } from '../hooks/useFAQ';
 import { useNews } from '../hooks/useNews';
+import FinalCTASection from '../components/FinalCTASection';
+import ServicesSection from '../components/ClientsSection';
+import NotificationsSection from '../components/NotificationsSection';
+import ManifestSection from '../components/ManifestSection';
 
 const LandingScreen: React.FC = () => {
   const { data: corporateProfile } = useCorporateProfile();
@@ -25,7 +29,10 @@ const LandingScreen: React.FC = () => {
       {corporateProfile?.activo && <AboutUsSection />}
       {newsData?.activo && <NewsSection />}
       {faqData?.activo && <FAQSection />}
-      {/*<FinalCTASection />*/}
+      <FinalCTASection />
+      <ServicesSection />
+      <NotificationsSection />
+      <ManifestSection />
     </>
   );
 };
