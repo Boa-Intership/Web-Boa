@@ -27,7 +27,9 @@ export class StrapiCategoriesRepository implements CategoryRepository {
   async getCategoryByDocumentId(documentId: string): Promise<CategoryEntity | null> {
     try {
       console.log('entrando a la endpoint con documentId:', documentId);
-      const response = await strapiClient.get(`/categorias-cargas/${documentId}?populate=*`);
+      const response = await strapiClient.getById('/categorias-cargas', documentId, {
+        populate: '*',
+      });
 
       if (!response.data || !response.data.data) {
         console.warn('No hay datos recibidos desde strapi');
@@ -52,9 +54,9 @@ export class StrapiCategoriesRepository implements CategoryRepository {
   async getCategoryBySlug(slug: string): Promise<CategoryEntity | null> {
     try {
       console.log('entrando a la endpoint con slug:', slug);
-      const response = await strapiClient.get(
-        `/categorias-cargas?filters[slug][$contains]=${slug}&populate=seccions`
-      );
+      const response = await strapiClient.getById('/categorias-cargas?filters[slug][$eq]=', slug, {
+        populate: 'seccions',
+      });
 
       if (!response.data || !response.data.data) {
         console.warn('No hay datos recibidos desde strapi con el slug', slug);
