@@ -20,6 +20,7 @@ export interface SectionEntity {
   titulo: string;
   orden: number;
   activo: boolean;
+  slug: string;
   contenido_seccion: ContenidoSeccion[];
 }
 

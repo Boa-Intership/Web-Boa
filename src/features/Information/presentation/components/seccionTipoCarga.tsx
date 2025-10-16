@@ -10,7 +10,7 @@ export const RenderSeccion = ({ seccion }: { seccion: ContenidoSeccion[] }) => {
     <Box mt={1.5}>
       {seccion.map((item) => {
         switch (item.__component) {
-          case 'categorias.contenido':
+          case 'recursos.contenido':
             return (
               <Contenido
                 key={item.id}
@@ -20,7 +20,7 @@ export const RenderSeccion = ({ seccion }: { seccion: ContenidoSeccion[] }) => {
               />
             );
 
-          case 'categorias.alerta':
+          case 'recursos.alerta':
             return (
               <Alerta
                 key={item.id}

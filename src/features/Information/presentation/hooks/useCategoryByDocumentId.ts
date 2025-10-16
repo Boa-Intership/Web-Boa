@@ -17,19 +17,18 @@ export const useCategoryByDocumentId = (documentId: string) => {
       }
 
       try {
-        console.log('Iniciando fetch para documentId:', documentId);
+        //console.log('Iniciando fetch para documentId:', documentId);
         setLoading(true);
         setError(null);
 
         const repository = new StrapiCategoriesRepository();
         const useCase = new GetCategoryByDocumentIdUseCase(repository);
 
-        console.log('Ejecutando useCase con documentId:', documentId);
         const categoryData = await useCase.execute(documentId);
-        console.log('Respuesta del useCase:', categoryData);
+        // console.log('Respuesta del useCase:', categoryData);
 
         if (!categoryData) {
-          console.warn('No se encontró la categoría con documentId:', documentId);
+          // console.warn('No se encontró la categoría con documentId:', documentId);
           setError('No se encontró la categoría');
         }
 

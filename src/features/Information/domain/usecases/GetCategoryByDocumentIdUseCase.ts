@@ -5,7 +5,7 @@ export class GetCategoryByDocumentIdUseCase {
 
   async execute(documentId: string): Promise<CategoryEntity | null> {
     try {
-      console.log('entro a GetCategoryByDocumentIdUseCase con documentId:', documentId);
+      // console.log('entro a GetCategoryByDocumentIdUseCase con documentId:', documentId);
       return await this.repository.getCategoryByDocumentId(documentId);
     } catch (error) {
       console.error('Error fetching categorias:', error);
