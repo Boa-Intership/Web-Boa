@@ -52,7 +52,7 @@ const navItems = [
           },
           {
             label: 'Contacto',
-            to: ROUTES.CONTACTO,
+            to: ROUTES.OFICINA,
             icon: <ContactPhoneOutlinedIcon />,
           },
         ],

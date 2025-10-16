@@ -5,7 +5,7 @@ import { QueryProvider } from './shared/providers/QueryProvider';
 import { ROUTES } from './router/routes';
 import HomeScreen from './features/home/presentation/screens/HomeScreen';
 import CorporateProfileScreen from './features/landing/presentation/screens/CorporateProfileScreen';
-import ContactScreen from './features/contact/presentation/screens/ContactScreen';
+import OfficeScreen from './features/office/presentation/screens/OfficeScreen';
 import InformacionScreen from './features/Information/presentation/screens/InformacionScreen';
 import PreRegistroScreen from './features/pre-registration/presentation/screens/PreRegistroScreen';
 import ComprobanteScreen from './features/pre-registration/presentation/screens/ComprobanteScreen';
@@ -31,7 +31,7 @@ const App: React.FC = () => (
             <Route index element={<LandingScreen />} />
             <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
             <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
-            <Route path={ROUTES.CONTACTO.replace('/', '')} element={<ContactScreen />} />
+            <Route path={ROUTES.OFICINA.replace('/', '')} element={<OfficeScreen />} />
             <Route
               path={ROUTES.PREREGISTRO.replace('/', '')}
               element={
