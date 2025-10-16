@@ -13,7 +13,6 @@ import { useNews } from '../hooks/useNews';
 import FinalCTASection from '../components/FinalCTASection';
 import ServicesSection from '../components/ClientsSection';
 import NotificationsSection from '../components/NotificationsSection';
-import ManifestSection from '../components/ManifestSection';
 
 const LandingScreen: React.FC = () => {
   const { data: corporateProfile } = useCorporateProfile();
@@ -32,7 +31,6 @@ const LandingScreen: React.FC = () => {
       <FinalCTASection />
       <ServicesSection />
       <NotificationsSection />
-      <ManifestSection />
     </>
   );
 };
