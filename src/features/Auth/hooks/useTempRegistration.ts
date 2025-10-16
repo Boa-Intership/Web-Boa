@@ -57,11 +57,6 @@ export const useTempRegistration = () => {
     return sessionStorage.getItem(TEMP_EMAIL_VERIFICATION_KEY) === 'true';
   };
 
-  // Marcar email como verificado
-  const markEmailAsVerified = () => {
-    sessionStorage.removeItem(TEMP_EMAIL_VERIFICATION_KEY);
-  };
-
   // Obtener datos para registro final
   const getTempDataForRegistration = (): CreateRegisterSchema | null => {
     if (!tempData) return null;
@@ -79,7 +74,6 @@ export const useTempRegistration = () => {
     saveTempData,
     clearTempData,
     isEmailVerificationPending,
-    markEmailAsVerified,
     getTempDataForRegistration,
   };
 };

@@ -116,18 +116,6 @@ export const useForgotPassword = () => {
 };
 
 /**
- * Hook para restablecer contraseña
- */
-export const useResetPassword = () => {
-  return useMutation({
-    mutationFn: (request: ResetPasswordRequest) => authService.resetPassword(request),
-    onError: (error) => {
-      console.error('Reset password error:', error);
-    },
-  });
-};
-
-/**
  * Hook para verificar email
  */
 export const useVerifyEmail = () => {
@@ -156,21 +144,6 @@ export const useRefreshToken = () => {
       queryClient.clear();
     },
   });
-};
-
-/**
- * Hook personalizado para verificar autenticación
- */
-export const useAuth = () => {
-  const { data: user, isLoading, error } = useProfile();
-  const isAuthenticated = authService.isAuthenticated();
-
-  return {
-    user,
-    isAuthenticated,
-    isLoading,
-    error,
-  };
 };
 
 /**
