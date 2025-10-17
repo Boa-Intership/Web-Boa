@@ -32,7 +32,8 @@ export const ROUTES = {
   COTIZAR: '/cotizar',
   PREREGISTRO: '/preregistro',
   COMPROBANTE: '/comprobante',
-  CONTACTO: '/contacto',
+  MISPREREGISTROS: '/mis-preregistros',
+  OFICINA: '/oficinas',
 
   CORPORATE_PROFILE: '/perfil-corporativo',
 };

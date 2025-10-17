@@ -30,11 +30,12 @@ const LinkButton = ({ href, children, ...props }) => (
 );
 
 export interface CarouselItem {
-  id: string | number;
-  image: string;
-  title?: string;
-  description?: string;
-  link?: string;
+  id: number;
+  imagen_url: string;
+  titulo?: string;
+  descripcion?: string;
+  enlace?: string;
+  activo: boolean;
 }
 
 interface CarouselProps {
@@ -92,8 +93,8 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
               }}
             >
               <img
-                src={item.image}
-                alt={item.title || 'Imagen'}
+                src={item.imagen_url}
+                alt={item.titulo || 'Imagen'}
                 style={{
                   width: '120%',
                   height: '120%',
@@ -103,7 +104,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
                   borderRadius: 8,
                 }}
               />
-              {(item.title || item.description || item.link) && (
+              {(item.titulo || item.descripcion || item.enlace) && (
                 <Box
                   sx={{
                     position: 'absolute',
@@ -123,16 +124,16 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
                     textAlign: 'center',
                   }}
                 >
-                  {item.title && (
+                  {item.titulo && (
                     <AppTypography variant="h4Bold" color="primary.main">
-                      {item.title}
+                      {item.titulo}
                     </AppTypography>
                   )}
-                  {item.description && (
-                    <AppTypography variant="baseMedium">{item.description}</AppTypography>
+                  {item.descripcion && (
+                    <AppTypography variant="baseMedium">{item.descripcion}</AppTypography>
                   )}
-                  {item.link && (
-                    <LinkButton href={item.link} target="_blank">
+                  {item.enlace && (
+                    <LinkButton href={item.enlace} target="_blank">
                       Leer más
                     </LinkButton>
                   )}

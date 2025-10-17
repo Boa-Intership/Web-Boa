@@ -19,4 +19,5 @@ export { default as AppButton } from '../shared/components/AppButton';
 export { default as AppTypography } from '../ui/AppTypography';
 
 export { default as Carousel } from '../shared/components/Carousel';
+export { default as Breadcrumb } from '../shared/components/Breadcrumb';
 // export { default as ROUTES } from '../router/routes';

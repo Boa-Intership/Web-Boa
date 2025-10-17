@@ -12,41 +12,51 @@ interface StrapiCustomerServiceItemData {
   orden: number;
 }
 
-interface StrapiCustomerServiceData {
-  id: number;
-  titulo: string;
-  descripcion?: string;
-  image_url?: string;
-  texto_boton: string;
-  enlace_boton: string;
-  activo: boolean;
-  elementos_izquierda: StrapiCustomerServiceItemData[];
-  elementos_derecha: StrapiCustomerServiceItemData[];
-}
-
 interface StrapiCustomerServiceResponse {
-  data: StrapiCustomerServiceData[];
+  data: {
+    id: number;
+    documentId: string;
+    titulo: string;
+    descripcion: string;
+    image_url: string | null;
+    texto_boton: string;
+    enlace_boton: string;
+    activo: boolean;
+    elementos_izquierda: Array<{
+      id: number;
+      texto: string;
+      orden: number;
+    }>;
+    elementos_derecha: Array<{
+      id: number;
+      texto: string;
+      orden: number;
+    }>;
+  };
+  meta: Record<string, unknown>;
 }
 
 export class StrapiCustomerServiceRepository implements CustomerServiceRepository {
   async getCustomerService(): Promise<CustomerServiceContent> {
     try {
       const result = await strapiClient.get<StrapiCustomerServiceResponse>(
-        '/atencion-clientes?populate[elementos_izquierda]=*&populate[elementos_derecha]=*&filters[activo][$eq]=true&sort=createdAt:desc'
+        '/atencion-cliente?populate=*'
       );
 
-      if (!result.data || result.data.length === 0) {
-        throw new Error('No active customer service found');
+      if (!result.data) {
+        throw new Error('No customer service found');
       }
 
-      return this.mapStrapiToEntity(result.data[0]);
+      return this.mapStrapiToEntity(result.data);
     } catch (error) {
       console.error('Error fetching from Strapi:', error);
       throw error;
     }
   }
 
-  private mapStrapiToEntity(strapiData: StrapiCustomerServiceData): CustomerServiceContent {
+  private mapStrapiToEntity(
+    strapiData: StrapiCustomerServiceResponse['data']
+  ): CustomerServiceContent {
     const elementos_izquierda: CustomerServiceItem[] = (strapiData.elementos_izquierda || [])
       .map((item) => ({
         id: item.id.toString(),
@@ -67,7 +77,7 @@ export class StrapiCustomerServiceRepository implements CustomerServiceRepositor
       id: strapiData.id.toString(),
       titulo: strapiData.titulo,
       descripcion: strapiData.descripcion,
-      imagen_url: strapiData.image_url,
+      imagen_url: strapiData.image_url || undefined,
       texto_boton: strapiData.texto_boton,
       enlace_boton: strapiData.enlace_boton,
       activo: strapiData.activo,

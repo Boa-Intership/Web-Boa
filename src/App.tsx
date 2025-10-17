@@ -5,10 +5,11 @@ import { QueryProvider } from './shared/providers/QueryProvider';
 import { ROUTES } from './router/routes';
 import HomeScreen from './features/home/presentation/screens/HomeScreen';
 import CorporateProfileScreen from './features/landing/presentation/screens/CorporateProfileScreen';
-import ContactScreen from './features/contact/presentation/screens/ContactScreen';
+import OfficeScreen from './features/office/presentation/screens/OfficeScreen';
 import InformacionScreen from './features/Information/presentation/screens/InformacionScreen';
 import PreRegistroScreen from './features/pre-registration/presentation/screens/PreRegistroScreen';
 import ComprobanteScreen from './features/pre-registration/presentation/screens/ComprobanteScreen';
+import MisPreRegistros from './features/pre-registration/presentation/screens/MisPreRegistrosScreen';
 import MainLayout from './layouts/MainLayout';
 import LandingScreen from './features/landing/presentation/screens/LandingScreen';
 import TipoCargaScreen from './features/Information/presentation/screens/TipoCargaScreen';
@@ -31,9 +32,10 @@ const App: React.FC = () => (
               <Route index element={<LandingScreen />} />
               <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
               <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
-              <Route path={ROUTES.CONTACTO.replace('/', '')} element={<ContactScreen />} />
+              <Route path={ROUTES.OFICINA.replace('/', '')} element={<OfficeScreen />} />
               <Route path={ROUTES.PREREGISTRO.replace('/', '')} element={<PreRegistroScreen />} />
               <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
+            <Route path={ROUTES.MISPREREGISTROS.replace('/', '')} element={<MisPreRegistros />} />
               <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
               <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
               <Route path={ROUTES.LOGIN.replace('/', '')} element={<Login />} />

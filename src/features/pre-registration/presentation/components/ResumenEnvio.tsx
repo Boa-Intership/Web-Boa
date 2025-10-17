@@ -112,11 +112,13 @@ const ResumenEnvio = ({ formData }: { formData: any }) => {
             </Box>
             <Typography>
               <strong>Documento: </strong>
-              {factura.tipoDocumento} - {factura.numeroDocumento}
+              {factura?.numeroDocumento
+                ? `${factura.tipoDocumento} - ${factura.numeroDocumento}`
+                : `CI - ${remitente.ci}`}
             </Typography>
-            {factura.tipoDocumento === 'NIT' && (
-              <Typography>Razón Social: {factura.razonSocial}</Typography>
-            )}
+            <Typography>
+              <strong>Razón Social: </strong> {factura.razonSocial}
+            </Typography>
             <Typography variant="h6" color="primary" fontWeight="bold" mt={2}>
               Importe Total Estimado: Bs. {carga?.costoEstimado}
             </Typography>

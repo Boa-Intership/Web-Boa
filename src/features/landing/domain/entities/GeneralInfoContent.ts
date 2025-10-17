@@ -3,9 +3,8 @@ export interface GeneralInfoItem {
   id: string;
   titulo: string;
   descripcion: string;
-  icono: string; // Tipo de icono simplificado
+  imagen?: string; // URL de la imagen de fondo
   enlace: string;
-  texto_boton: string;
   orden: number;
 }
 

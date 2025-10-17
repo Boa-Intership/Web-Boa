@@ -10,53 +10,52 @@ interface StrapiOfficeData {
   id: number;
   nombre: string;
   direccion: string;
-  telefono?: string;
-  horarios?: string;
-  imagen_url?: string;
+  telefono?: string | null;
+  horarios?: string | null;
+  imagen_url?: string | null;
   orden: number;
 }
 
-interface StrapiOfficePreviewData {
-  id: number;
-  titulo: string;
-  descripcion?: string;
-  texto_boton: string;
-  enlace_boton: string;
-  activo: boolean;
-  oficinas: StrapiOfficeData[];
-}
-
 interface StrapiOfficePreviewResponse {
-  data: StrapiOfficePreviewData[];
+  data: {
+    id: number;
+    documentId: string;
+    titulo: string;
+    descripcion: string;
+    texto_boton: string;
+    enlace_boton: string;
+    activo: boolean;
+    oficinas: StrapiOfficeData[];
+  };
 }
 
 export class StrapiOfficePreviewRepository implements OfficePreviewRepository {
   async getOfficePreview(): Promise<OfficePreviewContent> {
     try {
       const result = await strapiClient.get<StrapiOfficePreviewResponse>(
-        '/vista-oficinas?populate=*&filters[activo][$eq]=true&sort=createdAt:desc'
+        '/vista-oficina?populate=*'
       );
 
-      if (!result.data || result.data.length === 0) {
-        throw new Error('No active office preview found');
+      if (!result.data) {
+        throw new Error('No office preview found');
       }
 
-      return this.mapStrapiToEntity(result.data[0]);
+      return this.mapStrapiToEntity(result.data);
     } catch (error) {
       console.error('Error fetching from Strapi:', error);
       throw error;
     }
   }
 
-  private mapStrapiToEntity(strapiData: StrapiOfficePreviewData): OfficePreviewContent {
+  private mapStrapiToEntity(strapiData: StrapiOfficePreviewResponse['data']): OfficePreviewContent {
     const oficinas: OfficeInfo[] = (strapiData.oficinas || [])
       .map((office) => ({
         id: office.id.toString(),
         nombre: office.nombre,
         direccion: office.direccion,
-        telefono: office.telefono,
-        horarios: office.horarios,
-        imagen_url: office.imagen_url,
+        telefono: office.telefono || undefined,
+        horarios: office.horarios || undefined,
+        imagen_url: office.imagen_url || undefined,
         orden: office.orden,
       }))
       .sort((a, b) => a.orden - b.orden);
