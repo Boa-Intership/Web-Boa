@@ -34,6 +34,8 @@ class HttpClient {
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
+
+        config.headers['ngrok-skip-browser-warning'] = 'true';
         return config;
       },
       (error: AxiosError) => {

@@ -7,11 +7,10 @@ export const useRouteAccess = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const checkRouteAccess = (path: string): boolean => {
+  const checkRouteAccess = (path: string) => {
     if (isLoading) {
       return false;
     }
-
     if (isProtectedRoute(path) && !isAuthenticated) {
       navigate(ROUTES.LOGIN, { state: { from: location } });
       return false;
@@ -25,5 +24,5 @@ export const useRouteAccess = () => {
     return true;
   };
 
-  return { checkRouteAccess, isAuthenticated };
+  return { checkRouteAccess, isAuthenticated, isLoading };
 };

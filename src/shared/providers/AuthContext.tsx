@@ -7,7 +7,7 @@ interface User {
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  isLoading?: boolean;
+  isLoading: boolean;
   user: User | null;
   token: string | null;
   login: (userData: User, token: string, rToken: string) => void;
