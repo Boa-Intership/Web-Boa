@@ -3,6 +3,10 @@ import { Box, Button, Grid, TextField, Typography, Paper } from '@mui/material';
 import { Person } from '@mui/icons-material';
 import { validateField } from '../../domain/validators/validateDatosPersonales';
 import { getUserProfile } from '../../data/services/user.service';
+import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import '../../style/PhoneInputMui.css';
+import PhoneInputMUI from '../components/PhoneInputMUI ';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const [localData, setLocalData] = useState(
@@ -105,6 +109,23 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     }));
   };
 
+  const handlePhoneChange = (value: string | undefined, tipo: 'remitente' | 'destinatario') => {
+    const error =
+      value && !isValidPhoneNumber(value)
+        ? 'Número de celular inválido para el país seleccionado'
+        : null;
+
+    setLocalData((prev: any) => ({
+      ...prev,
+      [tipo]: { ...prev[tipo], celular: value || '' },
+    }));
+
+    setErrors((prev: any) => ({
+      ...prev,
+      [tipo]: { ...prev[tipo], celular: error },
+    }));
+  };
+
   const handleNextClick = () => {
     const newErrors: any = { remitente: {}, destinatario: {} };
     let isValid = true;
@@ -112,7 +133,12 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     (Object.keys(fieldConfig) as ('remitente' | 'destinatario')[]).forEach((tipo) => {
       Object.entries(fieldConfig[tipo]).forEach(([field, required]) => {
         const value = localData[tipo]?.[field] || '';
-        const error = validateField(field, value, required);
+        let error = validateField(field, value, required);
+
+        if (field === 'celular' && value && !isValidPhoneNumber(value)) {
+          error = 'Número de celular inválido para el país seleccionado';
+        }
+
         if (error) {
           newErrors[tipo][field] = error;
           isValid = false;
@@ -132,6 +158,21 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     const required = fieldConfig[tipo][name];
     const isNumericField = name === 'ci' || name === 'celular';
     const isRemitente = tipo === 'remitente';
+
+    // Campo especial: número de celular con bandera
+    if (name === 'celular') {
+      return (
+        <PhoneInputMUI
+          label={label}
+          required={required}
+          value={localData[tipo]?.celular || ''}
+          onChange={(value) => handlePhoneChange(value, tipo)}
+          disabled={isRemitente}
+          error={errors[tipo]?.celular}
+        />
+      );
+    }
+
     return (
       <TextField
         label={label}
