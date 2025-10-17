@@ -6,7 +6,7 @@ import { getUserProfile } from '../../data/services/user.service';
 import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import '../../style/PhoneInputMui.css';
-import PhoneInputMUI from '../components/PhoneInputMUI ';
+import PhoneInputMUI from './PhoneInputMUI';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const [localData, setLocalData] = useState(
@@ -87,7 +87,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     tipo: 'remitente' | 'destinatario'
   ) => {
     let { name, value } = e.target;
-    if (name === 'ci' || name === 'celular') {
+    //if (name === 'ci' || name === 'celular') {
+    if (name === 'ci') {
       value = value.replace(/\D/g, ''); // elimina todo lo que NO sea digito
     }
     // Validar el campo individualmente

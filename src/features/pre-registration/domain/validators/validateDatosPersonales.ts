@@ -9,12 +9,12 @@ export const validateField = (name: string, value: string, required = false): st
       if (value.length > 12) return 'El CI no puede superar los 12 dígitos';
       break;
     }
-    case 'celular': {
+    /*case 'celular': {
       if (!/^\d+$/.test(value)) return 'El celular solo debe contener números';
       if (value.length < 8) return 'El celular debe tener al menos 8 dígitos';
       if (value.length > 15) return 'El celular no puede superar los 15 dígitos';
       break;
-    }
+    }*/
     case 'nombre': {
       if (!/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]+$/.test(value)) return 'Solo se permiten letras, espacios';
       if (value.length < 2) return 'El nombre debe tener al menos 2 caractéres';
