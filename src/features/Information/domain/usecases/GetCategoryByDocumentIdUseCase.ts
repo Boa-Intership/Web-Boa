@@ -5,7 +5,7 @@ export class GetCategoryByDocumentIdUseCase {
 
   async execute(documentId: string): Promise<CategoryEntity | null> {
     try {
-      console.log('entro a GetCategoryByDocumentIdUseCase con documentId:', documentId);
+      // console.log('entro a GetCategoryByDocumentIdUseCase con documentId:', documentId);
       return await this.repository.getCategoryByDocumentId(documentId);
     } catch (error) {
       console.error('Error fetching categorias:', error);
@@ -19,10 +19,20 @@ export class GetCategoryByDocumentIdUseCase {
       documentId: 'default',
       titulo: 'Carga general',
       slug: 'carga-general',
-      icono: '',
-      orden: 0,
+      icono: 'Inventory2OutlinedIcon',
+      orden: 1,
       activo: true,
-      seccions: [],
+      seccions: [
+        {
+          id: 1,
+          documentId: 'sec1',
+          titulo: '¿Qué es Carga general?',
+          orden: 1,
+          activo: true,
+          slug: 'que-es-carga-general',
+          contenido_seccion: [],
+        },
+      ],
     };
   }
 }

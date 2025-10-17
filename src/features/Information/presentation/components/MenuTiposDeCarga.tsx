@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionSummary,
@@ -16,6 +16,7 @@ import { ViewCategoriesEntity } from '../../domain/entities/ViewCategoriesEntity
 import { SectionEntity } from '../../domain/entities/SectionEntity';
 import { useCategoryByDocumentId } from '../hooks/useCategoryByDocumentId';
 
+//Mapa de iconos
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
 import SetMealOutlinedIcon from '@mui/icons-material/SetMealOutlined';
@@ -30,18 +31,23 @@ interface Props {
 }
 
 const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
-  console.log('Data recibida en MenuTiposDeCarga:', data);
-  console.log('Categorías disponibles:', data.categorias_cargas);
-
   const [expanded, setExpanded] = useState<string>(data.categorias_cargas[0]?.documentId || '');
-  console.log('ID de categoría expandida:', expanded);
+  //console.log('ID de categoría expandida:', expanded);
+
+  const { data: categoryData, loading, error } = useCategoryByDocumentId(expanded || '');
+
+  //Cuando cambia la categoría cargada, selecciona la primera sección automáticamente
+  useEffect(() => {
+    if (categoryData && categoryData.seccions?.length > 0) {
+      onSelectSeccion?.(categoryData.seccions[0]);
+    }
+  }, [categoryData, onSelectSeccion]);
 
   const handleExpand = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
-    console.log('Cambiando categoría a:', isExpanded ? panel : '');
+    //console.log('Cambiando categoría a:', isExpanded ? panel : '');
     setExpanded(isExpanded ? panel : '');
   };
 
-  const { data: categoryData, loading, error } = useCategoryByDocumentId(expanded || '');
   console.log('data categoria:', categoryData?.titulo);
 
   // Mapa de nombre string -> componente
@@ -105,13 +111,30 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
             }}
           >
             <List disablePadding>
-              {categoria.seccions.length > 0 ? (
-                categoria.seccions.map((seccion) => (
+              {loading ? (
+                <Box sx={{ p: 2, textAlign: 'center' }}>
+                  <CircularProgress size={24} />
+                </Box>
+              ) : error ? (
+                <Typography
+                  variant="body2"
+                  sx={{
+                    p: 2,
+                    color: 'error.main',
+                    backgroundColor: 'background.default',
+                    textAlign: 'center',
+                  }}
+                >
+                  Error al cargar secciones
+                </Typography>
+              ) : categoryData && categoryData.seccions?.length > 0 ? (
+                categoryData.seccions.map((seccion) => (
                   <React.Fragment key={seccion.documentId}>
                     <ListItemButton
                       sx={{
                         pl: 3,
                         py: 1,
+                        backgroundColor: 'background.default',
                         '&:hover': { backgroundColor: '#E6EEF8' },
                       }}
                       onClick={() => onSelectSeccion?.(seccion)}
@@ -121,9 +144,8 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
                           <Typography
                             variant="body2"
                             sx={{
-                              color: '#003366',
+                              color: 'primary.main',
                               fontSize: '0.9rem',
-                              textDecoration: 'underline',
                             }}
                           >
                             {seccion.titulo}

@@ -1,13 +1,13 @@
 import { Box } from '@mui/material';
 import { AppTypography } from 'ui';
 
-type ExampleTypeProps = {
-  title: string;
-  description: string;
-  image: string;
-};
+interface TipoImagenProps {
+  titulo: string;
+  descripcion?: string | null;
+  imagen_url: string;
+}
 
-function ExampleType({ title, description, image }: ExampleTypeProps) {
+function TipoImagen({ titulo, descripcion, imagen_url }: TipoImagenProps) {
   return (
     <Box
       sx={{
@@ -21,9 +21,8 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
       <Box
         sx={{
           position: 'relative',
-          width: '95%', //aqui
-          borderRadius: '9px',
-          height: 300,
+          width: '100%', //aqui
+          height: 320,
           // borderWidth: 2,
           // borderStyle: 'solid',
           // borderColor: 'primary.light',
@@ -33,11 +32,12 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
       >
         <Box
           component="img"
-          src={image}
-          alt={title}
+          src={imagen_url}
+          alt={titulo}
           sx={{
             width: '100%',
-            height: { xs: 'auto', sm: '300px' },
+            borderRadius: 4,
+            height: { xs: 'auto', sm: '320px' },
             objectFit: 'cover',
             display: 'block',
           }}
@@ -48,12 +48,12 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
         <Box
           sx={{
             position: 'absolute',
-            borderRadius: '9px',
+            borderRadius: 4,
             top: 0,
             left: 0,
             width: '100%',
             height: '100%',
-            bgcolor: 'rgba(135, 205, 233, 0.18)', // azul semitransparente
+            bgcolor: 'rgba(11, 114, 155, 0.3)', // azul semitransparente
           }}
         />
       </Box>
@@ -67,12 +67,12 @@ function ExampleType({ title, description, image }: ExampleTypeProps) {
         }}
       >
         <AppTypography variant="baseBold" color="primary.dark">
-          {title}
+          {titulo}
         </AppTypography>
-        <AppTypography variant="smallRegular">{description}</AppTypography>
+        <AppTypography variant="smallRegular">{descripcion}</AppTypography>
       </Box>
     </Box>
   );
 }
 
-export default ExampleType;
+export default TipoImagen;

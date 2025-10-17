@@ -14,68 +14,65 @@ interface StrapiCategoryResponse {
     id: number;
     documentId: string;
     titulo: string;
+    slug: string;
     orden: number;
     activo: boolean;
   }>;
 }
+
 interface StrapiResponseCategories {
   data: StrapiCategoryResponse[];
   meta: Record<string, unknown>;
 }
 
 export class StrapiCategoriesRepository implements CategoryRepository {
+  // 🔹 Buscar por documentId
   async getCategoryByDocumentId(documentId: string): Promise<CategoryEntity | null> {
     try {
-      console.log('entrando a la endpoint con documentId:', documentId);
-      const response = await strapiClient.get(`/categorias-cargas/${documentId}?populate=*`);
+      console.log(' Buscando categoría por documentId:', documentId);
 
-      if (!response.data || !response.data.data) {
-        console.warn('No hay datos recibidos desde strapi');
-        return null;
-      }
-
-      // response.data.data is expected to be a single category object
-      return this.mapStrapiToSingleEntity(response.data.data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Error fetching category:', {
-          message: error.message,
-          status: error.response?.status,
-          data: error.response?.data,
-        });
-      } else {
-        console.error('Error fetching category:', error);
-      }
-      return null;
-    }
-  }
-  async getCategoryBySlug(slug: string): Promise<CategoryEntity | null> {
-    try {
-      console.log('entrando a la endpoint con slug:', slug);
-      const response = await strapiClient.get(
-        `/categorias-cargas?filters[slug][$contains]=${slug}&populate=seccions`
+      const response = await strapiClient.get<StrapiResponseCategories>(
+        `/categorias-cargas?filters[documentId][$eq]=${documentId}&populate=seccions`
       );
 
-      if (!response.data || !response.data.data) {
-        console.warn('No hay datos recibidos desde strapi con el slug', slug);
+      const categoria = response?.data?.[0]; // Strapi devuelve un array dentro de "data"
+
+      if (!categoria) {
+        console.warn(`⚠️ No se encontró categoría con documentId ${documentId}`);
         return null;
       }
 
-      // response.data.data is expected to be a single category object
-      return this.mapStrapiToSingleEntity(response.data.data);
+      return this.mapStrapiToSingleEntity(categoria);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Error fetching category:', {
-          message: error.message,
-          status: error.response?.status,
-          data: error.response?.data,
-        });
-      } else {
-        console.error('Error fetching category:', error);
-      }
+      this.handleError(error, 'documentId', documentId);
       return null;
     }
   }
+
+  // 🔹 Buscar por slug
+  async getCategoryBySlug(slug: string): Promise<CategoryEntity | null> {
+    try {
+      console.log('📡 Buscando categoría por slug:', slug);
+
+      const response = await strapiClient.get<StrapiResponseCategories>(
+        `/categorias-cargas?filters[slug][$eq]=${slug}&populate=seccions`
+      );
+
+      const categoria = response?.data?.[0];
+
+      if (!categoria) {
+        console.warn(`⚠️ No se encontró categoría con slug ${slug}`);
+        return null;
+      }
+
+      return this.mapStrapiToSingleEntity(categoria);
+    } catch (error) {
+      this.handleError(error, 'slug', slug);
+      return null;
+    }
+  }
+
+  // 🔹 Mapear datos de Strapi al dominio
   private mapStrapiToSingleEntity(item: StrapiCategoryResponse): CategoryEntity {
     return {
       id: item.id,
@@ -85,14 +82,29 @@ export class StrapiCategoriesRepository implements CategoryRepository {
       icono: item.icono,
       orden: item.orden,
       activo: item.activo,
-      seccions: item.seccions.map((s) => ({
-        id: s.id,
-        documentId: s.documentId,
-        titulo: s.titulo,
-        orden: s.orden,
-        activo: s.activo,
-        contenido_seccion: [], // aún no poblado
-      })),
+      seccions:
+        item.seccions?.map((s) => ({
+          id: s.id,
+          documentId: s.documentId,
+          titulo: s.titulo,
+          slug: s.slug,
+          orden: s.orden,
+          activo: s.activo,
+          contenido_seccion: [],
+        })) ?? [],
     };
+  }
+
+  // 🔹 Manejo de errores
+  private handleError(error: unknown, field: string, value: string) {
+    if (axios.isAxiosError(error)) {
+      console.error(`❌ Error al buscar categoría por ${field}=${value}:`, {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+      });
+    } else {
+      console.error(`❌ Error inesperado al buscar categoría por ${field}=${value}:`, error);
+    }
   }
 }

@@ -13,7 +13,7 @@ export const Contenido: React.FC<ContenidoProps> = ({ titulo, contenido, imagen_
   return (
     <Box sx={{ mb: 3 }}>
       {/* Título de la sección */}
-      <AppTypography variant="h4Bold" color="primary" gutterBottom>
+      <AppTypography variant="h4Bold" color="primary" mb={2}>
         {titulo}
       </AppTypography>
 

@@ -11,6 +11,6 @@ export interface CategoryEntity {
 }
 
 export interface CategoryRepository {
-  // getCategoryByDocumentId(documentId: string): Promise<CategoryEntity | null>;
+  getCategoryByDocumentId(documentId: string): Promise<CategoryEntity | null>;
   getCategoryBySlug(slug: string): Promise<CategoryEntity | null>;
 }
