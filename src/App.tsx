@@ -35,7 +35,7 @@ const App: React.FC = () => (
               <Route path={ROUTES.OFICINA.replace('/', '')} element={<OfficeScreen />} />
               <Route path={ROUTES.PREREGISTRO.replace('/', '')} element={<PreRegistroScreen />} />
               <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
-            <Route path={ROUTES.MISPREREGISTROS.replace('/', '')} element={<MisPreRegistros />} />
+              <Route path={ROUTES.MISPREREGISTROS.replace('/', '')} element={<MisPreRegistros />} />
               <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
               <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
               <Route path={ROUTES.LOGIN.replace('/', '')} element={<Login />} />

@@ -45,7 +45,7 @@ export const ROUTE_ACCESS: Record<string, RouteAccess> = {
   [ROUTES.ITINERARIOS]: { path: ROUTES.ITINERARIOS },
   [ROUTES.TERMINOS]: { path: ROUTES.TERMINOS },
   [ROUTES.TIPOS_CARGAS]: { path: ROUTES.TIPOS_CARGAS },
-  [ROUTES.CONTACTO]: { path: ROUTES.CONTACTO },
+  [ROUTES.OFICINA]: { path: ROUTES.OFICINA },
   [ROUTES.CORPORATE_PROFILE]: { path: ROUTES.CORPORATE_PROFILE },
   [ROUTES.COMPROBANTE]: { path: ROUTES.COMPROBANTE },
 
@@ -56,6 +56,7 @@ export const ROUTE_ACCESS: Record<string, RouteAccess> = {
   [ROUTES.ADMIN]: { path: ROUTES.ADMIN, requiresAuth: true },
   [ROUTES.DASHBOARD]: { path: ROUTES.DASHBOARD, requiresAuth: true },
   [ROUTES.COTIZAR]: { path: ROUTES.COTIZAR, requiresAuth: true },
+  [ROUTES.MISPREREGISTROS]: { path: ROUTES.MISPREREGISTROS, requiresAuth: true },
 
   // Rutas solo para usuarios no autenticados
   [ROUTES.LOGIN]: { path: ROUTES.LOGIN, publicOnly: true },

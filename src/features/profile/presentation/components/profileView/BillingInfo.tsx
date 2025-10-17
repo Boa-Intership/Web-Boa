@@ -8,18 +8,12 @@ interface User {
   billingDocType?: string;
   billingNit?: string;
   billingNitComplemento?: string;
-  name: string;
-  email: string;
-  ci: string;
-  nitComplemento?: string;
-  number: string;
-  address?: string;
 }
 
 interface BillingInfoProps {
   user: User;
   isEditable?: boolean;
-  onUserDataChange?: (field: keyof User, value: string) => void;
+  onUserDataChange?: (field: string, value: string) => void;
 }
 
 const BillingInfo: React.FC<BillingInfoProps> = ({

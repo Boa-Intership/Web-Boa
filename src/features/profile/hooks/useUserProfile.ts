@@ -6,16 +6,22 @@ interface UserRole {
   name: string;
   description: string;
 }
+interface UserBillingData {
+  businessName: string;
+  docType: number;
+  nit: string;
+  complement: string | null;
+}
 
 interface UserProfileResponse {
   id: number;
-  nit: string;
-  documentType: number;
+  ci: string;
   complement: string | null;
   name: string;
   address: string | null;
   phone: string;
   email: string;
+  billingData: UserBillingData[] | null;
   roles: UserRole[];
 }
 

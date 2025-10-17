@@ -15,7 +15,7 @@ interface User {
   name: string;
   email: string;
   ci: string;
-  nitComplemento?: string;
+  complemento?: string;
   number: string;
   address?: string;
   businessName?: string;
@@ -33,7 +33,7 @@ const ProfileScreen: React.FC = () => {
     name: '',
     email: '',
     ci: '',
-    nitComplemento: '',
+    complemento: '',
     number: '',
     address: '',
     businessName: '',
@@ -48,14 +48,14 @@ const ProfileScreen: React.FC = () => {
       const mappedData: User = {
         name: apiUserData.name || '',
         email: apiUserData.email || '',
-        ci: apiUserData.nit || '',
-        nitComplemento: apiUserData.complement || '',
+        ci: apiUserData.ci || '',
+        complemento: apiUserData.complement || '',
         number: apiUserData.phone ? `+591${apiUserData.phone}` : '',
         address: apiUserData.address || '',
-        businessName: '',
-        billingDocType: String(apiUserData.documentType) || '',
-        billingNit: apiUserData.nit || '',
-        billingNitComplemento: apiUserData.complement || '',
+        businessName: apiUserData.billingData[0].businessName || '',
+        billingDocType: String(apiUserData.billingData[0].docType) || '',
+        billingNit: apiUserData.billingData[0].nit || '',
+        billingNitComplemento: apiUserData.billingData[0].complement || '',
       };
       setUserData(mappedData);
       setOriginalData(mappedData);
@@ -170,7 +170,11 @@ const ProfileScreen: React.FC = () => {
                 onUserDataChange={handleUserDataChange}
                 resetEditingState={resetDataCards}
               />
-              {/* <BillingInfo user={userData} isEditable={true} onUserDataChange={handleUserDataChange} /> */}
+              {/* <BillingInfo
+                user={userData}
+                isEditable={true}
+                onUserDataChange={handleUserDataChange}
+              /> */}
             </Grid>
 
             {/* Columna derecha - Información de facturación */}
