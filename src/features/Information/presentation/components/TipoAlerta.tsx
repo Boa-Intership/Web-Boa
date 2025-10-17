@@ -28,7 +28,29 @@ export const Alerta: React.FC<AlertaProps> = ({ titulo, contenido, tipo }) => (
   >
     {titulo && <AlertTitle>{titulo}</AlertTitle>}
 
-    <BlocksRenderer content={contenido} />
+    <BlocksRenderer
+      content={contenido}
+      blocks={{
+        paragraph: ({ children }) => (
+          <Typography variant="body1" sx={{ mb: 1 }}>
+            {children}
+          </Typography>
+        ),
+        link: ({ children, url }) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'primary.main',
+              textDecoration: 'underline',
+            }}
+          >
+            {children}
+          </a>
+        ),
+      }}
+    />
 
     {/* {contenido.map((block, i) =>
       block.children.map((child, j) => <span key={`${i}-${j}`}>{child.text}</span>)
