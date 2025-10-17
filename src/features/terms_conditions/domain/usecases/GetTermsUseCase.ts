@@ -68,10 +68,10 @@ export class GetTermsUseCase {
         },
       ] as BlocksContent,
       activo: true,
-      tituloContrato: 'Titulo Contrato por Defecto',
+      tituloContrato: 'CONTRATO DE TRANSPORTE AÉREO, TÉRMINOS Y CONDICIONES',
       aviso: {
         id: 0,
-        titulo: 'Aviso por Defecto',
+        titulo: '',
         tipo: 'info',
         contenido: [
           {
