@@ -1,6 +1,6 @@
 // components/RenderSeccion.tsx
 import React from 'react';
-import { ContenidoSeccion } from '../../domain/entities/Carga';
+import { ContenidoSeccion } from '../../domain/entities/SectionEntity';
 import { Contenido } from './TipoContenido';
 import { Alerta } from './TipoAlerta';
 import { TipoAcordion } from './TipoAcordion';

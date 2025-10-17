@@ -19,10 +19,20 @@ export class GetCategoryByDocumentIdUseCase {
       documentId: 'default',
       titulo: 'Carga general',
       slug: 'carga-general',
-      icono: '',
-      orden: 0,
+      icono: 'Inventory2OutlinedIcon',
+      orden: 1,
       activo: true,
-      seccions: [],
+      seccions: [
+        {
+          id: 1,
+          documentId: 'sec1',
+          titulo: '¿Qué es Carga general?',
+          orden: 1,
+          activo: true,
+          slug: 'que-es-carga-general',
+          contenido_seccion: [],
+        },
+      ],
     };
   }
 }
