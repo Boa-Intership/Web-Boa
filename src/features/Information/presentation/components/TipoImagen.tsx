@@ -21,9 +21,8 @@ function TipoImagen({ titulo, descripcion, imagen_url }: TipoImagenProps) {
       <Box
         sx={{
           position: 'relative',
-          width: '95%', //aqui
-          borderRadius: '9px',
-          height: 300,
+          width: '100%', //aqui
+          height: 320,
           // borderWidth: 2,
           // borderStyle: 'solid',
           // borderColor: 'primary.light',
@@ -37,7 +36,8 @@ function TipoImagen({ titulo, descripcion, imagen_url }: TipoImagenProps) {
           alt={titulo}
           sx={{
             width: '100%',
-            height: { xs: 'auto', sm: '300px' },
+            borderRadius: 4,
+            height: { xs: 'auto', sm: '320px' },
             objectFit: 'cover',
             display: 'block',
           }}
@@ -48,7 +48,7 @@ function TipoImagen({ titulo, descripcion, imagen_url }: TipoImagenProps) {
         <Box
           sx={{
             position: 'absolute',
-            borderRadius: '9px',
+            borderRadius: 4,
             top: 0,
             left: 0,
             width: '100%',

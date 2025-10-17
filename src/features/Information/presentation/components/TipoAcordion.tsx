@@ -19,9 +19,9 @@ export const TipoAcordion: React.FC<TipoAcordionProps> = ({
     <Accordion
       defaultExpanded={defaultExpanded}
       sx={{
-        backgroundColor: '#E4F4FF',
+        backgroundColor: '#fafafa',
         my: 2,
-        boxShadow: 'none',
+        //boxShadow: 'none',
         borderRadius: 2,
         // border: '1px solid #cfeafcff',
         '&:before': { display: 'none' },

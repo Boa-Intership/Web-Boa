@@ -56,10 +56,10 @@ function TipoCargaScreen() {
     <AppContainer sx={{ py: 4 }}>
       {data.map((viewCategory) => (
         <React.Fragment key={viewCategory.id}>
-          <Breadcrumb
+          {/* <Breadcrumb
             nameSection={viewCategory.titulo}
             selected={selectedSection?.titulo || 'Cargando...'}
-          />
+          /> */}
 
           <AppTypography variant="h2Bold" color="primary" mb={2}>
             {viewCategory.titulo}
