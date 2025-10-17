@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Grid, Alert, Snackbar, CircularProgress } from '@mui/material';
-import { Lock, Check } from '@mui/icons-material';
+import { Lock, Check, Description } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { AppContainer, AppTypography } from 'ui';
 import ProfileCard from '../components/profileView/ProfileCard';
 import ContactInfo from '../components/profileView/ContactInfo';
@@ -9,6 +10,7 @@ import UserData from '../components/profileView/UserData';
 import ChangePasswordModal from '../components/modals/ChangePasswordModal';
 import { useChangePassword } from '../../hooks/useChangePassword';
 import { useUserProfile } from '../../hooks/useUserProfile';
+import { ROUTES } from '../../../../router/routes';
 
 // Tipo temporal para simular datos del usuario
 interface User {
@@ -25,6 +27,8 @@ interface User {
 }
 
 const ProfileScreen: React.FC = () => {
+  const navigate = useNavigate();
+
   // Hook para obtener datos del usuario desde la API
   const { userData: apiUserData, loading: loadingProfile, error: profileError } = useUserProfile();
 
@@ -124,6 +128,11 @@ const ProfileScreen: React.FC = () => {
     setChangePasswordModalOpen(true);
   };
 
+  // Navegar a Mis Pre-Registros
+  const handleGoToPreRegistros = () => {
+    navigate(ROUTES.MISPREREGISTROS);
+  };
+
   // Función para enviar cambio de contraseña a la API
   const handlePasswordSubmit = async (
     currentPassword: string,
@@ -140,6 +149,20 @@ const ProfileScreen: React.FC = () => {
           <AppTypography variant="h3Bold" color="primary.main">
             Mi Perfil
           </AppTypography>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="text"
+            color="primary"
+            startIcon={<Description />}
+            onClick={handleGoToPreRegistros}
+            sx={{
+              textTransform: 'none',
+              fontWeight: 500,
+            }}
+          >
+            Mis Pre-Registros
+          </Button>
         </Grid>
       </Grid>
 
