@@ -81,6 +81,20 @@ class HttpClient {
     return response.data;
   }
 
+  public async getById<T = unknown>(
+    resource: string,
+    id: number | string,
+    params?: Record<string, any>
+  ) {
+    let url = `${resource}/${id}`;
+    if (params) {
+      const queryString = new URLSearchParams(params).toString();
+      url += `?${queryString}`;
+    }
+    const response = await this.client.get(url);
+    return response.data;
+  }
+
   public async post<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) {
     const response = await this.client.post(url, data, config);
     return response.data;
