@@ -2,24 +2,19 @@ import React from 'react';
 import { Paper, Box, Button, Alert, Grid, Divider } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import UserDataForm from '../components/registerForm/UserDataForm';
-import BillingDataForm from '../components/registerForm/BillingDataForm';
-import TermsAndConditions from '../components/registerForm/TermsAndConditions';
+import UserDataForm from '../components/register_form/UserDataForm';
+import BillingDataForm from '../components/register_form/BillingDataForm';
+import TermsAndConditions from '../components/register_form/TermsAndConditions';
 import EmailVerification from '../components/verification/EmailVerification';
 import RegistrationSuccess from '../components/verification/RegistrationSuccess';
-import { useTempRegistration } from '../../hooks/useTempRegistration';
+import { useTempRegistration } from '../components/register_form/useTempRegistration';
 import { useSendVerificationCode } from '../useAuth.hooks';
 import { AppContainer, AppTypography } from 'ui';
 import { createRegisterSchema, CreateRegisterSchema } from '../../domain/validators';
 
 const Register = () => {
-  const {
-    saveTempData,
-    isEmailVerificationPending,
-    markEmailAsVerified,
-    getTempDataForRegistration,
-    clearTempData,
-  } = useTempRegistration();
+  const { saveTempData, isEmailVerificationPending, getTempDataForRegistration, clearTempData } =
+    useTempRegistration();
   const sendCodeMutation = useSendVerificationCode();
 
   const [showVerification, setShowVerification] = React.useState(false);
@@ -108,7 +103,6 @@ const Register = () => {
 
   const handleVerificationSuccess = async () => {
     try {
-      markEmailAsVerified();
       clearTempData();
 
       // Mostrar pantalla de éxito
@@ -139,7 +133,6 @@ const Register = () => {
         errorMessage = apiError.message;
       }
 
-      // Mostrar el error en la interfaz en lugar de un alert
       setApiError(errorMessage);
 
       // Regresar a la vista de verificación para que el usuario vea el error

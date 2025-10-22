@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container, Typography, Grid, Button, Pagination } from '@mui/material';
+import { Box, Container, Typography, Grid, Button, Pagination, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import PreRegistroCard from '../components/PreRegistroCard';
 import { getAllPreRegisters } from '../../data/services/pre-register.service';
 import { PreRegistroModel } from '../../data/models/pre-register.model';
 import { AppTypography } from 'ui';
 import { useNavigate } from 'react-router-dom';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 const MisPreRegistros: React.FC = () => {
   const navigate = useNavigate();
@@ -55,9 +56,32 @@ const MisPreRegistros: React.FC = () => {
       </Box>
 
       {data.length === 0 ? (
-        <Typography variant="body1" textAlign="center" mt={5}>
-          No tienes preregistros.
-        </Typography>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          minHeight="60vh"
+          textAlign="center"
+        >
+          <Box>
+            <DescriptionOutlinedIcon sx={{ fontSize: 60, color: '#90a4ae', mb: 2 }} />
+            <Typography variant="h6" gutterBottom>
+              No hay preregistros
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 3, maxWidth: 360 }}>
+              Aún no ha realizado ningún preregistro de envío. Comience creando su primer envío.
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={() => navigate('/preregistro')}
+            >
+              Crear Nuevo Envío
+            </Button>
+          </Box>
+        </Box>
       ) : (
         <Box
           sx={{

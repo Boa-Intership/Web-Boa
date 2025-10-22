@@ -42,8 +42,8 @@ export const RenderSeccion = ({ seccion }: { seccion: ContenidoSeccion[] }) => {
               key={`grupo-img-${index}`}
               sx={{ mb: 3, width: '100%' }}
             >
-              {grupo.map((img) => (
-                <Grid item xs={12} sm={6} key={img.id}>
+              {grupo.map((img, imgIndex) => (
+                <Grid item xs={12} sm={6} key={`${img.id}-${index}-${imgIndex}`}>
                   <TipoImagen
                     titulo={img.titulo}
                     descripcion={img.descripcion}
@@ -60,7 +60,7 @@ export const RenderSeccion = ({ seccion }: { seccion: ContenidoSeccion[] }) => {
           case 'recursos.contenido':
             return (
               <Contenido
-                key={firstItem.id}
+                key={`contenido-${firstItem.id}-${index}`}
                 titulo={firstItem.titulo}
                 contenido={firstItem.contenido}
                 imagen_url={firstItem.imagen_url}
@@ -70,7 +70,7 @@ export const RenderSeccion = ({ seccion }: { seccion: ContenidoSeccion[] }) => {
           case 'recursos.alerta':
             return (
               <Alerta
-                key={firstItem.id}
+                key={`alerta-${firstItem.id}-${index}`}
                 tipo={firstItem.tipo_alerta}
                 titulo={firstItem.titulo}
                 contenido={firstItem.contenido}
@@ -79,10 +79,10 @@ export const RenderSeccion = ({ seccion }: { seccion: ContenidoSeccion[] }) => {
           case 'recursos.acordion':
             return (
               <TipoAcordion
-                key={firstItem.id}
+                key={`acordion-${firstItem.id}-${index}`}
                 titulo={firstItem.titulo}
                 contenido={firstItem.contenido}
-                defaultExpanded={index === 0} // si quieres abrir el primero
+                defaultExpanded={index === 0}
               />
             );
 

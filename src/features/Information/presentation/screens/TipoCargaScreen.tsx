@@ -21,7 +21,7 @@ function TipoCargaScreen() {
     loading: loadingSection,
     error: errorSection,
   } = useSectionByDocumentId(selectedSection?.documentId || '');
-  console.log('data seccion:', dataSection);
+  // console.log('data seccion:', dataSection);
 
   // 🔄 Redirigir a carga general por defecto
   React.useEffect(() => {

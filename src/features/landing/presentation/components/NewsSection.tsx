@@ -1,6 +1,5 @@
 import React from 'react';
 import { AppBox, AppTypography, Carousel } from 'ui';
-import { CarouselItem } from 'src/shared/components/Carousel';
 import { useNews } from '../hooks/useNews';
 import { Alert, CircularProgress } from '@mui/material';
 import { AppContainer } from 'ui';

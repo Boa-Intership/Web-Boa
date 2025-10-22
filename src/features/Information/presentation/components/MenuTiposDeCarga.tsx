@@ -48,7 +48,7 @@ const MenuTiposDeCarga: React.FC<Props> = ({ data, onSelectSeccion }) => {
     setExpanded(isExpanded ? panel : '');
   };
 
-  console.log('data categoria:', categoryData?.titulo);
+  //console.log('data categoria:', categoryData?.titulo);
 
   // Mapa de nombre string -> componente
   const iconMap: Record<string, SvgIconComponent> = {
