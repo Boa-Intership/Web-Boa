@@ -36,11 +36,11 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
           ...prev,
           remitente: {
             ...prev.remitente,
-            ci: user.ci || '',
-            celular: user.phone || '',
-            nombre: user.name || '',
-            correo: user.email || '',
-            direccion: user.address || '',
+            ci: user.ci || null,
+            celular: user.phone,
+            nombre: user.name,
+            correo: user.email || null,
+            direccion: user.address || null,
             complemento: user.complement,
           },
         }));
