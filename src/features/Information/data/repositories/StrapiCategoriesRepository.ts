@@ -29,7 +29,7 @@ export class StrapiCategoriesRepository implements CategoryRepository {
   // 🔹 Buscar por documentId
   async getCategoryByDocumentId(documentId: string): Promise<CategoryEntity | null> {
     try {
-      console.log(' Buscando categoría por documentId:', documentId);
+      //  console.log(' Buscando categoría por documentId:', documentId);
 
       const response = await strapiClient.get<StrapiResponseCategories>(
         `/categorias-cargas?filters[documentId][$eq]=${documentId}&populate=seccions`

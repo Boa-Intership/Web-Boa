@@ -36,7 +36,7 @@ interface StrapiResponseSections {
 export class StrapiSectionRepository implements SectionRepository {
   async getSectionByDocumentId(documentId: string): Promise<SectionEntity | null> {
     try {
-      console.log(' Buscando sección por documentId:', documentId);
+      // console.log(' Buscando sección por documentId:', documentId);
       const response = await strapiClient.get<StrapiResponseSections>(
         `/seccions/?filters[documentId][$eq]=${documentId}&populate=contenido_seccion`
       );
