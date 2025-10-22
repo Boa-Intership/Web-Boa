@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Stack, Card as MuiCard, styled, Alert, Box } from '@mui/material';
-import { LoginForm, SocialLoginSection } from '../components/loginForm';
+import { LoginForm, SocialLoginSection } from '../components/login_form';
 import { LoginSchema } from '../../domain/validators/loginSchema';
 import { useLogin } from '../useAuth.hooks';
 import { useLocation, useNavigate } from 'react-router-dom';

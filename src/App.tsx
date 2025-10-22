@@ -18,57 +18,38 @@ import ItinerariosScreen from './features/itinerarios/presentation/screens/Itine
 import TerminosScreen from './features/terms_conditions/presentation/screens/TerminosScreen';
 import Login from './features/Auth/presentation/screen/LoginScreen';
 import Register from './features/Auth/presentation/screen/RegisterScreen';
-import ProtectedRoute from 'router/ProtectedRoute';
-import PublicRoute from 'router/PublicRoute';
+import { ProfileScreen } from './features/profile/presentation';
+import RouteGuard from './router/RouteGuard';
 
 const App: React.FC = () => (
   <QueryProvider>
     <AuthProvider>
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<LandingScreen />} />
-            <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
-            <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
-            <Route path={ROUTES.OFICINA.replace('/', '')} element={<OfficeScreen />} />
-            <Route
-              path={ROUTES.PREREGISTRO.replace('/', '')}
-              element={
-                <ProtectedRoute>
-                  <PreRegistroScreen />
-                </ProtectedRoute>
-              }
-            />
-            <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
-            <Route path={ROUTES.MISPREREGISTROS.replace('/', '')} element={<MisPreRegistros />} />
-            <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
-            <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
-            <Route
-              path={ROUTES.LOGIN.replace('/', '')}
-              element={
-                <PublicRoute>
-                  <Login />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path={ROUTES.REGISTER.replace('/', '')}
-              element={
-                <PublicRoute>
-                  <Register />
-                </PublicRoute>
-              }
-            />
-
-            <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
-            <Route
-              path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
-              element={<CorporateProfileScreen />}
-            />
-          </Route>
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+        <RouteGuard>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<LandingScreen />} />
+              <Route path={ROUTES.HOME.replace('/', '')} element={<HomeScreen />} />
+              <Route path={ROUTES.ITINERARIOS.replace('/', '')} element={<ItinerariosScreen />} />
+              <Route path={ROUTES.OFICINA.replace('/', '')} element={<OfficeScreen />} />
+              <Route path={ROUTES.PREREGISTRO.replace('/', '')} element={<PreRegistroScreen />} />
+              <Route path={ROUTES.COMPROBANTE.replace('/', '')} element={<ComprobanteScreen />} />
+              <Route path={ROUTES.MISPREREGISTROS.replace('/', '')} element={<MisPreRegistros />} />
+              <Route path={ROUTES.INFORMACION.replace('/', '')} element={<InformacionScreen />} />
+              <Route path={ROUTES.TIPOS_CARGAS} element={<TipoCargaScreen />} />
+              <Route path={ROUTES.LOGIN.replace('/', '')} element={<Login />} />
+              <Route path={ROUTES.REGISTER.replace('/', '')} element={<Register />} />
+              <Route path={ROUTES.TERMINOS.replace('/', '')} element={<TerminosScreen />} />
+              <Route path={ROUTES.PERFIL.replace('/', '')} element={<ProfileScreen />} />
+              <Route
+                path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
+                element={<CorporateProfileScreen />}
+              />
+            </Route>
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </RouteGuard>
       </BrowserRouter>
     </AuthProvider>
   </QueryProvider>

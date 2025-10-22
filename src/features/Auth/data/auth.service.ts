@@ -117,10 +117,6 @@ export class AuthService {
     return !!localStorage.getItem('authToken');
   }
 
-  getAccessToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
   getRefreshToken(): string | null {
     return localStorage.getItem('rToken');
   }

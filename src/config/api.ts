@@ -11,9 +11,6 @@ export const API_CONFIG = {
   // Endpoints comunes
   ENDPOINTS: {
     AUTH: '/auth',
-    USERS: '/users',
-    CARGO: '/cargo',
-    SHIPMENTS: '/shipments',
     TRACKING: '/tracking',
     SEND_CODE: '/auth/send-code',
     VALIDATE_CODE: '/auth/validate-code',
