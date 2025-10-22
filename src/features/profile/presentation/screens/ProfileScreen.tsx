@@ -8,8 +8,8 @@ import ContactInfo from '../components/profileView/ContactInfo';
 import BillingInfo from '../components/profileView/BillingInfo';
 import UserData from '../components/profileView/UserData';
 import ChangePasswordModal from '../components/modals/ChangePasswordModal';
-import { useChangePassword } from '../../hooks/useChangePassword';
-import { useUserProfile } from '../../hooks/useUserProfile';
+import { useChangePassword } from '../../domain/hooks/useChangePassword';
+import { useUserProfile } from '../../domain/hooks/useUserProfile';
 import { ROUTES } from '../../../../router/routes';
 
 // Tipo temporal para simular datos del usuario

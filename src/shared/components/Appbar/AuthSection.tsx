@@ -17,7 +17,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import { useLogout } from '../../../features/Auth/presentation/useAuth.hooks';
-import { useUserProfile } from '../../../features/profile/hooks/useUserProfile';
+import { useUserProfile } from '../../../features/profile/domain/hooks/useUserProfile';
 
 export const AuthSection = () => {
   const { isAuthenticated, logout, user } = useAuth();
@@ -28,7 +28,6 @@ export const AuthSection = () => {
 
   const { userData: apiUserData } = useUserProfile();
   const displayName = apiUserData?.name || user?.name || 'Usuario';
-  const displayEmail = apiUserData?.email || user?.email || 'correo@ejemplo.com';
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -135,7 +134,7 @@ export const AuthSection = () => {
       >
         {/* Sección de información del usuario */}
         <Box sx={{ px: 2, py: 1, minWidth: 250 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
             <Avatar sx={{ width: 40, height: 40, bgcolor: 'primary.main' }}>
               <PersonIcon />
             </Avatar>
@@ -151,17 +150,6 @@ export const AuthSection = () => {
                 }}
               >
                 {displayName}
-              </AppTypography>
-              <AppTypography
-                variant="smallRegular"
-                sx={{
-                  color: 'text.secondary',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                {displayEmail}
               </AppTypography>
             </Box>
           </Box>
