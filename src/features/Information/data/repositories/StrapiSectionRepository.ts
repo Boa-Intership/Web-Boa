@@ -38,7 +38,7 @@ export class StrapiSectionRepository implements SectionRepository {
     try {
       console.log(' Buscando sección por documentId:', documentId);
       const response = await strapiClient.get<StrapiResponseSections>(
-        `http://localhost:1337/api/seccions/?filters[documentId][$eq]=${documentId}&populate=contenido_seccion`
+        `/seccions/?filters[documentId][$eq]=${documentId}&populate=contenido_seccion`
       );
       const seccion = response?.data?.[0]; // Strapi devuelve un array dentro de "data"
 
