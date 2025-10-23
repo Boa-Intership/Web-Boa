@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { httpClient } from '@/config/httpClient';
+import { userService } from '../../data/user.service';
 
 interface UserRole {
   id: number;
@@ -25,11 +26,18 @@ interface UserProfileResponse {
   roles: UserRole[];
 }
 
+interface UpdateUserData {
+  name?: string;
+  address?: string;
+  phone?: string;
+}
+
 interface UseUserProfileReturn {
   userData: UserProfileResponse | null;
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
+  updateUser: (data: UpdateUserData) => Promise<void>;
 }
 
 export const useUserProfile = (): UseUserProfileReturn => {
@@ -57,6 +65,26 @@ export const useUserProfile = (): UseUserProfileReturn => {
     }
   };
 
+  const updateUser = async (data: UpdateUserData) => {
+    if (!userData) throw new Error('No hay datos de usuario');
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await userService.updateUser(userData.id, data);
+      setUserData(response);
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Error al actualizar datos del usuario';
+      setError(errorMessage);
+      console.error('Error updating user profile:', err);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchUserProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,6 +95,7 @@ export const useUserProfile = (): UseUserProfileReturn => {
     loading,
     error,
     refetch: fetchUserProfile,
+    updateUser,
   };
 };
 
