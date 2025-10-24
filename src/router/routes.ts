@@ -19,6 +19,7 @@ export const ROUTES = {
   // Autenticación
   LOGIN: '/login',
   REGISTER: '/registro',
+  RECUPERAR_CONTRASENA: '/recuperar-contrasena',
 
   // Funcionalidades que requieren autenticación
   TRACKING: '/tracking',
@@ -61,6 +62,7 @@ export const ROUTE_ACCESS: Record<string, RouteAccess> = {
   // Rutas solo para usuarios no autenticados
   [ROUTES.LOGIN]: { path: ROUTES.LOGIN, publicOnly: true },
   [ROUTES.REGISTER]: { path: ROUTES.REGISTER, publicOnly: true },
+  [ROUTES.RECUPERAR_CONTRASENA]: { path: ROUTES.RECUPERAR_CONTRASENA, publicOnly: true },
 };
 
 export const getRouteAccess = (path: string): RouteAccess | undefined => {

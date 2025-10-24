@@ -5,7 +5,7 @@ import QuickContactButtons from '../shared/components/QuickContactButtons';
 
 const MainLayout: React.FC = () => {
   const location = useLocation();
-  const hideFooterRoutes = ['/login', '/perfil', '/registro'];
+  const hideFooterRoutes = ['/login', '/perfil', '/registro', '/recuperar-contrasena'];
   const shouldHideFooter = hideFooterRoutes.some((route) => location.pathname.startsWith(route));
 
   return (

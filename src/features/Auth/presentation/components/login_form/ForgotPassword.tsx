@@ -1,11 +1,14 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { TextField } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface ForgotPasswordProps {
   open: boolean;
@@ -13,43 +16,62 @@ interface ForgotPasswordProps {
 }
 
 export default function ForgotPassword({ open, handleClose }: ForgotPasswordProps) {
+  const navigate = useNavigate();
+  const [email, setEmail] = React.useState('');
+  const [error, setError] = React.useState('');
+
+  const handleContinue = () => {
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      setError('Por favor, introduce un correo electrónico válido.');
+      return;
+    }
+    setError('');
+
+    // Guardar el email para el siguiente paso
+    sessionStorage.setItem('pwd_reset_email', email);
+
+    // (Futuro) Aquí se llamaría al backend para enviar el código.
+
+    // Redirigir a la nueva vista de reseteo
+    navigate('/recuperar-contrasena');
+    handleClose(); // Cierra el modal
+  };
+
+  // Resetear estado al cerrar
+  const handleOnClose = () => {
+    setEmail('');
+    setError('');
+    handleClose();
+  };
+
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
-      PaperProps={{
-        component: 'form',
-        onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-          event.preventDefault();
-          handleClose();
-        },
-        sx: {
-          backgroundImage: 'none',
-          backgroundColor: 'background.default',
-          borderRadius: 2,
-        },
-      }}
+      onClose={handleOnClose}
+      PaperProps={{ sx: { backgroundColor: 'background.default', borderRadius: 2 } }}
     >
-      <DialogTitle color="primary.main">Restablecer contraseña</DialogTitle>
-      <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
-        <DialogContentText>
-          Ingresa la dirección de correo electrónico de tu cuenta y te enviaremos un enlace para
-          restablecer tu contraseña.
+      <DialogTitle>Restablecer Contraseña</DialogTitle>
+      <DialogContent>
+        <DialogContentText sx={{ mb: 2 }}>
+          Ingresa tu correo electrónico y te enviaremos un código para restablecer tu contraseña.
         </DialogContentText>
         <TextField
-          required
+          autoFocus
           margin="dense"
           id="email"
-          name="email"
-          label="Email"
-          placeholder="Dirección de correo electrónico"
+          label="Correo Electrónico"
           type="email"
           fullWidth
+          variant="outlined"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={!!error}
+          helperText={error}
         />
       </DialogContent>
-      <DialogActions sx={{ pb: 3, px: 3 }}>
-        <Button onClick={handleClose}>Canelar</Button>
-        <Button variant="contained" type="submit">
+      <DialogActions sx={{ p: '0 24px 24px' }}>
+        <Button onClick={handleOnClose}>Cancelar</Button>
+        <Button onClick={handleContinue} variant="contained">
           Continuar
         </Button>
       </DialogActions>
