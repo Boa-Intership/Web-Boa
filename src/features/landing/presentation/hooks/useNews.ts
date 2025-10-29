@@ -1,33 +1,20 @@
 import { NewsContent } from '../../domain/entities/NewsContent';
-import { useState, useEffect } from 'react';
 import { GetNewUseCase } from '../../domain/usecases/GetNewsUseCase';
 import { StrapiNewRepository } from '../../data/repositories/StrapiNewsRepository';
+import { StaticNewsRepository } from '../../data/repositories/StaticNewsRepository';
+import { useLandingQuery } from './useLandingQuery';
 
 export const useNews = () => {
-  const [data, setData] = useState<NewsContent | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const repository = new StrapiNewRepository();
-        const useCase = new GetNewUseCase(repository);
-
-        const perfilData = await useCase.execute();
-        setData(perfilData);
-      } catch (err) {
-        const message = err instanceof Error ? err.message : 'Error desconocido';
-        setError(message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return { data, loading, error };
+  return useLandingQuery(['news-content'] as const, async () => {
+    try {
+      const repository = new StrapiNewRepository();
+      const useCase = new GetNewUseCase(repository);
+      return await useCase.execute();
+    } catch (strapiError) {
+      console.warn('Strapi fallido, usando datos estáticos:', strapiError);
+      const staticRepository = new StaticNewsRepository();
+      const useCase = new GetNewUseCase(staticRepository);
+      return await useCase.execute();
+    }
+  });
 };

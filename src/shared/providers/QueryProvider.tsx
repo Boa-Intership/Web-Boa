@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools'; // Temporalmente comentado
-import { useState, ReactNode } from 'react';
+import { useState, ReactNode, useEffect } from 'react';
+import { QueryCachePersistor } from '@/config/queryPersistence';
 
 interface QueryProviderProps {
   children: ReactNode;
@@ -19,9 +20,11 @@ export const QueryProvider = ({ children }: QueryProviderProps) => {
         defaultOptions: {
           queries: {
             // Tiempo que los datos se consideran "frescos" antes de refetch
-            staleTime: 5 * 60 * 1000, // 5 minutos
+            // Para landing: usar infinito para no refetch automático
+            staleTime: Infinity,
             // Tiempo que los datos permanecen en cache
-            cacheTime: 10 * 60 * 1000, // 10 minutos
+            // Para landing: usar infinito para mantener en caché
+            cacheTime: Infinity,
             // Reintentar en caso de error
             retry: (failureCount, error) => {
               const apiError = error as ApiError;
@@ -47,6 +50,25 @@ export const QueryProvider = ({ children }: QueryProviderProps) => {
         },
       })
   );
+
+  // Restaurar cache al montar
+  useEffect(() => {
+    QueryCachePersistor.restoreCache(queryClient);
+  }, [queryClient]);
+
+  // Guardar cache antes de desmontar
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      QueryCachePersistor.saveCache(queryClient);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      // Guardar cuando se desmonta el proveedor
+      QueryCachePersistor.saveCache(queryClient);
+    };
+  }, [queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>

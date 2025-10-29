@@ -16,7 +16,7 @@ export default defineConfig({
     proxy: {
       // Proxy para CMS Strapi (local)
       '/api/cms': {
-        target: 'http://localhost:1337',
+        target: 'https://effortless-strength-42ee47afff.strapiapp.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/cms/, '/api'),
       },
