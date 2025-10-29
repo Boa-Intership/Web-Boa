@@ -1,37 +1,51 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Box, Chip, Container } from '@mui/material';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Box,
+  Chip,
+  Container,
+  CircularProgress,
+  Alert,
+} from '@mui/material';
 import { ContactCard } from '../components/ContactCard';
 import { ExpandMore, Home, Public } from '@mui/icons-material';
 import { AppTypography } from 'ui';
-import { Oficina } from '../../data/models/office.model';
-import { OfficeService } from '../../data/services/office.service';
+import { useOficinasNacionales, useOficinasInternacionales } from '../hook/useOficinas';
 import { defaultOficinas } from '../../domain/constants/default-offices';
 
 export default function OfficeScreen() {
   const [tabIndex, setTabIndex] = useState(0); // 0 = nacional, 1 = internacional
-  const [expanded, setExpanded] = useState<number | false>(0); // para una expansión a la vezzz
-  const [oficinasNacionales, setOficinasNacionales] = useState<Oficina[]>([]);
-  const [oficinasInternacionales, setOficinasInternacionales] = useState<Oficina[]>([]);
-  const oficinas = tabIndex === 0 ? oficinasNacionales : oficinasInternacionales;
+  const [expanded, setExpanded] = useState<number | false>(0); // para una expansión a la vez
 
-  useEffect(() => {
-    const fetchOficinas = async () => {
-      try {
-        const nacionales = await OfficeService.getByRegion('Nacional');
-        const internacionales = await OfficeService.getByRegion('Internacional');
-        setOficinasNacionales(nacionales);
-        setOficinasInternacionales(internacionales);
-      } catch (error) {
-        console.error('Error cargando oficinas desde Strapi, usando datos por defecto:', error);
-        const groupByRegion = (region: 'Nacional' | 'Internacional') =>
-          defaultOficinas.filter((of) => of.RegionOficinas === region);
-        setOficinasNacionales(groupByRegion('Nacional'));
-        setOficinasInternacionales(groupByRegion('Internacional'));
-      }
-    };
-    fetchOficinas();
-  }, [tabIndex]);
+  // Usar hooks para traer datos cacheados
+  const {
+    data: oficinasNacionales,
+    loading: loadingNac,
+    error: errorNac,
+  } = useOficinasNacionales();
+  const {
+    data: oficinasInternacionales,
+    loading: loadingInt,
+    error: errorInt,
+  } = useOficinasInternacionales();
+
+  // Si no hay datos (array vacío), usar datos por defecto
+  const oficinasNacionalesDisplay =
+    oficinasNacionales && oficinasNacionales.length > 0
+      ? oficinasNacionales
+      : defaultOficinas.filter((of) => of.RegionOficinas === 'Nacional');
+
+  const oficinasInternacionalesDisplay =
+    oficinasInternacionales && oficinasInternacionales.length > 0
+      ? oficinasInternacionales
+      : defaultOficinas.filter((of) => of.RegionOficinas === 'Internacional');
+
+  const oficinas = tabIndex === 0 ? oficinasNacionalesDisplay : oficinasInternacionalesDisplay;
+  const _loading = tabIndex === 0 ? loadingNac : loadingInt;
+  const _error = tabIndex === 0 ? errorNac : errorInt; // Prefijo _ para indicar que puede no ser usado
 
   const handleChange = (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
