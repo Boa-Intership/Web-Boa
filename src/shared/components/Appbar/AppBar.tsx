@@ -51,7 +51,7 @@ const navItems = [
             icon: <GavelOutlinedIcon />,
           },
           {
-            label: 'Contacto',
+            label: 'Nuestras oficinas',
             to: ROUTES.OFICINA,
             icon: <ContactPhoneOutlinedIcon />,
           },

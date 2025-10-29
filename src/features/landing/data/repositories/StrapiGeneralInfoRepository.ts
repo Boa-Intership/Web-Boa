@@ -69,7 +69,8 @@ export class StrapiGeneralInfoRepository implements GeneralInfoRepository {
         id: item.id.toString(),
         titulo: item.titulo,
         descripcion: item.descripcion,
-        imagen: item.imagen?.url ? `http://localhost:1337${item.imagen.url}` : undefined,
+        //imagen: item.imagen?.url ? `http://localhost:1337${item.imagen.url}` : undefined,
+        imagen: item.imagen?.formats?.small?.url || item.imagen?.url || undefined,
         enlace: item.enlace,
         orden: item.orden,
       }))

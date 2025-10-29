@@ -57,12 +57,12 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
   };
 
   return (
-    <AppContainer sx={{ position: 'relative', width: '100%', maxWidth: 400, mx: 'auto', py: 4 }}>
+    <AppContainer sx={{ position: 'relative', width: '100%' }}>
       <Box
         sx={{
           position: 'relative',
           width: '100%',
-          height: { xs: 500, md: 620 },
+          height: { xs: 400, md: 620 },
           overflow: 'hidden',
           borderRadius: 4,
         }}
@@ -72,7 +72,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
             key={item.id}
             sx={{
               position: 'absolute',
-              width: '100%',
+              width: '95%',
               height: '100%',
               opacity: idx === current ? 1 : 0,
               zIndex: idx === current ? 2 : 1,

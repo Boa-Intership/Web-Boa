@@ -33,11 +33,15 @@ const NewsSection: React.FC = () => {
   }
 
   return (
-    <AppBox sx={{ py: { xs: 5, md: 8 }, background: '#fff' }}>
+    <AppBox sx={{ py: { xs: 5, md: 8 }, background: '#aa2f2fff', width: '100%' }}>
       <AppTypography variant="h2Bold" color="primary" textAlign="center">
         {newsData.titulo}
       </AppTypography>
-      <Carousel items={activeNews} />
+      <AppBox
+        sx={{ width: '80%', display: 'flex', justifyContent: 'center', margin: 'auto', mt: 2 }}
+      >
+        <Carousel items={activeNews} />
+      </AppBox>
     </AppBox>
   );
 };
