@@ -1,3 +1,4 @@
+
 export interface RouteAccess {
   path: string;
   requiresAuth?: boolean;
@@ -57,7 +58,7 @@ export const ROUTE_ACCESS: Record<string, RouteAccess> = {
   [ROUTES.DASHBOARD]: { path: ROUTES.DASHBOARD, requiresAuth: true },
   [ROUTES.COTIZAR]: { path: ROUTES.COTIZAR, requiresAuth: true },
   [ROUTES.MISPREREGISTROS]: { path: ROUTES.MISPREREGISTROS, requiresAuth: true },
-
+  
   // Rutas solo para usuarios no autenticados
   [ROUTES.LOGIN]: { path: ROUTES.LOGIN, publicOnly: true },
   [ROUTES.REGISTER]: { path: ROUTES.REGISTER, publicOnly: true },
@@ -68,11 +69,20 @@ export const getRouteAccess = (path: string): RouteAccess | undefined => {
 };
 
 export const isProtectedRoute = (path: string): boolean => {
-  const route = getRouteAccess(path);
-  return route?.requiresAuth || false;
+  // Exact match first
+  const exact = getRouteAccess(path);
+  if (exact?.requiresAuth) return true;
+  // Also protect nested paths under any protected base (e.g., /tracking/*)
+  return Object.values(ROUTE_ACCESS).some((route) => {
+    if (!route.requiresAuth) return false;
+    const base = route.path.endsWith('/') ? route.path.slice(0, -1) : route.path;
+    return path === base || path.startsWith(base + '/');
+  });
 };
 
 export const isPublicOnlyRoute = (path: string): boolean => {
   const route = getRouteAccess(path);
   return route?.publicOnly || false;
 };
+
+

@@ -20,6 +20,10 @@ import Login from './features/Auth/presentation/screen/LoginScreen';
 import Register from './features/Auth/presentation/screen/RegisterScreen';
 import { ProfileScreen } from './features/profile/presentation';
 import RouteGuard from './router/RouteGuard';
+import FlightsScreen from './features/packageTracking/presentation/screens/FlightsScreen';
+import ManifestsScreen from './features/packageTracking/presentation/screens/ManifestsScreen';
+import PackagesScreen from './features/packageTracking/presentation/screens/PackagesScreen';
+import PackageDetailScreen from './features/packageTracking/presentation/screens/PackageDetailScreen';
 
 const App: React.FC = () => (
   <QueryProvider>
@@ -45,6 +49,17 @@ const App: React.FC = () => (
               <Route
                 path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
                 element={<CorporateProfileScreen />}
+              />
+              {/* Tracking */}
+              <Route path={ROUTES.TRACKING.replace('/', '')} element={<FlightsScreen />} />
+              <Route path={`${ROUTES.TRACKING.replace('/', '')}/:flightId`} element={<ManifestsScreen />} />
+              <Route
+                path={`${ROUTES.TRACKING.replace('/', '')}/:flightId/:manifestId`}
+                element={<PackagesScreen />}
+              />
+              <Route
+                path={`${ROUTES.TRACKING.replace('/', '')}/:flightId/:manifestId/:packageId`}
+                element={<PackageDetailScreen />}
               />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />

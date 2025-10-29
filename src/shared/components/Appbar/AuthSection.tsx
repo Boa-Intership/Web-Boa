@@ -44,6 +44,9 @@ export const AuthSection = () => {
       if (response.message) {
         handleClose();
         logout();
+        // Después de cerrar sesión forzamos navegación a la landing
+        // para evitar que el usuario quede en una ruta protegida (ej. tracking)
+        navigate(ROUTES.LANDING, { replace: true });
         console.log('Sesión cerrada exitosamente:', response);
       }
     } catch (error) {

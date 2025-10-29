@@ -14,6 +14,7 @@ import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 import { AuthSection } from './AuthSection';
+import { getUserProfile } from '../../../features/pre-registration/data/services/user.service';
 
 const navItems = [
   // {
@@ -31,6 +32,12 @@ const navItems = [
     key: 'itinerarios',
     label: 'Itinerario',
     route: ROUTES.ITINERARIOS,
+    icon: <TodayOutlinedIcon />,
+  },
+  {
+    key: 'tracking',
+    label: 'Seguimiento',
+    route: ROUTES.TRACKING,
     icon: <TodayOutlinedIcon />,
   },
   {
@@ -76,8 +83,11 @@ const AppAppBar: React.FC = () => {
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const [openKey, setOpenKey] = React.useState<string | null>(null);
 
+  const [openKey, setOpenKey] = React.useState<string | null>(null);
+  const [menuItems, setMenuItems] = React.useState(() =>
+  navItems.filter((i) => i.key !== 'tracking')
+  );
   // Idioma
   const [anchorLang, setAnchorLang] = React.useState<null | HTMLElement>(null);
   const [selectedLang, setSelectedLang] = React.useState(LANGUAGES[0]);
@@ -107,6 +117,33 @@ const AppAppBar: React.FC = () => {
     setAnchorLang(null);
     // Aquí podrías cambiar el idioma global de la app
   };
+
+  // Efecto para cargar menú según rol del usuario (se ejecuta al montar)
+  React.useEffect(() => {
+   
+    (async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          // usuario no autenticado -> ocultar tracking
+           setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+          return;
+        }
+        const user = await getUserProfile(token);
+        const isAdmin =
+          Array.isArray(user.roles) &&
+          user.roles.some((r: any) => r.id === 2);
+        
+        if (isAdmin) {
+          setMenuItems(navItems.filter((i) => i.key === 'tracking' ));
+        } else {
+          setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+        }
+      } catch (e) {
+        setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+      }
+    })();
+  }, [localStorage.getItem('token')]);
 
   return (
     <>
@@ -194,7 +231,7 @@ const AppAppBar: React.FC = () => {
                   m: 0,
                 }}
               >
-                {navItems.map((item) => {
+                {menuItems.map((item) => {
                   const isOpen = openKey === item.key;
                   const active = isActiveRoute(item.route);
 
@@ -275,7 +312,7 @@ const AppAppBar: React.FC = () => {
       <MobileDrawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        navItems={navItems}
+        navItems={menuItems}
         navigate={(to: string) => navigate(to)}
       />
     </>

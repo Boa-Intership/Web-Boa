@@ -8,13 +8,13 @@ interface RouteGuardProps {
 
 const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const location = useLocation();
-  const { checkRouteAccess, isLoading } = useRouteAccess();
+  const { checkRouteAccess, isLoading, isAuthenticated } = useRouteAccess();
 
   useEffect(() => {
     if (!isLoading) {
       checkRouteAccess(location.pathname);
     }
-  }, [location.pathname, checkRouteAccess, isLoading]);
+  }, [location.pathname, checkRouteAccess, isLoading, isAuthenticated]);
 
   if (isLoading) {
     return null; // O un componente de Spinner/Loader global
