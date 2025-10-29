@@ -27,6 +27,7 @@ export const ROUTES = {
   // Administración
   ADMIN: '/admin',
   DASHBOARD: '/dashboard',
+  GESTION: 'gestion-usuarios',
 
   // Existentes
   COTIZAR: '/cotizar',
