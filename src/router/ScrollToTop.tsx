@@ -5,8 +5,15 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Cuando cambia de ruta
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [pathname]);
+
+  // También forza al montar (al recargar)
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  }, []);
 
   return null;
 }
