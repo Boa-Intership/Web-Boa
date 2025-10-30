@@ -8,12 +8,14 @@ import {
   Paper,
   TextField,
   Typography,
+  Alert,
+  Snackbar,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { AppTypography } from '../../../../../ui';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
 
 // Esquema de validación para el formulario de nueva contraseña
 const newPasswordSchema = z
@@ -29,13 +31,20 @@ const newPasswordSchema = z
 type NewPasswordSchema = z.infer<typeof newPasswordSchema>;
 
 interface NewPasswordFormProps {
-  onSubmit: (data: NewPasswordSchema) => void;
+  onSubmit: (data: NewPasswordSchema) => Promise<void>;
   isLoading?: boolean;
+  error?: string;
 }
 
-export default function NewPasswordForm({ onSubmit, isLoading = false }: NewPasswordFormProps) {
+export default function NewPasswordForm({
+  onSubmit,
+  isLoading = false,
+  error,
+}: NewPasswordFormProps) {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [localError, setLocalError] = useState<string>('');
   const {
     control,
     handleSubmit,
@@ -45,6 +54,41 @@ export default function NewPasswordForm({ onSubmit, isLoading = false }: NewPass
     mode: 'onBlur',
     defaultValues: { password: '', confirmPassword: '' },
   });
+
+  const handleFormSubmit = async (data: NewPasswordSchema) => {
+    setLocalError(''); // Limpiar errores previos
+
+    try {
+      await onSubmit(data);
+      // Si llega aquí, el submit fue exitoso
+      setShowSuccessMessage(true);
+    } catch (error: unknown) {
+      // Manejar errores del backend
+      const apiError = error as {
+        response?: {
+          data?: {
+            message?: string;
+          };
+        };
+      };
+
+      const errorMessage =
+        apiError?.response?.data?.message || 'Error al cambiar la contraseña. Inténtalo de nuevo.';
+
+      setLocalError(errorMessage);
+    }
+  };
+
+  const handleCloseSuccessMessage = () => {
+    setShowSuccessMessage(false);
+  };
+
+  const handleCloseError = () => {
+    setLocalError('');
+  };
+
+  // Calcular si hay algún error para mostrar
+  const currentError = error || localError;
 
   return (
     <Paper
@@ -59,7 +103,7 @@ export default function NewPasswordForm({ onSubmit, isLoading = false }: NewPass
     >
       <Box
         component="form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(handleFormSubmit)}
         sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
       >
         <Box display="flex" flexDirection="column" sx={{ mb: 2 }}>
@@ -130,6 +174,13 @@ export default function NewPasswordForm({ onSubmit, isLoading = false }: NewPass
             )}
           />
         </FormControl>
+        {/* Mensaje de error */}
+        {currentError && (
+          <Alert severity="error" onClose={() => setLocalError('')} sx={{ mt: 1 }}>
+            {currentError}
+          </Alert>
+        )}
+
         <Button
           type="submit"
           variant="contained"
@@ -139,6 +190,18 @@ export default function NewPasswordForm({ onSubmit, isLoading = false }: NewPass
         >
           {isLoading ? 'Guardando...' : 'Guardar Contraseña'}
         </Button>
+
+        {/* Mensaje de éxito */}
+        <Snackbar
+          open={showSuccessMessage}
+          autoHideDuration={6000}
+          onClose={handleCloseSuccessMessage}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert onClose={handleCloseSuccessMessage} severity="success" sx={{ width: '100%' }}>
+            ¡Contraseña cambiada con éxito! Serás redirigido al login.
+          </Alert>
+        </Snackbar>
       </Box>
     </Paper>
   );

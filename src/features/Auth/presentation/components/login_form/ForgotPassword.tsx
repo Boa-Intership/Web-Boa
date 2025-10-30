@@ -9,6 +9,7 @@ import {
   TextField,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useSendResetCode } from '../../useAuth.hooks';
 
 interface ForgotPasswordProps {
   open: boolean;
@@ -19,22 +20,39 @@ export default function ForgotPassword({ open, handleClose }: ForgotPasswordProp
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
   const [error, setError] = React.useState('');
+  const sendResetCodeMutation = useSendResetCode();
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       setError('Por favor, introduce un correo electrónico válido.');
       return;
     }
     setError('');
 
-    // Guardar el email para el siguiente paso
-    sessionStorage.setItem('pwd_reset_email', email);
+    try {
+      // Enviar código de recuperación al backend
+      await sendResetCodeMutation.mutateAsync({ email });
 
-    // (Futuro) Aquí se llamaría al backend para enviar el código.
+      // Guardar el email para el siguiente paso
+      sessionStorage.setItem('password_reset_email', email);
 
-    // Redirigir a la nueva vista de reseteo
-    navigate('/recuperar-contrasena');
-    handleClose(); // Cierra el modal
+      // Redirigir a la nueva vista de reseteo
+      navigate('/recuperar-contrasena');
+      handleClose(); // Cierra el modal
+    } catch (error: unknown) {
+      // Manejar errores del backend
+      const apiError = error as {
+        response?: {
+          data?: {
+            message?: string;
+          };
+        };
+      };
+
+      const errorMessage =
+        apiError?.response?.data?.message || 'Error al enviar el código. Inténtalo de nuevo.';
+      setError(errorMessage);
+    }
   };
 
   // Resetear estado al cerrar

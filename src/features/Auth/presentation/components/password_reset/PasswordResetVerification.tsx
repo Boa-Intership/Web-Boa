@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Alert, Box, Button, Paper } from '@mui/material';
 import { AppTypography } from '../../../../../ui';
 import { LockReset } from '@mui/icons-material';
+import { useValidateResetCode, useSendResetCode } from '../../useAuth.hooks';
 
 interface PasswordResetVerificationProps {
   email: string;
@@ -20,6 +21,10 @@ export default function PasswordResetVerification({
   const [error, setError] = useState('');
   const [resendCooldown, setResendCooldown] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // Hooks para backend
+  const validateResetCodeMutation = useValidateResetCode();
+  const sendResetCodeMutation = useSendResetCode();
 
   // Cooldown para reenvío
   useEffect(() => {
@@ -81,10 +86,28 @@ export default function PasswordResetVerification({
     setError('');
 
     try {
+      // Validar código con el backend
+      await validateResetCodeMutation.mutateAsync({
+        email,
+        code: verificationCode,
+      });
+
       // Llamar al callback de éxito
       onVerificationSuccess(verificationCode);
     } catch (error: unknown) {
-      setError('Error al verificar el código. Inténtalo de nuevo.');
+      // Manejar errores del backend
+      const apiError = error as {
+        response?: {
+          data?: {
+            message?: string;
+          };
+        };
+      };
+
+      const errorMessage =
+        apiError?.response?.data?.message || 'Código inválido. Inténtalo de nuevo.';
+
+      setError(errorMessage);
       setCode(['', '', '', '', '']);
       inputRefs.current[0]?.focus();
     }
@@ -93,16 +116,22 @@ export default function PasswordResetVerification({
   const handleResend = async () => {
     setResendCooldown(60);
     try {
-      await onResendCode();
+      // Reenviar código usando el backend
+      await sendResetCodeMutation.mutateAsync({ email });
+
       setError('');
       setCode(['', '', '', '', '']);
       inputRefs.current[0]?.focus();
+
+      // Llamar al callback original para notificaciones adicionales si es necesario
+      onResendCode();
     } catch (error) {
       setError('Error al reenviar el código. Inténtalo de nuevo.');
     }
   };
 
   const isCodeComplete = code.every((digit) => digit !== '');
+  const isProcessing = validateResetCodeMutation.isPending || sendResetCodeMutation.isPending;
 
   return (
     <Paper
@@ -126,7 +155,6 @@ export default function PasswordResetVerification({
           }}
         />
       </Box>
-
       <AppTypography
         variant="h3Medium"
         color="primary.main"
@@ -137,7 +165,6 @@ export default function PasswordResetVerification({
       >
         Verifica tu correo electrónico
       </AppTypography>
-
       <Alert severity="info" icon={false} sx={{ mb: 4, justifyContent: 'center' }}>
         <Box sx={{ textAlign: 'center' }}>
           <AppTypography variant="smallRegular" sx={{ mb: 1, fontSize: { xs: '0.85rem' } }}>
@@ -155,7 +182,6 @@ export default function PasswordResetVerification({
           </AppTypography>
         </Box>
       </Alert>
-
       {/* Inputs del código */}
       <Box sx={{ mb: 3 }}>
         <AppTypography variant="smallRegular" sx={{ mb: 2 }}>
@@ -207,25 +233,26 @@ export default function PasswordResetVerification({
           ))}
         </Box>
       </Box>
-
       {/* Error */}
       {error && (
         <AppTypography variant="smallRegular" color="error.main" sx={{ mb: 3 }}>
           {error}
         </AppTypography>
-      )}
-
+      )}{' '}
       {/* Loading indicator */}
-      {isLoading && (
+      {(isLoading || isProcessing) && (
         <Box sx={{ mb: 3 }}>
           <AppTypography variant="smallRegular" color="primary.main">
-            Verificando código...
+            {validateResetCodeMutation.isPending
+              ? 'Verificando código...'
+              : sendResetCodeMutation.isPending
+                ? 'Reenviando código...'
+                : 'Procesando...'}
           </AppTypography>
         </Box>
-      )}
-
+      )}{' '}
       {/* Botón de verificación manual */}
-      {isCodeComplete && !isLoading && (
+      {isCodeComplete && !isLoading && !isProcessing && (
         <Button
           fullWidth
           variant="contained"
@@ -236,17 +263,15 @@ export default function PasswordResetVerification({
           Verificar código
         </Button>
       )}
-
       {/* Reenviar código */}
       <Box>
         <AppTypography variant="smallRegular" color="text.secondary" sx={{ mb: 2 }}>
           ¿No recibiste el código?
-        </AppTypography>
-
+        </AppTypography>{' '}
         <Button
           variant="text"
           onClick={handleResend}
-          disabled={resendCooldown > 0 || isLoading}
+          disabled={resendCooldown > 0 || isLoading || isProcessing}
           sx={{
             textTransform: 'none',
             fontSize: '0.9rem',
