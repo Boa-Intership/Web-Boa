@@ -49,29 +49,6 @@ export class StrapiCategoriesRepository implements CategoryRepository {
     }
   }
 
-  // 🔹 Buscar por slug
-  async getCategoryBySlug(slug: string): Promise<CategoryEntity | null> {
-    try {
-      console.log('📡 Buscando categoría por slug:', slug);
-
-      const response = await strapiClient.get<StrapiResponseCategories>(
-        `/categorias-cargas?filters[slug][$eq]=${slug}&populate=seccions`
-      );
-
-      const categoria = response?.data?.[0];
-
-      if (!categoria) {
-        console.warn(`⚠️ No se encontró categoría con slug ${slug}`);
-        return null;
-      }
-
-      return this.mapStrapiToSingleEntity(categoria);
-    } catch (error) {
-      this.handleError(error, 'slug', slug);
-      return null;
-    }
-  }
-
   // 🔹 Mapear datos de Strapi al dominio
   private mapStrapiToSingleEntity(item: StrapiCategoryResponse): CategoryEntity {
     return {

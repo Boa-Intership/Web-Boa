@@ -9,7 +9,7 @@ interface ContenidoSeccion {
   //contenido,requisitos
   titulo: string;
   slug: string;
-  contenido?: BlocksContent | null;
+  contenido?: BlocksContent[] | null;
   icono?: string | null;
   //galeria
   imagen_url?: string | null;
