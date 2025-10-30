@@ -1,4 +1,3 @@
-
 export interface RouteAccess {
   path: string;
   requiresAuth?: boolean;
@@ -59,7 +58,7 @@ export const ROUTE_ACCESS: Record<string, RouteAccess> = {
   [ROUTES.DASHBOARD]: { path: ROUTES.DASHBOARD, requiresAuth: true },
   [ROUTES.COTIZAR]: { path: ROUTES.COTIZAR, requiresAuth: true },
   [ROUTES.MISPREREGISTROS]: { path: ROUTES.MISPREREGISTROS, requiresAuth: true },
-  
+
   // Rutas solo para usuarios no autenticados
   [ROUTES.LOGIN]: { path: ROUTES.LOGIN, publicOnly: true },
   [ROUTES.REGISTER]: { path: ROUTES.REGISTER, publicOnly: true },
@@ -85,5 +84,3 @@ export const isPublicOnlyRoute = (path: string): boolean => {
   const route = getRouteAccess(path);
   return route?.publicOnly || false;
 };
-
-
