@@ -11,9 +11,13 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const { checkRouteAccess, isLoading, isAuthenticated } = useRouteAccess();
 
   useEffect(() => {
-    if (!isLoading) {
-      checkRouteAccess(location.pathname);
-    }
+    const run = async () => {
+      if (!isLoading) {
+        await checkRouteAccess(location.pathname);
+      }
+    };
+
+    run();
   }, [location.pathname, checkRouteAccess, isLoading, isAuthenticated]);
 
   if (isLoading) {

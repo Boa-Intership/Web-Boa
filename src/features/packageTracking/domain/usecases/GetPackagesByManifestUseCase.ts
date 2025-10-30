@@ -1,6 +1,6 @@
-import type { PackageTrackingRepository } from '../repositories/PackageTrackingRepository';
-import type { PackageEntity } from '../entities/Package';
-import type { ManifestId } from '../entities/Manifest';
+import type { PackageTrackingRepository } from '@/features/packageTracking/domain/repositories/PackageTrackingRepository';
+import type { PackageEntity } from '@/features/packageTracking/domain/entities/Package';
+import type { ManifestId } from '@/features/packageTracking/domain/entities/Manifest';
 
 export class GetPackagesByManifestUseCase {
   constructor(private readonly repo: PackageTrackingRepository) {}

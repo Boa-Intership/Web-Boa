@@ -52,7 +52,10 @@ const App: React.FC = () => (
               />
               {/* Tracking */}
               <Route path={ROUTES.TRACKING.replace('/', '')} element={<FlightsScreen />} />
-              <Route path={`${ROUTES.TRACKING.replace('/', '')}/:flightId`} element={<ManifestsScreen />} />
+              <Route
+                path={`${ROUTES.TRACKING.replace('/', '')}/:flightId`}
+                element={<ManifestsScreen />}
+              />
               <Route
                 path={`${ROUTES.TRACKING.replace('/', '')}/:flightId/:manifestId`}
                 element={<PackagesScreen />}

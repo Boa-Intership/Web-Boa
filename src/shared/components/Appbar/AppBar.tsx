@@ -13,8 +13,9 @@ import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
-import { AuthSection } from './AuthSection';
-import { getUserProfile } from '../../../features/pre-registration/data/services/user.service';
+import { AuthSection } from '@/shared/components/Appbar/AuthSection';
+import { getUserProfile } from '@/features/pre-registration/data/services/user.service';
+import { useAuth } from '@/shared/providers/AuthContext';
 
 const navItems = [
   // {
@@ -86,7 +87,7 @@ const AppAppBar: React.FC = () => {
 
   const [openKey, setOpenKey] = React.useState<string | null>(null);
   const [menuItems, setMenuItems] = React.useState(() =>
-  navItems.filter((i) => i.key !== 'tracking')
+    navItems.filter((i) => i.key !== 'tracking')
   );
   // Idioma
   const [anchorLang, setAnchorLang] = React.useState<null | HTMLElement>(null);
@@ -119,31 +120,36 @@ const AppAppBar: React.FC = () => {
   };
 
   // Efecto para cargar menú según rol del usuario (se ejecuta al montar)
+  const { isAuthenticated, token } = useAuth();
+
   React.useEffect(() => {
-   
+    let mounted = true;
     (async () => {
       try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          // usuario no autenticado -> ocultar tracking
-           setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+        if (!isAuthenticated || !token) {
+          if (mounted) setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
           return;
         }
         const user = await getUserProfile(token);
-        const isAdmin =
-          Array.isArray(user.roles) &&
-          user.roles.some((r: any) => r.id === 2);
-        
+        const isAdmin = Array.isArray(user.roles) && user.roles.some((r: any) => r.id === 2);
+
+        if (!mounted) return;
         if (isAdmin) {
-          setMenuItems(navItems.filter((i) => i.key === 'tracking' ));
+          setMenuItems(navItems.filter((i) => i.key === 'tracking'));
         } else {
+          // usuarios normales no ven tracking
           setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
         }
       } catch (e) {
+        if (!mounted) return;
         setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+        console.error('Error al cargar perfil de usuario para menú:', e);
       }
     })();
-  }, [localStorage.getItem('token')]);
+    return () => {
+      mounted = false;
+    };
+  }, [isAuthenticated, token]);
 
   return (
     <>

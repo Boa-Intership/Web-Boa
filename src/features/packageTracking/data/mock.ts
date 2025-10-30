@@ -1,7 +1,7 @@
-import type { FlightEntity } from '../domain/entities/Flight';
-import type { ManifestEntity } from '../domain/entities/Manifest';
-import type { PackageEntity } from '../domain/entities/Package';
-import type { PackageStatusEntity } from '../domain/entities/PackageStatus';
+import type { FlightEntity } from '@/features/packageTracking/domain/entities/Flight';
+import type { ManifestEntity } from '@/features/packageTracking/domain/entities/Manifest';
+import type { PackageEntity } from '@/features/packageTracking/domain/entities/Package';
+import type { PackageStatusEntity } from '@/features/packageTracking/domain/entities/PackageStatus';
 
 // Simple mock dataset inspired by the provided mockups
 export const flights: FlightEntity[] = [

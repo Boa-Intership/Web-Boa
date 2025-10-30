@@ -1,4 +1,4 @@
-import type { PackageId } from './Package';
+import type { PackageId } from '@/features/packageTracking/domain/entities/Package';
 
 export interface PackageStatusEntity {
   id: string; // unique per status entry

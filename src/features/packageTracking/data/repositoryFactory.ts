@@ -1,5 +1,5 @@
-import { MockPackageTrackingRepository } from './MockPackageTrackingRepository';
-import type { PackageTrackingRepository } from '../domain/repositories/PackageTrackingRepository';
+import { MockPackageTrackingRepository } from '@/features/packageTracking/data/MockPackageTrackingRepository';
+import type { PackageTrackingRepository } from '@/features/packageTracking/domain/repositories/PackageTrackingRepository';
 
 let singletonRepo: PackageTrackingRepository | null = null;
 
