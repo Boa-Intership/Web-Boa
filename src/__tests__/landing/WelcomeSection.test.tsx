@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import WelcomeSection from '../../features/landing/presentation/components/WelcomeSection';
-import { BrowserRouter } from 'react-router-dom';
+import { createTestWrapper } from '../../test/testUtils';
 
 describe('Welcome', () => {
   it('should show statistics text', () => {
-    render(<WelcomeSection />, { wrapper: BrowserRouter });
+    const wrapper = createTestWrapper();
+    render(<WelcomeSection />, { wrapper });
     const stats = screen.getByText(/Paquetes enviados/i);
     expect(stats).toBeInTheDocument();
   });
