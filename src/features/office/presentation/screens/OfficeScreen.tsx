@@ -1,15 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Box,
-  Chip,
-  Container,
-  CircularProgress,
-  Alert,
-} from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Box, Chip, Container } from '@mui/material';
 import { ContactCard } from '../components/ContactCard';
 import { ExpandMore, Home, Public } from '@mui/icons-material';
 import { AppTypography } from 'ui';
