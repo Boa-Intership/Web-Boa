@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardActionArea, CardContent, Chip, Stack, Typography } from '@mui/material';
-import AppGrid from '../../../../shared/components/AppGrid';
-import type { ManifestEntity } from '../../domain/entities/Manifest';
+import AppGrid from '@/shared/components/AppGrid';
+import type { ManifestEntity } from '@/features/packageTracking/domain/entities/Manifest';
 
 interface Props {
   manifests: ManifestEntity[];
@@ -24,9 +24,7 @@ const ManifestList: React.FC<Props> = ({ manifests, onSelect }) => {
                 </Stack>
                 <Stack direction="row" spacing={2} mt={1}>
                   <Chip label={`${m.packageCount} paquetes`} size="small" />
-                  {m.totalWeightKg != null && (
-                    <Chip label={`${m.totalWeightKg} kg`} size="small" />
-                  )}
+                  {m.totalWeightKg != null && <Chip label={`${m.totalWeightKg} kg`} size="small" />}
                 </Stack>
               </CardContent>
             </CardActionArea>

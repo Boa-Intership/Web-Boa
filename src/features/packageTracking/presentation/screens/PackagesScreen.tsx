@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import AppContainer from '../../../../shared/components/AppContainer';
-import { Stack, Typography, Button } from '@mui/material';
-import PackageList from '../components/PackageList';
-import { usePackages } from '../hooks/usePackages';
-import { ROUTES } from '../../../../router/routes';
-
+import AppContainer from '@/shared/components/AppContainer';
+import { Stack, Typography } from '@mui/material';
+import PackageList from '@/features/packageTracking/presentation/components/PackageList';
+import { usePackages } from '@/features/packageTracking/presentation/hooks/usePackages';
+import { ROUTES } from '@/router/routes';
+import AppButton from '@/shared/components/AppButton';
 const PackagesScreen: React.FC = () => {
   const navigate = useNavigate();
   const { flightId = '', manifestId = '' } = useParams<{ flightId: string; manifestId: string }>();
@@ -17,15 +17,28 @@ const PackagesScreen: React.FC = () => {
     );
   };
 
+  React.useEffect(() => {
+    console.debug('[PackagesScreen] params ->', { flightId, manifestId });
+  }, [flightId, manifestId]);
+
   return (
     <AppContainer>
       <Stack direction="row" alignItems="center" spacing={2} mb={2}>
-        <Button variant="outlined" onClick={() => navigate(`${ROUTES.TRACKING}/${encodeURIComponent(flightId)}`)}>
+        <AppButton
+          variant="outlined"
+          onClick={() => navigate(`${ROUTES.TRACKING}/${encodeURIComponent(flightId)}`)}
+        >
           Volver a manifiestos
-        </Button>
-        <Typography variant="h5" color="primary.main">Paquetes — {manifestId}</Typography>
+        </AppButton>
+        <Typography variant="h5" color="primary.main">
+          Paquetes — {manifestId}
+        </Typography>
       </Stack>
-      {isLoading ? <Typography>Cargando...</Typography> : <PackageList packages={data} onSelect={onSelect} />}
+      {isLoading ? (
+        <Typography>Cargando...</Typography>
+      ) : (
+        <PackageList packages={data} onSelect={onSelect} />
+      )}
     </AppContainer>
   );
 };

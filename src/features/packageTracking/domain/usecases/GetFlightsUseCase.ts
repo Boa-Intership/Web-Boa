@@ -1,5 +1,5 @@
-import type { PackageTrackingRepository } from '../repositories/PackageTrackingRepository';
-import type { FlightEntity } from '../entities/Flight';
+import type { PackageTrackingRepository } from '@/features/packageTracking/domain/repositories/PackageTrackingRepository';
+import type { FlightEntity } from '@/features/packageTracking/domain/entities/Flight';
 
 export class GetFlightsUseCase {
   constructor(private readonly repo: PackageTrackingRepository) {}

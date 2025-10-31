@@ -1,7 +1,10 @@
-import type { FlightEntity, FlightId } from '../entities/Flight';
-import type { ManifestEntity, ManifestId } from '../entities/Manifest';
-import type { PackageEntity, PackageId } from '../entities/Package';
-import type { PackageStatusEntity } from '../entities/PackageStatus';
+import type { FlightEntity, FlightId } from '@/features/packageTracking/domain/entities/Flight';
+import type {
+  ManifestEntity,
+  ManifestId,
+} from '@/features/packageTracking/domain/entities/Manifest';
+import type { PackageEntity, PackageId } from '@/features/packageTracking/domain/entities/Package';
+import type { PackageStatusEntity } from '@/features/packageTracking/domain/entities/PackageStatus';
 
 export interface PackageTrackingRepository {
   getFlights(): Promise<FlightEntity[]>;

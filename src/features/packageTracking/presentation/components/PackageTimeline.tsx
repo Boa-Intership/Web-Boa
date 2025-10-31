@@ -1,7 +1,15 @@
 import React from 'react';
-import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineOppositeContent, TimelineSeparator } from '@mui/lab';
+import {
+  Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
+  TimelineItem,
+  TimelineOppositeContent,
+  TimelineSeparator,
+} from '@mui/lab';
 import { Card, CardContent, Typography } from '@mui/material';
-import type { PackageStatusEntity } from '../../domain/entities/PackageStatus';
+import type { PackageStatusEntity } from '@/features/packageTracking/domain/entities/PackageStatus';
 
 interface Props {
   history: PackageStatusEntity[];

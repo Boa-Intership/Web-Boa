@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardActionArea, CardContent, Chip, Stack, Typography } from '@mui/material';
-import AppGrid from '../../../../shared/components/AppGrid';
-import type { FlightEntity } from '../../domain/entities/Flight';
+import AppGrid from '@/shared/components/AppGrid';
+import type { FlightEntity } from '@/features/packageTracking/domain/entities/Flight';
 
 interface Props {
   flights: FlightEntity[];
@@ -29,9 +29,7 @@ const FlightList: React.FC<Props> = ({ flights, onSelect }) => {
                   {f.manifestCount != null && (
                     <Chip label={`${f.manifestCount} manifiestos`} size="small" />
                   )}
-                  {f.totalWeightKg != null && (
-                    <Chip label={`${f.totalWeightKg} kg`} size="small" />
-                  )}
+                  {f.totalWeightKg != null && <Chip label={`${f.totalWeightKg} kg`} size="small" />}
                 </Stack>
                 <Typography variant="caption" color="text.disabled" display="block" mt={1}>
                   {new Date(f.date).toLocaleDateString()}

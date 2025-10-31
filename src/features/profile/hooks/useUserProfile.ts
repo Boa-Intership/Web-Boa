@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { httpClient } from '@/config/httpClient';
-
+import { getUserProfile } from '@/features/pre-registration/data/services/user.service';
 interface UserRole {
   id: number;
   name: string;
@@ -36,7 +36,6 @@ export const useUserProfile = (): UseUserProfileReturn => {
   const [userData, setUserData] = useState<UserProfileResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const fetchUserProfile = async () => {
     // No hacer nada si ya hay datos cargados
     if (userData) return;
@@ -45,7 +44,9 @@ export const useUserProfile = (): UseUserProfileReturn => {
     setError(null);
 
     try {
-      const response = await httpClient.get<UserProfileResponse>('/user/me');
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      const response = await getUserProfile(token);
       setUserData(response);
     } catch (err) {
       const errorMessage =

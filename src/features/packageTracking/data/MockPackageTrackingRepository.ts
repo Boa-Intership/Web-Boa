@@ -1,9 +1,12 @@
-import type { PackageTrackingRepository } from '../domain/repositories/PackageTrackingRepository';
-import type { FlightEntity, FlightId } from '../domain/entities/Flight';
-import type { ManifestEntity, ManifestId } from '../domain/entities/Manifest';
-import type { PackageEntity, PackageId } from '../domain/entities/Package';
-import type { PackageStatusEntity } from '../domain/entities/PackageStatus';
-import { flights, manifests, packages, packageHistory } from './mock';
+import type { PackageTrackingRepository } from '@/features/packageTracking/domain/repositories/PackageTrackingRepository';
+import type { FlightEntity, FlightId } from '@/features/packageTracking/domain/entities/Flight';
+import type {
+  ManifestEntity,
+  ManifestId,
+} from '@/features/packageTracking/domain/entities/Manifest';
+import type { PackageEntity, PackageId } from '@/features/packageTracking/domain/entities/Package';
+import type { PackageStatusEntity } from '@/features/packageTracking/domain/entities/PackageStatus';
+import { flights, manifests, packages, packageHistory } from '@/features/packageTracking/data/mock';
 
 const delay = (ms = 300) => new Promise((res) => setTimeout(res, ms));
 

@@ -1,4 +1,4 @@
-import type { ManifestId } from './Manifest';
+import type { ManifestId } from '@/features/packageTracking/domain/entities/Manifest';
 
 export interface PackageEntity {
   id: string; // tracking code e.g., "PKG001234567"

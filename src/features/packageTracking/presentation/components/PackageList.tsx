@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Chip,
-  Divider,
-  Stack,
-  Typography,
-} from '@mui/material';
-import AppGrid from '../../../../shared/components/AppGrid';
-import type { PackageEntity } from '../../domain/entities/Package';
+import { Card, CardActionArea, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
+import AppGrid from '@/shared/components/AppGrid';
+import type { PackageEntity } from '@/features/packageTracking/domain/entities/Package';
 
 interface Props {
   packages: PackageEntity[];
@@ -28,7 +20,11 @@ const PackageList: React.FC<Props> = ({ packages, onSelect }) => {
                   <Typography variant="subtitle1" color="primary.main" fontWeight={700}>
                     {p.id}
                   </Typography>
-                  <Chip label={p.priority} size="small" color={p.priority === 'Urgente' ? 'secondary' : 'primary'} />
+                  <Chip
+                    label={p.priority}
+                    size="small"
+                    color={p.priority === 'Urgente' ? 'secondary' : 'primary'}
+                  />
                 </Stack>
                 <Typography variant="body2" color="text.secondary" mt={0.5}>
                   {p.category} • {p.status}
@@ -42,7 +38,10 @@ const PackageList: React.FC<Props> = ({ packages, onSelect }) => {
                   {p.weightKg != null && <Chip label={`${p.weightKg} kg`} size="small" />}
                   {p.dimensions && <Chip label={p.dimensions} size="small" />}
                   {p.estimatedDelivery && (
-                    <Chip label={`Entrega: ${new Date(p.estimatedDelivery).toLocaleDateString()}`} size="small" />
+                    <Chip
+                      label={`Entrega: ${new Date(p.estimatedDelivery).toLocaleDateString()}`}
+                      size="small"
+                    />
                   )}
                 </Stack>
               </CardContent>
