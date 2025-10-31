@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { userService } from '../../data/user.service';
 
 interface UseChangePasswordProps {
   onSuccess?: () => void;
@@ -29,16 +30,9 @@ export const useChangePassword = ({
     setError(null);
 
     try {
-      // Simulación de delay de API
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Simulación de validación básica
+      // Validación básica del lado del cliente
       if (!currentPassword) {
         throw new Error('La contraseña actual es requerida');
-      }
-
-      if (currentPassword.length < 6) {
-        throw new Error('La contraseña actual debe tener al menos 6 caracteres');
       }
 
       if (!newPassword) {
@@ -53,19 +47,37 @@ export const useChangePassword = ({
         throw new Error('La nueva contraseña debe ser diferente a la actual');
       }
 
-      // Simulación de error ocasional (10% de probabilidad)
-      if (Math.random() < 0.1) {
-        throw new Error('La contraseña actual es incorrecta');
+      // Llamar al servicio de backend
+      await userService.changePassword({
+        currentPassword,
+        newPassword,
+      });
+
+      console.log('✅ Contraseña cambiada exitosamente');
+      onSuccess?.();
+    } catch (err: unknown) {
+      // Manejar errores del backend
+      const apiError = err as {
+        response?: {
+          data?: {
+            message?: string;
+          };
+        };
+        message?: string;
+      };
+
+      let errorMessage = 'Error al cambiar la contraseña';
+
+      // Priorizar el mensaje específico del backend
+      if (apiError?.response?.data?.message) {
+        errorMessage = apiError.response.data.message;
+      } else if (apiError?.message) {
+        errorMessage = apiError.message;
       }
 
-      // Simulación de éxito
-      console.log('✅ Contraseña cambiada exitosamente (simulación)');
-      onSuccess?.();
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
       setError(errorMessage);
       onError?.(errorMessage);
-      throw err; // Re-throw para que el componente pueda manejarlo
+      throw new Error(errorMessage); // Re-throw para que el componente pueda manejarlo
     } finally {
       setLoading(false);
     }

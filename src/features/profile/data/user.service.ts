@@ -6,6 +6,11 @@ interface UpdateUserData {
   phone?: string;
 }
 
+interface ChangePasswordData {
+  currentPassword: string;
+  newPassword: string;
+}
+
 interface UserResponse {
   id: number;
   ci: string;
@@ -31,7 +36,11 @@ interface UserResponse {
 
 export const userService = {
   updateUser: async (userId: number, data: UpdateUserData): Promise<UserResponse> => {
-    return await httpClient.patch<UserResponse>(`/user/${userId}`, data);
+    return await httpClient.patch<UserResponse>(`/user`, data);
+  },
+
+  changePassword: async (data: ChangePasswordData): Promise<void> => {
+    return await httpClient.patch<void>(`/user/change-password`, data);
   },
 };
 
