@@ -8,54 +8,48 @@ on:
   pull_request:
 
 jobs:
-  setup-node-pnpm:
-    name: Setup Node & pnpm
+  ci-cd:
+    name: CI/CD Pipeline
     runs-on: ubuntu-latest
-    outputs:
-      node-version: ${{ steps.node-version.outputs.node-version }}
+
     steps:
+      # 1Clonar el repositorio
       - uses: actions/checkout@v4
 
+      # 2 Configurar pnpm
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           run_install: false
 
-      - name: Verify pnpm installation
-        run: pnpm -v
-
+      # 3️ Configurar Node.js
       - name: Setup Node.js
-        id: node-version
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
 
+      # 4️ Verificar pnpm
+      - name: Verify pnpm installation
+        run: pnpm -v
+
+      # 5️ Instalar dependencias
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-  quality-check:
-    name: Quality Check
-    runs-on: ubuntu-latest
-    needs: setup-node-pnpm
-    steps:
+      # 6️ Ejecutar lint
       - name: Run linting
         run: pnpm run lint
 
+      # 7️ Ejecutar tests
       - name: Run tests
         run: pnpm test -- --run
 
-      - name: Build application
+      # 8️ Construir la aplicación
+      - name: Build project
         run: pnpm run build
 
-  sonarcloud:
-    name: SonarCloud Scan
-    runs-on: ubuntu-latest
-    needs: setup-node-pnpm
-    steps:
-      - name: Run tests with coverage
-        run: pnpm test -- --coverage --run
-
+      # 9️ Ejecutar SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
