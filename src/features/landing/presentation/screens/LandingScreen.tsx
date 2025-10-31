@@ -22,9 +22,9 @@ const LandingScreen: React.FC = () => {
       <GeneralInfoSection />
       <CustomerServiceSection />
       <OfficePreviewSection />
-      {corporateProfile?.activo && <AboutUsSection />}
-      {newsData?.activo && <NewsSection />}
-      {faqData?.activo && <FAQSection />}
+      {corporateProfile && corporateProfile.activo && <AboutUsSection />}
+      {newsData && newsData.activo && <NewsSection />}
+      {faqData && faqData.activo && <FAQSection />}
     </>
   );
 };

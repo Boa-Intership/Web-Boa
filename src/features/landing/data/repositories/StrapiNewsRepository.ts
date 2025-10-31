@@ -27,11 +27,7 @@ interface StrapiResponse {
 export class StrapiNewRepository implements NewContentRepository {
   async getNewContent(): Promise<NewsContent> {
     try {
-      const result = await strapiClient.get<StrapiResponse>('/noticia', {
-        params: {
-          populate: '*',
-        },
-      });
+      const result = await strapiClient.get<StrapiResponse>('/noticia?populate=*');
 
       if (!result.data) {
         throw new Error('No se encontraron datos de noticias');

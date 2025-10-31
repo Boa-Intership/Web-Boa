@@ -10,6 +10,7 @@ import InformacionScreen from './features/Information/presentation/screens/Infor
 import PreRegistroScreen from './features/pre-registration/presentation/screens/PreRegistroScreen';
 import ComprobanteScreen from './features/pre-registration/presentation/screens/ComprobanteScreen';
 import MisPreRegistros from './features/pre-registration/presentation/screens/MisPreRegistrosScreen';
+import UserManagementScreen from './features/usermanagement/presentation/screens/UserManagementScreen';
 import MainLayout from './layouts/MainLayout';
 import LandingScreen from './features/landing/presentation/screens/LandingScreen';
 import TipoCargaScreen from './features/Information/presentation/screens/TipoCargaScreen';
@@ -64,6 +65,10 @@ const App: React.FC = () => (
                 path={`${ROUTES.TRACKING.replace('/', '')}/:flightId/:manifestId/:packageId`}
                 element={<PackageDetailScreen />}
               />
+            </Route>
+            {/* Administracion */}
+            <Route>
+              <Route path={ROUTES.GESTION.replace('/', '')} element={<UserManagementScreen />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

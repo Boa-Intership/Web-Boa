@@ -1,12 +1,9 @@
 import React from 'react';
 import { AppBox, AppButton, AppContainer, AppStack, AppTypography } from 'ui';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'router/routes';
 import { Alert, CircularProgress, Grid, Box } from '@mui/material';
 import { useCorporateProfile } from '../hooks/useCorporateProfile';
 
 const AboutUsSection: React.FC = () => {
-  const navigate = useNavigate();
   const { data, loading, error } = useCorporateProfile();
 
   if (loading) {
@@ -52,7 +49,7 @@ const AboutUsSection: React.FC = () => {
           </AppTypography>
           <AppTypography variant="baseMedium">{data.descripcion}</AppTypography>
           <AppButton
-            onClick={() => navigate(ROUTES.CORPORATE_PROFILE)}
+            onClick={() => window.open(data.enlaceBoton, '_blank', 'noopener,noreferrer')}
             color="primary"
             sx={{ width: 'fit-content' }}
           >

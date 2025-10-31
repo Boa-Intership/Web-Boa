@@ -14,16 +14,18 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      // Proxy para CMS Strapi - IMPORTANTE: debe estar ANTES que /api
+      // Proxy para CMS Strapi (local)
       '/api/cms': {
-        target: 'https://effortless-strength-42ee47afff.strapiapp.com/api',
+        target: 'https://effortless-strength-42ee47afff.strapiapp.com/',
+        //target: 'http://localhost:1337/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/cms/, ''),
-        secure: false,
+        rewrite: (path) => path.replace(/^\/api\/cms/, '/api'),
       },
-      // Proxy para Backend API
+      // Proxy para Backend API - SOLO para desarrollo local
+      // En producción no se usa, va directo a VITE_BACKEND_API_URL
       '/api': {
-        target: 'http://192.168.150.220',
+        //target: 'http://localhost:8080', // Cambiar por tu servidor de desarrollo
+        target: 'http://192.168.150.220', // Cambiar por tu servidor de desarrollo
         changeOrigin: true,
         secure: false,
       },

@@ -1,10 +1,9 @@
-import { strapiClient } from '@/config/httpClient';
+import { strapiClient } from '@/config';
 import { Oficina } from '../models/office.model';
 
 export const OfficeService = {
   async getAll(): Promise<Oficina[]> {
-    //const res = await axios.get(API_URL);
-    const res = await strapiClient.get('/oficinas?populate=*');
+    const res = await strapiClient.get<{ data: Oficina[] }>('/oficinas?populate=*');
     return res.data as Oficina[];
   },
 
