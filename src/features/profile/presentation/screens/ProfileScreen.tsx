@@ -122,9 +122,7 @@ const ProfileScreen: React.FC = () => {
         updates.address = userData.address || undefined;
       }
       if (userData.number !== originalData.number) {
-        // Remover el prefijo +591 antes de enviar
-        const phoneWithoutPrefix = userData.number.replace(/^\+591/, '');
-        updates.phone = phoneWithoutPrefix;
+        updates.phone = userData.number;
       }
 
       // Si no hay cambios, no hacer nada
