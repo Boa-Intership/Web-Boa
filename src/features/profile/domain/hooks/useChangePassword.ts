@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { userService } from '../../data/user.service';
+import { type ChangePasswordSchema } from '../validators/changePasswordSchema';
 
 interface UseChangePasswordProps {
   onSuccess?: () => void;
@@ -7,7 +8,7 @@ interface UseChangePasswordProps {
 }
 
 interface UseChangePasswordReturn {
-  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
+  changePassword: (data: ChangePasswordSchema) => Promise<void>;
   loading: boolean;
   error: string | null;
   clearError: () => void;
@@ -25,32 +26,15 @@ export const useChangePassword = ({
 
   const clearError = () => setError(null);
 
-  const changePassword = async (currentPassword: string, newPassword: string): Promise<void> => {
+  const changePassword = async (data: ChangePasswordSchema): Promise<void> => {
     setLoading(true);
     setError(null);
 
     try {
-      // Validación básica del lado del cliente
-      if (!currentPassword) {
-        throw new Error('La contraseña actual es requerida');
-      }
-
-      if (!newPassword) {
-        throw new Error('La nueva contraseña es requerida');
-      }
-
-      if (newPassword.length < 8) {
-        throw new Error('La nueva contraseña debe tener al menos 8 caracteres');
-      }
-
-      if (currentPassword === newPassword) {
-        throw new Error('La nueva contraseña debe ser diferente a la actual');
-      }
-
-      // Llamar al servicio de backend
+      // Llamar al servicio de backend - La validación ya se hace con Zod
       await userService.changePassword({
-        currentPassword,
-        newPassword,
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
       });
 
       console.log('✅ Contraseña cambiada exitosamente');

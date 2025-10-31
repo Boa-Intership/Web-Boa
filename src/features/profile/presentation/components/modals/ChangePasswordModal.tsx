@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -9,19 +9,25 @@ import {
   IconButton,
   InputAdornment,
   Alert,
-  CircularProgress,
   useTheme,
   useMediaQuery,
   Paper,
+  CircularProgress,
 } from '@mui/material';
 import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
 import { AppTypography } from 'ui';
 import { LoadingButton } from '@mui/lab';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  changePasswordSchema,
+  type ChangePasswordSchema,
+} from '../../../domain/validators/changePasswordSchema';
 
 interface ChangePasswordModalProps {
   open: boolean;
   onClose: () => void;
-  onSubmit: (currentPassword: string, newPassword: string) => Promise<void>;
+  onSubmit: (data: ChangePasswordSchema) => Promise<void>;
 }
 
 interface PasswordValidation {
@@ -35,149 +41,82 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ open, onClose
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // Estados del formulario
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   // Estados de visibilidad
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Estados de validación y UI
-  const [loading, setLoading] = useState(false);
+  // Estados de UI
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [touched, setTouched] = useState({
-    currentPassword: false,
-    newPassword: false,
-    confirmPassword: false,
+
+  // Configuración del formulario con react-hook-form y Zod
+  const {
+    control,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { isSubmitting },
+  } = useForm<ChangePasswordSchema>({
+    resolver: zodResolver(changePasswordSchema),
+    mode: 'onChange',
+    defaultValues: {
+      currentPassword: '',
+      newPassword: '',
+      confirmNewPassword: '',
+    },
   });
 
-  // Referencias para el foco
-  const currentPasswordRef = useRef<HTMLInputElement>(null);
+  // Observar los valores para validación visual
+  const watchedNewPassword = watch('newPassword');
 
-  // Validación de contraseña
-  const validatePassword = (password: string): PasswordValidation => {
-    return {
-      minLength: password.length >= 8,
-      hasUppercase: /[A-Z]/.test(password),
-      hasLowercase: /[a-z]/.test(password),
-      hasNumber: /\d/.test(password),
-    };
+  // Validación visual de la contraseña
+  const passwordValidation: PasswordValidation = {
+    minLength: watchedNewPassword.length >= 8,
+    hasUppercase: /[A-Z]/.test(watchedNewPassword),
+    hasLowercase: /[a-z]/.test(watchedNewPassword),
+    hasNumber: /\d/.test(watchedNewPassword),
   };
 
-  const passwordValidation = validatePassword(newPassword);
-  const isPasswordValid = Object.values(passwordValidation).every(Boolean);
-  const passwordsMatch = newPassword === confirmPassword;
-
   // Limpieza del formulario
-  const resetForm = () => {
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmPassword('');
+  const resetForm = useCallback(() => {
+    reset();
     setError(null);
     setSuccess(false);
-    setTouched({
-      currentPassword: false,
-      newPassword: false,
-      confirmPassword: false,
-    });
     setShowCurrentPassword(false);
     setShowNewPassword(false);
     setShowConfirmPassword(false);
-  };
+  }, [reset]);
 
-  // Focus automático al abrir
+  // Reset al abrir modal
   useEffect(() => {
-    if (open && currentPasswordRef.current) {
-      const timer = setTimeout(() => {
-        currentPasswordRef.current?.focus();
-      }, 100);
-      return () => clearTimeout(timer);
+    if (open) {
+      resetForm();
     }
-  }, [open]);
+  }, [open, resetForm]);
 
   // Cerrar modal con limpieza
   const handleClose = () => {
-    if (!loading) {
+    if (!isSubmitting) {
       resetForm();
       onClose();
     }
   };
 
   // Manejar envío del formulario
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      setError('Todos los campos son obligatorios');
-      return;
-    }
-
-    if (!isPasswordValid) {
-      setError('La nueva contraseña no cumple con los requisitos de seguridad');
-      return;
-    }
-
-    if (!passwordsMatch) {
-      setError('Las contraseñas no coinciden');
-      return;
-    }
-
-    if (currentPassword === newPassword) {
-      setError('La nueva contraseña debe ser diferente a la actual');
-      return;
-    }
-
-    setLoading(true);
+  const onSubmitForm = async (data: ChangePasswordSchema) => {
     setError(null);
 
     try {
-      await onSubmit(currentPassword, newPassword);
+      await onSubmit(data);
       setSuccess(true);
       setTimeout(() => {
         handleClose();
       }, 2000);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Error al cambiar la contraseña');
-    } finally {
-      setLoading(false);
     }
   };
-
-  // Validación en tiempo real
-  const getFieldError = (field: keyof typeof touched) => {
-    if (!touched[field]) return '';
-
-    switch (field) {
-      case 'currentPassword':
-        return !currentPassword ? 'La contraseña actual es obligatoria' : '';
-      case 'newPassword':
-        return !newPassword
-          ? 'La nueva contraseña es obligatoria'
-          : !isPasswordValid
-            ? 'La contraseña no cumple con los requisitos'
-            : '';
-      case 'confirmPassword':
-        return !confirmPassword
-          ? 'Confirma tu nueva contraseña'
-          : !passwordsMatch
-            ? 'Las contraseñas no coinciden'
-            : '';
-      default:
-        return '';
-    }
-  };
-
-  const canSubmit =
-    currentPassword &&
-    newPassword &&
-    confirmPassword &&
-    isPasswordValid &&
-    passwordsMatch &&
-    !loading;
 
   return (
     <Dialog
@@ -215,7 +154,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ open, onClose
         </AppTypography>
         <IconButton
           onClick={handleClose}
-          disabled={loading}
+          disabled={isSubmitting}
           sx={{
             color: 'primary.contrastText',
             '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' },
@@ -227,7 +166,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ open, onClose
 
       {/* Content */}
       <DialogContent sx={{ p: 3, mt: 2 }}>
-        <Box component="form" onSubmit={handleSubmit} noValidate>
+        <Box component="form" onSubmit={handleSubmit(onSubmitForm)} noValidate>
           {/* Mensajes de estado */}
           {error && (
             <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError(null)}>
@@ -242,62 +181,69 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ open, onClose
           )}
 
           {/* Contraseña actual */}
-          <TextField
-            ref={currentPasswordRef}
-            fullWidth
-            type={showCurrentPassword ? 'text' : 'password'}
-            label="Contraseña Actual"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            onBlur={() => setTouched((prev) => ({ ...prev, currentPassword: true }))}
-            error={!!getFieldError('currentPassword')}
-            helperText={getFieldError('currentPassword')}
-            disabled={loading}
-            sx={{ mb: 2, mt: 1 }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                    edge="end"
-                    disabled={loading}
-                  >
-                    {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
+          <Controller
+            name="currentPassword"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                {...field}
+                fullWidth
+                type={showCurrentPassword ? 'text' : 'password'}
+                label="Contraseña Actual"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                disabled={isSubmitting}
+                sx={{ mb: 2, mt: 1 }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                        edge="end"
+                        disabled={isSubmitting}
+                      >
+                        {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
           />
 
           {/* Nueva contraseña */}
-          <TextField
-            fullWidth
-            type={showNewPassword ? 'text' : 'password'}
-            label="Nueva Contraseña"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            onBlur={() => setTouched((prev) => ({ ...prev, newPassword: true }))}
-            error={!!getFieldError('newPassword')}
-            helperText={getFieldError('newPassword')}
-            disabled={loading}
-            sx={{ mb: 2 }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowNewPassword(!showNewPassword)}
-                    edge="end"
-                    disabled={loading}
-                  >
-                    {showNewPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
+          <Controller
+            name="newPassword"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                {...field}
+                fullWidth
+                type={showNewPassword ? 'text' : 'password'}
+                label="Nueva Contraseña"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                disabled={isSubmitting}
+                sx={{ mb: 2 }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        edge="end"
+                        disabled={isSubmitting}
+                      >
+                        {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
           />
 
           {/* Indicadores de validación de contraseña */}
-          {newPassword && (
+          {watchedNewPassword && (
             <Paper
               elevation={0}
               sx={{
@@ -336,42 +282,46 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ open, onClose
           )}
 
           {/* Confirmar contraseña */}
-          <TextField
-            fullWidth
-            type={showConfirmPassword ? 'text' : 'password'}
-            label="Confirmar Nueva Contraseña"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            onBlur={() => setTouched((prev) => ({ ...prev, confirmPassword: true }))}
-            error={!!getFieldError('confirmPassword')}
-            helperText={getFieldError('confirmPassword')}
-            disabled={loading}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    edge="end"
-                    disabled={loading}
-                  >
-                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
+          <Controller
+            name="confirmNewPassword"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                {...field}
+                fullWidth
+                type={showConfirmPassword ? 'text' : 'password'}
+                label="Confirmar Nueva Contraseña"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                disabled={isSubmitting}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        edge="end"
+                        disabled={isSubmitting}
+                      >
+                        {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
           />
         </Box>
       </DialogContent>
 
       {/* Actions */}
       <DialogActions sx={{ p: 3, pt: 1 }}>
-        <LoadingButton onClick={handleClose} disabled={loading} variant="text" sx={{ mr: 1 }}>
+        <LoadingButton onClick={handleClose} disabled={isSubmitting} variant="text" sx={{ mr: 1 }}>
           Cancelar
         </LoadingButton>
         <LoadingButton
-          onClick={handleSubmit}
-          loading={loading}
-          disabled={!canSubmit}
+          onClick={handleSubmit(onSubmitForm)}
+          loading={isSubmitting}
+          disabled={isSubmitting}
           variant="contained"
           loadingIndicator={
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

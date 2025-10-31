@@ -10,6 +10,7 @@ import UserData from '../components/profileView/UserData';
 import ChangePasswordModal from '../components/modals/ChangePasswordModal';
 import { useChangePassword } from '../../domain/hooks/useChangePassword';
 import { useUserProfile } from '../../domain/hooks/useUserProfile';
+import { type ChangePasswordSchema } from '../../domain/validators/changePasswordSchema';
 import { ROUTES } from '../../../../router/routes';
 
 // Tipo temporal para simular datos del usuario
@@ -163,11 +164,8 @@ const ProfileScreen: React.FC = () => {
   };
 
   // Función para enviar cambio de contraseña a la API
-  const handlePasswordSubmit = async (
-    currentPassword: string,
-    newPassword: string
-  ): Promise<void> => {
-    return changePassword(currentPassword, newPassword);
+  const handlePasswordSubmit = async (data: ChangePasswordSchema): Promise<void> => {
+    return changePassword(data);
   };
 
   return (
