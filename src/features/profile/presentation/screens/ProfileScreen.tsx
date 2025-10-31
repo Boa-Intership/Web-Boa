@@ -20,6 +20,7 @@ interface User {
   complemento?: string;
   number: string;
   address?: string;
+  rol?: string;
   // businessName?: string;
   // billingDocType?: string;
   // billingNit?: string;
@@ -40,6 +41,7 @@ const ProfileScreen: React.FC = () => {
     complemento: '',
     number: '',
     address: '',
+    rol: '',
     // businessName: '',
     // billingDocType: '',
     // billingNit: '',
@@ -56,6 +58,7 @@ const ProfileScreen: React.FC = () => {
         complemento: apiUserData.complement || '',
         number: apiUserData.phone ? `+591${apiUserData.phone}` : '',
         address: apiUserData.address || '',
+        rol: apiUserData.roles.length > 0 ? apiUserData.roles[0].name : '',
         // businessName: apiUserData.billingData[0].businessName || '',
         // billingDocType: String(apiUserData.billingData[0].docType) || '',
         // billingNit: apiUserData.billingData[0].nit || '',
@@ -150,6 +153,7 @@ const ProfileScreen: React.FC = () => {
             Mi Perfil
           </AppTypography>
         </Grid>
+
         <Grid item>
           <Button
             variant="text"

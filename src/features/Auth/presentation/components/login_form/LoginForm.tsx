@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Box, Button, FormControl, Link, TextField } from '@mui/material';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, type FieldPath } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AppTypography } from 'ui';
 import ForgotPassword from './ForgotPassword';
 import { loginSchema, LoginSchema } from '../../../domain/validators/loginSchema';
-
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 interface LoginFormProps {
   onSubmit: (data: LoginSchema) => void;
   isLoading?: boolean;
@@ -18,12 +18,14 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setError,
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     mode: 'onBlur',
     defaultValues: {
       email: '',
       password: '',
+      captcha: '',
     },
   });
 
@@ -36,9 +38,22 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
   };
 
   const onFormSubmit = (data: LoginSchema) => {
+    const value = String(data.captcha ?? '').trim();
+    const valid = validateCaptcha(value);
+    if (!valid) {
+      setError('captcha' as FieldPath<LoginSchema>, {
+        type: 'validate',
+        message: 'Captcha incorrecto',
+      });
+      return;
+    }
+
     onSubmit(data);
   };
 
+  React.useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
   return (
     <>
       <AppTypography color={'primary'} variant="h3Regular" sx={{ pb: '8px' }}>
@@ -103,6 +118,29 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
           />
         </FormControl>
         <ForgotPassword open={open} handleClose={handleClose} />
+
+        {/* Captcha field */}
+        <FormControl>
+          <AppTypography variant="smallRegular">Captcha</AppTypography>
+          <LoadCanvasTemplate reloadText="cambiar" color="primary" />
+          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: 1 }}>
+            <Controller
+              name="captcha"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  error={!!errors.captcha}
+                  helperText={errors.captcha?.message}
+                  id="captcha"
+                  placeholder="Respuesta"
+                  required
+                  size="small"
+                />
+              )}
+            />
+          </Box>
+        </FormControl>
         <Button type="submit" fullWidth variant="contained" disabled={isSubmitting || isLoading}>
           {isSubmitting || isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
         </Button>
