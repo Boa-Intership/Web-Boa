@@ -139,20 +139,7 @@ const CustomerServiceSection: FC = () => {
           </AppGrid>
         </AppGrid>
 
-        <AppButton
-          size="large"
-          color="primary"
-          onClick={handleButtonClick}
-          sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'bold',
-            px: 4,
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              transform: 'scale(1.05)',
-            },
-          }}
-        >
+        <AppButton size="medium" color="primary" onClick={handleButtonClick}>
           {data.texto_boton}
         </AppButton>
       </AppContainer>

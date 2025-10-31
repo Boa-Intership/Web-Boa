@@ -55,14 +55,31 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
     const next = Math.min(current + 1, items.length - 1);
     setCurrent(next);
   };
+  const style = {
+    minWidth: 0,
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    zIndex: 100,
+    borderRadius: '50%',
+    width: 44,
+    height: 44,
+    opacity: 1,
+    p: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'background 0.2s, border 0.2s',
+    '&:hover': {},
+  };
 
   return (
-    <AppContainer sx={{ position: 'relative', width: '100%', maxWidth: 400, mx: 'auto', py: 4 }}>
+    <AppContainer sx={{ position: 'relative', width: '100%' }}>
       <Box
         sx={{
           position: 'relative',
           width: '100%',
-          height: { xs: 500, md: 620 },
+          height: { xs: 300, md: 720 },
           overflow: 'hidden',
           borderRadius: 4,
         }}
@@ -73,6 +90,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
             sx={{
               position: 'absolute',
               width: '100%',
+
               height: '100%',
               opacity: idx === current ? 1 : 0,
               zIndex: idx === current ? 2 : 1,
@@ -85,8 +103,9 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
             <Box
               sx={{
                 position: 'relative',
-                width: { xs: '90%', md: '70%' },
-                height: { xs: '90%', md: '80%' },
+                width: '90%',
+                height: '90%',
+
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -96,8 +115,8 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
                 src={item.imagen_url}
                 alt={item.titulo || 'Imagen'}
                 style={{
-                  width: '120%',
-                  height: '120%',
+                  width: '100%',
+                  height: '100%',
                   objectFit: 'contain',
                   boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
                   display: 'block',
@@ -150,7 +169,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
           zIndex: 10,
           display: 'flex',
           left: '50%',
-          bottom: 16,
+          backgroundColor: 'rgba(194, 194, 194, 0.3)',
           transform: 'translateX(-50%)',
           gap: 1.5,
         }}
@@ -179,24 +198,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       <AppButton
         onClick={handlePrev}
         disabled={current === 0}
-        sx={{
-          minWidth: 0,
-          position: 'absolute',
-          top: '50%',
-          left: 0,
-          transform: 'translateY(-50%)',
-          zIndex: 100,
-          borderRadius: '50%',
-          width: 44,
-          height: 44,
-          opacity: 1,
-          p: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'background 0.2s, border 0.2s',
-          '&:hover': {},
-        }}
+        sx={{ ...style, left: 0 }}
         aria-label="Anterior"
       >
         <ArrowBackIosNewIcon fontSize="small" />
@@ -204,23 +206,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       <AppButton
         onClick={handleNext}
         disabled={current === items.length - 1}
-        sx={{
-          minWidth: 0,
-          position: 'absolute',
-          top: '50%',
-          right: 0,
-          transform: 'translateY(-50%)',
-          zIndex: 100,
-          width: 44,
-          height: 44,
-          opacity: 1,
-          p: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'background 0.2s, border 0.2s',
-          '&:hover': {},
-        }}
+        sx={{ ...style, right: 0 }}
         aria-label="Siguiente"
       >
         <ArrowForwardIosIcon fontSize="small" />
