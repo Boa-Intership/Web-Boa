@@ -36,6 +36,12 @@ const navItems = [
   },
   {
     key: 'tracking',
+    label: 'Gestion de Usuarios',
+    route: ROUTES.GESTION,
+    icon: <TodayOutlinedIcon />,
+  },
+  {
+    key: 'tracking',
     label: 'Seguimiento',
     route: ROUTES.TRACKING,
     icon: <TodayOutlinedIcon />,
@@ -86,7 +92,7 @@ const AppAppBar: React.FC = () => {
 
   const [openKey, setOpenKey] = React.useState<string | null>(null);
   const [menuItems, setMenuItems] = React.useState(() =>
-  navItems.filter((i) => i.key !== 'tracking')
+    navItems.filter((i) => i.key !== 'tracking')
   );
   // Idioma
   const [anchorLang, setAnchorLang] = React.useState<null | HTMLElement>(null);
@@ -120,22 +126,19 @@ const AppAppBar: React.FC = () => {
 
   // Efecto para cargar menú según rol del usuario (se ejecuta al montar)
   React.useEffect(() => {
-   
     (async () => {
       try {
         const token = localStorage.getItem('token');
         if (!token) {
           // usuario no autenticado -> ocultar tracking
-           setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+          setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
           return;
         }
         const user = await getUserProfile(token);
-        const isAdmin =
-          Array.isArray(user.roles) &&
-          user.roles.some((r: any) => r.id === 2);
-        
+        const isAdmin = Array.isArray(user.roles) && user.roles.some((r: any) => r.id === 2);
+
         if (isAdmin) {
-          setMenuItems(navItems.filter((i) => i.key === 'tracking' ));
+          setMenuItems(navItems.filter((i) => i.key === 'tracking'));
         } else {
           setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
         }
