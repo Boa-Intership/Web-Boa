@@ -65,9 +65,7 @@ const App: React.FC = () => (
                 path={`${ROUTES.TRACKING.replace('/', '')}/:flightId/:manifestId/:packageId`}
                 element={<PackageDetailScreen />}
               />
-            </Route>
-            {/* Administracion */}
-            <Route>
+              {/* Administracion */}
               <Route path={ROUTES.GESTION.replace('/', '')} element={<UserManagementScreen />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />

@@ -1,36 +1,4 @@
-/*import React, { useEffect, useState } from 'react';
-import { getUsers, updateUser } from '../../data/services/user.service';
-import { User } from '../../types/user.types';
-import { UserCard } from '../components/UserCard';
-import { Container, Typography } from '@mui/material';
-
-const UserManagementScreen = () => {
-  const [users, setUsers] = useState<User[]>([]);
-
-  useEffect(() => {
-    getUsers().then(setUsers);
-  }, []);
-
-  const handleUpdate = async (updatedUser: User) => {
-    await updateUser(updatedUser);
-    setUsers((prev) => prev.map((user) => (user.id === updatedUser.id ? updatedUser : user)));
-  };
-
-  return (
-    <Container>
-      <Typography variant="h4" mt={4} mb={2}>
-        Gestión de Usuarios
-      </Typography>
-      {users.map((user) => (
-        <UserCard key={user.id} user={user} onUpdate={handleUpdate} />
-      ))}
-    </Container>
-  );
-};
-
-export default UserManagementScreen;*/
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Typography,
@@ -51,16 +19,12 @@ import {
   Container,
 } from '@mui/material';
 import { Security, Group, Person, FilterList, PersonAddAlt } from '@mui/icons-material';
+import { getRoles } from '../../data/services/role.service';
+import { getUsers } from '../../data/services/user.service';
+import { Role } from '../../domain/models/role.model';
+import { User } from '../../domain/models/user.model';
 
-type TipoUsuario = 'Administrador' | 'Funcionario' | 'Usuario';
-
-interface User {
-  id: number;
-  nombre: string;
-  email: string;
-  tipo: TipoUsuario;
-  rolesFuncionario?: string[];
-}
+type TipoUsuario = string;
 
 const rolesDisponibles = [
   'Revisor / Recepción de Paquetes',
@@ -74,52 +38,37 @@ const rolesDisponibles = [
   'Administrador (Admin General)',
 ];
 
-const usuariosIniciales: User[] = [
-  {
-    id: 1,
-    nombre: 'Ana García López',
-    email: 'ana.garcia@empresa.com',
-    tipo: 'Administrador',
-  },
-  {
-    id: 2,
-    nombre: 'Carlos Rodríguez',
-    email: 'carlos.rodriguez@empresa.com',
-    tipo: 'Funcionario',
-    rolesFuncionario: ['Facturador', 'Control Físico', 'Revisor / Recepción de Paquetes'],
-  },
-  {
-    id: 3,
-    nombre: 'María Fernández',
-    email: 'maria.fernandez@empresa.com',
-    tipo: 'Usuario',
-  },
-  {
-    id: 4,
-    nombre: 'David Martínez',
-    email: 'david.martinez@empresa.com',
-    tipo: 'Funcionario',
-    rolesFuncionario: ['Encargado de Aeronave', 'Inspector NAABOL'],
-  },
-  {
-    id: 5,
-    nombre: 'Laura Sánchez',
-    email: 'laura.sanchez@empresa.com',
-    tipo: 'Funcionario',
-    rolesFuncionario: [],
-  },
-];
-
 const UserManagement: React.FC = () => {
-  const [usuarios, setUsuarios] = useState<User[]>(usuariosIniciales);
+  const [usuarios, setUsuarios] = useState<User[]>([]);
   const [filtro, setFiltro] = useState<TipoUsuario | 'Todos'>('Todos');
   const [busqueda, setBusqueda] = useState('');
+  const [rolesApi, setRolesApi] = useState<Role[]>([]);
 
-  const handleTipoChange = (id: number, nuevoTipo: TipoUsuario) => {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    const fetchData = async () => {
+      try {
+        const [rolesData, usersData] = await Promise.all([getRoles(token), getUsers(token)]); // Obtener roles y usuarios en paralelo
+        setRolesApi(rolesData);
+        setUsuarios(usersData);
+      } catch (error) {
+        console.error('Error al cargar datos:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleTipoChange = (id: number, nuevoRol: TipoUsuario) => {
     setUsuarios((prev) =>
       prev.map((u) =>
         u.id === id
-          ? { ...u, tipo: nuevoTipo, rolesFuncionario: nuevoTipo === 'Funcionario' ? [] : [] }
+          ? {
+              ...u,
+              roles: [{ id: 0, name: nuevoRol, description: '' }],
+              rolesFuncionario: nuevoRol === 'FUNCIONARIO' ? u.rolesFuncionario || [] : [],
+            }
           : u
       )
     );
@@ -142,19 +91,19 @@ const UserManagement: React.FC = () => {
 
   const filtrados = usuarios.filter(
     (u) =>
-      (filtro === 'Todos' || u.tipo === filtro) &&
-      (u.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      (filtro === 'Todos' || u.roles.some((r) => r.name === filtro)) &&
+      (u.name.toLowerCase().includes(busqueda.toLowerCase()) ||
         u.email.toLowerCase().includes(busqueda.toLowerCase()))
   );
 
   const contadores = {
-    Administrador: usuarios.filter((u) => u.tipo === 'Administrador').length,
-    Funcionario: usuarios.filter((u) => u.tipo === 'Funcionario').length,
-    Usuario: usuarios.filter((u) => u.tipo === 'Usuario').length,
+    Administrador: usuarios.filter((u) => u.roles.some((r) => r.name === 'ADMIN')).length,
+    Funcionario: usuarios.filter((u) => u.roles.some((r) => r.name === 'FUNCIONARIO')).length,
+    Usuario: usuarios.filter((u) => u.roles.some((r) => r.name === 'USER')).length,
   };
 
   return (
-    <Container>
+    <Container sx={{ py: 4, minHeight: '80vh' }}>
       <Typography variant="h4" fontWeight="bold" gutterBottom>
         Gestión de Usuarios
       </Typography>
@@ -229,9 +178,11 @@ const UserManagement: React.FC = () => {
             startAdornment={<FilterList sx={{ mr: 1 }} />}
           >
             <MenuItem value="Todos">Todos los tipos</MenuItem>
-            <MenuItem value="Administrador">Administrador</MenuItem>
-            <MenuItem value="Usuario">Usuario</MenuItem>
-            <MenuItem value="Funcionario">Funcionario</MenuItem>
+            {rolesApi.map((rol) => (
+              <MenuItem key={rol.id} value={rol.name}>
+                {rol.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <Button
@@ -247,7 +198,7 @@ const UserManagement: React.FC = () => {
       {filtrados.map((u) => (
         <Card key={u.id} sx={{ mb: 3 }}>
           <CardContent>
-            <Typography variant="h6">{u.nombre}</Typography>
+            <Typography variant="h6">{u.name}</Typography>
             <Typography variant="body2" color="text.secondary" mb={2}>
               {u.email}
             </Typography>
@@ -255,15 +206,20 @@ const UserManagement: React.FC = () => {
             <Typography variant="subtitle2">Tipo de Usuario:</Typography>
             <RadioGroup
               row
-              value={u.tipo}
+              value={u.roles?.[0]?.name}
               onChange={(e) => handleTipoChange(u.id, e.target.value as TipoUsuario)}
             >
-              <FormControlLabel value="Administrador" control={<Radio />} label="Administrador" />
-              <FormControlLabel value="Usuario" control={<Radio />} label="Usuario" />
-              <FormControlLabel value="Funcionario" control={<Radio />} label="Funcionario" />
+              {rolesApi.map((rol) => (
+                <FormControlLabel
+                  key={rol.id}
+                  value={rol.name}
+                  control={<Radio />}
+                  label={rol.name}
+                />
+              ))}
             </RadioGroup>
 
-            {u.tipo === 'Funcionario' && (
+            {u.roles.some((r) => r.name === 'FUNCIONARIO') && (
               <>
                 <Typography variant="subtitle2" mt={2}>
                   Roles de Funcionario:
