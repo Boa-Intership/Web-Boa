@@ -37,6 +37,12 @@ const navItems = [
   },
   {
     key: 'tracking',
+    label: 'Gestion de Usuarios',
+    route: ROUTES.GESTION,
+    icon: <TodayOutlinedIcon />,
+  },
+  {
+    key: 'tracking',
     label: 'Seguimiento',
     route: ROUTES.TRACKING,
     icon: <TodayOutlinedIcon />,
@@ -88,6 +94,7 @@ const AppAppBar: React.FC = () => {
   const [openKey, setOpenKey] = React.useState<string | null>(null);
   const [menuItems, setMenuItems] = React.useState(() =>
     navItems.filter((i) => i.key !== 'tracking')
+    navItems.filter((i) => i.key !== 'tracking')
   );
   // Idioma
   const [anchorLang, setAnchorLang] = React.useState<null | HTMLElement>(null);
@@ -135,6 +142,7 @@ const AppAppBar: React.FC = () => {
 
         if (!mounted) return;
         if (isAdmin) {
+          setMenuItems(navItems.filter((i) => i.key === 'tracking'));
           setMenuItems(navItems.filter((i) => i.key === 'tracking'));
         } else {
           // usuarios normales no ven tracking
