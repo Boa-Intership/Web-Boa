@@ -28,7 +28,7 @@ export const ROUTES = {
   // Administración
   ADMIN: '/admin',
   DASHBOARD: '/dashboard',
-  GESTION: 'gestion-usuarios',
+  GESTION: '/gestion-usuarios',
 
   // Existentes
   COTIZAR: '/cotizar',
@@ -55,6 +55,7 @@ export const ROUTE_ACCESS: Record<string, RouteAccess> = {
   [ROUTES.PREREGISTRO]: { path: ROUTES.PREREGISTRO, requiresAuth: true },
   [ROUTES.PERFIL]: { path: ROUTES.PERFIL, requiresAuth: true },
   [ROUTES.TRACKING]: { path: ROUTES.TRACKING, requiresAuth: true, requiresAdmin: true },
+  [ROUTES.GESTION]: { path: ROUTES.GESTION, requiresAuth: true, requiresAdmin: true },
   [ROUTES.ADMIN]: { path: ROUTES.ADMIN, requiresAuth: true },
   [ROUTES.DASHBOARD]: { path: ROUTES.DASHBOARD, requiresAuth: true },
   [ROUTES.COTIZAR]: { path: ROUTES.COTIZAR, requiresAuth: true },
