@@ -11,7 +11,7 @@ interface CacheData {
 }
 
 /**
- * Persistidor de React Query Cache (Solución manual sin dependencias)
+ * Persistidor de React Query Cache (Solución manual sin dependencies)
  * Guarda el cache en localStorage y lo restaura en recargas
  */
 export class QueryCachePersistor {
@@ -56,7 +56,7 @@ export class QueryCachePersistor {
         queryClient.setQueryData(key, (state as any).data);
       });
 
-      console.log('✅ Cache restaurado del localStorage');
+      console.log('Cache restaurado del localStorage');
     } catch (error) {
       console.error('Error restoring query cache:', error);
     }

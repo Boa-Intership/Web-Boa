@@ -27,15 +27,21 @@ class HttpClient {
   }
 
   private setupInterceptors(): void {
-    // Request interceptor - agregar token de autenticación
+    // Request interceptor - add token of auth
     this.client.interceptors.request.use(
       (config) => {
-        const token = this.getAuthToken();
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
+        // No rewrite Authorization from es client Strapi
+        if (!this.isStrapi) {
+          const token = this.getAuthToken();
+          if (token) {
+            if (!config.headers) {
+              config.headers = {} as any;
+            }
+            (config.headers as any).Authorization = `Bearer ${token}`;
+          }
         }
 
-        config.headers['ngrok-skip-browser-warning'] = 'true';
+        (config.headers as any)['ngrok-skip-browser-warning'] = 'true';
         return config;
       },
       (error: AxiosError) => {
@@ -43,7 +49,7 @@ class HttpClient {
       }
     );
 
-    // Response interceptor - manejar errores globalmente
+    // Response interceptor - manager bugs global
     this.client.interceptors.response.use(
       (response: AxiosResponse) => {
         return response;
@@ -144,11 +150,10 @@ class HttpClient {
   }
 }
 
-// Cliente HTTP para la API principal
+// Client HTTP para la API principal
 export const httpClient = new HttpClient();
 
-// Cliente HTTP para Strapi
+// Client HTTP para Strapi
 export const strapiClient = new HttpClient(true);
 
-// Exportar el cliente principal por defecto
 export default httpClient;

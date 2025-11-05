@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// 👇 recreamos __dirname para ESM
+// 👇 we recreate __dirname para ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -15,17 +15,17 @@ export default defineConfig({
   server: {
     proxy: {
       // Proxy para CMS Strapi (local)
-      '/api/cms': {
-        target: 'https://effortless-strength-42ee47afff.strapiapp.com/',
+      '/api/cms': { 
+        target: 'https://effortless-strength-42ee47afff.strapiapp.com',
         //target: 'http://localhost:1337/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/cms/, '/api'),
       },
-      // Proxy para Backend API - SOLO para desarrollo local
-      // En producción no se usa, va directo a VITE_BACKEND_API_URL
+      // Proxy para Backend API - SOLO para development local
+      // En production no se usa, va straight a VITE_BACKEND_API_URL
       '/api': {
-        //target: 'http://localhost:8080', // Cambiar por tu servidor de desarrollo
-        target: 'http://192.168.150.220', // Cambiar por tu servidor de desarrollo
+        //target: 'http://localhost:8080', // change por tu server de development
+        target: 'http://192.168.150.220', // change por tu server de development
         changeOrigin: true,
         secure: false,
       },
@@ -56,13 +56,4 @@ export default defineConfig({
       exclude: ['node_modules/', 'src/setupTests.ts'],
     },
   },
-  /*server: {
-    proxy: {
-      '/api': {
-        //target: 'http://192.168.150.220',
-        target: 'http://ec2-54-92-229-60.compute-1.amazonaws.com',
-        changeOrigin: true,
-      },
-    },
-  },*/
 });

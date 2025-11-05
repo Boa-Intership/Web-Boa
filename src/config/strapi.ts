@@ -1,12 +1,14 @@
-// Configuración centralizada para Strapi CMS
+// Configuration centralized para Strapi CMS
 export const STRAPI_CONFIG = {
-  // URL base para Strapi en producción vs desarrollo
-  BASE_URL: '/api/cms',
+  // URL base para Strapi en production vs development
+  BASE_URL: import.meta.env.VITE_STRAPI_URL
+    ? `${import.meta.env.VITE_STRAPI_URL.replace(/\/+$/, '')}/api`
+    : '/api/cms',
 
-  // Token de autenticación si es necesario
+  // Authentication token if required
   API_TOKEN: import.meta.env.VITE_STRAPI_API_TOKEN,
 
-  // Configuración común para requests
+  // Configuration common para requests
   HEADERS: {
     'Content-Type': 'application/json',
     ...(import.meta.env.VITE_STRAPI_API_TOKEN && {

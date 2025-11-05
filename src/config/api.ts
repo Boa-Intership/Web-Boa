@@ -1,12 +1,14 @@
-// Configuración global de la API
+// Configuration global API
 export const API_CONFIG = {
-  // URL base del backend NestJS - usa el proxy de Vite en desarrollo
-  BASE_URL: import.meta.env.VITE_BACKEND_API_URL,
+  // URL base del backend NestJS - usa el proxy de Vite en development
+  BASE_URL: import.meta.env.VITE_BACKEND_API_URL
+    ? `${import.meta.env.VITE_BACKEND_API_URL.replace(/\/+$/, '')}/api`
+    : '/api',
   TIMEOUT: 10000,
   HEADERS: {
     'Content-Type': 'application/json',
   },
-  // Endpoints comunes
+  // Endpoints common
   ENDPOINTS: {
     AUTH: '/auth',
     TRACKING: '/tracking',
