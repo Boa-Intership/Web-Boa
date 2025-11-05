@@ -15,10 +15,6 @@ export const useRouteAccess = () => {
 
     // Admin-only routes: require auth + ADMIN role
     if (isAdminRoute(path)) {
-      if (!isAuthenticated) {
-        navigate(ROUTES.LANDING, { state: { from: location } });
-        return false;
-      }
       try {
         const token = localStorage.getItem('token');
         if (!token) return;

@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
+import { getUserProfile } from '@/features/pre-registration/data/services/user.service';
 
 interface User {
   name: string;
   email: string;
+  roles?: Array<{ id: number; name: string }>;
 }
 
 interface AuthContextType {
@@ -44,12 +46,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const token = localStorage.getItem('token');
-        // Aquí harías una llamada a tu API para validar el token
-        if (token) {
+        const storedToken = localStorage.getItem('token');
+        // Si hay token en localStorage, restaurarlo en el estado y obtener perfil
+        if (storedToken) {
+          setToken(storedToken);
           setIsAuthenticated(true);
+          try {
+            const profile = await getUserProfile(storedToken);
+            if (profile) {
+              setUser(profile);
+            }
+          } catch (e) {
+            // Si falla obtener perfil, limpiar autenticación
+            console.debug('AuthContext: failed to fetch profile on init', e);
+            setIsAuthenticated(false);
+            setToken(null);
+            setUser(null);
+            localStorage.removeItem('token');
+            localStorage.removeItem('rToken');
+          }
         }
-      } catch (error) {
+      } catch {
         setIsAuthenticated(false);
       } finally {
         setIsLoading(false); // <--- FINALIZAR LA CARGA

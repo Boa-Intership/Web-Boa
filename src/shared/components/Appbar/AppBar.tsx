@@ -126,7 +126,7 @@ const AppAppBar: React.FC = () => {
   };
 
   // Efecto para cargar menú según rol del usuario (se ejecuta al montar)
-  const { isAuthenticated, token } = useAuth();
+  const { isAuthenticated, token, user } = useAuth();
 
   React.useEffect(() => {
     let mounted = true;
@@ -136,8 +136,15 @@ const AppAppBar: React.FC = () => {
           if (mounted) setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
           return;
         }
-        const user = await getUserProfile(token);
-        const isAdmin = Array.isArray(user.roles) && user.roles.some((r: any) => r.id === 2);
+
+        // Preferir el user ya cargado en el contexto para evitar llamadas redundantes
+        let profile = user as any | undefined;
+        if (!profile) {
+          profile = await getUserProfile(token);
+        }
+
+        const isAdmin =
+          Array.isArray(profile?.roles) && profile.roles.some((r: any) => r.name === 'ADMIN');
 
         if (!mounted) return;
         if (isAdmin) {
@@ -155,7 +162,7 @@ const AppAppBar: React.FC = () => {
     return () => {
       mounted = false;
     };
-  }, [isAuthenticated, token]);
+  }, [isAuthenticated, token, user]);
 
   return (
     <>
