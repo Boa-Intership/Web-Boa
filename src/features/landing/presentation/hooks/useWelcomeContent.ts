@@ -13,7 +13,7 @@ export const useWelcomeContent = () => {
       return await strapiUseCase.execute();
     } catch (strapiError) {
       console.warn('Strapi fallido, usando datos estáticos:', strapiError);
-      
+
       // Fallback a datos estáticos
       const staticRepository = new StaticWelcomeContentRepository();
       const staticUseCase = new GetWelcomeContentUseCase(staticRepository);
