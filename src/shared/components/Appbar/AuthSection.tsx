@@ -17,7 +17,6 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import { useLogout } from '../../../features/Auth/presentation/useAuth.hooks';
-import { useUserProfile } from '../../../features/profile/hooks/useUserProfile';
 
 export const AuthSection = () => {
   const { isAuthenticated, logout, user } = useAuth();
@@ -26,9 +25,8 @@ export const AuthSection = () => {
   const open = Boolean(anchorEl);
   const logoutMutation = useLogout();
 
-  const { userData: apiUserData } = useUserProfile();
-  const displayName = apiUserData?.name || user?.name || 'Usuario';
-  const displayEmail = apiUserData?.email || user?.email || 'correo@ejemplo.com';
+  const displayName = user?.name || 'Usuario';
+  const displayEmail = user?.email || 'correo@ejemplo.com';
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
