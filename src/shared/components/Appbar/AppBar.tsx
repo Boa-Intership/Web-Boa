@@ -36,7 +36,7 @@ const navItems = [
     icon: <TodayOutlinedIcon />,
   },
   {
-    key: 'tracking',
+    key: 'gestion',
     label: 'Gestion de Usuarios',
     route: ROUTES.GESTION,
     icon: <TodayOutlinedIcon />,
@@ -126,36 +126,51 @@ const AppAppBar: React.FC = () => {
   };
 
   // Efecto para cargar menú según rol del usuario (se ejecuta al montar)
-  const { isAuthenticated, token } = useAuth();
+  const { isAuthenticated, token, user } = useAuth();
 
   React.useEffect(() => {
     let mounted = true;
     (async () => {
       try {
         if (!isAuthenticated || !token) {
-          if (mounted) setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+          if (mounted)
+            setMenuItems(navItems.filter((i) => i.key !== 'tracking' && i.key !== 'gestion'));
+          console.log('usuario no autenticado, menú sin tracking ni gestión');
           return;
         }
-        const user = await getUserProfile(token);
-        const isAdmin = Array.isArray(user.roles) && user.roles.some((r: any) => r.id === 2);
+
+        // Preferir el user ya cargado en el contexto para evitar llamadas redundantes
+        let profile = user as any | undefined;
+        if (!profile) {
+          profile = await getUserProfile(token);
+        }
+
+        const isAdmin =
+          Array.isArray(profile?.roles) && profile.roles.some((r: any) => r.name === 'ADMIN');
 
         if (!mounted) return;
         if (isAdmin) {
-          setMenuItems(navItems.filter((i) => i.key === 'tracking'));
+          setMenuItems(
+            navItems.filter(
+              (i) => i.key !== 'Pre-Registro' && i.key !== 'informacion' && i.key !== 'itinerarios'
+            )
+          );
+          console.log('usuario administrador, menú con tracking y gestión');
         } else {
           // usuarios normales no ven tracking
-          setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+          setMenuItems(navItems.filter((i) => i.key !== 'tracking' && i.key !== 'gestion'));
+          console.log('usuario normal, menú sin tracking ni gestión');
         }
       } catch (e) {
         if (!mounted) return;
-        setMenuItems(navItems.filter((i) => i.key !== 'tracking'));
+        setMenuItems(navItems.filter((i) => i.key !== 'tracking' && i.key !== 'gestion'));
         console.error('Error al cargar perfil de usuario para menú:', e);
       }
     })();
     return () => {
       mounted = false;
     };
-  }, [isAuthenticated, token]);
+  }, [isAuthenticated, token, user]);
 
   return (
     <>
