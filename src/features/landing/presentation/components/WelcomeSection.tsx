@@ -200,7 +200,7 @@ const WelcomeSection: FC = () => {
             />
           </AppGrid>
         </AppGrid>
-        {/* Estadísticas */}
+        {/* Estadísticas
         <AppBox sx={{ boxShadow: 2, py: 4, px: 4, borderRadius: 4 }}>
           <AppGrid container>
             {exps.map((item) => (
@@ -209,7 +209,7 @@ const WelcomeSection: FC = () => {
               </AppGrid>
             ))}
           </AppGrid>
-        </AppBox>
+        </AppBox> */}
       </AppContainer>
     </AppBox>
   );

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Button, Stack, TextField } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 import portada from 'assets/GGI_portada1.webp';
 import { AppTypography } from 'ui';
 
@@ -37,27 +39,27 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
         </AppTypography>
         <AppTypography
           variant="h4Regular"
-          sx={{ textAlign: 'center', color: 'grey.200', mx: 'auto' }}
+          sx={{ textAlign: 'center', color: 'grey.200', mx: 'auto', my: 4 }}
         >
           Realiza el seguimiento de tus envios en tiempo real, con la seguridad y confianza de BoA
           Cargo.
         </AppTypography>
 
         {/* Buscador */}
-        {/* <Stack
+        <Stack
           direction={{ xs: 'column', sm: 'row' }}
           spacing={2}
           alignItems="center"
           justifyContent="center"
         >
           <TextField
-            placeholder="N° de guía o tracking"
+            placeholder="Código de tracking"
             size="small"
             value={tracking}
             onChange={(e) => onTrackingChange(e.target.value)}
             sx={{
               bgcolor: 'background.default',
-              borderRadius: 10,
+              borderRadius: 2,
               flex: { xs: '1 1 100%', sm: '0 0 260px' }, // ancho flexible en móviles
               '& .MuiOutlinedInput-root': {
                 '& fieldset': { border: 'none' },
@@ -76,11 +78,11 @@ const Hero: React.FC<HeroProps> = ({ tracking, onTrackingChange, onTrack }) => {
             variant="contained"
             size="medium"
             onClick={onTrack}
-            sx={{ borderRadius: 10, px: 3 }}
+            sx={{ borderRadius: 2, px: 3 }}
           >
             Rastrear
           </Button>
-        </Stack> */}
+        </Stack>
       </Box>
     </Box>
   );
