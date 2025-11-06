@@ -140,14 +140,12 @@ const AppAppBar: React.FC = () => {
         }
 
         // Preferir el user ya cargado en el contexto para evitar llamadas redundantes
-        let profile = user as any | undefined;
-        if (!profile) {
-          profile = await getUserProfile(token);
-        }
+        let profile = undefined;
+        profile = await getUserProfile(token);
 
         const isAdmin =
           Array.isArray(profile?.roles) && profile.roles.some((r: any) => r.name === 'ADMIN');
-
+        console.log('Perfil de usuario cargado para menú:', profile);
         if (!mounted) return;
         if (isAdmin) {
           setMenuItems(
