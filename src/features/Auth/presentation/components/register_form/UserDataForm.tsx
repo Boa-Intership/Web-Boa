@@ -151,7 +151,7 @@ const UserDataForm: React.FC<UserDataFormProps> = ({ control, errors }) => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const isNumericField =
       (event.target as HTMLInputElement).name === 'number' ||
-      (event.target as HTMLInputElement).name === 'nit';
+      (event.target as HTMLInputElement).name === 'ci';
 
     if (!isNumericField) return;
 

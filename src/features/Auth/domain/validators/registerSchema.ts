@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const identificationSchema = z
   .string()
-  .min(1, 'El número de identificación es obligatorio')
+  .min(5, 'El número de identificación es obligatorio')
   .max(10, 'El número de identificación no puede tener más de 10 dígitos')
   .regex(/^[0-9]+$/, 'Solo se permiten números en la identificación');
 
@@ -25,7 +25,7 @@ const phoneSchema = z
     // Validar que tenga formato internacional básico
     return /^\+[1-9]\d{6,14}$/.test(value || '');
   }, 'Ingresa un número de teléfono válido')
-  .min(7, 'El celular debe tener al menos 7 dígitos')
+  .min(8, 'El celular debe tener al menos 8 dígitos')
   .max(15, 'El celular no puede tener más de 15 dígitos');
 
 export const createRegisterSchema = (isBillingRequired: boolean) => {
@@ -39,25 +39,37 @@ export const createRegisterSchema = (isBillingRequired: boolean) => {
         .string()
         .min(1, 'El nombre es obligatorio')
         .min(2, 'El nombre debe tener al menos 2 caracteres')
-        .max(50, 'El nombre no puede tener más de 50 caracteres'),
+        .max(50, 'El nombre no puede tener más de 50 caracteres')
+        .regex(/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/, 'El nombre solo puede contener letras y espacios'),
       password: z
         .string()
         .min(1, 'La contraseña es obligatoria')
         .min(8, 'La contraseña debe tener al menos 8 caracteres')
         .regex(/[a-z]/, 'La contraseña debe contener al menos una minúscula')
         .regex(/[A-Z]/, 'La contraseña debe contener al menos una mayúscula')
-        .regex(/[0-9]/, 'La contraseña debe contener al menos un número'),
+        .regex(/[0-9]/, 'La contraseña debe contener al menos un número')
+        .refine((val) => !val.startsWith(' '), 'La contraseña no puede iniciar con espacios'),
       confirmPassword: z.string().min(1, 'Debes confirmar tu contraseña'),
       ci: identificationSchema,
       nitComplemento: complementoSchema,
       number: phoneSchema,
-      address: z.string().optional(),
+      address: z
+        .string()
+        .optional()
+        .refine(
+          (value) => !value || /^[a-zA-Z0-9\s.,\-#°]+$/.test(value),
+          'La dirección solo puede contener letras, números, espacios, puntos, comas, guiones y #'
+        ),
       businessName: isBillingRequired
         ? z
             .string()
             .min(1, 'La razón social es obligatoria')
             .min(2, 'La razón social debe tener al menos 2 caracteres')
             .max(100, 'La razón social no puede tener más de 100 caracteres')
+            .regex(
+              /^[a-zA-Z0-9\s]+$/,
+              'La razón social solo puede contener letras, números y espacios'
+            )
         : z.string().optional(),
       billingDocType: isBillingRequired ? doctypeSchema : doctypeSchema.optional(),
       billingNit: isBillingRequired ? identificationSchema : z.string().optional(),
