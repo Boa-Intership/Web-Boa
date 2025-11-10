@@ -8,8 +8,9 @@ import ContactInfo from '../components/profileView/ContactInfo';
 import BillingInfo from '../components/profileView/BillingInfo';
 import UserData from '../components/profileView/UserData';
 import ChangePasswordModal from '../components/modals/ChangePasswordModal';
-import { useChangePassword } from '../../hooks/useChangePassword';
-import { useUserProfile } from '../../hooks/useUserProfile';
+import { useChangePassword } from '../../domain/hooks/useChangePassword';
+import { useUserProfile } from '../../domain/hooks/useUserProfile';
+import { type ChangePasswordSchema } from '../../domain/validators/changePasswordSchema';
 import { ROUTES } from '../../../../router/routes';
 
 // Tipo temporal para simular datos del usuario
@@ -31,7 +32,12 @@ const ProfileScreen: React.FC = () => {
   const navigate = useNavigate();
 
   // Hook para obtener datos del usuario desde la API
-  const { userData: apiUserData, loading: loadingProfile, error: profileError } = useUserProfile();
+  const {
+    userData: apiUserData,
+    loading: loadingProfile,
+    error: profileError,
+    updateUser,
+  } = useUserProfile();
 
   // Estado para datos editables del usuario
   const [userData, setUserData] = useState<User>({
@@ -56,7 +62,7 @@ const ProfileScreen: React.FC = () => {
         email: apiUserData.email || '',
         ci: apiUserData.ci || '',
         complemento: apiUserData.complement || '',
-        number: apiUserData.phone ? `+591${apiUserData.phone}` : '',
+        number: apiUserData.phone ? `${apiUserData.phone}` : '',
         address: apiUserData.address || '',
         rol: apiUserData.roles.length > 0 ? apiUserData.roles[0].name : '',
         // businessName: apiUserData.billingData[0].businessName || '',
@@ -72,6 +78,8 @@ const ProfileScreen: React.FC = () => {
   const [originalData, setOriginalData] = useState<User>(userData);
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [resetDataCards, setResetDataCards] = useState(false);
   const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
 
@@ -107,8 +115,26 @@ const ProfileScreen: React.FC = () => {
   // Guardar cambios
   const handleSaveChanges = async () => {
     try {
-      // TODO: Implementar llamada a la API
-      console.log('Guardando cambios:', userData);
+      // Construir objeto solo con los campos que cambiaron
+      const updates: { name?: string; address?: string; phone?: string } = {};
+
+      if (userData.name !== originalData.name) {
+        updates.name = userData.name;
+      }
+      if (userData.address !== originalData.address) {
+        updates.address = userData.address || undefined;
+      }
+      if (userData.number !== originalData.number) {
+        updates.phone = userData.number;
+      }
+
+      // Si no hay cambios, no hacer nada
+      if (Object.keys(updates).length === 0) {
+        setHasChanges(false);
+        return;
+      }
+
+      await updateUser(updates);
 
       setOriginalData(userData);
       setHasChanges(false);
@@ -118,6 +144,8 @@ const ProfileScreen: React.FC = () => {
       setTimeout(() => setResetDataCards(false), 100);
     } catch (error) {
       console.error('Error saving changes:', error);
+      setErrorMessage('Error al actualizar el perfil. Por favor, intenta nuevamente.');
+      setShowError(true);
     }
   };
 
@@ -137,11 +165,8 @@ const ProfileScreen: React.FC = () => {
   };
 
   // Función para enviar cambio de contraseña a la API
-  const handlePasswordSubmit = async (
-    currentPassword: string,
-    newPassword: string
-  ): Promise<void> => {
-    return changePassword(currentPassword, newPassword);
+  const handlePasswordSubmit = async (data: ChangePasswordSchema): Promise<void> => {
+    return changePassword(data);
   };
 
   return (
@@ -287,6 +312,18 @@ const ProfileScreen: React.FC = () => {
           icon={<Check />}
         >
           Perfil actualizado exitosamente
+        </Alert>
+      </Snackbar>
+
+      {/* Snackbar de error */}
+      <Snackbar
+        open={showError}
+        autoHideDuration={4000}
+        onClose={() => setShowError(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={() => setShowError(false)} severity="error" sx={{ width: '100%' }}>
+          {errorMessage}
         </Alert>
       </Snackbar>
 

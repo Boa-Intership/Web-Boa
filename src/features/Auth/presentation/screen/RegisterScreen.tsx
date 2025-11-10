@@ -147,6 +147,14 @@ const Register = () => {
     }
   };
 
+  const handleChangeEmail = () => {
+    // Limpiar estados y regresar a la vista de registro
+    setShowVerification(false);
+    setShowSuccess(false);
+    setUserEmail('');
+    setApiError('');
+  };
+
   const handleTermsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTermsAccepted(event.target.checked);
     if (event.target.checked) {
@@ -166,6 +174,7 @@ const Register = () => {
         email={userEmail}
         onVerificationSuccess={handleVerificationSuccess}
         onResendCode={handleResendCode}
+        onChangeEmail={handleChangeEmail}
       />
     );
   }

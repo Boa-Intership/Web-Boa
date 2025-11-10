@@ -7,6 +7,7 @@ interface DataCardProps {
   icon: React.ReactNode;
   label: string;
   value: string;
+  value2?: string;
   field: string;
   onValueChange: (field: string, value: string) => void;
   multiline?: boolean;
@@ -22,6 +23,7 @@ const DataCard: React.FC<DataCardProps> = ({
   icon,
   label,
   value,
+  value2,
   field,
   onValueChange,
   multiline = false,
@@ -100,7 +102,7 @@ const DataCard: React.FC<DataCardProps> = ({
         {/* Contenido */}
         <Box sx={{ flex: 1, mt: variant === 'standard' ? 0.5 : 0 }}>
           <AppTypography
-            variant="caption"
+            variant="smallBold"
             color="text.secondary"
             sx={{
               fontWeight: variant === 'standard' ? 'bold' : 'normal',
@@ -155,7 +157,11 @@ const DataCard: React.FC<DataCardProps> = ({
                 lineHeight: multiline ? 1.4 : 'normal',
               }}
             >
-              {value || placeholder || 'No registrado'}
+              {field === 'ci' && value2
+                ? `${value} - ${value2}`
+                : value
+                  ? `${value}`
+                  : placeholder || 'No registrado'}
             </AppTypography>
           )}
         </Box>

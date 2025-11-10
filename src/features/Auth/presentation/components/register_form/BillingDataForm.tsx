@@ -11,11 +11,11 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Control, Controller, FieldErrors, useWatch } from 'react-hook-form';
 import { AppTypography } from 'ui';
-import { RegisterSchema } from '../../../domain/validators';
+import { CreateRegisterSchema } from '../../../domain/validators';
 
 interface FormFieldConfig {
   id: string;
-  name: keyof RegisterSchema;
+  name: keyof CreateRegisterSchema;
   label: string;
   type?: string;
   gridSize: { xs: number; sm?: number };
@@ -29,8 +29,8 @@ interface FormFieldConfig {
 }
 
 interface FormFieldProps extends FormFieldConfig {
-  control: Control<RegisterSchema>;
-  errors: FieldErrors<RegisterSchema>;
+  control: Control<CreateRegisterSchema>;
+  errors: FieldErrors<CreateRegisterSchema>;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -89,8 +89,8 @@ const FormField: React.FC<FormFieldProps> = ({
 };
 
 interface BillingDataFormProps {
-  control: Control<RegisterSchema>;
-  errors: FieldErrors<RegisterSchema>;
+  control: Control<CreateRegisterSchema>;
+  errors: FieldErrors<CreateRegisterSchema>;
   onExpansionChange?: (expanded: boolean) => void; // Nueva prop
 }
 
