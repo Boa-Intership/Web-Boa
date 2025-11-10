@@ -71,21 +71,34 @@ function TrackingResultCustomer({ info }: { info: TrackingCustomerModel }) {
   return (
     <AppContainer>
       <AppTypography variant="h3Bold" color="primary.main" mb={2}>
-        Resultado del Rastreo: 1234Track
+        Resultado del Rastreo: {info.airWaybill}
       </AppTypography>
 
       <Grid
         container
         spacing={1}
         sx={{
-          p: 3,
-          borderRadius: '8px',
+          p: { xs: 2, sm: 2 },
+          borderRadius: 2,
           boxShadow: 2,
+          alignItems: 'flex-start',
+          justifyContent: 'center', // 🔹 centra horizontalmente los items
         }}
       >
         {/* Estado actual */}
-        <Grid item xs={12} sm={6} md={6} pr={4}>
-          <AppTypography variant="baseBold" color={'primary.dark'}>
+        <Grid
+          item
+          xs={12}
+          sm={10}
+          md={5.5}
+          sx={{
+            mx: 'auto', // 🔹 centra el grid cuando está solo en pantallas medianas
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <AppTypography variant="baseBold" color={'primary.dark'} textAlign="center">
             Estado actual del paquete:
           </AppTypography>
 
@@ -109,15 +122,20 @@ function TrackingResultCustomer({ info }: { info: TrackingCustomerModel }) {
                     : 'primary'
               }
               sx={{
-                px: 2,
+                px: 3,
                 py: 1,
                 fontSize: 16,
+                fontWeight: 500,
               }}
             />
 
             <Alert
               severity={infoEstado.tipoInfo as 'error' | 'info' | 'success' | 'warning'}
-              sx={{ maxWidth: 480 }}
+              sx={{
+                maxWidth: 480,
+                width: '100%',
+                textAlign: 'justify',
+              }}
             >
               {infoEstado.descripcion}
             </Alert>
@@ -125,14 +143,30 @@ function TrackingResultCustomer({ info }: { info: TrackingCustomerModel }) {
         </Grid>
 
         {/* Detalles del envío */}
-        <Grid item xs={12} md={6}>
-          <AppTypography variant="baseBold" color="primary.dark" mb={2}>
+        <Grid
+          item
+          xs={12}
+          sm={10}
+          md={5.5}
+          sx={{
+            mx: 'auto',
+          }}
+        >
+          <AppTypography
+            variant="baseBold"
+            color="primary.dark"
+            mb={2}
+            textAlign={{ xs: 'center', md: 'left' }}
+          >
             Detalles del envío:
           </AppTypography>
+
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
             divider={<Divider orientation="vertical" flexItem sx={{ borderColor: '#e0e0e0' }} />}
-            gap={{ xs: 3, sm: 2 }}
+            gap={{ xs: 2, sm: 2 }}
+            justifyContent="space-around"
+            alignItems={{ xs: 'center', sm: 'flex-start' }}
           >
             {infoPersona(
               'Remitente',
