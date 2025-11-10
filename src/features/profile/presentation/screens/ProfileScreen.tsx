@@ -56,7 +56,7 @@ const ProfileScreen: React.FC = () => {
         email: apiUserData.email || '',
         ci: apiUserData.ci || '',
         complemento: apiUserData.complement || '',
-        number: apiUserData.phone ? `+591${apiUserData.phone}` : '',
+        number: apiUserData.phone ? apiUserData.phone : '',
         address: apiUserData.address || '',
         rol: apiUserData.roles.length > 0 ? apiUserData.roles[0].name : '',
         // businessName: apiUserData.billingData[0].businessName || '',
