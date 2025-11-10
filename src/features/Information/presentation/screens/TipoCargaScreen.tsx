@@ -75,6 +75,10 @@ function TipoCargaScreen() {
 
     return (
       <AppContainer sx={{ py: 4 }}>
+        {/* <Breadcrumb
+          nameSection="Tipos de carga"
+          selected={breadcrumbMap[selected] || 'Categoría'}
+        /> */}
         <AppTypography variant="h2Bold" color="primary" mb={2}>
           Tipos de carga
         </AppTypography>
