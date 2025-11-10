@@ -9,6 +9,9 @@ import {
   ResetPasswordRequest,
   SendCodeRequest,
   ValidateCodeRequest,
+  SendResetCodeRequest,
+  ValidateResetCodeRequest,
+  ResetPasswordWithCodeRequest,
 } from '../domain/auth.types';
 
 export class AuthService {
@@ -69,6 +72,27 @@ export class AuthService {
   }
 
   /**
+   * Enviar código de recuperación de contraseña
+   */
+  async sendResetCode(request: SendResetCodeRequest) {
+    return await httpClient.post<void>(`${this.baseUrl}/send-reset-code`, request);
+  }
+
+  /**
+   * Validar código de recuperación de contraseña
+   */
+  async validateResetCode(request: ValidateResetCodeRequest) {
+    return await httpClient.post<void>(`${this.baseUrl}/validate-reset-code`, request);
+  }
+
+  /**
+   * Restablecer contraseña con código
+   */
+  async resetPasswordWithCode(request: ResetPasswordWithCodeRequest) {
+    return await httpClient.post<void>(`${this.baseUrl}/reset-password`, request);
+  }
+
+  /**
    * Refrescar token de acceso
    */
   async refreshToken() {
@@ -115,10 +139,6 @@ export class AuthService {
    */
   isAuthenticated(): boolean {
     return !!localStorage.getItem('authToken');
-  }
-
-  getAccessToken(): string | null {
-    return localStorage.getItem('token');
   }
 
   getRefreshToken(): string | null {

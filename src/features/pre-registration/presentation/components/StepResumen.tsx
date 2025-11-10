@@ -4,16 +4,64 @@ import { CheckCircle } from '@mui/icons-material';
 import { ROUTES } from '../../../../router/routes';
 import ResumenEnvio from '../components/ResumenEnvio';
 import { AppTypography } from 'ui';
+import { registrarPreRegistro } from '../../data/services/pre-register.service';
 
 const StepResumen = ({ formData, onBack }: any) => {
   const navigate = useNavigate();
 
   const { remitente, destinatario, ruta, carga, factura } = formData;
+  const handleConfirm = async () => {
+    try {
+      const payload = {
+        originID: ruta.origen.id,
+        destinationID: ruta.destino.id,
+        /*sender: {
+          nit: Number(remitente.ci),
+          //documentType: factura.tipoDocumento === 'CI' ? 1 : 5,
+          documentType: 1, // se manda todo como CI
+          complement: remitente.complemento || null,
+          name: remitente.nombre,
+          address: remitente.direccion,
+          phone: remitente.celular,
+          email: remitente.correo,
+          type: 'sender',
+        },*/
+        recipient: {
+          nit: Number(destinatario.ci) || null,
+          //documentType: factura.tipoDocumento === 'CI' ? 1 : 5,
+          documentType: 1, // se manda todo como CI
+          complement: destinatario.complemento || null,
+          name: destinatario.nombre,
+          address: destinatario.direccion || null,
+          phone: destinatario.celular,
+          email: destinatario.correo || null,
+          //type: 'recipient',
+        },
+        cargoType: carga.tipoID,
+        billingData: {
+          businessName: remitente.nombre,
+          docType: factura.numeroDocumento ? (factura.tipoDocumento === 'NIT' ? 5 : 1) : 1,
+          nit: Number(factura.numeroDocumento) || Number(remitente.ci),
+          complement:
+            (factura.numeroDocumento ? factura.complemento : null) || remitente.complemento,
+        },
+        packages: carga.detalles.map((p) => ({
+          description: p.descripcion,
+          weight: parseFloat(p.peso),
+          height: parseFloat(p.alto),
+          width: parseFloat(p.ancho),
+          length: parseFloat(p.largo),
+          pieces: parseInt(p.piezas),
+        })),
+        estimatedCost: carga.costoEstimado,
+      };
+      const result = await registrarPreRegistro(payload);
 
-  const handleConfirm = () => {
-    // Llamar a un servicio para enviar datos al backend
-    // Luego rediriges al resumen final con código
-    navigate(ROUTES.COMPROBANTE, { state: { formData } });
+      navigate(ROUTES.COMPROBANTE, { state: { formData, codePR: result.codePR } });
+    } catch (error) {
+      alert('Error al confirmar el pre-registro. Intenta nuevamente.');
+      console.error(error);
+    }
   };
 
   return (

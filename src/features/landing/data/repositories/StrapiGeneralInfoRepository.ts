@@ -6,13 +6,30 @@ import {
 import { strapiClient } from '@config';
 
 // Tipos para mapear la respuesta de Strapi
+interface StrapiImageData {
+  id: number;
+  documentId: string;
+  url: string;
+  name: string;
+  alternativeText?: string;
+  caption?: string;
+  width: number;
+  height: number;
+  formats?: Record<string, { url: string }>;
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface StrapiGeneralInfoItemData {
   id: number;
   titulo: string;
   descripcion: string;
-  icono: string;
+  imagen?: StrapiImageData;
   enlace: string;
-  texto_boton: string;
   orden: number;
 }
 
@@ -32,7 +49,7 @@ export class StrapiGeneralInfoRepository implements GeneralInfoRepository {
   async getGeneralInfo(): Promise<GeneralInfoContent> {
     try {
       const result = await strapiClient.get<StrapiGeneralInfoResponse>(
-        '/informacion-generals?populate=elementos&filters[activo][$eq]=true&sort=createdAt:desc'
+        '/informacion-generals?populate[elementos][populate][0]=imagen&filters[activo][$eq]=true&sort=createdAt:desc'
       );
 
       if (!result.data || result.data.length === 0) {
@@ -47,15 +64,17 @@ export class StrapiGeneralInfoRepository implements GeneralInfoRepository {
   }
 
   private mapStrapiToEntity(strapiData: StrapiGeneralInfoData): GeneralInfoContent {
-    const elementos: GeneralInfoItem[] = (strapiData.elementos || []).map((item) => ({
-      id: item.id.toString(),
-      titulo: item.titulo,
-      descripcion: item.descripcion,
-      icono: item.icono,
-      enlace: item.enlace,
-      texto_boton: item.texto_boton,
-      orden: item.orden,
-    }));
+    const elementos: GeneralInfoItem[] = (strapiData.elementos || [])
+      .map((item) => ({
+        id: item.id.toString(),
+        titulo: item.titulo,
+        descripcion: item.descripcion,
+        // imagen: item.imagen?.url ? `http://localhost:1337${item.imagen.url}` : undefined, para strapi local
+        imagen: item.imagen?.formats?.small?.url || item.imagen?.url || undefined, //para el servidor
+        enlace: item.enlace,
+        orden: item.orden,
+      }))
+      .sort((a, b) => a.orden - b.orden);
 
     return {
       id: strapiData.id.toString(),

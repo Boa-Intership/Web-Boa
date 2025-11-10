@@ -1,0 +1,181 @@
+import * as React from 'react';
+import { Box, Button, FormControl, Link, TextField } from '@mui/material';
+import { useForm, Controller, type FieldPath } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AppTypography } from 'ui';
+import ForgotPassword from './ForgotPassword';
+import { loginSchema, LoginSchema } from '../../../domain/validators/loginSchema';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+interface LoginFormProps {
+  onSubmit: (data: LoginSchema) => void;
+  isLoading?: boolean;
+  forgotPasswordOpen?: boolean;
+  onForgotPasswordClose?: () => void;
+  onForgotPasswordOpen?: () => void;
+  initialEmail?: string;
+}
+
+export default function LoginForm({
+  onSubmit,
+  isLoading = false,
+  forgotPasswordOpen,
+  onForgotPasswordClose,
+  onForgotPasswordOpen,
+  initialEmail,
+}: LoginFormProps) {
+  const [open, setOpen] = React.useState(false);
+
+  // Sincronizar con el prop externo
+  const isModalOpen = forgotPasswordOpen !== undefined ? forgotPasswordOpen : open;
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError,
+  } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      email: '',
+      password: '',
+      captcha: '',
+    },
+  });
+
+  const handleClickOpen = () => {
+    if (onForgotPasswordOpen) {
+      onForgotPasswordOpen();
+    } else {
+      setOpen(true);
+    }
+  };
+
+  const handleClose = () => {
+    if (onForgotPasswordClose) {
+      onForgotPasswordClose();
+    } else {
+      setOpen(false);
+    }
+  };
+
+  const onFormSubmit = (data: LoginSchema) => {
+    const value = String(data.captcha ?? '').trim();
+    const valid = validateCaptcha(value);
+    if (!valid) {
+      setError('captcha' as FieldPath<LoginSchema>, {
+        type: 'validate',
+        message: 'Captcha incorrecto',
+      });
+      return;
+    }
+
+    onSubmit(data);
+  };
+
+  React.useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+  return (
+    <>
+      <AppTypography color={'primary'} variant="h3Regular" sx={{ pb: '8px' }}>
+        Iniciar sesión
+      </AppTypography>
+      <Box
+        component="form"
+        onSubmit={handleSubmit(onFormSubmit)}
+        noValidate
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          gap: 2,
+        }}
+      >
+        <FormControl>
+          <AppTypography variant="smallRegular">Correo</AppTypography>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                id="email"
+                type="email"
+                placeholder="tu@correo.com"
+                autoComplete="email"
+                autoFocus
+                required
+                fullWidth
+                variant="outlined"
+                color={errors.email ? 'error' : 'primary'}
+                sx={{ pt: '8px' }}
+              />
+            )}
+          />
+        </FormControl>
+        <FormControl>
+          <AppTypography variant="smallRegular">Contraseña</AppTypography>
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                placeholder="••••••••"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                required
+                fullWidth
+                variant="outlined"
+                color={errors.password ? 'error' : 'primary'}
+                sx={{ pt: '8px' }}
+              />
+            )}
+          />
+        </FormControl>
+        <ForgotPassword open={isModalOpen} handleClose={handleClose} initialEmail={initialEmail} />
+
+        {/* Captcha field */}
+        <FormControl>
+          <AppTypography variant="smallRegular">Captcha</AppTypography>
+          <LoadCanvasTemplate reloadText="cambiar" color="primary" />
+          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: 1 }}>
+            <Controller
+              name="captcha"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  error={!!errors.captcha}
+                  helperText={errors.captcha?.message}
+                  id="captcha"
+                  placeholder="Respuesta"
+                  required
+                  size="small"
+                />
+              )}
+            />
+          </Box>
+        </FormControl>
+        <Button type="submit" fullWidth variant="contained" disabled={isSubmitting || isLoading}>
+          {isSubmitting || isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+        </Button>
+        <Link
+          component="button"
+          type="button"
+          onClick={handleClickOpen}
+          variant="body2"
+          sx={{ alignSelf: 'center' }}
+        >
+          ¿Olvidaste tu contraseña?
+        </Link>
+      </Box>
+    </>
+  );
+}

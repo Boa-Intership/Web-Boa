@@ -8,35 +8,54 @@ on:
   pull_request:
 
 jobs:
-  quality-check:
+  ci-cd:
+    name: CI/CD Pipeline
     runs-on: ubuntu-latest
+
     steps:
+      # 1Clonar el repositorio
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      # 2 Configurar pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      # 3️ Configurar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
+          cache: 'pnpm'
+
+      # 4️ Verificar pnpm
+      - name: Verify pnpm installation
+        run: pnpm -v
+
+      # 5️ Instalar dependencias
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 6️ Ejecutar lint
       - name: Run linting
-        run: npm run lint
+        run: pnpm run lint
+
+      # 7️ Ejecutar tests
       - name: Run tests
-        run: npm test -- --run
-      - name: Build application
-        run: npm run build
+        run: pnpm test -- --run
 
-  sonarcloud:
-    name: SonarCloud Scan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # 8️ Construir la aplicación
+      - name: Build project
+        run: pnpm run build
 
-      - run: npm ci
-      - name: Run tests with coverage
-        run: npm test -- --coverage --run
+      # 9️ Ejecutar SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
-          projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
-          organization: ${{ secrets.SONAR_ORGANIZATION }}
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

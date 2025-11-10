@@ -1,47 +1,53 @@
 import React from 'react';
 import { AppBox, AppTypography, Carousel } from 'ui';
-import { CarouselItem } from 'src/shared/components/Carousel';
+import { useNews } from '../hooks/useNews';
+import { Alert, CircularProgress } from '@mui/material';
+import { AppContainer } from 'ui';
 
-// Tipado local para Vite import.meta.glob solo en este archivo
-const imageModules = import.meta.glob('/src/assets/new*.jpg', { eager: true }) as Record<
-  string,
-  { default: string }
->;
+const NewsSection: React.FC = () => {
+  const { data: newsData, loading, error } = useNews();
 
-const imagePaths = Object.values(imageModules).map((mod) => mod.default);
+  // Solo mostramos la sección si está activa y filtramos las noticias activas
+  const activeNews = newsData?.activo ? newsData.noticias.filter((noticia) => noticia.activo) : [];
 
-const news: CarouselItem[] = [
-  {
-    id: 1,
-    image: imagePaths[0],
-  },
-  {
-    id: 2,
-    image: imagePaths[1],
-  },
-  {
-    id: 3,
-    image: imagePaths[2],
-    title: 'Título noticia 3',
-    description: 'Descripción de la noticia 3',
-    link: 'https://ejemplo.com/noticia3',
-  },
-  {
-    id: 4,
-    image: 'https://assets.codepen.io/2585/Entertainment.svg',
-    title: 'Título noticia 4',
-    description: 'Descripción de la noticia 4',
-    link: 'https://ejemplo.com/noticia4',
-  },
-];
+  if (loading) {
+    return (
+      <AppBox sx={{ py: { xs: 4, md: 7 }, display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </AppBox>
+    );
+  }
 
-const NewsSection: React.FC = () => (
-  <AppBox sx={{ py: { xs: 5, md: 8 }, background: '#fff' }}>
-    <AppTypography variant="h2Bold" color="primary" textAlign="center">
-      Noticias
-    </AppTypography>
-    <Carousel items={news} />
-  </AppBox>
-);
+  if (error) {
+    return (
+      <AppBox sx={{ py: { xs: 4, md: 7 } }}>
+        <AppContainer>
+          <Alert severity="error">Error cargando contenido: {error}</Alert>
+        </AppContainer>
+      </AppBox>
+    );
+  }
+
+  if (!newsData) {
+    return null;
+  }
+
+  return (
+    <AppBox sx={{ py: 4, background: 'background.default', width: '100%' }}>
+      <AppTypography variant="h2Bold" color="primary" textAlign="center">
+        {newsData.titulo}
+      </AppTypography>
+      <AppBox
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Carousel items={activeNews} />
+      </AppBox>
+    </AppBox>
+  );
+};
 
 export default NewsSection;

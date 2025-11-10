@@ -13,7 +13,9 @@ import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
-import { AuthSection } from './AuthSection';
+import { AuthSection } from '@/shared/components/Appbar/AuthSection';
+import { getUserProfile } from '@/features/pre-registration/data/services/user.service';
+import { useAuth } from '@/shared/providers/AuthContext';
 
 const navItems = [
   // {
@@ -34,6 +36,18 @@ const navItems = [
     icon: <TodayOutlinedIcon />,
   },
   {
+    key: 'gestion',
+    label: 'Gestion de Usuarios',
+    route: ROUTES.GESTION,
+    icon: <TodayOutlinedIcon />,
+  },
+  {
+    key: 'tracking',
+    label: 'Seguimiento',
+    route: ROUTES.TRACKING,
+    icon: <TodayOutlinedIcon />,
+  },
+  {
     key: 'informacion',
     label: 'Información',
     columns: [
@@ -51,8 +65,8 @@ const navItems = [
             icon: <GavelOutlinedIcon />,
           },
           {
-            label: 'Contacto',
-            to: ROUTES.CONTACTO,
+            label: 'Nuestras oficinas',
+            to: ROUTES.OFICINA,
             icon: <ContactPhoneOutlinedIcon />,
           },
         ],
@@ -76,8 +90,11 @@ const AppAppBar: React.FC = () => {
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const [openKey, setOpenKey] = React.useState<string | null>(null);
 
+  const [openKey, setOpenKey] = React.useState<string | null>(null);
+  const [menuItems, setMenuItems] = React.useState(() =>
+    navItems.filter((i) => i.key !== 'tracking')
+  );
   // Idioma
   const [anchorLang, setAnchorLang] = React.useState<null | HTMLElement>(null);
   const [selectedLang, setSelectedLang] = React.useState(LANGUAGES[0]);
@@ -107,6 +124,51 @@ const AppAppBar: React.FC = () => {
     setAnchorLang(null);
     // Aquí podrías cambiar el idioma global de la app
   };
+
+  // Efecto para cargar menú según rol del usuario (se ejecuta al montar)
+  const { isAuthenticated, token, user } = useAuth();
+
+  React.useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        if (!isAuthenticated || !token) {
+          if (mounted)
+            setMenuItems(navItems.filter((i) => i.key !== 'tracking' && i.key !== 'gestion'));
+          console.log('usuario no autenticado, menú sin tracking ni gestión');
+          return;
+        }
+
+        // Preferir el user ya cargado en el contexto para evitar llamadas redundantes
+        let profile = undefined;
+        profile = await getUserProfile(token);
+
+        const isAdmin =
+          Array.isArray(profile?.roles) && profile.roles.some((r: any) => r.name === 'ADMIN');
+        console.log('Perfil de usuario cargado para menú:', profile);
+        if (!mounted) return;
+        if (isAdmin) {
+          setMenuItems(
+            navItems.filter(
+              (i) => i.key !== 'Pre-Registro' && i.key !== 'informacion' && i.key !== 'itinerarios'
+            )
+          );
+          console.log('usuario administrador, menú con tracking y gestión');
+        } else {
+          // usuarios normales no ven tracking
+          setMenuItems(navItems.filter((i) => i.key !== 'tracking' && i.key !== 'gestion'));
+          console.log('usuario normal, menú sin tracking ni gestión');
+        }
+      } catch (e) {
+        if (!mounted) return;
+        setMenuItems(navItems.filter((i) => i.key !== 'tracking' && i.key !== 'gestion'));
+        console.error('Error al cargar perfil de usuario para menú:', e);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [isAuthenticated, token, user]);
 
   return (
     <>
@@ -194,7 +256,7 @@ const AppAppBar: React.FC = () => {
                   m: 0,
                 }}
               >
-                {navItems.map((item) => {
+                {menuItems.map((item) => {
                   const isOpen = openKey === item.key;
                   const active = isActiveRoute(item.route);
 
@@ -275,7 +337,7 @@ const AppAppBar: React.FC = () => {
       <MobileDrawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        navItems={navItems}
+        navItems={menuItems}
         navigate={(to: string) => navigate(to)}
       />
     </>

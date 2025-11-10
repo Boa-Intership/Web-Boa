@@ -3,7 +3,7 @@ import { Person, LocationOn, Inventory2, ReceiptLong, TaskAlt } from '@mui/icons
 import { AppTypography } from 'ui';
 
 const steps = [
-  { label: 'Datos personales', icon: <Person /> },
+  { label: 'Datos', icon: <Person /> },
   { label: 'Ruta', icon: <LocationOn /> },
   { label: 'Carga', icon: <Inventory2 /> },
   { label: 'Factura', icon: <ReceiptLong /> },

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Stack } from '@mui/material';
 import { AppContainer } from 'ui';
 // import { useNavigate } from 'react-router-dom';
-import { Hero, CardInfoSection } from 'ui';
+import { Hero } from 'ui';
 import HomeActionButton from '../components/HomeActionButton';
 import InfoIcon from '@mui/icons-material/Info';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';

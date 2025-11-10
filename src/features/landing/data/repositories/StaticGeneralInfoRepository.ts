@@ -18,9 +18,8 @@ export class StaticGeneralInfoRepository implements GeneralInfoRepository {
           titulo: 'Tipos de carga y normativa',
           descripcion:
             'Conoce los diferentes tipos de carga que puedes enviar y la normativa vigente para cada uno.',
-          icono: 'envio',
+          imagen: 'https://via.placeholder.com/600x400?text=Tipos+de+Carga',
           enlace: '/tipos-cargas',
-          texto_boton: 'Ver más',
           orden: 1,
         },
         {
@@ -28,9 +27,9 @@ export class StaticGeneralInfoRepository implements GeneralInfoRepository {
           titulo: 'Términos y condiciones',
           descripcion:
             'Consulta los términos y condiciones para el envío de paquetes y servicios de BOA Cargo.',
-          icono: 'legal',
+          imagen:
+            'https://cdnboa-aab8augderd2cff4.a02.azurefd.net/images/e0f60c30-addd-4251-9466-98580f5c0870.png',
           enlace: '/terminos',
-          texto_boton: 'Leer términos',
           orden: 2,
         },
       ],

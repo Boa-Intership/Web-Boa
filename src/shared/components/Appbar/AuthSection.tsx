@@ -17,6 +17,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import { useLogout } from '../../../features/Auth/presentation/useAuth.hooks';
+import { useUserProfile } from '../../../features/profile/domain/hooks/useUserProfile';
 
 export const AuthSection = () => {
   const { isAuthenticated, logout, user } = useAuth();
@@ -24,6 +25,9 @@ export const AuthSection = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const logoutMutation = useLogout();
+
+  const { userData: apiUserData } = useUserProfile();
+  const displayName = apiUserData?.name || user?.name || 'Usuario';
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -39,6 +43,9 @@ export const AuthSection = () => {
       if (response.message) {
         handleClose();
         logout();
+        // Después de cerrar sesión forzamos navegación a la landing
+        // para evitar que el usuario quede en una ruta protegida (ej. tracking)
+        navigate(ROUTES.LANDING, { replace: true });
         console.log('Sesión cerrada exitosamente:', response);
       }
     } catch (error) {
@@ -128,15 +135,56 @@ export const AuthSection = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        {/* Sección de información del usuario */}
+        <Box sx={{ px: 2, py: 1, minWidth: 250 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+            <Avatar sx={{ width: 40, height: 40, bgcolor: 'primary.main' }}>
+              <PersonIcon />
+            </Avatar>
+            <Box sx={{ flex: 1, overflow: 'hidden' }}>
+              <AppTypography
+                variant="baseRegular"
+                sx={{
+                  fontWeight: 600,
+                  color: 'text.primary',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {displayName}
+              </AppTypography>
+            </Box>
+          </Box>
+        </Box>
+
+        <Divider />
+
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            navigate(ROUTES.PERFIL);
+          }}
+          sx={{
+            py: 1.5,
+          }}
+        >
           <ListItemIcon sx={{ color: 'primary.main' }}>
             <PersonIcon fontSize="small" />
           </ListItemIcon>
-          <AppTypography variant="baseRegular">{user?.name || 'Mi perfil'}</AppTypography>
+          <AppTypography variant="baseRegular">Perfil</AppTypography>
         </MenuItem>
+
         <Divider />
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon sx={{ color: 'primary.main' }}>
+
+        <MenuItem
+          onClick={handleLogout}
+          sx={{
+            py: 1.5,
+            color: 'error.main',
+          }}
+        >
+          <ListItemIcon sx={{ color: 'error.main' }}>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
           <AppTypography variant="baseRegular">Cerrar sesión</AppTypography>

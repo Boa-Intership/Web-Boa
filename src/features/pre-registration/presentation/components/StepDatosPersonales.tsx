@@ -3,6 +3,10 @@ import { Box, Button, Grid, TextField, Typography, Paper } from '@mui/material';
 import { Person } from '@mui/icons-material';
 import { validateField } from '../../domain/validators/validateDatosPersonales';
 import { getUserProfile } from '../../data/services/user.service';
+import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import '../../style/PhoneInputMui.css';
+import PhoneInputMUI from './PhoneInputMUI';
 
 const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const [localData, setLocalData] = useState(
@@ -32,11 +36,12 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
           ...prev,
           remitente: {
             ...prev.remitente,
-            ci: user.nit || '',
+            ci: user.ci || '',
             celular: user.phone || '',
             nombre: user.name || '',
             correo: user.email || '',
             direccion: user.address || '',
+            complemento: user.complement,
           },
         }));
         /**
@@ -82,7 +87,8 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     tipo: 'remitente' | 'destinatario'
   ) => {
     let { name, value } = e.target;
-    if (name === 'ci' || name === 'celular') {
+    //if (name === 'ci' || name === 'celular') {
+    if (name === 'ci') {
       value = value.replace(/\D/g, ''); // elimina todo lo que NO sea digito
     }
     // Validar el campo individualmente
@@ -104,6 +110,23 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     }));
   };
 
+  const handlePhoneChange = (value: string | undefined, tipo: 'remitente' | 'destinatario') => {
+    const error =
+      value && !isValidPhoneNumber(value)
+        ? 'Número de celular inválido para el país seleccionado'
+        : null;
+
+    setLocalData((prev: any) => ({
+      ...prev,
+      [tipo]: { ...prev[tipo], celular: value || '' },
+    }));
+
+    setErrors((prev: any) => ({
+      ...prev,
+      [tipo]: { ...prev[tipo], celular: error },
+    }));
+  };
+
   const handleNextClick = () => {
     const newErrors: any = { remitente: {}, destinatario: {} };
     let isValid = true;
@@ -111,7 +134,12 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
     (Object.keys(fieldConfig) as ('remitente' | 'destinatario')[]).forEach((tipo) => {
       Object.entries(fieldConfig[tipo]).forEach(([field, required]) => {
         const value = localData[tipo]?.[field] || '';
-        const error = validateField(field, value, required);
+        let error = validateField(field, value, required);
+
+        if (field === 'celular' && value && !isValidPhoneNumber(value)) {
+          error = 'Número de celular inválido para el país seleccionado';
+        }
+
         if (error) {
           newErrors[tipo][field] = error;
           isValid = false;
@@ -130,6 +158,22 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
   const renderTextField = (tipo: 'remitente' | 'destinatario', name: string, label: string) => {
     const required = fieldConfig[tipo][name];
     const isNumericField = name === 'ci' || name === 'celular';
+    const isRemitente = tipo === 'remitente';
+
+    // Campo especial: número de celular con bandera
+    if (name === 'celular') {
+      return (
+        <PhoneInputMUI
+          label={label}
+          required={required}
+          value={localData[tipo]?.celular || ''}
+          onChange={(value) => handlePhoneChange(value, tipo)}
+          disabled={isRemitente}
+          error={errors[tipo]?.celular}
+        />
+      );
+    }
+
     return (
       <TextField
         label={label}
@@ -137,6 +181,7 @@ const StepDatosPersonales = ({ data, setData, onNext }: any) => {
         fullWidth
         required={required}
         value={localData[tipo]?.[name] || ''}
+        disabled={isRemitente}
         onChange={(e) => handleChange(e, tipo)}
         error={!!errors[tipo]?.[name]}
         helperText={errors[tipo]?.[name] || ''}

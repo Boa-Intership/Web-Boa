@@ -60,7 +60,7 @@ const theme = createTheme({
     },
     // AZULES PERSONALIZADOS
     blue_light: {
-      main: '#4a7bc8',
+      main: '#e0f6ff',
       contrastText: '#fff',
     },
     blue_main: {

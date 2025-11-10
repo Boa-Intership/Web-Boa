@@ -2,7 +2,10 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
-    "lib": ["DOM", "ES2020"],
+    "lib": [
+      "DOM",
+      "ES2020"
+    ],
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
     "esModuleInterop": true,
@@ -14,13 +17,27 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "ui": ["src/ui/index.ts"],
-      "ui/*": ["./src/ui/*"],
-      "pages/*": ["./src/pages/*"],
-      "router/*": ["./src/router/*"],
-      "@config": ["src/config/index.ts"],
-      "@config/*": ["src/config/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "ui": [
+        "src/ui/index.ts"
+      ],
+      "ui/*": [
+        "./src/ui/*"
+      ],
+      "pages/*": [
+        "./src/pages/*"
+      ],
+      "router/*": [
+        "./src/router/*"
+      ],
+      "@config": [
+        "src/config/index.ts"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ]
     },
     "types": [
       "node",
@@ -31,5 +48,7 @@
       "vite/client"
     ]
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

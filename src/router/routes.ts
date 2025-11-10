@@ -1,3 +1,10 @@
+export interface RouteAccess {
+  path: string;
+  requiresAuth?: boolean;
+  publicOnly?: boolean; // Solo para usuarios no autenticados
+  requiresAdmin?: boolean;
+}
+
 export const ROUTES = {
   // Ruta landing
   LANDING: '/',
@@ -13,6 +20,7 @@ export const ROUTES = {
   // Autenticación
   LOGIN: '/login',
   REGISTER: '/registro',
+  RECUPERAR_CONTRASENA: '/recuperar-contrasena',
 
   // Funcionalidades que requieren autenticación
   TRACKING: '/tracking',
@@ -21,12 +29,72 @@ export const ROUTES = {
   // Administración
   ADMIN: '/admin',
   DASHBOARD: '/dashboard',
+  GESTION: '/gestion-usuarios',
 
   // Existentes
   COTIZAR: '/cotizar',
   PREREGISTRO: '/preregistro',
   COMPROBANTE: '/comprobante',
-  CONTACTO: '/contacto',
+  MISPREREGISTROS: '/mis-preregistros',
+  OFICINA: '/oficinas',
 
   CORPORATE_PROFILE: '/perfil-corporativo',
+};
+
+export const ROUTE_ACCESS: Record<string, RouteAccess> = {
+  [ROUTES.LANDING]: { path: ROUTES.LANDING },
+  [ROUTES.HOME]: { path: ROUTES.HOME },
+  [ROUTES.INFORMACION]: { path: ROUTES.INFORMACION },
+  [ROUTES.ITINERARIOS]: { path: ROUTES.ITINERARIOS },
+  [ROUTES.TERMINOS]: { path: ROUTES.TERMINOS },
+  [ROUTES.TIPOS_CARGAS]: { path: ROUTES.TIPOS_CARGAS },
+  [ROUTES.OFICINA]: { path: ROUTES.OFICINA },
+  [ROUTES.CORPORATE_PROFILE]: { path: ROUTES.CORPORATE_PROFILE },
+  [ROUTES.COMPROBANTE]: { path: ROUTES.COMPROBANTE },
+
+  // Rutas que requieren autenticación
+  [ROUTES.PREREGISTRO]: { path: ROUTES.PREREGISTRO, requiresAuth: true },
+  [ROUTES.PERFIL]: { path: ROUTES.PERFIL, requiresAuth: true },
+  [ROUTES.TRACKING]: { path: ROUTES.TRACKING, requiresAuth: true, requiresAdmin: true },
+  [ROUTES.GESTION]: { path: ROUTES.GESTION, requiresAuth: true, requiresAdmin: true },
+  [ROUTES.ADMIN]: { path: ROUTES.ADMIN, requiresAuth: true },
+  [ROUTES.DASHBOARD]: { path: ROUTES.DASHBOARD, requiresAuth: true },
+  [ROUTES.COTIZAR]: { path: ROUTES.COTIZAR, requiresAuth: true },
+  [ROUTES.MISPREREGISTROS]: { path: ROUTES.MISPREREGISTROS, requiresAuth: true },
+
+  // Rutas solo para usuarios no autenticados
+  [ROUTES.LOGIN]: { path: ROUTES.LOGIN, publicOnly: true },
+  [ROUTES.REGISTER]: { path: ROUTES.REGISTER, publicOnly: true },
+  [ROUTES.RECUPERAR_CONTRASENA]: { path: ROUTES.RECUPERAR_CONTRASENA, publicOnly: true },
+};
+
+export const getRouteAccess = (path: string): RouteAccess | undefined => {
+  return Object.values(ROUTE_ACCESS).find((route) => route.path === path);
+};
+
+export const isAdminRoute = (path: string): boolean => {
+  const exact = getRouteAccess(path);
+  if (exact?.requiresAdmin) return true;
+  // Also protect nested paths under any protected base (e.g., /tracking/*)
+  return Object.values(ROUTE_ACCESS).some((route) => {
+    if (!route.requiresAdmin) return false;
+    const base = route.path.endsWith('/') ? route.path.slice(0, -1) : route.path;
+    return path === base || path.startsWith(base + '/');
+  });
+};
+export const isProtectedRoute = (path: string): boolean => {
+  // Exact match first
+  const exact = getRouteAccess(path);
+  if (exact?.requiresAuth) return true;
+  // Also protect nested paths under any protected base (e.g., /tracking/*)
+  return Object.values(ROUTE_ACCESS).some((route) => {
+    if (!route.requiresAuth) return false;
+    const base = route.path.endsWith('/') ? route.path.slice(0, -1) : route.path;
+    return path === base || path.startsWith(base + '/');
+  });
+};
+
+export const isPublicOnlyRoute = (path: string): boolean => {
+  const route = getRouteAccess(path);
+  return route?.publicOnly || false;
 };
