@@ -12,12 +12,14 @@ interface EmailVerificationProps {
   email: string;
   onVerificationSuccess: () => void;
   onResendCode: () => void;
+  onChangeEmail?: () => void;
 }
 
 const EmailVerification: React.FC<EmailVerificationProps> = ({
   email,
   onVerificationSuccess,
   onResendCode,
+  onChangeEmail,
 }) => {
   const [code, setCode] = useState(['', '', '', '', '']);
   const [error, setError] = useState('');
@@ -206,6 +208,15 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
     inputRefs.current[0]?.focus();
   };
 
+  const handleChangeEmail = () => {
+    // Limpiar datos temporales
+    sessionStorage.removeItem('temp_registration_data');
+    sessionStorage.removeItem('email_verification_pending');
+
+    // Regresar a la vista de registro
+    onChangeEmail?.();
+  };
+
   const isCodeComplete = code.every((digit) => digit !== '');
   const isLoading = validateCodeMutation.isPending || registerUserMutation.isPending;
 
@@ -364,17 +375,31 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
               ¿No recibiste el código?
             </AppTypography>
 
-            <Button
-              variant="text"
-              onClick={handleResend}
-              disabled={resendCooldown > 0 || isLoading}
-              sx={{
-                textTransform: 'none',
-                fontSize: '0.9rem',
-              }}
-            >
-              {resendCooldown > 0 ? `Reenviar en ${resendCooldown}s` : 'Reenviar código'}
-            </Button>
+            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Button
+                variant="text"
+                onClick={handleResend}
+                disabled={resendCooldown > 0 || isLoading}
+                sx={{
+                  textTransform: 'none',
+                  fontSize: '0.9rem',
+                }}
+              >
+                {resendCooldown > 0 ? `Reenviar en ${resendCooldown}s` : 'Reenviar código'}
+              </Button>
+
+              <Button
+                variant="text"
+                onClick={handleChangeEmail}
+                disabled={isLoading}
+                sx={{
+                  textTransform: 'none',
+                  fontSize: '0.9rem',
+                }}
+              >
+                Cambiar correo
+              </Button>
+            </Box>
           </Box>
         </Paper>
       </Box>

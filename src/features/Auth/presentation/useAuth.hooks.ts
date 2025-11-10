@@ -8,6 +8,9 @@ import {
   User,
   SendCodeRequest,
   ValidateCodeRequest,
+  SendResetCodeRequest,
+  ValidateResetCodeRequest,
+  ResetPasswordWithCodeRequest,
 } from '../domain/auth.types';
 
 // Query keys para React Query
@@ -111,6 +114,52 @@ export const useForgotPassword = () => {
     mutationFn: (request: ForgotPasswordRequest) => authService.forgotPassword(request),
     onError: (error) => {
       console.error('Forgot password error:', error);
+    },
+  });
+};
+
+/**
+ * Hook para enviar código de recuperación de contraseña
+ */
+export const useSendResetCode = () => {
+  return useMutation({
+    mutationFn: (request: SendResetCodeRequest) => authService.sendResetCode(request),
+    onSuccess: () => {
+      console.log('Código de recuperación enviado exitosamente');
+    },
+    onError: (error) => {
+      console.error('Error al enviar código de recuperación:', error);
+    },
+  });
+};
+
+/**
+ * Hook para validar código de recuperación de contraseña
+ */
+export const useValidateResetCode = () => {
+  return useMutation({
+    mutationFn: (request: ValidateResetCodeRequest) => authService.validateResetCode(request),
+    onSuccess: () => {
+      console.log('Código de recuperación validado exitosamente');
+    },
+    onError: (error) => {
+      console.error('Error al validar código de recuperación:', error);
+    },
+  });
+};
+
+/**
+ * Hook para restablecer contraseña con código
+ */
+export const useResetPasswordWithCode = () => {
+  return useMutation({
+    mutationFn: (request: ResetPasswordWithCodeRequest) =>
+      authService.resetPasswordWithCode(request),
+    onSuccess: () => {
+      console.log('Contraseña restablecida exitosamente');
+    },
+    onError: (error) => {
+      console.error('Error al restablecer contraseña:', error);
     },
   });
 };
