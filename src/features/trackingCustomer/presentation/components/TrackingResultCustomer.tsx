@@ -3,11 +3,11 @@ import { Box, Stack, Grid, Chip, Alert, Step, Stepper, StepLabel, Divider } from
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import { AppTypography, AppContainer } from 'ui';
+import { AppTypography, AppContainer, TrackingCustomerModel } from 'ui';
 import { informacionEstados } from './StatusInformation';
 
-function TrackingResultCustomer() {
-  const [estadoActual, setEstadoActual] = useState<string>('En almacén');
+function TrackingResultCustomer({ info }: { info: TrackingCustomerModel }) {
+  const estadoActual = info.state || 'EN ALMACÉN';
 
   const infoEstado = informacionEstados.find((e) => e.estado === estadoActual) || {
     tipoInfo: 'info',
@@ -71,7 +71,7 @@ function TrackingResultCustomer() {
   return (
     <AppContainer>
       <AppTypography variant="h3Bold" color="primary.main" mb={2}>
-        Resultado del Rastreo: 12345TRA
+        Resultado del Rastreo: 1234Track
       </AppTypography>
 
       <Grid
@@ -136,17 +136,17 @@ function TrackingResultCustomer() {
           >
             {infoPersona(
               'Remitente',
-              'Juan Perez santos domingues',
-              'juanPerez@gmail.com',
-              'La Paz',
-              'LPZ'
+              info.sender.name,
+              info.sender.email,
+              info.origin.city.cityName,
+              info.origin.codStation
             )}
             {infoPersona(
               'Destinatario',
-              'Michelle Figueroa Lopez',
-              'gfffigueroao@gmail.com',
-              'Cochabamba',
-              'CBB'
+              info.recipient.name,
+              info.recipient.email,
+              info.destination.city.cityName,
+              info.destination.codStation
             )}
           </Stack>
         </Grid>

@@ -18,6 +18,7 @@ export { default as AppTypography } from '../ui/AppTypography';
 
 export { default as Carousel } from '../shared/components/Carousel';
 export { default as Breadcrumb } from '../shared/components/Breadcrumb';
-export { default as FindCodeTraking } from '../features/trackingCustomer/presentation/components/FindCodeTraking';
+export { findTrackingCode } from '../features/trackingCustomer/data/services/TrackingCustomerServices';
+export type { TrackingCustomerModel } from '../features/trackingCustomer/data/models/TrackingCustomer.model';
 export { default as TrackingResultCustomer } from '../features/trackingCustomer/presentation/components/TrackingResultCustomer';
 // export { default as ROUTES } from '../router/routes';

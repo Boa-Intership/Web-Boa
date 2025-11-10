@@ -2,23 +2,49 @@ import React, { useState } from 'react';
 import { Container, Stack } from '@mui/material';
 import { AppContainer, TrackingResultCustomer } from 'ui';
 // import { useNavigate } from 'react-router-dom';
-import { Hero } from 'ui';
+import { Hero, findTrackingCode, TrackingCustomerModel } from 'ui';
 import HomeActionButton from '../components/HomeActionButton';
 import InfoIcon from '@mui/icons-material/Info';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'router/routes';
-// import { ROUTES } from 'router/routes';
+import { CircularProgress, Alert, Box } from '@mui/material';
 
 const HomeScreen: React.FC = () => {
   // const navigate = useNavigate();
   const [tracking, setTracking] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [trackingData, setTrackingData] = useState<TrackingCustomerModel | null>(null);
+  const [error, setError] = useState('');
 
-  const handleTrack = () => {
-    alert(`Buscando información para: ${tracking}`);
+  const handleTrack = async () => {
+    if (!tracking.trim()) {
+      setError('Por favor ingresa un código de rastreo válido.');
+      setVisible(false);
+      return;
+    }
+
+    setError('');
+    setVisible(false);
+    setLoading(true);
+
+    try {
+      const result = await findTrackingCode(tracking);
+      console.log('Resultado del tracking:', result);
+
+      setTrackingData(result);
+      setVisible(true);
+    } catch (error) {
+      console.error('Error al obtener el tracking:', error);
+      setError(
+        'No se pudo obtener la información del rastreo. Verifica el código e inténtalo nuevamente.'
+      );
+      setVisible(false);
+    } finally {
+      setLoading(false);
+    }
   };
-  // const navigate = useNavigate();
 
   return (
     <>
@@ -50,11 +76,19 @@ const HomeScreen: React.FC = () => {
         </Stack>
         ription="Completa el pre-registro." onCli
       </AppContainer> */}
-      {/* <Container sx={{ mb: 6 }}>
-        <CardInfoSection />
-      </Container> */}
       <AppContainer sx={{ mb: 6 }}>
-        <TrackingResultCustomer />
+        {/* Mostrar loading mientras carga */}
+        {loading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
+            <CircularProgress />
+          </Box>
+        )}
+
+        {/* Mostrar error si existe */}
+        {error && <Alert severity="error">{error}</Alert>}
+
+        {/* Mostrar resultado si se encontró */}
+        {visible && trackingData && !loading && <TrackingResultCustomer info={trackingData} />}
       </AppContainer>
     </>
   );
