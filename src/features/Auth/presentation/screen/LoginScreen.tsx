@@ -42,11 +42,27 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 
 export default function Login() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [error, setError] = React.useState<string>('');
+  const [showForgotPassword, setShowForgotPassword] = React.useState(false);
+  const [initialEmail, setInitialEmail] = React.useState<string>('');
+
   const loginMutation = useLogin();
-  const navigate = useNavigate();
   const { login } = useAuth();
+
+  // Verificar si viene desde reset de contraseña con email
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const resetEmail = urlParams.get('resetEmail');
+
+    if (resetEmail) {
+      setInitialEmail(resetEmail);
+      setShowForgotPassword(true);
+      // Limpiar el parámetro de la URL
+      navigate('/login', { replace: true });
+    }
+  }, [location.search, navigate]);
 
   const handleLoginSubmit = async (data: LoginSchema) => {
     setError('');
@@ -99,6 +115,15 @@ export default function Login() {
     // Aquí puedes agregar la lógica de login con Google
   };
 
+  const handleForgotPasswordClose = () => {
+    setShowForgotPassword(false);
+    setInitialEmail('');
+  };
+
+  const handleForgotPasswordOpen = () => {
+    setShowForgotPassword(true);
+  };
+
   return (
     <SignInContainer direction="column" justifyContent="space-between">
       <Card
@@ -108,7 +133,14 @@ export default function Login() {
           borderRadius: '15px',
         }}
       >
-        <LoginForm onSubmit={handleLoginSubmit} isLoading={loginMutation.isPending} />
+        <LoginForm
+          onSubmit={handleLoginSubmit}
+          isLoading={loginMutation.isPending}
+          forgotPasswordOpen={showForgotPassword}
+          onForgotPasswordClose={handleForgotPasswordClose}
+          onForgotPasswordOpen={handleForgotPasswordOpen}
+          initialEmail={initialEmail}
+        />
         {/* Mostrar errores de login */}
         {error && (
           <Box sx={{ mb: 2 }}>

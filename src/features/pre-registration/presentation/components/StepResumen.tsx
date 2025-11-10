@@ -15,7 +15,7 @@ const StepResumen = ({ formData, onBack }: any) => {
       const payload = {
         originID: ruta.origen.id,
         destinationID: ruta.destino.id,
-        sender: {
+        /*sender: {
           nit: Number(remitente.ci),
           //documentType: factura.tipoDocumento === 'CI' ? 1 : 5,
           documentType: 1, // se manda todo como CI
@@ -25,7 +25,7 @@ const StepResumen = ({ formData, onBack }: any) => {
           phone: remitente.celular,
           email: remitente.correo,
           type: 'sender',
-        },
+        },*/
         recipient: {
           nit: Number(destinatario.ci) || null,
           //documentType: factura.tipoDocumento === 'CI' ? 1 : 5,
@@ -35,7 +35,7 @@ const StepResumen = ({ formData, onBack }: any) => {
           address: destinatario.direccion || null,
           phone: destinatario.celular,
           email: destinatario.correo || null,
-          type: 'recipient',
+          //type: 'recipient',
         },
         cargoType: carga.tipoID,
         billingData: {

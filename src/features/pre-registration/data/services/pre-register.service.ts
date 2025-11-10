@@ -3,7 +3,7 @@ import axios from 'axios';
 const token = localStorage.getItem('token'); // o usar un método AuthUser()
 
 export const registrarPreRegistro = async (payload: any) => {
-  const response = await axios.post('api/pre-register', payload, {
+  const response = await axios.post('/api/pre-register', payload, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -14,7 +14,7 @@ export const registrarPreRegistro = async (payload: any) => {
 export const downloadPreRegisterPDF = async (codePR: string) => {
   const token = localStorage.getItem('token');
 
-  const response = await axios.get(`api/pre-register/pdf/${codePR}`, {
+  const response = await axios.get(`/api/pre-register/pdf/${codePR}`, {
     responseType: 'blob', // Para que Axios devuelva un archivo binario
     headers: {
       Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ export const downloadPreRegisterPDF = async (codePR: string) => {
 };
 
 export const getAllPreRegisters = async (page: number = 1, limit: number = 5, token: string) => {
-  const response = await axios.get(`api/pre-register?page=${page}&limit=${limit}`, {
+  const response = await axios.get(`/api/pre-register?page=${page}&limit=${limit}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

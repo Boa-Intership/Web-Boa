@@ -15,9 +15,17 @@ export const useRouteAccess = () => {
 
     // Admin-only routes: require auth + ADMIN role
     if (isAdminRoute(path)) {
-      if (!isAuthenticated) {
-        navigate(ROUTES.LANDING, { state: { from: location } });
-        return false;
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const user = await getUserProfile(token);
+        if (user.roles[0].name === 'USER') {
+          navigate(ROUTES.LANDING, { state: { from: location } });
+          return false;
+        }
+      } catch (error) {
+        console.error('Error al obtener el perfil del usuario:', error);
       }
     }
 

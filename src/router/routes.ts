@@ -20,6 +20,7 @@ export const ROUTES = {
   // Autenticación
   LOGIN: '/login',
   REGISTER: '/registro',
+  RECUPERAR_CONTRASENA: '/recuperar-contrasena',
 
   // Funcionalidades que requieren autenticación
   TRACKING: '/tracking',
@@ -28,7 +29,7 @@ export const ROUTES = {
   // Administración
   ADMIN: '/admin',
   DASHBOARD: '/dashboard',
-  GESTION: 'gestion-usuarios',
+  GESTION: '/gestion-usuarios',
 
   // Existentes
   COTIZAR: '/cotizar',
@@ -55,6 +56,7 @@ export const ROUTE_ACCESS: Record<string, RouteAccess> = {
   [ROUTES.PREREGISTRO]: { path: ROUTES.PREREGISTRO, requiresAuth: true },
   [ROUTES.PERFIL]: { path: ROUTES.PERFIL, requiresAuth: true },
   [ROUTES.TRACKING]: { path: ROUTES.TRACKING, requiresAuth: true, requiresAdmin: true },
+  [ROUTES.GESTION]: { path: ROUTES.GESTION, requiresAuth: true, requiresAdmin: true },
   [ROUTES.ADMIN]: { path: ROUTES.ADMIN, requiresAuth: true },
   [ROUTES.DASHBOARD]: { path: ROUTES.DASHBOARD, requiresAuth: true },
   [ROUTES.COTIZAR]: { path: ROUTES.COTIZAR, requiresAuth: true },
@@ -63,6 +65,7 @@ export const ROUTE_ACCESS: Record<string, RouteAccess> = {
   // Rutas solo para usuarios no autenticados
   [ROUTES.LOGIN]: { path: ROUTES.LOGIN, publicOnly: true },
   [ROUTES.REGISTER]: { path: ROUTES.REGISTER, publicOnly: true },
+  [ROUTES.RECUPERAR_CONTRASENA]: { path: ROUTES.RECUPERAR_CONTRASENA, publicOnly: true },
 };
 
 export const getRouteAccess = (path: string): RouteAccess | undefined => {

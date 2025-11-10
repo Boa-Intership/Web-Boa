@@ -27,15 +27,34 @@ class HttpClient {
   }
 
   private setupInterceptors(): void {
-    // Request interceptor - agregar token de autenticación
+    // Request interceptor - add token of auth
     this.client.interceptors.request.use(
       (config) => {
-        const token = this.getAuthToken();
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
+        // No rewrite Authorization from es client Strapi
+        if (!this.isStrapi) {
+          const token = this.getAuthToken();
+          if (token) {
+            if (!config.headers) {
+              config.headers = {} as any;
+            }
+            (config.headers as any).Authorization = `Bearer ${token}`;
+          }
         }
 
-        config.headers['ngrok-skip-browser-warning'] = 'true';
+        (config.headers as any)['ngrok-skip-browser-warning'] = 'true';
+
+        // Debug: log the outgoing request URL and Authorization header for easier CORS/auth diagnosis
+        try {
+          const base = (this.client.defaults.baseURL || '').replace(/\/+$/, '');
+          const url = `${base}${config.url?.toString() || ''}`;
+          // eslint-disable-next-line no-console
+          console.debug('[HttpClient] Request:', config.method?.toUpperCase(), url, {
+            Authorization: (config.headers as any)?.Authorization,
+          });
+        } catch (e) {
+          // ignore logging errors
+        }
+
         return config;
       },
       (error: AxiosError) => {
@@ -43,13 +62,24 @@ class HttpClient {
       }
     );
 
-    // Response interceptor - manejar errores globalmente
+    // Response interceptor - manager bugs global
     this.client.interceptors.response.use(
       (response: AxiosResponse) => {
         return response;
       },
       (error: AxiosError<ApiError>) => {
         this.handleApiError(error);
+        // Debug: log response error details to console
+        try {
+          // eslint-disable-next-line no-console
+          console.debug('[HttpClient] Response error:', {
+            url: error.config?.url,
+            status: error.response?.status,
+            data: error.response?.data,
+          });
+        } catch (e) {
+          // ignore
+        }
         return Promise.reject(error);
       }
     );
@@ -144,11 +174,10 @@ class HttpClient {
   }
 }
 
-// Cliente HTTP para la API principal
+// Client HTTP para la API principal
 export const httpClient = new HttpClient();
 
-// Cliente HTTP para Strapi
+// Client HTTP para Strapi
 export const strapiClient = new HttpClient(true);
 
-// Exportar el cliente principal por defecto
 export default httpClient;

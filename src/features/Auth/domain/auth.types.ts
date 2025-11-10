@@ -56,3 +56,18 @@ export interface ResetPasswordRequest {
   token: string;
   newPassword: string;
 }
+
+// Tipos para recuperación de contraseña
+export interface SendResetCodeRequest {
+  email: string;
+}
+
+export interface ValidateResetCodeRequest {
+  email: string;
+  code: string;
+}
+
+export interface ResetPasswordWithCodeRequest {
+  email: string;
+  password: string;
+}

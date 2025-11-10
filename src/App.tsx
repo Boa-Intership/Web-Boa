@@ -21,6 +21,7 @@ import Login from './features/Auth/presentation/screen/LoginScreen';
 import Register from './features/Auth/presentation/screen/RegisterScreen';
 import { ProfileScreen } from './features/profile/presentation';
 import RouteGuard from './router/RouteGuard';
+import PasswordResetScreen from './features/Auth/presentation/screen/PasswordResetScreen';
 import FlightsScreen from './features/packageTracking/presentation/screens/FlightsScreen';
 import ManifestsScreen from './features/packageTracking/presentation/screens/ManifestsScreen';
 import PackagesScreen from './features/packageTracking/presentation/screens/PackagesScreen';
@@ -51,6 +52,10 @@ const App: React.FC = () => (
                 path={ROUTES.CORPORATE_PROFILE.replace('/', '')}
                 element={<CorporateProfileScreen />}
               />
+              <Route
+                path={ROUTES.RECUPERAR_CONTRASENA.replace('/', '')}
+                element={<PasswordResetScreen />}
+              />
               {/* Tracking */}
               <Route path={ROUTES.TRACKING.replace('/', '')} element={<FlightsScreen />} />
               <Route
@@ -65,9 +70,7 @@ const App: React.FC = () => (
                 path={`${ROUTES.TRACKING.replace('/', '')}/:flightId/:manifestId/:packageId`}
                 element={<PackageDetailScreen />}
               />
-            </Route>
-            {/* Administracion */}
-            <Route>
+              {/* Administracion */}
               <Route path={ROUTES.GESTION.replace('/', '')} element={<UserManagementScreen />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />

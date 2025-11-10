@@ -7,6 +7,7 @@ interface User {
   email: string;
   name: string;
   ci: string;
+  complemento?: string;
 }
 
 interface UserDataProps {
@@ -58,6 +59,7 @@ const UserData: React.FC<UserDataProps> = ({ user, onUserDataChange, resetEditin
             }
             label="CI"
             value={user.ci}
+            value2={user.complemento}
             field="ci"
             onValueChange={handleFieldChange}
             variant="standard"

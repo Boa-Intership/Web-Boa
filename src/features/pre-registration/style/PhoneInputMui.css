@@ -6,10 +6,12 @@
   border-radius: 4px;
   padding: 0 12px;
   height: 56px; /* igual que TextField */
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.87);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .phone-input:focus-within {
@@ -43,7 +45,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.87);
 }
@@ -65,4 +67,3 @@
 .phone-input-field .PhoneInputCountry {
   margin-right: 8px;
 }
-
