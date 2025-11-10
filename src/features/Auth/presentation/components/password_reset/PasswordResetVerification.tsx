@@ -8,6 +8,7 @@ interface PasswordResetVerificationProps {
   email: string;
   onVerificationSuccess: (code: string) => void;
   onResendCode: () => void;
+  onChangeEmail?: () => void;
   isLoading?: boolean;
 }
 
@@ -15,6 +16,7 @@ export default function PasswordResetVerification({
   email,
   onVerificationSuccess,
   onResendCode,
+  onChangeEmail,
   isLoading = false,
 }: PasswordResetVerificationProps) {
   const [code, setCode] = useState(['', '', '', '', '']);
@@ -128,6 +130,11 @@ export default function PasswordResetVerification({
     } catch (error) {
       setError('Error al reenviar el código. Inténtalo de nuevo.');
     }
+  };
+
+  const handleChangeEmail = () => {
+    // Llamar al callback para cambiar email
+    onChangeEmail?.();
   };
 
   const isCodeComplete = code.every((digit) => digit !== '');
@@ -268,17 +275,31 @@ export default function PasswordResetVerification({
         <AppTypography variant="smallRegular" color="text.secondary" sx={{ mb: 2 }}>
           ¿No recibiste el código?
         </AppTypography>{' '}
-        <Button
-          variant="text"
-          onClick={handleResend}
-          disabled={resendCooldown > 0 || isLoading || isProcessing}
-          sx={{
-            textTransform: 'none',
-            fontSize: '0.9rem',
-          }}
-        >
-          {resendCooldown > 0 ? `Reenviar en ${resendCooldown}s` : 'Reenviar código'}
-        </Button>
+        <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Button
+            variant="text"
+            onClick={handleResend}
+            disabled={resendCooldown > 0 || isLoading || isProcessing}
+            sx={{
+              textTransform: 'none',
+              fontSize: '0.9rem',
+            }}
+          >
+            {resendCooldown > 0 ? `Reenviar en ${resendCooldown}s` : 'Reenviar código'}
+          </Button>
+
+          <Button
+            variant="text"
+            onClick={handleChangeEmail}
+            disabled={isLoading || isProcessing}
+            sx={{
+              textTransform: 'none',
+              fontSize: '0.9rem',
+            }}
+          >
+            Cambiar correo
+          </Button>
+        </Box>
       </Box>
     </Paper>
   );

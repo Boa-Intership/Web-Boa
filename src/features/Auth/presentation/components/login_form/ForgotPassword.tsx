@@ -14,11 +14,12 @@ import { useSendResetCode } from '../../useAuth.hooks';
 interface ForgotPasswordProps {
   open: boolean;
   handleClose: () => void;
+  initialEmail?: string;
 }
 
-export default function ForgotPassword({ open, handleClose }: ForgotPasswordProps) {
+export default function ForgotPassword({ open, handleClose, initialEmail }: ForgotPasswordProps) {
   const navigate = useNavigate();
-  const [email, setEmail] = React.useState('');
+  const [email, setEmail] = React.useState(initialEmail || '');
   const [error, setError] = React.useState('');
   const sendResetCodeMutation = useSendResetCode();
 
@@ -57,10 +58,17 @@ export default function ForgotPassword({ open, handleClose }: ForgotPasswordProp
 
   // Resetear estado al cerrar
   const handleOnClose = () => {
-    setEmail('');
+    setEmail(initialEmail || '');
     setError('');
     handleClose();
   };
+
+  // Actualizar email cuando cambie initialEmail
+  React.useEffect(() => {
+    if (initialEmail) {
+      setEmail(initialEmail);
+    }
+  }, [initialEmail]);
 
   return (
     <Dialog

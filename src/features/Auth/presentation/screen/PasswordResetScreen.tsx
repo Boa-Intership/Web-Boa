@@ -37,6 +37,12 @@ export default function PasswordResetScreen() {
     // El componente PasswordResetVerification ya maneja el reenvío con el backend
   };
 
+  const handleChangeEmail = () => {
+    // Limpiar el email del sessionStorage y regresar a login con el email como parámetro
+    sessionStorage.removeItem('password_reset_email');
+    navigate(`/login?resetEmail=${encodeURIComponent(email)}`);
+  };
+
   const handleNewPasswordSubmit = async (data: { password: string; confirmPassword: string }) => {
     setError(''); // Limpiar errores previos
 
@@ -92,6 +98,7 @@ export default function PasswordResetScreen() {
             email={email}
             onVerificationSuccess={handleVerificationSuccess}
             onResendCode={handleResendCode}
+            onChangeEmail={handleChangeEmail}
           />
         )}
         {step === 'reset' && (

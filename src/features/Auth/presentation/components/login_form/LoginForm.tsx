@@ -9,10 +9,24 @@ import { loginSchema, LoginSchema } from '../../../domain/validators/loginSchema
 interface LoginFormProps {
   onSubmit: (data: LoginSchema) => void;
   isLoading?: boolean;
+  forgotPasswordOpen?: boolean;
+  onForgotPasswordClose?: () => void;
+  onForgotPasswordOpen?: () => void;
+  initialEmail?: string;
 }
 
-export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProps) {
+export default function LoginForm({
+  onSubmit,
+  isLoading = false,
+  forgotPasswordOpen,
+  onForgotPasswordClose,
+  onForgotPasswordOpen,
+  initialEmail,
+}: LoginFormProps) {
   const [open, setOpen] = React.useState(false);
+
+  // Sincronizar con el prop externo
+  const isModalOpen = forgotPasswordOpen !== undefined ? forgotPasswordOpen : open;
 
   const {
     control,
@@ -28,11 +42,19 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
   });
 
   const handleClickOpen = () => {
-    setOpen(true);
+    if (onForgotPasswordOpen) {
+      onForgotPasswordOpen();
+    } else {
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {
-    setOpen(false);
+    if (onForgotPasswordClose) {
+      onForgotPasswordClose();
+    } else {
+      setOpen(false);
+    }
   };
 
   const onFormSubmit = (data: LoginSchema) => {
@@ -102,7 +124,7 @@ export default function LoginForm({ onSubmit, isLoading = false }: LoginFormProp
             )}
           />
         </FormControl>
-        <ForgotPassword open={open} handleClose={handleClose} />
+        <ForgotPassword open={isModalOpen} handleClose={handleClose} initialEmail={initialEmail} />
         <Button type="submit" fullWidth variant="contained" disabled={isSubmitting || isLoading}>
           {isSubmitting || isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
         </Button>
