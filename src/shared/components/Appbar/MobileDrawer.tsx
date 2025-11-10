@@ -159,7 +159,13 @@ const MobileDrawer: React.FC<{
             </>
           ) : (
             <>
-              <ListItemButton sx={buttonStyle}>
+              <ListItemButton
+                sx={buttonStyle}
+                onClick={() => {
+                  onClose();
+                  navigate('/perfil'); // Cambia '/perfil' si tu ruta de perfil es diferente
+                }}
+              >
                 <ListItemIcon sx={iconStyle}>
                   <AccountCircleOutlinedIcon />
                 </ListItemIcon>
