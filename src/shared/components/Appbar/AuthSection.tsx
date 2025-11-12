@@ -40,16 +40,19 @@ export const AuthSection = () => {
   const handleLogout = async () => {
     try {
       const response = await logoutMutation.mutateAsync();
-      if (response.message) {
-        handleClose();
-        logout();
-        // Después de cerrar sesión forzamos navegación a la landing
-        // para evitar que el usuario quede en una ruta protegida (ej. tracking)
-        navigate(ROUTES.LANDING, { replace: true });
-        console.log('Sesión cerrada exitosamente:', response);
-      }
+      // Limpieza local del estado de autenticación aunque el servidor no devuelva body
+      handleClose();
+      logout();
+      // Después de cerrar sesión forzamos navegación a la landing
+      // para evitar que el usuario quede en una ruta protegida (ej. tracking)
+      navigate(ROUTES.LANDING, { replace: true });
+      console.log('Sesión cerrada (server response):', response);
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
+      // Aun si la petición al servidor falla (p. ej. CORS), igual limpiamos el estado local
+      handleClose();
+      logout();
+      navigate(ROUTES.LANDING, { replace: true });
     }
   };
 

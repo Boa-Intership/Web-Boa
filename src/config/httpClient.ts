@@ -42,6 +42,19 @@ class HttpClient {
         }
 
         (config.headers as any)['ngrok-skip-browser-warning'] = 'true';
+
+        // Debug: log the outgoing request URL and Authorization header for easier CORS/auth diagnosis
+        try {
+          const base = (this.client.defaults.baseURL || '').replace(/\/+$/, '');
+          const url = `${base}${config.url?.toString() || ''}`;
+          // eslint-disable-next-line no-console
+          console.debug('[HttpClient] Request:', config.method?.toUpperCase(), url, {
+            Authorization: (config.headers as any)?.Authorization,
+          });
+        } catch (e) {
+          // ignore logging errors
+        }
+
         return config;
       },
       (error: AxiosError) => {
@@ -56,6 +69,17 @@ class HttpClient {
       },
       (error: AxiosError<ApiError>) => {
         this.handleApiError(error);
+        // Debug: log response error details to console
+        try {
+          // eslint-disable-next-line no-console
+          console.debug('[HttpClient] Response error:', {
+            url: error.config?.url,
+            status: error.response?.status,
+            data: error.response?.data,
+          });
+        } catch (e) {
+          // ignore
+        }
         return Promise.reject(error);
       }
     );
