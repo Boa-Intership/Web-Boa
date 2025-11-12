@@ -47,14 +47,14 @@ function TipoCargaScreen() {
     const colorBoton = theme.palette.primary.dark;
     const colorHover = theme.palette.primary.main;
 
-    const breadcrumbMap: Record<string, string> = {
-      cargaGeneral: 'Carga General',
-      animalesVivos: 'Animales Vivos',
-      perecederos: 'Perecederos',
-      restosHumanos: 'Restos Humanos',
-      cargaValorada: 'Carga Valorada',
-      peligrosa: 'Carga Peligrosa',
-    };
+    // const breadcrumbMap: Record<string, string> = {
+    //   cargaGeneral: 'Carga General',
+    //   animalesVivos: 'Animales Vivos',
+    //   perecederos: 'Perecederos',
+    //   restosHumanos: 'Restos Humanos',
+    //   cargaValorada: 'Carga Valorada',
+    //   peligrosa: 'Carga Peligrosa',
+    // };
 
     const renderContent = () => {
       const dataStatic = cargaData[selected];
